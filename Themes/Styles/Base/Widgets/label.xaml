@@ -1,0 +1,80 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Base -->
+    <Style x:Key="LabelBase" TargetType="{x:Type Label}">
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="{DynamicResource RscRound}"></Setter>
+            </Style>
+        </Style.Resources>
+    </Style>
+    <!-- /Base -->
+
+
+    <!-- Plain -->
+    <Style x:Key="LabelPlain" TargetType="Label" BasedOn="{StaticResource LabelBase}">
+        <Setter Property="Background" Value="{StaticResource RgbM1}" />
+        <Setter Property="Foreground" Value="{StaticResource RgbM2}" />
+    </Style>
+    
+    <Style x:Key="LabelPlainM1" TargetType="{x:Type Label}" BasedOn="{StaticResource LabelPlain}">
+        <Setter Property="Background" Value="{StaticResource RgbM1}" />
+        <Setter Property="Foreground" Value="{StaticResource RgbM2}" />
+    </Style>
+
+    <Style x:Key="LabelPlainM2" TargetType="{x:Type Label}" BasedOn="{StaticResource LabelPlain}">
+        <Setter Property="Background" Value="{StaticResource RgbM2}" />
+        <Setter Property="Foreground" Value="{StaticResource RgbM3}" />
+    </Style>
+
+    <Style x:Key="LabelPlainM3" TargetType="{x:Type Label}" BasedOn="{StaticResource LabelPlain}">
+        <Setter Property="Background" Value="{StaticResource RgbM3}" />
+        <Setter Property="Foreground" Value="{StaticResource RgbM2}" />
+    </Style>
+
+    <Style x:Key="LabelPlainB1" TargetType="{x:Type Label}" BasedOn="{StaticResource LabelPlain}">
+        <Setter Property="Background" Value="{StaticResource RgbB1}" />
+        <Setter Property="Foreground" Value="{StaticResource RgbM3}" />
+    </Style>
+
+    <Style x:Key="LabelPlainB2" TargetType="{x:Type Label}" BasedOn="{StaticResource LabelPlain}">
+        <Setter Property="Background" Value="{StaticResource RgbB2}" />
+        <Setter Property="Foreground" Value="{StaticResource RgbM3}" />
+    </Style>
+    <!-- /Plain -->
+
+
+    <!-- Transparent -->
+    <Style x:Key="LabelTransparent" TargetType="Label" BasedOn="{StaticResource LabelBase}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource RgbM2}" />
+    </Style>
+    
+    <Style x:Key="LabelTransparentM1" TargetType="{x:Type Label}" BasedOn="{StaticResource LabelTransparent}">
+        <Setter Property="Foreground" Value="{StaticResource RgbM1}" />
+    </Style>
+
+    <Style x:Key="LabelTransparentM2" TargetType="{x:Type Label}" BasedOn="{StaticResource LabelTransparent}">
+        <Setter Property="Foreground" Value="{StaticResource RgbM2}" />
+    </Style>
+
+    <Style x:Key="LabelTransparentM3" TargetType="{x:Type Label}" BasedOn="{StaticResource LabelTransparent}">
+        <Setter Property="Foreground" Value="{StaticResource RgbM3}" />
+    </Style>
+
+    <Style x:Key="LabelTransparentB1" TargetType="{x:Type Label}" BasedOn="{StaticResource LabelTransparent}">
+        <Setter Property="Foreground" Value="{StaticResource RgbB1}" />
+    </Style>
+
+    <Style x:Key="LabelTransparentB2" TargetType="{x:Type Label}" BasedOn="{StaticResource LabelTransparent}">
+        <Setter Property="Foreground" Value="{StaticResource RgbB2}" />
+    </Style>
+    <!-- /Transparent -->
+
+
+    <!-- INITIAL -->
+    <Style TargetType="{x:Type Label}" BasedOn="{StaticResource LabelPlainM1}" />
+    <!-- /INITIAL -->
+
+
+</ResourceDictionary>

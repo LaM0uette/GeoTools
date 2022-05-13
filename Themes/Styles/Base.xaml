@@ -1,0 +1,25 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <ResourceDictionary.MergedDictionaries>
+        
+        <!-- Pages -->
+        <ResourceDictionary Source="/Themes/Styles/Base/Pages/body.xaml"/>
+        <ResourceDictionary Source="/Themes/Styles/Base/Pages/footer.xaml"/>
+        <ResourceDictionary Source="/Themes/Styles/Base/Pages/header.xaml"/>
+        
+        <!-- Rsc -->
+        <ResourceDictionary Source="/Themes/Styles/Base/Rsc/rsc.xaml"/>
+        
+        <!-- Widgets -->
+        <ResourceDictionary Source="/Themes/Styles/Base/Widgets/label.xaml"/>
+        
+        <ResourceDictionary Source="/Themes/Styles/Base/Widgets/button.xaml"/>
+        <ResourceDictionary Source="/Themes/Styles/Base/Widgets/checkBox.xaml"/>
+        <ResourceDictionary Source="/Themes/Styles/Base/Widgets/radioButton.xaml"/>
+        <ResourceDictionary Source="/Themes/Styles/Base/Widgets/toggleButton.xaml"/>
+        
+        <ResourceDictionary Source="/Themes/Styles/Base/Widgets/comboBox.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

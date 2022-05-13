@@ -1,0 +1,26 @@
+﻿<Application x:Class="GeoTools.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                
+                <!-- MetroWindow -->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                
+                <!-- App -->
+                <!-- Config -->
+                <ResourceDictionary Source="/Configs/config.xaml"/>
+                
+                <!-- Themes -->
+                <ResourceDictionary Source="/Themes/CurrentColors.xaml"/>
+                <ResourceDictionary Source="/Themes/CurrentImg.xaml"/>
+                <ResourceDictionary Source="/Themes/CurrentStyle.xaml"/>
+                
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+    
+</Application>

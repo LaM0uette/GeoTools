@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "Af1RRouhJVZyU7xTaQbwR7vZDvIOFBPLCkVqu+8mnRlf5gwd07PVYOqJgIMtKRqGFt4JMxfUjy//Id0Jws/2jw==",
+  "success": true,
+  "projectFilePath": "C:\\Prog\\C#\\GeoTools\\GeoTools.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\XD5965\\.nuget\\packages\\controlzex\\4.4.0\\controlzex.4.4.0.nupkg.sha512",
+    "C:\\Users\\XD5965\\.nuget\\packages\\mahapps.metro\\2.4.9\\mahapps.metro.2.4.9.nupkg.sha512",
+    "C:\\Users\\XD5965\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.19\\microsoft.xaml.behaviors.wpf.1.1.19.nupkg.sha512",
+    "C:\\Users\\XD5965\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512"
+  ],
+  "logs": []
+}
