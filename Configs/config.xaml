@@ -4,7 +4,7 @@
 
     <!-- App -->
     <sys:String x:Key="Author">LaM0uette</sys:String>
-    <sys:String x:Key="AppName">TemplateWPF</sys:String>
+    <sys:String x:Key="AppName">GeoTools</sys:String>
     <sys:String x:Key="AppVersion">0.1</sys:String>
     
     <!-- Window -->
