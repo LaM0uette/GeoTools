@@ -6,10 +6,18 @@
              mc:Ignorable="d">
     
     <Grid>
-        <TabControl Background="Transparent">
-            <TabItem Visibility="Collapsed">
-                <Button Content="EXPORT&#x0a;GRACE"
-                        Style="{StaticResource ButtonBoxM2}"/>
+        <TabControl x:Name="TcMain" Background="Transparent">
+            <TabItem x:Name="TiMenu" Visibility="Collapsed" IsSelected="True">
+                <Button x:Name="BtnTiMenu" 
+                        Content="EXPORT&#x0a;GRACE"
+                        Style="{StaticResource ButtonBoxM2}"
+                        Click="BtnTiMenu_OnClick"/>
+            </TabItem>
+            <TabItem x:Name="TiExportGrace" Visibility="Collapsed" IsSelected="True">
+                <Button x:Name="BtnTiExportGrace" 
+                        Content="jdskfjlskdmjfkldsjqfkdsjkfqsjdklf"
+                        Style="{StaticResource ButtonBoxM2}"
+                        Click="BtnTiExportGrace_OnClick"/>
             </TabItem>
         </TabControl>
     </Grid>

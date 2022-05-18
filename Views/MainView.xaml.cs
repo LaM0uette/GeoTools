@@ -24,4 +24,13 @@ public partial class MainView : UserControl
     //     
     //     TestGrid.Children.Add(btn);
     // }
+    private void BtnTiMenu_OnClick(object sender, RoutedEventArgs e)
+    {
+        TiExportGrace.IsSelected = true;
+    }
+    
+    private void BtnTiExportGrace_OnClick(object sender, RoutedEventArgs e)
+    {
+        TiMenu.IsSelected = true;
+    }
 }
