@@ -28,9 +28,4 @@ public partial class MainView : UserControl
     {
         TiExportGrace.IsSelected = true;
     }
-    
-    private void BtnTiExportGrace_OnClick(object sender, RoutedEventArgs e)
-    {
-        TiMenu.IsSelected = true;
-    }
 }

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:views="clr-namespace:GeoTools.Views"
              mc:Ignorable="d">
     
     <Grid>
@@ -14,10 +15,7 @@
                         Click="BtnTiMenu_OnClick"/>
             </TabItem>
             <TabItem x:Name="TiExportGrace" Visibility="Collapsed" IsSelected="True">
-                <Button x:Name="BtnTiExportGrace" 
-                        Content="jdskfjlskdmjfkldsjqfkdsjkfqsjdklf"
-                        Style="{StaticResource ButtonBoxM2}"
-                        Click="BtnTiExportGrace_OnClick"/>
+                <views:DlgView/>
             </TabItem>
         </TabControl>
     </Grid>
