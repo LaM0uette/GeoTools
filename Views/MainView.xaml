@@ -6,7 +6,6 @@
              mc:Ignorable="d">
     
     <Grid x:Name="TestGrid">
-        
     </Grid>
     
 </UserControl>
