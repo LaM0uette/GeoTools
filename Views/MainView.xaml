@@ -8,7 +8,8 @@
     <Grid>
         <TabControl Background="Transparent">
             <TabItem Visibility="Collapsed">
-                <Button Content="EXPORT&#x0a;GRACE"/>
+                <Button Content="EXPORT&#x0a;GRACE"
+                        Style="{StaticResource ButtonBoxM2}"/>
             </TabItem>
         </TabControl>
     </Grid>
