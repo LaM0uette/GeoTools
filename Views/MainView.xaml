@@ -6,6 +6,11 @@
              mc:Ignorable="d">
     
     <Grid>
+        <TabControl Background="Transparent">
+            <TabItem Visibility="Collapsed">
+                <Button Content="EXPORT&#x0a;GRACE"/>
+            </TabItem>
+        </TabControl>
     </Grid>
     
 </UserControl>
