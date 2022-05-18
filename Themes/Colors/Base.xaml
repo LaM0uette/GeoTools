@@ -7,8 +7,8 @@
     <Color x:Key="CRgbB1">#FF44AAB8</Color>
     <Color x:Key="CRgbB2">#FFE53843</Color>
     <Color x:Key="CRgbAll">#FF555555</Color>
-    <Color x:Key="CRgbOk">#A1E510</Color>
-    <Color x:Key="CRgbOkBis">#2DC8AB</Color>
+    <Color x:Key="CRgbOk">#FFA1E510</Color>
+    <Color x:Key="CRgbOkBis">#FF2DC8AB</Color>
     <Color x:Key="CRgbNok">#FFE53843</Color>
     <Color x:Key="CRgbNokBis">#FFDC562E</Color>
     
