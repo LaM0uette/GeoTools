@@ -12,16 +12,20 @@
         </Grid.RowDefinitions>
         
         <!-- Header -->
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
+        <Border Grid.Row="0" CornerRadius="{StaticResource RscRound}" 
+                Background="{StaticResource RgbM2}">
+            <StackPanel Orientation="Horizontal">
             
-        </StackPanel>
+            </StackPanel>
+        </Border>
         
         <!-- Body -->
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
+        <Border Grid.Row="1" CornerRadius="{StaticResource RscRound}" 
+                Background="{StaticResource RgbM2}">
             <StackPanel Orientation="Vertical" Width="300">
                 
             </StackPanel>
-        </StackPanel>
+        </Border>
         
     </Grid>
     
