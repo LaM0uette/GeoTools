@@ -20,12 +20,24 @@
         </Border>
         
         <!-- Body -->
-        <Border Grid.Row="1" CornerRadius="{StaticResource RscRound}" 
-                Background="{StaticResource RgbM2}">
-            <StackPanel Orientation="Vertical" Width="300">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 3 0 0">
+            <!-- MenuLeft -->
+            <Border CornerRadius="{StaticResource RscRound}" 
+                    Background="{StaticResource RgbM2}"
+                    Width="300">
+                <StackPanel Orientation="Vertical">
                 
-            </StackPanel>
-        </Border>
+                </StackPanel>
+            </Border>
+            
+            <!-- BodyDlg -->
+            <Grid Background="Aqua">
+                
+            </Grid>
+        </StackPanel>
+        
+        
+        
         
     </Grid>
     
