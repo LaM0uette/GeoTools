@@ -6,6 +6,22 @@
              mc:Ignorable="d">
     
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            
+        </StackPanel>
+        
+        <!-- Body -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <StackPanel Orientation="Vertical" Width="300">
+                
+            </StackPanel>
+        </StackPanel>
         
     </Grid>
     
