@@ -100,3 +100,5 @@ T:\- 4 Suivi Appuis\18-Partage\__PROG__\GeoTools\obj\Debug\net6.0-windows\refint
 T:\- 4 Suivi Appuis\18-Partage\__PROG__\GeoTools\obj\Debug\net6.0-windows\GeoTools.pdb
 T:\- 4 Suivi Appuis\18-Partage\__PROG__\GeoTools\obj\Debug\net6.0-windows\GeoTools.genruntimeconfig.cache
 T:\- 4 Suivi Appuis\18-Partage\__PROG__\GeoTools\obj\Debug\net6.0-windows\ref\GeoTools.dll
+T:\- 4 Suivi Appuis\18-Partage\__PROG__\GeoTools\obj\Debug\net6.0-windows\Views\DlgAllView.g.cs
+T:\- 4 Suivi Appuis\18-Partage\__PROG__\GeoTools\obj\Debug\net6.0-windows\Views\DlgAllView.baml
