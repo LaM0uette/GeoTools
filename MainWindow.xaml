@@ -15,7 +15,7 @@
                  MinWidth="{StaticResource AppWidth}"
                  Height="{StaticResource AppHeight}"
                  MinHeight="{StaticResource AppHeight}"
-                 GlowBrush="{StaticResource RgbM2}"
+                 GlowBrush="{StaticResource RgbM1}"
                  WindowTitleBrush="{StaticResource RgbM1}"
                  FontFamily="Roboto"
                  FontSize="15"
