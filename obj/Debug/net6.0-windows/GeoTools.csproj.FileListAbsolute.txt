@@ -116,3 +116,4 @@ T:\- 4 Suivi Appuis\18-Partage\__PROG__\GeoTools\bin\Debug\net6.0-windows\runtim
 T:\- 4 Suivi Appuis\18-Partage\__PROG__\GeoTools\bin\Debug\net6.0-windows\runtimes\win-x86\native\SQLite.Interop.dll
 T:\- 4 Suivi Appuis\18-Partage\__PROG__\GeoTools\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 T:\- 4 Suivi Appuis\18-Partage\__PROG__\GeoTools\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+T:\- 4 Suivi Appuis\18-Partage\__PROG__\GeoTools\obj\Debug\net6.0-windows\Themes\Img\Base\Ui\home.baml
