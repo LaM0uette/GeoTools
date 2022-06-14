@@ -23,6 +23,7 @@ public partial class DlgViewAll : UserControl
         // _MyViewModel = new MyViewModel();
         // DataContext = _viewModel;
 
+        var style = FindResource("ButtonTxtInvB2") as Style;
         string connectionString = "Data Source=T:\\- 4 Suivi Appuis\\25_BDD\\MyDLG\\bdd.sqlite";
 
         SQLiteConnection connection = new SQLiteConnection(connectionString);
@@ -30,32 +31,48 @@ public partial class DlgViewAll : UserControl
 
 
         SQLiteCommand command = new SQLiteCommand("SELECT * FROM v_dlg", connection);
-
-
-        DataTable dataTable = new DataTable();
-        dataTable.Load(command.ExecuteReader());
-        connection.Close();
-        
-        var style = FindResource("ButtonTxtInvB2") as Style;
-
-        for (int i = 0; i < 100; i++)
+        SQLiteDataReader sqlReader = command.ExecuteReader();
+        while (sqlReader.Read())
         {
             Button button = new Button()
             {
-                Content = $"Button for {i}",
+                Content = sqlReader["dlg"].ToString(),
                 Height = 50,
-                Name = $"jeSuisUnTest{i}",
+                Name = $"btn_{sqlReader["dl_id"]}",
                 Style = style,
             };
 
             button.Click += new RoutedEventHandler(button_Click);
             Panel.Children.Add(button);
         }
+        
+        connection.Close();
+        
 
-        foreach (var i in dataTable.Rows)
-        {
-            
-        }
+        // DataTable dataTable = new DataTable();
+        // dataTable.Load(command.ExecuteReader());
+        // connection.Close();
+        //
+        //
+        //
+        // for (int i = 0; i < 100; i++)
+        // {
+        //     Button button = new Button()
+        //     {
+        //         Content = $"Button for {i}",
+        //         Height = 50,
+        //         Name = $"jeSuisUnTest{i}",
+        //         Style = style,
+        //     };
+        //
+        //     button.Click += new RoutedEventHandler(button_Click);
+        //     Panel.Children.Add(button);
+        // }
+        //
+        // foreach (var i in dataTable.Rows)
+        // {
+        //     
+        // }
 
         // dataGrid.DataContext = dataTable;
         

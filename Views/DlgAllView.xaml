@@ -7,17 +7,6 @@
              mc:Ignorable="d">
 
     <Grid>
-        <!-- <DataGrid Margin="0, 24, 0, 207" Name="dataGrid" ItemsSource="{Binding}"></DataGrid> -->
-        <!-- -->
-        <!-- <ItemsControl ItemsSource="{Binding MyCommands}"> -->
-        <!--     <ItemsControl.Resources> -->
-        <!--         <DataTemplate DataType="{x:Type local:MyCommandWrapper}"> -->
-        <!--             <Button Content="{Binding DisplayName}" Command="{Binding command}"/> -->
-        <!--         </DataTemplate> -->
-        <!--     </ItemsControl.Resources> -->
-        <!-- </ItemsControl> -->
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-            <WrapPanel x:Name="Panel" Width="800"/>
-        </ScrollViewer>
+        <WrapPanel x:Name="Panel"/>
     </Grid>
 </UserControl>

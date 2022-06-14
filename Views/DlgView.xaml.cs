@@ -12,6 +12,5 @@ public partial class DlgView
     private void BtnDlgBackHome_OnClick(object sender, RoutedEventArgs e)
     {
         // MainView.TiMenu.IsSelected = true;
-        // MainView.Tg;
     }
 }
