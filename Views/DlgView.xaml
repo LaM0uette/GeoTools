@@ -18,9 +18,11 @@
             <StackPanel Orientation="Horizontal">
                 
                 <!-- Bouton de retour au menu -->
-                <Button Style="{StaticResource ButtonPlainM2}"
-                        Width="25"
-                        Height="25">
+                <Button  x:Name="BtnDlgBackHome" 
+                         Style="{StaticResource ButtonPlainM2}"
+                         Width="25"
+                         Height="25"
+                         Click="BtnDlgBackHome_OnClick">
                     <Image Style="{StaticResource ImgHomeM1}"
                            Width="18"
                            Height="18"/>
