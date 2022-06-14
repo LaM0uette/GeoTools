@@ -1316,7 +1316,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\XD5965\\.nuget\\packages\\": {},
+    "C:\\Users\\ZP6177\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
@@ -1325,14 +1325,14 @@
       "projectUniqueName": "T:\\- 4 Suivi Appuis\\18-Partage\\__PROG__\\GeoTools\\GeoTools.csproj",
       "projectName": "GeoTools",
       "projectPath": "T:\\- 4 Suivi Appuis\\18-Partage\\__PROG__\\GeoTools\\GeoTools.csproj",
-      "packagesPath": "C:\\Users\\XD5965\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\ZP6177\\.nuget\\packages\\",
       "outputPath": "T:\\- 4 Suivi Appuis\\18-Partage\\__PROG__\\GeoTools\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\XD5965\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ZP6177\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
