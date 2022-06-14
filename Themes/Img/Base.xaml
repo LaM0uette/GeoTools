@@ -8,6 +8,7 @@
         
         <!-- Ui -->
         <ResourceDictionary Source="/Themes/Img/Base/Ui/check.xaml"/>
+        <ResourceDictionary Source="/Themes/Img/Base/Ui/home.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

@@ -21,7 +21,7 @@
                 <Button Style="{StaticResource ButtonPlainM2}"
                         Width="25"
                         Height="25">
-                    <Image Source="{StaticResource Main}"
+                    <Image Style="{StaticResource ImgHomeM2}"
                            Width="18"
                            Height="18"/>
                 </Button>
