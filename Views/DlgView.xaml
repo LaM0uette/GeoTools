@@ -16,7 +16,15 @@
         <Border Grid.Row="0" CornerRadius="{StaticResource RscRound}" 
                 Background="{StaticResource RgbM2}">
             <StackPanel Orientation="Horizontal">
-            
+                
+                <!-- Bouton de retour au menu -->
+                <Button Style="{StaticResource ButtonPlainM2}"
+                        Width="25"
+                        Height="25">
+                    <Image Source="{StaticResource Main}"
+                           Width="18"
+                           Height="18"/>
+                </Button>
             </StackPanel>
         </Border>
         
