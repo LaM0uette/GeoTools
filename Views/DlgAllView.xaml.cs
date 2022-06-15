@@ -32,12 +32,12 @@ public partial class DlgViewAll : UserControl
             Label lb_nLivr_nVer = new Label(){Content = $"{sqlReader["dl_no_livraison"]}-V{sqlReader["dl_no_version"]}"};
 
 
-            Button button = new Button()
-            {
-                Content = lb_ext_id,
-                Name = $"dlg_{sqlReader["dl_id"]}" + lb_phase_td + lb_nLivr_nVer,
-                Style = style,
-            };
+            // Button button = new Button()
+            // {
+            //     Content = lb_ext_id,
+            //     Name = $"dlg_{sqlReader["dl_id"]}" + lb_phase_td + lb_nLivr_nVer,
+            //     Style = style,
+            // };
             
             
             
@@ -50,8 +50,8 @@ public partial class DlgViewAll : UserControl
             //     Style = style,
             // };
 
-            button.Click += new RoutedEventHandler(button_Click);
-            Panel.Children.Add(button);
+            //button.Click += new RoutedEventHandler(button_Click);
+            //Panel.Children.Add(button);
         }
         
         connection.Close();
