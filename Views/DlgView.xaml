@@ -15,10 +15,16 @@
         <!-- Header -->
         <Border Grid.Row="0" CornerRadius="{StaticResource RscRound}" 
                 Background="{StaticResource RgbM2}">
-            <StackPanel Orientation="Horizontal">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
                 
                 <!-- Bouton de retour au menu -->
-                <Button  x:Name="BtnDlgBackHome" 
+                <Button Grid.Column="0"  x:Name="BtnDlgBackHome" 
+                         HorizontalAlignment="Left"
                          Style="{StaticResource ButtonPlainM2}"
                          Width="25"
                          Height="25"
@@ -27,7 +33,11 @@
                            Width="18"
                            Height="18"/>
                 </Button>
-            </StackPanel>
+                
+                <!-- ComboBox des types d'affichages -->
+                <ComboBox Grid.Column="2" 
+                          HorizontalAlignment="Right"></ComboBox>
+            </Grid>
         </Border>
         
         <!-- Body -->
