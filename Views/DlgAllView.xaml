@@ -9,7 +9,9 @@
              
              mc:Ignorable="d">
 
-    <Grid>
-        <WrapPanel x:Name="Panel" Width="10"/>
+    <Grid x:Name="Grid">
+        <ScrollViewer x:Name="MyScrollViewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <WrapPanel x:Name="Panel"/>
+        </ScrollViewer>
     </Grid>
 </UserControl>

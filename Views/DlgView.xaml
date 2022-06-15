@@ -43,7 +43,7 @@
             
             <!-- BodyDlg -->
             <Grid>
-                <views:DlgViewAll/>
+                <views:DlgViewAll MaxWidth="{Binding ElementName=ActualWidthProperty}"/>
             </Grid>
         </StackPanel>
     </Grid>
