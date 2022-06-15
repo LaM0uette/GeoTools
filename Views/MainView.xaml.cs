@@ -5,23 +5,23 @@ namespace GeoTools.Views;
 
 public partial class MainView
 {
-    private static TabItem _te = new ();
-    private static TabItem _teb = new ();
+    public static TabItem Te = new ();
+    public static TabItem Teb = new ();
 
     public MainView()
     {
         InitializeComponent();
-        _te = TiExportGrace;
-        _teb = TiMenu;
+        Te = TiExportGrace;
+        Teb = TiMenu;
     }
     
-    public static void Test()
+    public static void Test(TabItem t)
     {
-        _teb.IsSelected = true;
+        t.IsSelected = true;
     }
 
     private void BtnTiMenu_OnClick(object sender, RoutedEventArgs e)
     {
-        _te.IsSelected = true;
+        Te.IsSelected = true;
     }
 }
