@@ -7,12 +7,13 @@ public partial class DlgView
     public DlgView()
     {
         InitializeComponent();
-        setWith();
+        SetWith();
     }
 
-    private void setWith()
+    private void SetWith()
     {
-        DlgViewAll.Width = Application.Current.MainWindow.Width - this.BorderTest.Width;
+        
+        DlgViewAll.Width = Application.Current.MainWindow.Width - BorderTest.Width;
     }
     private void BtnDlgBackHome_OnClick(object sender, RoutedEventArgs e)
     {
