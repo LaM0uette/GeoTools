@@ -28,26 +28,21 @@ public partial class DlgViewAll : UserControl
         SQLiteConnection connection = new SQLiteConnection(connectionString);
         connection.Open();
         
-        SQLiteCommand command = new SQLiteCommand("SELECT * FROM v_dlg", connection);
+        SQLiteCommand command = new SQLiteCommand("SELECT * FROM v_dlg_tmp", connection);
         SQLiteDataReader sqlReader = command.ExecuteReader();
         while (sqlReader.Read())
         {
 
-            Grid grid = new Grid()
-            {
-                Width = 200,
-                Height = 150,
-            };
-            grid.RowDefinitions.Count = 2;
-            
-            
             Button button = new Button()
             {
-                Name = $"dlg_{sqlReader["dl_id"]}"
+                Height = 60,
+                Width = 150,
+                Content = $"{sqlReader["zo_ext_id"]}" +
+                          $"\n{sqlReader["dl_phase"]}-{sqlReader["dl_td"]}" +
+                          $"\n{sqlReader["dl_no_livraison"]}-V{sqlReader["dl_no_version"]}",
+                Name = $"dlg_{sqlReader["dl_id"]}",
+                Style = style,
             };
-            
-            
-            grid.
 
             button.Click += new RoutedEventHandler(button_Click);
             Panel.Children.Add(button);
