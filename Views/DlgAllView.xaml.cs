@@ -16,14 +16,11 @@ public partial class DlgViewAll : UserControl
     public DlgViewAll()
     {
         InitializeComponent();
-        //CreateBtnDlg();
-
-        // MessageBox.Show($"{Grid.Width}");
-        // MessageBox.Show($"{Panel.MaxWidth}");
+        CreateBtnDlg();
 
     }
 
-    void CreateBtnDlg()
+    private void CreateBtnDlg()
     {
         var style = FindResource("ButtonTxtInvB2") as Style;
         string connectionString = "Data Source=T:\\- 4 Suivi Appuis\\25_BDD\\MyDLG\\bdd.sqlite";
@@ -35,13 +32,22 @@ public partial class DlgViewAll : UserControl
         SQLiteDataReader sqlReader = command.ExecuteReader();
         while (sqlReader.Read())
         {
+
+            Grid grid = new Grid()
+            {
+                Width = 200,
+                Height = 150,
+            };
+            grid.RowDefinitions.Count = 2;
+            
+            
             Button button = new Button()
             {
-                Content = sqlReader["dlg"].ToString(),
-                Height = 50,
-                Name = $"btn_{sqlReader["dl_id"]}",
-                Style = style,
+                Name = $"dlg_{sqlReader["dl_id"]}"
             };
+            
+            
+            grid.
 
             button.Click += new RoutedEventHandler(button_Click);
             Panel.Children.Add(button);

@@ -31,9 +31,9 @@
         </Border>
         
         <!-- Body -->
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 3 0 0">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 5 0 0">
             <!-- MenuLeft -->
-            <Border CornerRadius="{StaticResource RscRound}" 
+            <Border x:Name="BorderTest" CornerRadius="{StaticResource RscRound}" 
                     Background="{StaticResource RgbM2}"
                     Width="300">
                 <StackPanel Orientation="Vertical">
@@ -43,7 +43,7 @@
             
             <!-- BodyDlg -->
             <Grid>
-                <views:DlgViewAll MaxWidth="{Binding ElementName=ActualWidthProperty}"/>
+                <views:DlgViewAll x:Name="DlgViewAll" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </Grid>
         </StackPanel>
     </Grid>

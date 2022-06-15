@@ -10,7 +10,7 @@
              mc:Ignorable="d">
 
     <Grid x:Name="Grid">
-        <ScrollViewer x:Name="MyScrollViewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer x:Name="MyScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
             <WrapPanel x:Name="Panel"/>
         </ScrollViewer>
     </Grid>
