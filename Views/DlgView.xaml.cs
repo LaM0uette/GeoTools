@@ -12,11 +12,12 @@ public partial class DlgView
 
     private void SetWith()
     {
-        
         DlgViewAll.Width = Application.Current.MainWindow.Width - BorderTest.Width;
     }
+    
     private void BtnDlgBackHome_OnClick(object sender, RoutedEventArgs e)
     {
-        // MainView.TiMenu.IsSelected = true;
+        //MainView.TiMenu.IsSelected = true;
+        MainView.Test();
     }
 }

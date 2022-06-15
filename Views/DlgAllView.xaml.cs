@@ -1,12 +1,6 @@
-﻿using System;
-using System.Text;
-using System.Data;
-using System.Data.SQLite;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Data.SQLite;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace GeoTools.Views;
 
@@ -22,7 +16,7 @@ public partial class DlgViewAll : UserControl
 
     private void CreateBtnDlg()
     {
-        var style = FindResource("ButtonTxtInvB2") as Style;
+        var style = FindResource("ButtonDLGTemp") as Style;
         string connectionString = "Data Source=T:\\- 4 Suivi Appuis\\25_BDD\\MyDLG\\bdd.sqlite";
 
         SQLiteConnection connection = new SQLiteConnection(connectionString);
@@ -33,16 +27,28 @@ public partial class DlgViewAll : UserControl
         while (sqlReader.Read())
         {
 
+            Label lb_ext_id = new Label(){Content = $"{sqlReader["zo_ext_id"]}"};
+            Label lb_phase_td = new Label(){Content = $"{sqlReader["dl_phase"]}-{sqlReader["dl_td"]}"};
+            Label lb_nLivr_nVer = new Label(){Content = $"{sqlReader["dl_no_livraison"]}-V{sqlReader["dl_no_version"]}"};
+
+
             Button button = new Button()
             {
-                Height = 60,
-                Width = 150,
-                Content = $"{sqlReader["zo_ext_id"]}" +
-                          $"\n{sqlReader["dl_phase"]}-{sqlReader["dl_td"]}" +
-                          $"\n{sqlReader["dl_no_livraison"]}-V{sqlReader["dl_no_version"]}",
-                Name = $"dlg_{sqlReader["dl_id"]}",
+                Content = lb_ext_id,
+                Name = $"dlg_{sqlReader["dl_id"]}" + lb_phase_td + lb_nLivr_nVer,
                 Style = style,
             };
+            
+            
+            
+            // Button button = new Button()
+            // {
+            //     Content = $"{sqlReader["zo_ext_id"]}" +
+            //               $"\n{sqlReader["dl_phase"]}-{sqlReader["dl_td"]}" +
+            //               $"\n{sqlReader["dl_no_livraison"]}-V{sqlReader["dl_no_version"]}",
+            //     Name = $"dlg_{sqlReader["dl_id"]}",
+            //     Style = style,
+            // };
 
             button.Click += new RoutedEventHandler(button_Click);
             Panel.Children.Add(button);
