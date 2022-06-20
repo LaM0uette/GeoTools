@@ -110,4 +110,3 @@ SELECT *
 FROM v_exports_en_cours
 WHERE ex_dl_id = 2
 AND ex_date = (SELECT MAX(ex_date) FROM v_exports_en_cours WHERE ex_dl_id = 2);
-
