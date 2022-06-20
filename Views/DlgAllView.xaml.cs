@@ -60,6 +60,11 @@ public partial class DlgViewAll : UserControl
     void button_Click(object sender, RoutedEventArgs e)
     {
         //MessageBox.Show($"You clicked on the {(sender as Button).Name}"string.Format("You clicked on the {0}. button.", (sender as Button).Name));
-        MessageBox.Show($"You clicked on the {(sender as Button).Name}");
+        
+        string btnName = (sender as Button).Name;
+        if (btnName is not null)
+        {
+            MessageBox.Show($"You clicked on the {btnName}");
+        }
     }
 }

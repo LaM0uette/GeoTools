@@ -5,6 +5,8 @@
         <TargetFramework>net6.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
+        <LangVersion>10</LangVersion>
+        <ApplicationIcon>compilateur.ico</ApplicationIcon>
     </PropertyGroup>
 
     <ItemGroup>
