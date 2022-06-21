@@ -115,10 +115,12 @@
 
 
 
--- ********* V2 *********
+
+
+-- ********* V2 (PostreSQL) *********
 
 -- ...
--- INSERT l_etats
+-- l_etats
 
 SELECT * FROM l_etats;
 
@@ -138,3 +140,25 @@ SELECT * FROM l_etats;
 --        ('ANN', 'ANNULE', '#C72764');
 
 
+
+-- ...
+-- l_phases
+
+SELECT * FROM l_phases;
+--
+-- INSERT INTO l_phases (ph_nom)
+-- VALUES ('PRO'),
+--        ('EXE'),
+--        ('DOE');
+
+
+
+-- ...
+-- l_type_export
+
+SELECT * FROM l_type_export;
+
+-- INSERT INTO l_type_export (te_code, te_nom)
+-- VALUES ('T', 'TRANSPORT'),
+--        ('D', 'DISTRIBUTION'),
+--        ('TD', 'TRANSPORT ET DISTRIBUTION');
