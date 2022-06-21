@@ -162,3 +162,21 @@ SELECT * FROM l_type_export;
 -- VALUES ('T', 'TRANSPORT'),
 --        ('D', 'DISTRIBUTION'),
 --        ('TD', 'TRANSPORT ET DISTRIBUTION');
+
+
+
+-- ...
+-- t_users
+
+SELECT * FROM t_users;
+
+INSERT INTO t_users (us_guid, us_nom, us_prenom, us_admin)
+VALUES ('XD5965', 'DE VILLELE', 'Dorian', 0),
+       ('ZP6177', 'BARRENTO-ANTUNES', 'Raphael', 1);
+
+
+-- ...
+-- v_dlg
+
+SELECT *
+FROM t_dlg;
