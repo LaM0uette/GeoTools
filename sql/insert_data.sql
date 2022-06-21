@@ -172,7 +172,7 @@ SELECT * FROM t_users;
 
 INSERT INTO t_users (us_guid, us_nom, us_prenom, us_admin)
 VALUES ('XD5965', 'DE VILLELE', 'Dorian', 0),
-       ('ZP6177', 'BARRENTO-ANTUNES', 'Raphael', 1);
+       ('ZP6177', 'BARRENTO ANTUNES', 'Raphael', 1);
 
 
 -- ...
