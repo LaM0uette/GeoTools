@@ -1,22 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SQLite;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Data.SQLite;
 using GeoTools.Model;
-using GeoTools.Views;
-using MahApps.Metro.Controls;
 
 namespace GeoTools
 {
@@ -24,12 +7,14 @@ namespace GeoTools
     public partial class MainWindow
     {
         public static SQLiteConnection Connection = new ();
-        public static User UserSession = SetUserParameters(new User());
+        public static User UserSession = new ();
 
         public MainWindow()
         {
             Connection = new SQLiteConnection("Data Source=T:\\- 4 Suivi Appuis\\25_BDD\\MyDLG\\bdd.sqlite");
             Connection.Open();
+            
+            UserSession = SetUserParameters(UserSession);
         }
         
         private static User SetUserParameters(User userSession)
