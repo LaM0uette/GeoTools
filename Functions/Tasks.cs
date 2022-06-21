@@ -3,12 +3,9 @@ namespace GeoTools.Functions;
 
 public class Tasks
 {
-    private static string _guid ;
-
-    public static string Guid
+    public static string GetUserSession()
     {
-        get => _guid;
-        set => _guid = Environment.UserName;
+        return Environment.UserName;
     }
 }
 
