@@ -23,9 +23,8 @@ namespace GeoTools
         {
             string req = $"SELECT * FROM t_users WHERE us_guid='{Tasks.GetUserSession()}'";
 
-            SQLiteCommand command = new SQLiteCommand(req, Connection);
-            SQLiteDataReader cdReader = command.ExecuteReader();
-        
+            SQLiteDataReader cdReader = Tasks.GetData(cmd: req);
+            
             while (cdReader.Read())
             {
                 UserSession.Prenom = $"{cdReader["us_prenom"]}";
