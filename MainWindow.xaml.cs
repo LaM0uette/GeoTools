@@ -12,26 +12,20 @@ namespace GeoTools
 
         public MainWindow()
         {
+            // var sql = "get_dlg_by_date";
+            // var sql = "SELECT * FROM \"GeoTools\".v_dlg";
+            //var sq = "SELECT * FROM \"GeoTools\".get_dlg_by_date('2022-06-23')";
+            
             Connection = new SQLiteConnection("Data Source=T:\\- 4 Suivi Appuis\\25_BDD\\MyDLG\\bdd.sqlite");
             Connection.Open();
 
-            var cs = "HOST=BORDEAUX04;Username=postgres;Password=INEO_Infracom_33;Database=sig";
-            var con = new NpgsqlConnection(cs);
-
-            con.Open();
-            var tr = con.BeginTransaction();
-
-            // var sql = "get_dlg_by_date";
-
-            // var sql = "SELECT * FROM \"GeoTools\".v_dlg";
-            var sql = "SELECT * FROM \"GeoTools\".get_dlg_by_date('2022-06-23')";
-            sql = "SELECT * FROM \"GeoTools\".add_dlg('XD5965', 'BIVO', CURRENT_DATE, 'EXE', 'TRANSPORT ET DISTRIBUTION', 2, 4)";
-            var cmd = new NpgsqlCommand(sql, con);
-            tr.Commit();
+            var sql = Sql.Connect();
+            var req = "SELECT * FROM \"GeoTools\".add_dlg('XD5965', 'BIVO', CURRENT_DATE, 'EXE', 'TRANSPORT ET DISTRIBUTION', 3, 5)";
+            
+            var cmd = new NpgsqlCommand(req, sql.Connection);
+            sql.Transaction.Commit();
 
             NpgsqlDataReader pgreader = cmd.ExecuteReader();
-
-
             SetUserParameters();
         }
 

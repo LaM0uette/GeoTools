@@ -11,10 +11,10 @@ public class Sql
         public NpgsqlTransaction Transaction;
     }
     
-    public SqlCommand Connect() 
+    public static SqlCommand Connect() 
     {
-        var ConnexionString = "HOST=BORDEAUX04;Username=postgres;Password=INEO_Infracom_33;Database=sig";
-        var connexion = new NpgsqlConnection(ConnexionString);
+        var connexionString = "HOST=BORDEAUX04;Username=postgres;Password=INEO_Infracom_33;Database=sig";
+        var connexion = new NpgsqlConnection(connexionString);
         connexion.Open();
         
         var transaction = connexion.BeginTransaction();
