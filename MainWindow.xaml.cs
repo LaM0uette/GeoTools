@@ -15,7 +15,6 @@ namespace GeoTools
             // var sql = "get_dlg_by_date";
             // var sql = "SELECT * FROM \"GeoTools\".v_dlg";
             //var sq = "SELECT * FROM \"GeoTools\".get_dlg_by_date('2022-06-23')";
-            
             Connection = new SQLiteConnection("Data Source=T:\\- 4 Suivi Appuis\\25_BDD\\MyDLG\\bdd.sqlite");
             Connection.Open();
 
