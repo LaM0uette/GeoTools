@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.SQLite;
 
-namespace GeoTools.Functions;
+namespace GeoTools.Utils;
 
 public class Tasks
 {

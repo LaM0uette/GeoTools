@@ -1,6 +1,4 @@
-﻿using System.Data;
-using System.Data.SQLite;
-using System.Threading.Tasks;
+﻿using System.Data.SQLite;
 using GeoTools.Model;
 using GeoTools.Functions;
 using Npgsql;
