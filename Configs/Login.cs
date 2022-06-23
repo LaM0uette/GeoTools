@@ -1,6 +1,6 @@
 ﻿namespace GeoTools.Configs;
 
-public class Login
+public static class Login
 {
     public const string PgHost = "BORDEAUX04";
     public const string PgUser = "postgres";

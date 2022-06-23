@@ -20,7 +20,7 @@ namespace GeoTools
             Connection.Open();
 
             var sql = Sql.Connect();
-            var req = "SELECT * FROM \"GeoTools\".add_dlg('XD5965', 'BIVO', CURRENT_DATE, 'EXE', 'TRANSPORT ET DISTRIBUTION', 3, 5)";
+            var req = "SELECT * FROM \"GeoTools\".add_dlg('XD5965', 'BIVO', CURRENT_DATE, 'EXE', 'TRANSPORT ET DISTRIBUTION', 4, 5)";
             
             var cmd = new NpgsqlCommand(req, sql.Connection);
             sql.Transaction.Commit();

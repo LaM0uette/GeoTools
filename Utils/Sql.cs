@@ -3,7 +3,7 @@ using GeoTools.Configs;
 
 namespace GeoTools.Utils;
 
-public class Sql
+public static class Sql
 {
     public struct SqlCommand
     {
