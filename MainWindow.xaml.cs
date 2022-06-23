@@ -19,12 +19,11 @@ namespace GeoTools
             Connection.Open();
 
             var sql = Sql.Connect();
-            var req = "SELECT * FROM \"GeoTools\".add_dlg('XD5965', 'BIVO', CURRENT_DATE, 'EXE', 'TRANSPORT ET DISTRIBUTION', 4, 5)";
+            var req = "SELECT * FROM \"GeoTools\".add_dlg('XD5965', 'BIVO', CURRENT_DATE, 'EXE', 'TRANSPORT ET DISTRIBUTION', 4, 6)";
             
-            var cmd = new NpgsqlCommand(req, sql.Connection);
+            new NpgsqlCommand(req, sql.Connection).ExecuteNonQuery();
             sql.Transaction.Commit();
 
-            NpgsqlDataReader pgreader = cmd.ExecuteReader();
             SetUserParameters();
         }
 
