@@ -15,12 +15,15 @@ namespace GeoTools
             Connection = new SQLiteConnection("Data Source=T:\\- 4 Suivi Appuis\\25_BDD\\MyDLG\\bdd.sqlite");
             Connection.Open();
 
-            var sql = Sql.Connect();
-            var req = "SELECT * FROM \"GeoTools\".add_dlg('XD5965', 'BIVO', CURRENT_DATE, 'EXE', 'TRANSPORT ET DISTRIBUTION', 4, 6)";
-            
-            new NpgsqlCommand(req, sql.Connection).ExecuteNonQuery();
-            sql.Transaction.Commit();
+            // var sql = Sql.Connect();
+            // var req = "SELECT * FROM \"GeoTools\".add_dlg('XD5965', 'BIVO', CURRENT_DATE, 'EXE', 'TRANSPORT ET DISTRIBUTION', 4, 6)";
+            //
+            // new NpgsqlCommand(req, sql.Connection).ExecuteNonQuery();
+            // sql.Transaction.Commit();
 
+            //Sql.Exec("SELECT * FROM \"GeoTools\".add_dlg('XD5965', 'BIVO', CURRENT_DATE, 'EXE', 'TRANSPORT ET DISTRIBUTION', 11, 11)");
+            Sql.GetSql("SELECT * FROM \"GeoTools\".get_dlg_exports(1)");
+            
             SetUserParameters();
         }
 
