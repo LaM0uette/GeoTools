@@ -21,6 +21,10 @@ public static class Sql
         Commit();
     }
 
+    public static void Close()
+    {
+        Connection.Close();
+    }
     public static void Commit()
     {
         Transaction.Commit();

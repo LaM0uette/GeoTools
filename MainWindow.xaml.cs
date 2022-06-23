@@ -22,17 +22,19 @@ namespace GeoTools
             // sql.Transaction.Commit();
 
             //Sql.Exec("SELECT * FROM \"GeoTools\".add_dlg('XD5965', 'BIVO', CURRENT_DATE, 'EXE', 'TRANSPORT ET DISTRIBUTION', 11, 11)");
-            Sql.GetSql("SELECT * FROM \"GeoTools\".get_dlg_exports(1)");
+            //Sql.GetSql("SELECT * FROM \"GeoTools\".get_dlg_exports(1)");
             
             SetUserParameters();
         }
 
         private static void SetUserParameters()
         {
-            string req = $"SELECT * FROM t_users WHERE us_guid='{Tasks.GetUserSession()}'";
+            // string req = $"SELECT * FROM t_users WHERE us_guid='{Tasks.GetUserSession()}'";
 
-            SQLiteDataReader cdReader = Tasks.GetData(cmd: req);
+            //SQLiteDataReader cdReader = Tasks.GetData(cmd: req);
 
+            NpgsqlDataReader cdReader = Sql.GetSql($"SELECT * FROM \"GeoTools\".t_users WHERE us_guid='{Tasks.GetUserSession()}'");
+            
             while (cdReader.Read())
             {
                 UserSession.Prenom = $"{cdReader["us_prenom"]}";
