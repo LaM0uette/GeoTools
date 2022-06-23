@@ -99,7 +99,7 @@ $BODY$
     LANGUAGE plpgsql VOLATILE
                      COST 100;
 
-SELECT add_export_to_dlg(4, 6);
+SELECT add_export_to_dlg(5, 3);
 
 -- Trigger pour mettre dans la t_export
 create or replace function tr_add_export_to_dlg() RETURNS trigger AS
@@ -121,15 +121,112 @@ EXECUTE PROCEDURE "GeoTools".tr_add_export_to_dlg();
 
 
 
-
-
-
-
 SELECT *
 FROM t_exports;
 
+SELECT *
+FROM t_dlg dl;
+
 -- ...
 -- v_dlg
-SELECT *
-FROM t_dlg;
+SELECT dl_id                       as id,
+       usp.us_guid                 as guid_projeteur,
+       usp.us_nom || usp.us_prenom as projeteur,
+       use.us_guid                 as guid_executant,
+       use.us_nom || use.us_prenom as executant,
+       rc.rc_refcode1              as refcode1,
+       rc.rc_refcode2              as refcode2,
+       rc.rc_refcode3              as refcode3,
+       dl.dl_date_init             as date_initial,
+       ph.ph_nom                   as phase,
+       te.te_nom                   as type_export,
+       dl.dl_livraison             as livraison,
+       dl.dl_version               as version,
+       (SELECT ex_id
+        FROM t_exports
+        WHERE ex_dl_id = dl.dl_id
+        ORDER BY ex_date DESC
+        LIMIT 1) as id_export,
+    (SELECT ex_et_id
+        FROM t_exports
+        WHERE ex_dl_id = dl.dl_id
+        ORDER BY ex_date DESC
+        LIMIT 1) as id_export
+FROM t_dlg dl
+         INNER JOIN t_users usp
+                    ON usp.us_id = dl.dl_proj_us_id
+         INNER JOIN t_users use
+                    ON use.us_id = dl.dl_proj_us_id
+         INNER JOIN data.l_refcode rc
+                    ON rc.rc_id = dl.dl_rc_id
+         INNER JOIN l_phases ph
+                    ON ph.ph_id = dl.dl_ph_id
+         INNER JOIN l_type_export te
+                    ON te.te_id = dl.dl_te_id;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT dl_id                       as id,
+       usp.us_guid                 as guid_projeteur,
+       usp.us_nom || usp.us_prenom as projeteur,
+       use.us_guid                 as guid_executant,
+       use.us_nom || use.us_prenom as executant,
+       rc.rc_refcode1              as refcode1,
+       rc.rc_refcode2              as refcode2,
+       rc.rc_refcode3              as refcode3,
+       dl.dl_date_init             as date_initial,
+       ph.ph_nom                   as phase,
+       te.te_nom                   as type_export,
+       dl.dl_livraison             as livraison,
+       dl.dl_version               as version,
+       (SELECT ex_id
+        FROM t_exports
+        WHERE ex_dl_id = dl.dl_id
+        ORDER BY ex_date DESC
+        LIMIT 1)
+FROM t_dlg dl
+         INNER JOIN t_users usp
+                    ON usp.us_id = dl.dl_proj_us_id
+         INNER JOIN t_users use
+                    ON use.us_id = dl.dl_proj_us_id
+         INNER JOIN data.l_refcode rc
+                    ON rc.rc_id = dl.dl_rc_id
+         INNER JOIN l_phases ph
+                    ON ph.ph_id = dl.dl_ph_id
+         INNER JOIN l_type_export te
+                    ON te.te_id = dl.dl_te_id;
