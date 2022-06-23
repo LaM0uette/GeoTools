@@ -1,6 +1,6 @@
 ﻿using System.Data.SQLite;
 using GeoTools.Model;
-using GeoTools.Functions;
+using GeoTools.Utils;
 using Npgsql;
 
 namespace GeoTools
