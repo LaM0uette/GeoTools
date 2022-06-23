@@ -29,10 +29,6 @@ namespace GeoTools
 
         private static void SetUserParameters()
         {
-            // string req = $"SELECT * FROM t_users WHERE us_guid='{Tasks.GetUserSession()}'";
-
-            //SQLiteDataReader cdReader = Tasks.GetData(cmd: req);
-
             NpgsqlDataReader cdReader = Sql.GetSql($"SELECT * FROM \"GeoTools\".t_users WHERE us_guid='{Tasks.GetUserSession()}'");
             
             while (cdReader.Read())
