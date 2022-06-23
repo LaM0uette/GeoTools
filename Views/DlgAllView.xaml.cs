@@ -1,8 +1,8 @@
 ﻿using System.Data.SQLite;
-using System.Security.Principal;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using GeoTools.Functions;
 using GeoTools.Model;
 
 
@@ -36,8 +36,7 @@ public partial class DlgViewAll : UserControl
         const byte heighsize = 19;
         const byte widthsize = 90;
         
-        SQLiteCommand cd = new SQLiteCommand(req, co);
-        SQLiteDataReader cdReader = cd.ExecuteReader();
+        SQLiteDataReader cdReader = Tasks.GetData(cmd:req);
         while (cdReader.Read())
         {
             
@@ -118,12 +117,13 @@ public partial class DlgViewAll : UserControl
                 ToolTip = @$"{cdReader["dlg"]}
 Etat : {cdReader["ex_et_nom"]} ({cdReader["ex_et_ref"]})
 ID : {cdReader["dl_id"]}
-admin={user.Admin}",
+admin={user.Admin}
+prenom={user.Prenom}",
                 Background = Brushes.RoyalBlue
             };
             
             
-            button.Click += new RoutedEventHandler(button_Click);
+            button.Click += button_Click;
             Panel.Children.Add(button);
         }
     }
@@ -137,7 +137,7 @@ admin={user.Admin}",
     {
         //MessageBox.Show($"You clicked on the {(sender as Button).Name}"string.Format("You clicked on the {0}. button.", (sender as Button).Name));
         
-        string btnName = (sender as Button).Name;
+        string btnName = ((Button)sender).Name;
         if (btnName is not null)
         {
             MessageBox.Show($"You clicked on the {btnName}");
