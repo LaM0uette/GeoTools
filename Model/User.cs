@@ -9,5 +9,4 @@ public class User
     public bool Admin { get; set; }
     public string Prenom { get; set; }
     public string Nom { get; set; }
-
 }

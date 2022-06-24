@@ -61,7 +61,7 @@ public partial class DlgViewAll : UserControl
                 ShowGridLines = true
             };
 
-            Grid panel = new Grid()
+            Grid GridLabel = new Grid()
             {
                 VerticalAlignment = VerticalAlignment.Stretch,
                 HorizontalAlignment = HorizontalAlignment.Center
@@ -71,15 +71,15 @@ public partial class DlgViewAll : UserControl
             for (byte i = 0; i < 3; i++)
             {
                 RowDefinition row = new RowDefinition();
-                panel.RowDefinitions.Add(row);
+                GridLabel.RowDefinitions.Add(row);
             }
             Tasks.SetElementGrid(element:bdZoMarche, row:0);
             Tasks.SetElementGrid(element:bdDlInitDate, row:1);
             Tasks.SetElementGrid(element:bdExEtNom, row:2);
 
-            panel.Children.Add(bdZoMarche);
-            panel.Children.Add(bdDlInitDate);
-            panel.Children.Add(bdExEtNom);
+            GridLabel.Children.Add(bdZoMarche);
+            GridLabel.Children.Add(bdDlInitDate);
+            GridLabel.Children.Add(bdExEtNom);
 
             // // Define the Columns
             for (byte i = 0; i < 2; i++)
@@ -110,9 +110,9 @@ public partial class DlgViewAll : UserControl
             };
             
             Tasks.SetElementGrid(element:dlgInfo);
-            Tasks.SetElementGrid(element:panel, column:1);
+            Tasks.SetElementGrid(element:GridLabel, column:1);
 
-            grid.Children.Add(panel);
+            grid.Children.Add(GridLabel);
             grid.Children.Add(dlgInfo);
 
             Button button = new Button()
@@ -154,11 +154,8 @@ public partial class DlgViewAll : UserControl
             HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Center,
             FontSize = LabelFontSize,
-            // Height = heighsize,
-            // Width = widthsize,
             HorizontalContentAlignment = HorizontalAlignment.Center,
             VerticalContentAlignment = VerticalAlignment.Center,
-            // Margin = new Thickness(5, 0, 5, 0),
         };
         return test;
     }
@@ -170,5 +167,10 @@ public partial class DlgViewAll : UserControl
         {
             MessageBox.Show($"You clicked on the {btnName}");
         }
+    }
+
+    private void d(object sender, SizeChangedEventArgs e)
+    {
+
     }
 }

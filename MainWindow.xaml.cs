@@ -1,4 +1,5 @@
-﻿using GeoTools.Model;
+﻿using System.Windows;
+using GeoTools.Model;
 using GeoTools.Utils;
 using Npgsql;
 
@@ -10,6 +11,7 @@ namespace GeoTools
 
         public MainWindow()
         {
+            SizeChanged += onsenfou;
             SetUserParameters();
         }
 
@@ -20,6 +22,7 @@ namespace GeoTools
             
             while (cdReader.Read())
             {
+                
                 UserSession.Prenom = $"{cdReader["us_prenom"]}";
                 UserSession.Nom = $"{cdReader["us_nom"]}";
 
@@ -29,6 +32,11 @@ namespace GeoTools
                 }
             }
             cdReader.Close();
+        }
+
+        private void onsenfou(object sender, SizeChangedEventArgs e)
+        {
+            //Views.DlgView.SetWith();
         }
     }
 }
