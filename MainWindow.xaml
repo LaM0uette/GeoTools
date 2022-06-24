@@ -21,41 +21,43 @@
                  FontSize="15"
                  FontWeight="Bold"
                  mc:Ignorable="d">
-        
-        
-        <!-- Header -->
-        <mah:MetroWindow.WindowButtonCommands>
-                <mah:WindowButtonCommands 
-                        Minimize="Réduire"
-                        Maximize="Agrandir"
-                        Restore="Rétrécir"
-                        Close="Quitter"
-                        LightMinButtonStyle="{StaticResource MinButtonStyle}"
-                        LightMaxButtonStyle="{StaticResource MaxButtonStyle}"
-                        LightCloseButtonStyle="{StaticResource CloseButtonStyle}" 
-                        DarkMinButtonStyle="{StaticResource MinButtonStyle}"
-                        DarkMaxButtonStyle="{StaticResource MaxButtonStyle}"
-                        DarkCloseButtonStyle="{StaticResource CloseButtonStyle}" 
-                />
-        </mah:MetroWindow.WindowButtonCommands>
-        <!-- Header Icon -->
-        <mah:MetroWindow.IconTemplate>
-                <DataTemplate>
-                        <Grid Width="20"
-                              Height="20"
-                              Margin="5"
-                              Background="Transparent"
-                              RenderOptions.EdgeMode="Unspecified"
-                              RenderOptions.BitmapScalingMode="HighQuality">
-                                <Image Source="{StaticResource Main}"></Image>
-                        </Grid>
-                </DataTemplate>
-        </mah:MetroWindow.IconTemplate>
-        
-        
-        <!-- Body -->
-        <Grid Background="{StaticResource RgbM1}">
-                <views:MainView/>
-        </Grid>
-        
+
+
+    <!-- Header -->
+    <mah:MetroWindow.WindowButtonCommands>
+        <mah:WindowButtonCommands Minimize="Réduire"
+                                  Maximize="Agrandir"
+                                  Restore="Rétrécir"
+                                  Close="Quitter"
+                                  LightMinButtonStyle="{StaticResource MinButtonStyle}"
+                                  LightMaxButtonStyle="{StaticResource MaxButtonStyle}"
+                                  LightCloseButtonStyle="{StaticResource CloseButtonStyle}"
+                                  DarkMinButtonStyle="{StaticResource MinButtonStyle}"
+                                  DarkMaxButtonStyle="{StaticResource MaxButtonStyle}"
+                                  DarkCloseButtonStyle="{StaticResource CloseButtonStyle}" />
+
+    </mah:MetroWindow.WindowButtonCommands>
+    
+    
+    <!-- Header Icon -->
+    <mah:MetroWindow.IconTemplate>
+        <DataTemplate>
+            <Grid Width="20"
+                  Height="20"
+                  Margin="5"
+                  Background="Transparent"
+                  RenderOptions.EdgeMode="Unspecified"
+                  RenderOptions.BitmapScalingMode="HighQuality">
+                
+                <Image Source="{StaticResource Main}"/>
+            </Grid>
+        </DataTemplate>
+    </mah:MetroWindow.IconTemplate>
+
+
+    <!-- Body -->
+    <Grid Background="{StaticResource RgbM1}">
+        <views:MainView/>
+    </Grid>
+
 </mah:MetroWindow>

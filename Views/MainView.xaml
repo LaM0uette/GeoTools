@@ -5,19 +5,33 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:views="clr-namespace:GeoTools.Views"
              mc:Ignorable="d">
-    
+
+
     <Grid>
         <TabControl x:Name="TcMain" Background="Transparent">
-            <TabItem x:Name="TiMenu" Visibility="Collapsed" IsSelected="True">
-                <Button x:Name="BtnTiMenu" 
+
+            <!-- TabItem du Menu -->
+            <TabItem x:Name="TiMenu"
+                     Visibility="Collapsed"
+                     IsSelected="True">
+
+                <Button x:Name="BtnTiMenu"
                         Content="EXPORT&#x0a;GRACE"
                         Style="{StaticResource ButtonBoxM2}"
-                        Click="BtnTiMenu_OnClick"/>
+                        Click="BtnTiMenu_OnClick" />
+
             </TabItem>
-            <TabItem x:Name="TiExportGrace" Visibility="Collapsed" IsSelected="True">
-                <views:DlgView/>
+
+
+            <!-- TabItem des exports grace -->
+            <TabItem x:Name="TiExportGrace"
+                     Visibility="Collapsed"
+                     IsSelected="True">
+
+                <views:DlgView />
+                
             </TabItem>
         </TabControl>
     </Grid>
-    
+
 </UserControl>

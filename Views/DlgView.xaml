@@ -5,58 +5,73 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:views="clr-namespace:GeoTools.Views"
              mc:Ignorable="d">
-    
+
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
+
         <!-- Header -->
-        <Border Grid.Row="0" CornerRadius="{StaticResource RscRound}" 
+        <Border Grid.Row="0" 
+                CornerRadius="{StaticResource RscRound}"
                 Background="{StaticResource RgbM2}">
+            
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 
-                <!-- Bouton de retour au menu -->
-                <Button Grid.Column="0"  x:Name="BtnDlgBackHome" 
-                         HorizontalAlignment="Left"
-                         Style="{StaticResource ButtonPlainM2}"
-                         Width="25"
-                         Height="25"
-                         Click="BtnDlgBackHome_OnClick">
+                <!-- Bouton de retour au Menu -->
+                <Button Grid.Column="0" 
+                        x:Name="BtnDlgBackHome"
+                        HorizontalAlignment="Left"
+                        Style="{StaticResource ButtonPlainM2}"
+                        Width="25"
+                        Height="25"
+                        Click="BtnDlgBackHome_OnClick">
+                    
                     <Image Style="{StaticResource ImgHomeM1}"
                            Width="18"
-                           Height="18"/>
+                           Height="18" />
+                    
                 </Button>
                 
                 <!-- ComboBox des types d'affichages -->
-                <ComboBox Grid.Column="2" 
+                <ComboBox Grid.Column="2"
                           HorizontalAlignment="Right"
-                          Style="{StaticResource ComboBoxPlainM1}"/>
+                          Style="{StaticResource ComboBoxPlainM1}" />
+                
             </Grid>
         </Border>
-        
+
         <!-- Body -->
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 5 0 0">
+        <StackPanel Grid.Row="1" 
+                    Orientation="Horizontal" 
+                    Margin="0 5 0 0">
+            
             <!-- MenuLeft -->
-            <Border x:Name="DlgLegend" CornerRadius="{StaticResource RscRound}" 
+            <Border x:Name="DlgLegend" 
+                    CornerRadius="{StaticResource RscRound}"
                     Background="{StaticResource RgbM2}"
                     Width="300">
-                <StackPanel Orientation="Vertical">
                 
+                <StackPanel Orientation="Vertical">
+
                 </StackPanel>
             </Border>
             
             <!-- BodyDlg -->
             <Grid>
-                <views:DlgViewAll x:Name="DlgViewAll" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <views:DlgViewAll x:Name="DlgViewAll" 
+                                  HorizontalAlignment="Left" 
+                                  VerticalAlignment="Center" />
+                
             </Grid>
         </StackPanel>
     </Grid>
-    
+
 </UserControl>
