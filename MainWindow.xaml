@@ -42,7 +42,7 @@
     <!-- Header Icon -->
     <mah:MetroWindow.IconTemplate>
         <DataTemplate>
-            <Grid Width="20"
+            <Grid Width="20" 
                   Height="20"
                   Margin="5"
                   Background="Transparent"
