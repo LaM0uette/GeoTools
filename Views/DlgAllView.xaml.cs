@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -10,16 +9,13 @@ using Npgsql;
 
 namespace GeoTools.Views;
 
-public partial class DlgViewAll : UserControl
+public partial class DlgViewAll
 {
-    private User user = MainWindow.UserSession;
-
-    private const int GridWidthSize = 300;
-    private const byte GridHeighSize = 120;
-    private const int GridColumnWithSize = LabelWidthSize + 20;
-
-    private const byte TextBlockFontSize = LabelFontSize + 8;
+    private User _user = MainWindow.UserSession;
     
+    
+    private const byte TextBlockFontSize = LabelFontSize + 8;
+
     private const byte LabelFontSize = 13;
     private const byte LabelHeighSize = 26;
     private const byte LabelWidthSize = 125;
@@ -35,27 +31,28 @@ public partial class DlgViewAll : UserControl
         var style = FindResource("ButtonDLGTemp") as Style;
 
         NpgsqlDataReader cdReader = Sql.GetAllDlg();
-        
+
         while (cdReader.Read())
         {
             Label lbZoMarche = MakeLabel(content: $"RIP{cdReader["refcode1"]}");
-            Label lbDlInitDate = MakeLabel(content: $"{DateTime.Parse(cdReader["date_initial"].ToString()).ToString("MM/dd/yyyy")}");
+            Label lbDlInitDate =
+                MakeLabel(content: $"{DateTime.Parse(cdReader["date_initial"].ToString()).ToString("MM/dd/yyyy")}");
             Label lbExEtNom = MakeLabel(content: $"{cdReader["nom_etat"]}");
 
             Border bdZoMarche = MakeBorder();
             bdZoMarche.Child = lbZoMarche;
-            
+
             Border bdDlInitDate = MakeBorder();
             bdDlInitDate.Child = lbDlInitDate;
-            
+
             Border bdExEtNom = MakeBorder();
             bdExEtNom.Child = lbExEtNom;
-            
+
             // Create the Grid
             Grid grid = new Grid()
             {
-                Width = GridWidthSize,
-                Height = GridHeighSize,
+                Width = Constants.DlgWith,
+                Height = Constants.DlgHeight,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
                 ShowGridLines = true
@@ -65,7 +62,6 @@ public partial class DlgViewAll : UserControl
             {
                 VerticalAlignment = VerticalAlignment.Stretch,
                 HorizontalAlignment = HorizontalAlignment.Center
-                
             };
             // Define the Rows
             for (byte i = 0; i < 3; i++)
@@ -73,9 +69,10 @@ public partial class DlgViewAll : UserControl
                 RowDefinition row = new RowDefinition();
                 GridLabel.RowDefinitions.Add(row);
             }
-            Tasks.SetElementGrid(element:bdZoMarche, row:0);
-            Tasks.SetElementGrid(element:bdDlInitDate, row:1);
-            Tasks.SetElementGrid(element:bdExEtNom, row:2);
+
+            Tasks.SetElementGrid(element: bdZoMarche, row: 0);
+            Tasks.SetElementGrid(element: bdDlInitDate, row: 1);
+            Tasks.SetElementGrid(element: bdExEtNom, row: 2);
 
             GridLabel.Children.Add(bdZoMarche);
             GridLabel.Children.Add(bdDlInitDate);
@@ -87,8 +84,9 @@ public partial class DlgViewAll : UserControl
                 ColumnDefinition col = new ColumnDefinition();
                 if (i > 0)
                 {
-                    col.Width = new GridLength(GridColumnWithSize);
+                    col.Width = new GridLength(Constants.DlgLargeColumnWidth);
                 }
+
                 grid.ColumnDefinitions.Add(col);
             }
 
@@ -108,9 +106,9 @@ public partial class DlgViewAll : UserControl
                 HorizontalAlignment = HorizontalAlignment.Center,
                 TextAlignment = TextAlignment.Center
             };
-            
-            Tasks.SetElementGrid(element:dlgInfo);
-            Tasks.SetElementGrid(element:GridLabel, column:1);
+
+            Tasks.SetElementGrid(element: dlgInfo);
+            Tasks.SetElementGrid(element: GridLabel, column: 1);
 
             grid.Children.Add(GridLabel);
             grid.Children.Add(dlgInfo);
@@ -123,14 +121,15 @@ public partial class DlgViewAll : UserControl
                 ToolTip = $"{cdReader["dlg"]}\n" +
                           $"Etat : {cdReader["nom_etat"]} ({cdReader["code_etat"]})\n" +
                           $"ID : {cdReader["id"]}\n" +
-                          $"admin={user.Admin}\n" +
-                          $"prenom={user.Prenom}",
-                Background = Tasks.hexBrush(hexColor:cdReader["couleur_etat"].ToString())
+                          $"admin={_user.Admin}\n" +
+                          $"prenom={_user.Prenom}",
+                Background = Tasks.hexBrush(hexColor: cdReader["couleur_etat"].ToString())
             };
 
             button.Click += button_Click;
             Panel.Children.Add(button);
         }
+
         cdReader.Close();
     }
 
@@ -145,6 +144,7 @@ public partial class DlgViewAll : UserControl
             Margin = new Thickness(5, 0, 5, 0),
         };
     }
+
     static Label MakeLabel(string content)
     {
         Label test = new Label()
@@ -159,10 +159,10 @@ public partial class DlgViewAll : UserControl
         };
         return test;
     }
+
     static void button_Click(object sender, RoutedEventArgs e)
     {
-
-        string btnName = ((Button)sender).Name;
+        string btnName = ((Button) sender).Name;
         if (btnName is not null)
         {
             MessageBox.Show($"You clicked on the {btnName}");
@@ -171,6 +171,5 @@ public partial class DlgViewAll : UserControl
 
     private void d(object sender, SizeChangedEventArgs e)
     {
-
     }
 }
