@@ -1,22 +1,19 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using GeoTools.Utils;
-using Npgsql.Replication.TestDecoding;
 
 namespace GeoTools.Views;
 
 public partial class DlgView
 {
-    private const byte ScrollBarreWith = 10;
     public DlgView()
     {
         InitializeComponent();
-        SetWith();
+        SetDlgViewWith();
     }
 
-    public void SetWith()
+    private void SetDlgViewWith()
     {
-        DlgViewAll.Width = Tasks.GetWindowSize() - DlgLegend.Width - ScrollBarreWith;
+        DlgViewAll.Width = Tasks.GetWindowSize() - DlgLegend.Width - Constants.ScrollBarWith;
     }
 
     private void BtnDlgBackHome_OnClick(object sender, RoutedEventArgs e)

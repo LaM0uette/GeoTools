@@ -34,7 +34,7 @@ namespace GeoTools
 
         private static void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            //Views.DlgView.SetWith();
+            //Views.DlgView.SetDlgViewWith();
         }
     }
 }
