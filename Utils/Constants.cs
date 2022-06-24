@@ -1,6 +1,6 @@
 ﻿namespace GeoTools.Utils;
 
-public class Constants
+public static class Constants
 {
     public const byte ScrollBarWith = 10;
 }
