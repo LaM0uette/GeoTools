@@ -1,23 +1,21 @@
-﻿using System.Data.SQLite;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using GeoTools.Utils;
 using GeoTools.Model;
+using Npgsql;
 
 
 namespace GeoTools.Views;
 
 public partial class DlgViewAll : UserControl
 {
-    private SQLiteConnection co = MainWindow.Connection;
     private User user = MainWindow.UserSession;
 
     public DlgViewAll()
     {
         InitializeComponent();
-
-        // Admin = IsAdmin();
+        
         CreateBtnDlg();
 
     }
@@ -26,23 +24,18 @@ public partial class DlgViewAll : UserControl
     {
         var style = FindResource("ButtonDLGTemp") as Style;
 
-        const string req = @"SELECT dlg.*,
-                                (SELECT DISTINCT ex_et_ref FROM v_exports_en_cours WHERE ex_dl_id=dlg.dl_id) AS ex_et_ref,
-                                (SELECT DISTINCT ex_et_nom FROM v_exports_en_cours WHERE ex_dl_id=dlg.dl_id) AS ex_et_nom,
-                                (SELECT DISTINCT et_rgb FROM v_exports_en_cours WHERE ex_dl_id=dlg.dl_id) AS et_rgb
-                            FROM v_dlg_tmp dlg;";
-        
         const byte fontsize = 8;
         const byte heighsize = 19;
         const byte widthsize = 90;
+
+        NpgsqlDataReader cdReader = Sql.GetAllDlg();
         
-        SQLiteDataReader cdReader = Tasks.GetData(cmd:req);
         while (cdReader.Read())
         {
             
             Label lbZoMarche = new Label()
             {
-                Content = $"RIP{cdReader["zo_marche"]}",
+                Content = $"RIP{cdReader["refcode1"]}",
                 Background = Brushes.White,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
@@ -53,7 +46,7 @@ public partial class DlgViewAll : UserControl
 
             Label lbDlInitDate = new Label()
             {
-                Content = $"{cdReader["dl_init_date"]}",
+                Content = $"{cdReader["date_initial"]}",
                 Background = Brushes.White,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
@@ -64,7 +57,7 @@ public partial class DlgViewAll : UserControl
             
             Label lbExEtNom = new Label()
             {
-                Content = $"{cdReader["ex_et_nom"]}",
+                Content = $"{cdReader["nom_etat"]}",
                 Background = Brushes.White,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
@@ -101,9 +94,9 @@ public partial class DlgViewAll : UserControl
                 grid.RowDefinitions.Add(row);
             }
             
-            SetElementGrid(element:lbZoMarche, row:0, column:1);
-            SetElementGrid(element:lbDlInitDate, row:1, column:1);
-            SetElementGrid(element:lbExEtNom, row:2, column:1);
+            Tasks.SetElementGrid(element:lbZoMarche, row:0, column:1);
+            Tasks.SetElementGrid(element:lbDlInitDate, row:1, column:1);
+            Tasks.SetElementGrid(element:lbExEtNom, row:2, column:1);
 
             grid.Children.Add(lbZoMarche);
             grid.Children.Add(lbDlInitDate);
@@ -112,31 +105,25 @@ public partial class DlgViewAll : UserControl
             Button button = new Button()
             {
                 Content = grid,
-                Name = $"dlg_{cdReader["dl_id"]}",
+                Name = $"dlg_{cdReader["id"]}",
                 Style = style,
-                ToolTip = @$"{cdReader["dlg"]}
-Etat : {cdReader["ex_et_nom"]} ({cdReader["ex_et_ref"]})
-ID : {cdReader["dl_id"]}
-admin={user.Admin}
-prenom={user.Prenom}",
-                Background = Brushes.RoyalBlue
+                ToolTip = //$"{cdReader["dlg"]}" +
+                          $"Etat : {cdReader["nom_etat"]} ({cdReader["code_etat"]})\n" +
+                          $"ID : {cdReader["id"]}\n" +
+                          $"admin={user.Admin}\n" +
+                          $"prenom={user.Prenom}",
+                Background = Tasks.hexBrush(hexColor:cdReader["couleur_etat"].ToString())
             };
-            
-            
+
             button.Click += button_Click;
             Panel.Children.Add(button);
         }
+        cdReader.Close();
     }
-    private static void SetElementGrid(UIElement element, int row=0, int column=0)
+
+    static void button_Click(object sender, RoutedEventArgs e)
     {
-        Grid.SetRow(element, row);
-        Grid.SetColumn(element, column);
-    }
-    
-    void button_Click(object sender, RoutedEventArgs e)
-    {
-        //MessageBox.Show($"You clicked on the {(sender as Button).Name}"string.Format("You clicked on the {0}. button.", (sender as Button).Name));
-        
+
         string btnName = ((Button)sender).Name;
         if (btnName is not null)
         {

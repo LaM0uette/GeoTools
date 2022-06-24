@@ -170,9 +170,9 @@ SELECT * FROM l_type_export;
 
 SELECT * FROM t_users;
 
-INSERT INTO t_users (us_guid, us_refcode1, us_nom, us_prenom, us_admin)
-VALUES ('XD5965', 0, 'DE VILLELE', 'Dorian', 0),
-       ('ZP6177', 0, 'BARRENTO ANTUNES', 'Raphael', 1);
+INSERT INTO t_users (us_guid, us_refcode1, us_nom, us_prenom, us_role, us_admin)
+VALUES ('XD5965', 0, 'DE VILLELE', 'Dorian', 0, 0),
+       ('ZP6177', 0, 'BARRENTO ANTUNES', 'Raphael', 0, 1);
 
 
 -- ...
