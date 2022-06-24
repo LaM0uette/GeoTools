@@ -28,6 +28,7 @@ namespace GeoTools
                 UserSession.Role = int.Parse($"{cdReader["us_role"]}");
                 UserSession.Admin = int.Parse($"{cdReader["us_admin"]}") == 1;
             }
+            
             cdReader.Close();
         }
 
