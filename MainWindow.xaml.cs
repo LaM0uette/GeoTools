@@ -7,24 +7,25 @@ namespace GeoTools
 {
     public partial class MainWindow
     {
+        
         public static User UserSession = new();
 
         public MainWindow()
         {
-            SizeChanged += onsenfou;
+            SizeChanged += OnSizeChanged;
             SetUserParameters();
         }
 
         private static void SetUserParameters()
         {
-
             NpgsqlDataReader cdReader = Sql.GetUserInformation(guid: Tasks.GetUserSession());
             
             while (cdReader.Read())
             {
-                
-                UserSession.Prenom = $"{cdReader["us_prenom"]}";
+                UserSession.Refcode1 = int.Parse($"{cdReader["us_refcode1"]}");
                 UserSession.Nom = $"{cdReader["us_nom"]}";
+                UserSession.Prenom = $"{cdReader["us_prenom"]}";
+                UserSession.Role = int.Parse($"{cdReader["us_role"]}");
 
                 if (cdReader.GetByte(cdReader.GetOrdinal("us_admin")) == 1)
                 {
@@ -34,7 +35,7 @@ namespace GeoTools
             cdReader.Close();
         }
 
-        private void onsenfou(object sender, SizeChangedEventArgs e)
+        private static void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             //Views.DlgView.SetWith();
         }
