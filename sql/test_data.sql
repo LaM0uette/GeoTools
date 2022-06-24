@@ -23,7 +23,7 @@ as
 $BODY$
 begin
     INSERT INTO "GeoTools".t_dlg (dl_proj_us_id, dl_rc_id, dl_date_init,
-                       dl_ph_id, dl_te_id, dl_livraison, dl_version)
+                                  dl_ph_id, dl_te_id, dl_livraison, dl_version)
     SELECT proj_us_id, rc_id, date_init, ph_id, te_id, livraison, version
     WHERE NOT EXISTS(SELECT dl_id
                      FROM "GeoTools".t_dlg
@@ -60,7 +60,7 @@ declare
                       WHERE te_nom = te);
 begin
     INSERT INTO "GeoTools".t_dlg (dl_proj_us_id, dl_rc_id, dl_date_init,
-                       dl_ph_id, dl_te_id, dl_livraison, dl_version)
+                                  dl_ph_id, dl_te_id, dl_livraison, dl_version)
     SELECT proj_us_id,
            rc_id,
            date_init,
@@ -80,9 +80,11 @@ $BODY$
     LANGUAGE plpgsql VOLATILE
                      COST 100;
 
-SELECT add_dlg('XD5965', 'BIMI', CURRENT_DATE, 'EXE', 'TRANSPORT ET DISTRIBUTION', 1, 1);
+SELECT add_dlg('XD5965', 'TOCI', CURRENT_DATE, 'EXE', 'TRANSPORT ET DISTRIBUTION', 1, 1);
 
-
+SELECT *
+FROM data.l_refcode
+ORDER BY rc_nro DESC, rc_sro DESC;
 
 --...
 -- t_exports
@@ -126,53 +128,71 @@ FROM t_exports;
 
 SELECT *
 FROM t_dlg dl;
-
 -- ...
 -- v_dlg
 create or replace view "GeoTools".v_dlg as
-WITH dlg AS (SELECT dl_id                              as id,
-                    usp.us_guid                        as guid_projeteur,
-                    usp.us_nom || ' ' || usp.us_prenom as projeteur,
-                    use.us_guid                        as guid_executant,
-                    use.us_nom || ' ' || use.us_prenom as executant,
-                    rc.rc_refcode1                     as refcode1,
-                    rc.rc_refcode2                     as refcode2,
-                    rc.rc_refcode3                     as refcode3,
-                    dl.dl_date_init                    as date_initial,
-                    ph.ph_nom                          as phase,
-                    te.te_nom                          as type_export,
-                    dl.dl_livraison                    as livraison,
-                    dl.dl_version                      as version,
-                    (SELECT ex_id
+WITH dlg AS (SELECT dl.dl_id                                               AS id,
+                    usp.us_guid                                            AS guid_projeteur,
+                    (usp.us_nom::text || ' '::text) || usp.us_prenom::text AS projeteur,
+                    use.us_guid                                            AS guid_executant,
+                    (use.us_nom::text || ' '::text) || use.us_prenom::text AS executant,
+                    rc.rc_nro                                              AS nro,
+                    rc.rc_sro                                              AS sro,
+                    rc.rc_refcode1                                         AS refcode1,
+                    rc.rc_refcode2                                         AS refcode2,
+                    rc.rc_refcode3                                         AS refcode3,
+                    dl.dl_date_init                                        AS date_initial,
+                    ph.ph_nom                                              AS phase,
+                    te.te_code                                              AS code_type_export,
+                    te.te_nom                                              AS type_export,
+                    dl.dl_livraison                                        AS livraison,
+                    dl.dl_version                                          AS version,
+                    (SELECT t_exports.ex_id
                      FROM "GeoTools".t_exports
-                     WHERE ex_dl_id = dl.dl_id
-                     ORDER BY ex_date DESC
-                     LIMIT 1)                          as id_export
+                     WHERE t_exports.ex_dl_id = dl.dl_id
+                     ORDER BY t_exports.ex_date DESC
+                     LIMIT 1)                                              AS id_export
              FROM "GeoTools".t_dlg dl
-                      LEFT JOIN "GeoTools".t_users usp
-                                ON usp.us_id = dl.dl_proj_us_id
-                      LEFT JOIN "GeoTools".t_users use
-                                ON use.us_id = dl.dl_exe_us_id
-                      INNER JOIN data.l_refcode rc
-                                 ON rc.rc_id = dl.dl_rc_id
-                      INNER JOIN "GeoTools".l_phases ph
-                                 ON ph.ph_id = dl.dl_ph_id
-                      INNER JOIN "GeoTools".l_type_export te
-                                 ON te.te_id = dl.dl_te_id)
-SELECT dlg.*, et.et_code as code_etat, et.et_nom as nom_etat, et.et_color as couleur_etat, ex.ex_date as date_etat
+                      LEFT JOIN "GeoTools".t_users usp ON usp.us_id = dl.dl_proj_us_id
+                      LEFT JOIN "GeoTools".t_users use ON use.us_id = dl.dl_exe_us_id
+                      JOIN data.l_refcode rc ON rc.rc_id = dl.dl_rc_id::double precision
+                      JOIN "GeoTools".l_phases ph ON ph.ph_id = dl.dl_ph_id
+                      JOIN "GeoTools".l_type_export te ON te.te_id = dl.dl_te_id)
+SELECT dlg.id,
+       dlg.guid_projeteur,
+       dlg.projeteur,
+       dlg.guid_executant,
+       dlg.executant,
+       dlg.nro,
+       dlg.sro,
+       dlg.refcode1,
+       dlg.refcode2,
+       dlg.refcode3,
+       dlg.date_initial,
+       dlg.phase,
+       dlg.type_export,
+       dlg.livraison,
+       dlg.version,
+       dlg.id_export,
+       et.et_code                                            AS code_etat,
+       et.et_nom                                             AS nom_etat,
+       et.et_color                                           AS couleur_etat,
+       ex.ex_date                                            AS date_etat,
+       LEFT(dlg.phase, 3) || '-DLG-' || dlg.refcode1 || '-' || dlg.refcode2 || '-' || dlg.refcode3 || '-' ||
+       to_char(dlg.livraison, 'fm00') || '-V' || dlg.version as dlg,
+       'NRO' || dlg.nro || '-' || 'PM' || dlg.sro || '|' || dlg.refcode2 || '-' || dlg.refcode3 || '-' || LEFT(dlg.phase, 3) || '|' ||
+       dlg.code_type_export || '-' || to_char(dlg.livraison, 'fm00') || '-V' || dlg.version                as dlg_infos
 FROM dlg
-         INNER JOIN "GeoTools".t_exports ex
-                    ON ex.ex_id = dlg.id_export
-         INNER JOIN "GeoTools".l_etats et
-                    ON et.et_id = ex.ex_et_id;
+         JOIN "GeoTools".t_exports ex ON ex.ex_id = dlg.id_export
+         JOIN "GeoTools".l_etats et ON et.et_id = ex.ex_et_id;
 
 -- v_exports
 create or replace view "GeoTools".v_exports as
-SELECT ex.ex_id as id,
+SELECT ex.ex_id    as id,
        ex.ex_dl_id as dlg_id,
-       et.et_code as code_etat,
-       et.et_nom as nom_etat,
-       et_code as couleur_etat
+       et.et_code  as code_etat,
+       et.et_nom   as nom_etat,
+       et_code     as couleur_etat
 FROM "GeoTools".t_exports ex
          INNER JOIN "GeoTools".l_etats et
                     ON et.et_id = ex.ex_et_id
@@ -191,7 +211,8 @@ $BODY$
     LANGUAGE plpgsql VOLATILE
                      COST 100;
 
-SELECT * FROM get_dlg_exports(2);
+SELECT *
+FROM get_dlg_exports(2);
 
 
 
@@ -205,4 +226,5 @@ $BODY$
     LANGUAGE plpgsql VOLATILE
                      COST 100;
 
-SELECT * FROM get_dlg_by_date('2022-06-23');
+SELECT *
+FROM get_dlg_by_date('2022-06-23');
