@@ -6,23 +6,24 @@ namespace GeoTools.Views;
 
 public partial class MainView
 {
-    public static TabItem VTiExportGrace = new ();
-    public static TabItem VTiMenu = new ();
+    public static TabItem VTabItemExportGrace = new ();
+    public static TabItem VTabItemMenu = new ();
 
     public MainView()
     {
         InitializeComponent();
-        VTiExportGrace = TiExportGrace;
-        VTiMenu = TiMenu;
+        
+        VTabItemExportGrace = TabItemExportGrace;
+        VTabItemMenu = TabItemMenu;
     }
     
-    public static void SetTabItem(TabItem t)
+    public static void SetTabItem(TabItem tabItem)
     {
-        t.IsSelected = true;
+        tabItem.IsSelected = true;
     }
 
     private void BtnTiMenu_OnClick(object sender, RoutedEventArgs e)
     {
-        SetTabItem(VTiExportGrace);
+        SetTabItem(VTabItemExportGrace);
     }
 }

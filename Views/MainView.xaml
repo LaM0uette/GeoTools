@@ -11,7 +11,7 @@
         <TabControl x:Name="TcMain" Background="Transparent">
 
             <!-- TabItem du Menu -->
-            <TabItem x:Name="TiMenu"
+            <TabItem x:Name="TabItemMenu"
                      Visibility="Collapsed"
                      IsSelected="True">
 
@@ -24,7 +24,7 @@
 
 
             <!-- TabItem des exports grace -->
-            <TabItem x:Name="TiExportGrace"
+            <TabItem x:Name="TabItemExportGrace"
                      Visibility="Collapsed"
                      IsSelected="True">
 
