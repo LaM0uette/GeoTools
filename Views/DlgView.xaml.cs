@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using GeoTools.Utils;
 
 namespace GeoTools.Views;
@@ -10,10 +11,12 @@ public partial class DlgView
     
     public static TabItem VTabItemDlgAll = new ();
     public static TabItem VTabItemDlgMonth = new ();
+    private List<ToggleButton> toggleButtons = new();
     
     public DlgView()
     {
         InitializeComponent();
+        FillListBtn();
         
         VTabItemDlgAll = TabItemDlgAll;
         VTabItemDlgMonth = TabItemDlgMonth;
@@ -44,5 +47,25 @@ public partial class DlgView
     {
         return Tasks.GetWindowSize() - DlgLegend.Width - 
                (Tasks.GetWindowState() == WindowState.Maximized?Constants.MaximazeScrollBarWith:Constants.NormalScrollBarWith);
+    }
+    
+    private void FillListBtn()
+    {
+        toggleButtons.Add(BtnDlgTraiter);
+        toggleButtons.Add(BtnDlgAll);
+        toggleButtons.Add(BtnDlgFait);
+    }
+    
+    void Toggle_OnClick(object sender, RoutedEventArgs e)
+    {
+        string btnName = ((ToggleButton) sender).Name;
+        string mode = $"{((ToggleButton) sender).Content}";
+
+        DlgViewAll.InstanceDlgViewAll.CreateBtnDlgAll(mode:mode);
+
+        foreach (ToggleButton btn in toggleButtons)
+        {
+            btn.IsChecked = btnName == btn.Name;
+        }
     }
 }

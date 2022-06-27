@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Controls;
+using System.Windows.Media;
 using GeoTools.Utils;
+using Npgsql;
 
 namespace GeoTools.Views;
 
@@ -12,6 +14,7 @@ public partial class DlgViewMonth : UserControl
 
     private static List<string> jour = new List<string>(){"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"};
     private static readonly CultureInfo lang = CultureInfo.CreateSpecificCulture("fr-FR");
+    private static DateTime dateNow = DateTime.Now;
 
     public DlgViewMonth()
     {
@@ -35,6 +38,32 @@ public partial class DlgViewMonth : UserControl
         foreach (DateTime date in Tasks.EachDay(from:startDate, to:endDate))
         {
             string nameOfWeek = Tasks.FistLetterUpper(date.ToString("dddd", lang));
+            Brush foreground = dateNow == date ? Brushes.White : Brushes.Brown;
+
+            Label lbJourNom = new Label()
+            {
+                Content = nameOfWeek,
+                Foreground = foreground,
+            };
+            Label lbNumJour = new Label()
+            {
+                Content = $"{date.Day}",
+                Foreground = foreground
+            };
+
+            Grid gridDlg = new Grid();
+
+            NpgsqlDataReader cdReader = Sql.GetDlgByDate(date:date.ToString("yyyy-MM-dd"));
+            
+            byte dlgRow = 0;
+            while (cdReader.Read())
+            {
+                
+            }
+            cdReader.Close();
+            
+            Grid grid = new Grid();
+
         }
     }
 }

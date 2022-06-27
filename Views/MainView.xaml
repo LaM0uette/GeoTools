@@ -12,8 +12,7 @@
 
             <!-- TabItem du Menu -->
             <TabItem x:Name="TabItemMenu"
-                     Visibility="Collapsed"
-                     IsSelected="True">
+                     Visibility="Collapsed">
 
                 <Button x:Name="BtnTiMenu"
                         Content="EXPORT&#x0a;GRACE"
@@ -24,8 +23,7 @@
             
             <!-- TabItem des exports grace -->
             <TabItem x:Name="TabItemExportGrace"
-                     Visibility="Collapsed"
-                     IsSelected="True">
+                     Visibility="Collapsed">
                 
                 <views:DlgView />
                 

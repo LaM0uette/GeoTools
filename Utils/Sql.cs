@@ -8,6 +8,10 @@ public static class Sql
     private static NpgsqlConnection Connection = Connect();
     private static NpgsqlTransaction Transaction = Connection.BeginTransaction();
 
+    public static NpgsqlDataReader GetDlgByDate(string date)
+    {
+        return GetSql($"SELECT * FROM \"GeoTools\".v_dlg WHERE date_initial='{date}'");
+    }
     public static NpgsqlDataReader GetAllDlgATraiter()
     {
         return GetSql("SELECT * FROM \"GeoTools\".v_dlg WHERE id=1");

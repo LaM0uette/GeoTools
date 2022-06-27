@@ -47,14 +47,19 @@
 
             </Grid>
         </Border>
+        
 
         <!-- Body -->
-        <StackPanel Grid.Row="1"
-                    Orientation="Horizontal"
-                    Margin="0 5 0 0">
-
+        <Grid Grid.Row="1" Margin="0, 5, 0, 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            
             <!-- MenuLeft -->
-            <Border x:Name="DlgLegend"
+            <Border Grid.Column="0" x:Name="DlgLegend"
+                    Margin="0, 0, 5, 0"
                     CornerRadius="{StaticResource RscRound}"
                     Background="{StaticResource RgbM2}"
                     Width="300">
@@ -63,23 +68,69 @@
 
                 </StackPanel>
             </Border>
-
-            <!-- BodyDlg -->
-            <Grid>
+            
+            
+            <!-- BodyRight -->
+            <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0">
+                
+                <!-- Utils -->
+                <Border Grid.Row="0"
+                        CornerRadius="{StaticResource RscRound}"
+                        Background="{StaticResource RgbM2}">
 
-                </StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                            <ToggleButton x:Name="BtnDlgTraiter"
+                                          Style="{StaticResource ToggleButtonPlainM2}"
+                                          Width="80"
+                                          Margin="0, 0, 5, 0"
+                                          Content="A TRAITER"
+                                          IsChecked="False"
+                                          Click="Toggle_OnClick"/>
+                
+                            <ToggleButton x:Name="BtnDlgAll"
+                                          Style="{StaticResource ToggleButtonPlainM2}"
+                                          Width="80"
+                                          Margin="0, 0, 5, 0"
+                                          Content="TOUT"
+                                          IsChecked="True"
+                                          Click="Toggle_OnClick"/>
+        
+                            <ToggleButton x:Name="BtnDlgFait"
+                                          Style="{StaticResource ToggleButtonPlainM2}"
+                                          Width="80"
+                                          Content="FAIT"
+                                          IsChecked="False"
+                                          Click="Toggle_OnClick"/>
+                        </StackPanel>
+                        
+                        <Button Grid.Column="2"
+                                x:Name="BtnDlgNew"
+                                Style="{StaticResource ButtonPlainM2}"
+                                Width="120"
+                                Content="NOUVEAU DLG"/>
 
-                <TabControl Grid.Row="0">
-                    <!-- TabItem pour DLG All -->
+                    </Grid>
+                </Border>
+
+                
+                <!-- DLG -->
+                <TabControl Grid.Row="1" Background="Transparent">
+                    
+                    <!-- TabItem DlgAll -->
                     <TabItem x:Name="TabItemDlgAll"
-                             Visibility="Collapsed"
-                             IsSelected="True">
+                             Visibility="Collapsed">
 
                         <views:DlgViewAll x:Name="DlgViewAll"
                                           HorizontalAlignment="Left"
@@ -87,10 +138,10 @@
 
                     </TabItem>
 
-                    <!-- TabItem pour DLG Month -->
+                    
+                    <!-- TabItem DlgMonth -->
                     <TabItem x:Name="TabItemDlgMonth"
-                             Visibility="Collapsed"
-                             IsSelected="False">
+                             Visibility="Collapsed">
 
                         <views:DlgViewMonth x:Name="DlgViewMonth"
                                             HorizontalAlignment="Left"
@@ -99,7 +150,8 @@
                     </TabItem>
                 </TabControl>
             </Grid>
-        </StackPanel>
+            
+        </Grid>
     </Grid>
 
 </UserControl>
