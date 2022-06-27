@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
@@ -39,6 +40,15 @@ public class Tasks
             select d;
         return (byte)weekends.Count();
 
+    }
+    public static IEnumerable<DateTime> EachDay(DateTime from, DateTime to)
+    {
+        for(var day = from.Date; day.Date <= to.Date; day = day.AddDays(1))
+            yield return day;
+    }
+    public static string FistLetterUpper(string s)
+    {
+        return char.ToUpper(s[0]) + s.Substring(1);
     }
     public static string GetUserSession()
     {

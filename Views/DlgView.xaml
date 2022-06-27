@@ -14,91 +14,90 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <Border Grid.Row="0" 
+        <Border Grid.Row="0"
                 CornerRadius="{StaticResource RscRound}"
                 Background="{StaticResource RgbM2}">
-            
+
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                
+
                 <!-- Bouton de retour au Menu -->
-                <Button Grid.Column="0" 
+                <Button Grid.Column="0"
                         x:Name="BtnDlgBackHome"
                         HorizontalAlignment="Left"
                         Style="{StaticResource ButtonPlainM2}"
                         Width="25"
                         Height="25"
                         Click="BtnDlgBackHome_OnClick">
-                    
+
                     <Image Style="{StaticResource ImgHomeM1}"
                            Width="18"
                            Height="18" />
-                    
+
                 </Button>
-                
+
                 <!-- ComboBox des types d'affichages -->
                 <ComboBox Grid.Column="2"
                           HorizontalAlignment="Right"
                           Style="{StaticResource ComboBoxPlainM1}" />
-                
+
             </Grid>
         </Border>
 
         <!-- Body -->
-        <StackPanel Grid.Row="1" 
-                    Orientation="Horizontal" 
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
                     Margin="0 5 0 0">
-            
+
             <!-- MenuLeft -->
-            <Border x:Name="DlgLegend" 
+            <Border x:Name="DlgLegend"
                     CornerRadius="{StaticResource RscRound}"
                     Background="{StaticResource RgbM2}"
                     Width="300">
-                
+
                 <StackPanel Orientation="Vertical">
 
                 </StackPanel>
             </Border>
-            
+
             <!-- BodyDlg -->
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="25"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                
-                <views:DlgViewSelect Grid.Row="0"/>
-                
-                <views:DlgViewMonth Grid.Row="1" x:Name="DlgViewAll"
-                                  HorizontalAlignment="Left"
-                                  VerticalAlignment="Center" />
-                <!-- <TabControl Grid.Row="0"> -->
-                <!--     ~1~ TabItem pour DLG All @1@ -->
-                <!--     <TabItem x:Name="TabItemDlgAll" -->
-                <!--         Visibility="Collapsed" -->
-                <!--         IsSelected="True"> -->
-                <!--          -->
-                <!--         <views:DlgViewAll x:Name="DlgViewAll" -->
-                <!--                           HorizontalAlignment="Left" -->
-                <!--                           VerticalAlignment="Center" /> -->
-                <!--          -->
-                <!--     </TabItem> -->
-                <!--      -->
-                <!--     ~1~ TabItem pour DLG Month @1@ -->
-                <!--     <TabItem x:Name="TabItemDlgMonth" -->
-                <!--              Visibility="Collapsed" -->
-                <!--              IsSelected="False"> -->
-                <!--      -->
-                <!--         <views:DlgViewMonth x:Name="DlgViewMonth" -->
-                <!--                             HorizontalAlignment="Left" -->
-                <!--                             VerticalAlignment="Center" /> -->
-                <!--      -->
-                <!--     </TabItem> -->
-                <!-- </TabControl> -->
+
+                <StackPanel Grid.Row="0">
+
+                </StackPanel>
+
+                <TabControl Grid.Row="0">
+                    <!-- TabItem pour DLG All -->
+                    <TabItem x:Name="TabItemDlgAll"
+                             Visibility="Collapsed"
+                             IsSelected="True">
+
+                        <views:DlgViewAll x:Name="DlgViewAll"
+                                          HorizontalAlignment="Left"
+                                          VerticalAlignment="Center" />
+
+                    </TabItem>
+
+                    <!-- TabItem pour DLG Month -->
+                    <TabItem x:Name="TabItemDlgMonth"
+                             Visibility="Collapsed"
+                             IsSelected="False">
+
+                        <views:DlgViewMonth x:Name="DlgViewMonth"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center" />
+
+                    </TabItem>
+                </TabControl>
             </Grid>
         </StackPanel>
     </Grid>

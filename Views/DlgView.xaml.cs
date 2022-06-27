@@ -1,16 +1,33 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 using GeoTools.Utils;
 
 namespace GeoTools.Views;
 
 public partial class DlgView
 {
+    
+    public static TabItem VTabItemDlgAll = new ();
+    public static TabItem VTabItemDlgMonth = new ();
+    
     public DlgView()
     {
         InitializeComponent();
+        
+        VTabItemDlgAll = TabItemDlgAll;
+        VTabItemDlgMonth = TabItemDlgMonth;
+        
+        SetTabItem(VTabItemDlgMonth);
+        
         if (Application.Current.MainWindow != null) Application.Current.MainWindow.SizeChanged += OnSizeChanged;
     }
+    
+    public static void SetTabItem(TabItem tabItem)
+    {
+        tabItem.IsSelected = true;
+    }
+    
     private void BtnDlgBackHome_OnClick(object sender, RoutedEventArgs e)
     {
         MainView.SetTabItem(MainView.VTabItemMenu);
