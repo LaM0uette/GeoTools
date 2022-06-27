@@ -126,7 +126,7 @@ public class Widget
             Margin = new Thickness(5, 0, 5, 0),
         };
     }
-    private static void SetElementGrid(UIElement element, int row=0, int column=0)
+    public static void SetElementGrid(UIElement element, int row=0, int column=0)
     {
         Grid.SetRow(element, row);
         Grid.SetColumn(element, column);
