@@ -8,9 +8,15 @@ public static class Sql
     private static NpgsqlConnection Connection = Connect();
     private static NpgsqlTransaction Transaction = Connection.BeginTransaction();
 
-    public static NpgsqlDataReader GetAllDlg()
+    public static NpgsqlDataReader GetAllDlgATraiter()
+    {
+        return GetSql("SELECT * FROM \"GeoTools\".v_dlg WHERE id=1");
+    }    public static NpgsqlDataReader GetAllDlg()
     {
         return GetSql("SELECT * FROM \"GeoTools\".v_dlg");
+    }    public static NpgsqlDataReader GetSqlFait()
+    {
+        return GetSql("SELECT * FROM \"GeoTools\".v_dlg WHERE id=5");
     }
     
     public static NpgsqlDataReader GetUserInformation(string guid)

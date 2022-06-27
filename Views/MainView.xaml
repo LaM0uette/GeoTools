@@ -21,13 +21,12 @@
                         Click="BtnTiMenu_OnClick" />
 
             </TabItem>
-
-
+            
             <!-- TabItem des exports grace -->
             <TabItem x:Name="TabItemExportGrace"
                      Visibility="Collapsed"
                      IsSelected="True">
-
+                
                 <views:DlgView />
                 
             </TabItem>

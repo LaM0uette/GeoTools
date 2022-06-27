@@ -66,10 +66,39 @@
             
             <!-- BodyDlg -->
             <Grid>
-                <views:DlgViewAll x:Name="DlgViewAll" 
-                                  HorizontalAlignment="Left" 
-                                  VerticalAlignment="Center" />
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
                 
+                <views:DlgViewSelect Grid.Row="0"/>
+                
+                <views:DlgViewAll Grid.Row="1" x:Name="DlgViewAll"
+                                  HorizontalAlignment="Left"
+                                  VerticalAlignment="Center" />
+                <!-- <TabControl Grid.Row="0"> -->
+                <!--     ~1~ TabItem pour DLG All @1@ -->
+                <!--     <TabItem x:Name="TabItemDlgAll" -->
+                <!--         Visibility="Collapsed" -->
+                <!--         IsSelected="True"> -->
+                <!--          -->
+                <!--         <views:DlgViewAll x:Name="DlgViewAll" -->
+                <!--                           HorizontalAlignment="Left" -->
+                <!--                           VerticalAlignment="Center" /> -->
+                <!--          -->
+                <!--     </TabItem> -->
+                <!--      -->
+                <!--     ~1~ TabItem pour DLG Month @1@ -->
+                <!--     <TabItem x:Name="TabItemDlgMonth" -->
+                <!--              Visibility="Collapsed" -->
+                <!--              IsSelected="False"> -->
+                <!--      -->
+                <!--         <views:DlgViewMonth x:Name="DlgViewMonth" -->
+                <!--                             HorizontalAlignment="Left" -->
+                <!--                             VerticalAlignment="Center" /> -->
+                <!--      -->
+                <!--     </TabItem> -->
+                <!-- </TabControl> -->
             </Grid>
         </StackPanel>
     </Grid>

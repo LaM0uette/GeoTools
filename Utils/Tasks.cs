@@ -1,8 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
-using GeoTools.Views;
 
 namespace GeoTools.Utils;
 
@@ -13,17 +12,29 @@ public class Tasks
     
     public static double GetWindowSize()
     {
-        return Application.Current.MainWindow.Width;
+        return Application.Current.MainWindow.ActualWidth;
     }
-    
-    public static Brush hexBrush(string hexColor)
+
+    public static WindowState GetWindowState()
+    {
+        return Application.Current.MainWindow.WindowState;
+    }
+
+    public static Brush HexBrush(string hexColor)
     {
         return (Brush)converter.ConvertFromString(hexColor);
     }
-    public static void SetElementGrid(UIElement element, int row=0, int column=0)
+
+    public static byte WeekInMonth(int year, int month)
     {
-        Grid.SetRow(element, row);
-        Grid.SetColumn(element, column);
+        DateTime date = new DateTime(year, month, 1);
+        
+        var dates = Enumerable.Range(1, DateTime.DaysInMonth(date.Year, date.Month)).Select(n => new DateTime(date.Year, date.Month, n));
+        var weekends = from d in dates
+            where d.DayOfWeek == DayOfWeek.Monday
+            select d;
+        return (byte)weekends.Count();
+
     }
     public static string GetUserSession()
     {

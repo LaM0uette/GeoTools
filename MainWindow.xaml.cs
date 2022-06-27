@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using GeoTools.Model;
 using GeoTools.Utils;
+using GeoTools.Views;
 using Npgsql;
 
 namespace GeoTools
@@ -12,14 +14,13 @@ namespace GeoTools
 
         public MainWindow()
         {
-            SizeChanged += OnSizeChanged;
             SetUserParameters();
         }
 
         private static void SetUserParameters()
         {
             NpgsqlDataReader cdReader = Sql.GetUserInformation(guid: Tasks.GetUserSession());
-            
+
             while (cdReader.Read())
             {
                 UserSession.Refcode1 = int.Parse($"{cdReader["us_refcode1"]}");
@@ -32,9 +33,15 @@ namespace GeoTools
             cdReader.Close();
         }
 
-        private static void OnSizeChanged(object sender, SizeChangedEventArgs e)
+        private static void ConnectionOnNotification(object sender, NpgsqlNotificationEventArgs e)
         {
-            //Views.DlgView.SetDlgViewWith();
+            MessageBox.Show("value changed");
         }
+
+        private void OnApplicationExit(object sender, EventArgs e)
+        {
+            Sql.Close();
+        }
+        
     }
 }
