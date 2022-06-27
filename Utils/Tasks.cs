@@ -25,6 +25,10 @@ public class Tasks
         return (Brush)converter.ConvertFromString(hexColor);
     }
 
+    public static byte DaysInMonth(int year, int month)
+    {
+        return (byte)DateTime.DaysInMonth(year: year, month: month);
+    }
     public static byte WeekInMonth(int year, int month)
     {
         DateTime date = new DateTime(year, month, 1);

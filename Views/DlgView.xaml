@@ -73,7 +73,7 @@
                 
                 <views:DlgViewSelect Grid.Row="0"/>
                 
-                <views:DlgViewAll Grid.Row="1" x:Name="DlgViewAll"
+                <views:DlgViewMonth Grid.Row="1" x:Name="DlgViewAll"
                                   HorizontalAlignment="Left"
                                   VerticalAlignment="Center" />
                 <!-- <TabControl Grid.Row="0"> -->

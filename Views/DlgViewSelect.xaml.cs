@@ -31,14 +31,7 @@ public partial class DlgViewSelect : UserControl
 
         foreach (ToggleButton btn in toggleButtons)
         {
-            if (btnName != btn.Name)
-            {
-                btn.IsChecked = false;
-            }
-            else
-            {
-                btn.IsChecked = true;
-            }
+            btn.IsChecked = btnName == btn.Name;
         }
     }
 }

@@ -128,9 +128,10 @@ FROM t_exports;
 
 SELECT *
 FROM t_dlg dl;
+
 -- ...
 -- v_dlg
-create or replace view "GeoTools".v_dlg as
+create or replace view "GeoTools".v_dlg_all as
 WITH dlg AS (SELECT dl.dl_id                                               AS id,
                     usp.us_guid                                            AS guid_projeteur,
                     (usp.us_nom::text || ' '::text) || usp.us_prenom::text AS projeteur,
