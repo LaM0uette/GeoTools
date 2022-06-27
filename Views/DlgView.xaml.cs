@@ -40,7 +40,7 @@ public partial class DlgView
         double maxWith = GetMaxWidth();
         
         DlgViewAll.Width = maxWith;
-        //DlgViewMonth.Width = maxWith;
+        DlgViewMonth.Width = maxWith;
     }
 
     private double GetMaxWidth()

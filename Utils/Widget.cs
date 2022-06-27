@@ -43,8 +43,7 @@ public class Widget
         // Define the Rows
         for (byte i = 0; i < 3; i++)
         {
-            RowDefinition row = new RowDefinition();
-            GridLabel.RowDefinitions.Add(row);
+            GridLabel.RowDefinitions.Add(new RowDefinition());
         }
 
         SetElementGrid(element: bdZoMarche, row: 0);
@@ -69,8 +68,8 @@ public class Widget
         // Define the Rows
         for (byte i = 0; i < 1; i++) 
         {
-            RowDefinition row = new RowDefinition();
-            grid.RowDefinitions.Add(row);
+            //RowDefinition row = new RowDefinition();
+            grid.RowDefinitions.Add(new RowDefinition());
         }
 
         TextBlock dlgInfo = new TextBlock()

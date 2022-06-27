@@ -19,7 +19,7 @@ VALUES (2, 1, 1, CURRENT_DATE, 2, 3, 1, 1),
 
 -- ******** VUES ******** --
 -- v_dlg
-create or replace view "GeoTools".v_dlg_all as
+create or replace view "GeoTools".v_dlg as
 WITH dlg AS (SELECT dl.dl_id                                               AS id,
                     usp.us_guid                                            AS guid_projeteur,
                     (usp.us_nom::text || ' '::text) || usp.us_prenom::text AS projeteur,
@@ -31,6 +31,8 @@ WITH dlg AS (SELECT dl.dl_id                                               AS id
                     rc.rc_refcode2                                         AS refcode2,
                     rc.rc_refcode3                                         AS refcode3,
                     dl.dl_date_init                                        AS date_initial,
+                    extract('week' from dl.dl_date_init)                      AS semaine,
+                    extract('year' from dl.dl_date_init)                      AS annee,
                     ph.ph_nom                                              AS phase,
                     te.te_code                                             AS code_type_export,
                     te.te_nom                                              AS type_export,
@@ -58,6 +60,8 @@ SELECT dlg.id,
        dlg.refcode2,
        dlg.refcode3,
        dlg.date_initial,
+       dlg.semaine,
+       dlg.annee,
        dlg.phase,
        dlg.type_export,
        dlg.livraison,
@@ -113,7 +117,7 @@ ORDER BY ex.ex_dl_id, ex.ex_id;
 --                        AND dl_version = version);
 -- end;
 -- $BODY$
---     LANGUAGE plpgsql VOLATILE
+--     LANGUAGE plpgsql STABLE
 --                      COST 100;
 --
 -- SELECT _add_dlg(2, 1, CURRENT_DATE, 2, 3, 1, 1);
@@ -157,7 +161,7 @@ begin
                        AND dl_version = version);
 end;
 $BODY$
-    LANGUAGE plpgsql VOLATILE
+    LANGUAGE plpgsql STABLE
                      COST 100;
 
 SELECT add_dlg('XD5965', 'NISY', CURRENT_DATE, 'EXE', 'TRANSPORT ET DISTRIBUTION', 1, 1);
@@ -173,7 +177,7 @@ begin
     VALUES (dlg_id, etat_id);
 end;
 $BODY$
-    LANGUAGE plpgsql VOLATILE
+    LANGUAGE plpgsql STABLE
                      COST 100;
 
 SELECT add_export_to_dlg(5, 3);
@@ -188,10 +192,25 @@ begin
     RETURN QUERY (SELECT * FROM "GeoTools".v_dlg WHERE DATE(date_initial) = dt);
 end
 $BODY$
-    LANGUAGE plpgsql VOLATILE
+    LANGUAGE plpgsql STABLE
                      COST 100;
 
 SELECT * FROM get_dlg_by_date('2022-06-23');
+-- ...
+
+
+-- Obtenir la liste des DLG à une date précise
+create or replace function get_dlg_by_weeks(week int, year int) returns setof "GeoTools".v_dlg
+as
+$BODY$
+begin
+    RETURN QUERY (SELECT * FROM "GeoTools".v_dlg WHERE semaine = week AND annee = year);
+end
+$BODY$
+    LANGUAGE plpgsql STABLE
+                     COST 100;
+
+SELECT * FROM get_dlg_by_weeks(25, 2022);
 -- ...
 
 
@@ -203,7 +222,7 @@ begin
     RETURN QUERY (SELECT * FROM "GeoTools".v_exports WHERE dlg_id = dlg ORDER BY dlg_id, id);
 end;
 $BODY$
-    LANGUAGE plpgsql VOLATILE
+    LANGUAGE plpgsql STABLE
                      COST 100;
 
 SELECT * FROM get_dlg_exports(2);
@@ -221,7 +240,7 @@ begin
     RETURN NEW;
 end;
 $BODY$
-    LANGUAGE plpgsql VOLATILE
+    LANGUAGE plpgsql STABLE
                      COST 100;
 
 create trigger tr_add_export_to_dlg

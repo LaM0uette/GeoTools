@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
@@ -40,6 +41,11 @@ public class Tasks
             select d;
         return (byte)weekends.Count();
 
+    }
+
+    public static DateTime GetDayOfWeek(int week, int year, DayOfWeek dayOfWeek=DayOfWeek.Monday)
+    {
+        return ISOWeek.ToDateTime(year: year, week: week, dayOfWeek);
     }
     public static IEnumerable<DateTime> EachDay(DateTime from, DateTime to)
     {
