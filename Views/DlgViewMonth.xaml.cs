@@ -49,7 +49,6 @@ public partial class DlgViewMonth : UserControl
 
     public void CreateBtnDlgMonth(int year, byte month)
     {
-
         int yearEnd = year;
         byte monthEnd = (byte)(month + 1);
         if (monthEnd == 13){ yearEnd++; monthEnd = 1;}
@@ -60,65 +59,19 @@ public partial class DlgViewMonth : UserControl
         
         byte firstWeeks = (byte)ISOWeek.GetWeekOfYear(startDate);
         byte lastWeeks = (byte)ISOWeek.GetWeekOfYear(endDate);
-        string nameOfWeek;
+        string nameOfDay;
         
         for (byte i = 0; firstWeeks + i <= lastWeeks; i++)
         {
-            NpgsqlDataReader cdReader = Sql.GetDlgByWeek(week: (byte)(firstWeeks + i), year:year);
-            Weeks weeks = new();
-            while (cdReader.Read())
-            {
-                Dictionary<string, object> dictionary = Tasks.sqlDict(cdReader);
-                
-                DateTime date = (DateTime)dictionary["date_initial"];
-                
-                nameOfWeek = Tasks.FistLetterUpper(date.ToString("dddd", lang));
-                switch (nameOfWeek)
-                {
-                    case "Lundi":
-                        weeks.Lundi.Add(dictionary);
-                        break;
-                    case "Mardi":
-                        weeks.Mardi.Add(dictionary);
-                        break;
-                    case "Mercredi":
-                        weeks.Mercredi.Add(dictionary);
-                        break;
-                    case "Jeudi":
-                        weeks.Jeudi.Add(dictionary);
-                        break;
-                    case "Vendredi":
-                        weeks.Vendredi.Add(dictionary);
-                        break;
-                }
-            }
-            cdReader.Close();
-            
+            Weeks weeks = sql2Struc(week: (byte)(firstWeeks + i), year:year);
+
             foreach (DateTime date in Tasks.EachDay(from:Tasks.GetDayOfWeek(week:firstWeeks + i, year:year), to:Tasks.GetDayOfWeek(week:firstWeeks + i, year:year, DayOfWeek.Friday)))
             {
                 Brush? foreground = dateNow == DateOnly.FromDateTime(date) ? Brushes.White : FindResource("RgbM2") as Brush;
                 int col = (int)date.DayOfWeek;
                 
-                nameOfWeek = Tasks.FistLetterUpper(date.ToString("dddd", lang));
-                List<Dictionary<string, object>> listDay = new ();
-                switch (nameOfWeek)
-                {
-                    case "Lundi":
-                        listDay = weeks.Lundi;
-                        break;
-                    case "Mardi":
-                        listDay = weeks.Mardi;
-                        break;
-                    case "Mercredi":
-                        listDay = weeks.Mercredi;
-                        break;
-                    case "Jeudi":
-                        listDay = weeks.Jeudi;
-                        break;
-                    case "Vendredi":
-                        listDay = weeks.Vendredi;
-                        break;
-                }
+                nameOfDay = Tasks.FistLetterUpper(date.ToString("dddd", lang));
+                List<Dictionary<string, object>> listDay = GetDay(weeks: weeks, day: nameOfDay);
 
                 StackPanel stackPanel = new StackPanel()
                 {
@@ -126,7 +79,7 @@ public partial class DlgViewMonth : UserControl
                     HorizontalAlignment = HorizontalAlignment.Center
                 };
 
-                Label lbJourNom = makeLabel(content: nameOfWeek, foreground: foreground);
+                Label lbJourNom = makeLabel(content: nameOfDay, foreground: foreground);
                 Label lbNumJour = makeLabel(content: $"{date.Day}", foreground: foreground);
                 
                 Grid gridDlg = new Grid();
@@ -143,20 +96,9 @@ public partial class DlgViewMonth : UserControl
                     dlgRow++;
                 }
 
-                // if (cdReader["date_initial"].ToString() == date.ToString())
-                // {
-                //     Button button = Widget.MakeBtnDlg(cdReader: cdReader, style: style);
-                //     Widget.SetElementGrid(button, row: dlgRow);
-                //
-                //     gridDlg.RowDefinitions.Add(new RowDefinition());
-                //     gridDlg.Children.Add(button);
-                //     dlgRow++;
-                // }
-
                 ScrollViewer scrollViewer = new ScrollViewer()
                 {
                     Content = gridDlg,
-                    MaxHeight = 200,
                     VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
                     HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled
                 };
@@ -171,121 +113,6 @@ public partial class DlgViewMonth : UserControl
             }
         }
     }
-
-    // private StackPanel MakePanel(DateTime date, NpgsqlDataReader cdReader)
-    // {
-    //     var style = FindResource("ButtonDLGTemp") as Style;
-    //     string nameOfWeek = Tasks.FistLetterUpper(date.ToString("dddd", lang));
-    //
-    //     StackPanel stackPanel = new StackPanel()
-    //     {
-    //         Orientation = Orientation.Vertical,
-    //         HorizontalAlignment = HorizontalAlignment.Center
-    //     };
-    //             
-    //     Brush? foreground = dateNow == DateOnly.FromDateTime(date) ? Brushes.White : FindResource("RgbM2") as Brush;
-    //             
-    //     Label lbJourNom = makeLabel(content: nameOfWeek, foreground: foreground);
-    //     Label lbNumJour = makeLabel(content: $"{date.Day}", foreground: foreground);
-    //     
-    //     Grid gridDlg = new Grid();
-    //     int dlgRow = 0;
-    //     
-    //     while (cdReader.Read())
-    //     {
-    //         if (cdReader["date_initial"].ToString() == date.ToString())
-    //         {
-    //             Button button = Widget.MakeBtnDlg(dictionary: cdReader, style: style);
-    //             Widget.SetElementGrid(button, row: dlgRow);
-    //
-    //             gridDlg.RowDefinitions.Add(new RowDefinition());
-    //             gridDlg.Children.Add(button);
-    //             dlgRow++;
-    //         }
-    //     }
-    //
-    //     // NpgsqlDataReader cdReader = Sql.GetDlgByDate(date: date.ToString("yyyy-MM-dd"));
-    //     // while (cdReader.Read())
-    //     // {
-    //     //     Button button = Widget.MakeBtnDlg(cdReader: cdReader, style: style);
-    //     //     Widget.SetElementGrid(button, row: dlgRow);
-    //     //         
-    //     //     gridDlg.RowDefinitions.Add(new RowDefinition());
-    //     //     gridDlg.Children.Add(button);
-    //     //     dlgRow++;
-    //     // }
-    //
-    //     ScrollViewer scrollViewer = new ScrollViewer()
-    //     {
-    //         Content = gridDlg,
-    //         MaxHeight = 200,
-    //         VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-    //         HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled
-    //     };
-    //
-    //     stackPanel.Children.Add(lbJourNom);
-    //     stackPanel.Children.Add(lbNumJour);
-    //     stackPanel.Children.Add(scrollViewer);
-    //
-    //     return stackPanel;
-    // }
-    
-    // private StackPanel MakePanel(DateTime date)
-    // {
-    //     var style = FindResource("ButtonDLGTemp") as Style;
-    //     string nameOfWeek = Tasks.FistLetterUpper(date.ToString("dddd", lang));
-    //
-    //     StackPanel stackPanel = new StackPanel()
-    //     {
-    //         Orientation = Orientation.Vertical,
-    //         HorizontalAlignment = HorizontalAlignment.Center
-    //     };
-    //             
-    //     Brush foreground = dateNow == date ? Brushes.White : FindResource("RgbM2") as Brush;
-    //             
-    //     Label lbJourNom = makeLabel(content: nameOfWeek, foreground: foreground);
-    //     Label lbNumJour = makeLabel(content: $"{date.Day}", foreground: foreground);
-    //     
-    //     Grid gridDlg = new Grid();
-    //     int dlgRow = 0;
-    //     
-    //     NpgsqlDataReader cdReader = Sql.GetDlgByDate(date: date.ToString("yyyy-MM-dd"));
-    //     while (cdReader.Read())
-    //     {
-    //         Button button = Widget.MakeBtnDlg(cdReader: cdReader, style: style);
-    //         Widget.SetElementGrid(button, row: dlgRow);
-    //             
-    //         gridDlg.RowDefinitions.Add(new RowDefinition());
-    //         gridDlg.Children.Add(button);
-    //         dlgRow++;
-    //     }
-    //
-    //     ScrollViewer scrollViewer = new ScrollViewer()
-    //     {
-    //         Content = gridDlg,
-    //         MaxHeight = 200,
-    //         VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-    //         HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled
-    //     };
-    //
-    //     // Border border = new Border()
-    //     // {
-    //     //     CornerRadius = new CornerRadius(5),
-    //     //     Background = Brushes.White,
-    //     //     Height = Constants.LabelHeighSize,
-    //     //     Width = Constants.LabelWidthSize,
-    //     //     Margin = new Thickness(5),
-    //     // };
-    //     // border.Child = border;
-    //             
-    //     cdReader.Close();
-    //             
-    //     stackPanel.Children.Add(lbJourNom);
-    //     stackPanel.Children.Add(lbNumJour);
-    //     stackPanel.Children.Add(scrollViewer);
-    //
-    //     return stackPanel;
-    // }
     private Label makeLabel(string content, Brush? foreground)
     {
         return new Label()
@@ -298,5 +125,62 @@ public partial class DlgViewMonth : UserControl
             HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Center,
         };
+    }
+    private List<Dictionary<string, object>> GetDay (Weeks weeks, string day)
+    {
+        List<Dictionary<string, object>> listDay = new ();
+        switch (day)
+        {
+            case "Lundi":
+                listDay = weeks.Lundi;
+                break;
+            case "Mardi":
+                listDay = weeks.Mardi;
+                break;
+            case "Mercredi":
+                listDay = weeks.Mercredi;
+                break;
+            case "Jeudi":
+                listDay = weeks.Jeudi;
+                break;
+            case "Vendredi":
+                listDay = weeks.Vendredi;
+                break;
+        }
+
+        return listDay;
+    }
+    private Weeks sql2Struc(byte week, int year)
+    {
+        NpgsqlDataReader cdReader = Sql.GetDlgByWeek(week: (byte)(week), year:year);
+        Weeks weeks = new();
+        while (cdReader.Read())
+        {
+            Dictionary<string, object> dictionary = Tasks.sqlDict(cdReader);
+                
+            DateTime date = (DateTime)dictionary["date_initial"];
+            
+            switch (Tasks.FistLetterUpper(date.ToString("dddd", lang)))
+            {
+                case "Lundi":
+                    weeks.Lundi.Add(dictionary);
+                    break;
+                case "Mardi":
+                    weeks.Mardi.Add(dictionary);
+                    break;
+                case "Mercredi":
+                    weeks.Mercredi.Add(dictionary);
+                    break;
+                case "Jeudi":
+                    weeks.Jeudi.Add(dictionary);
+                    break;
+                case "Vendredi":
+                    weeks.Vendredi.Add(dictionary);
+                    break;
+            }
+        }
+        cdReader.Close();
+        
+        return weeks;
     }
 }

@@ -13,7 +13,11 @@ public class Tasks
 
     private static BrushConverter converter = new();
     
-    public static double GetWindowSize()
+    public static double GetWindowHeight()
+    {
+        return Application.Current.MainWindow.ActualHeight;
+    }
+    public static double GetWindowWidth()
     {
         return Application.Current.MainWindow.ActualWidth;
     }

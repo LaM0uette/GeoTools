@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -38,14 +39,22 @@ public partial class DlgView
     private void OnSizeChanged(object sender, SizeChangedEventArgs e)
     {
         double maxWith = GetMaxWidth();
+        double maxHeigh = GetMaxHeight();
         
         DlgViewAll.Width = maxWith;
         DlgViewMonth.Width = maxWith;
+        
+        DlgViewMonth.GridMonth.MaxHeight = maxHeigh;
     }
 
+    private double GetMaxHeight()
+    {
+        // double x = ActualHeight != double.NaN ? 10 : 0;
+        return Tasks.GetWindowHeight() - (ActualHeight != double.NaN ? 10 : 0);
+    }
     private double GetMaxWidth()
     {
-        return Tasks.GetWindowSize() - DlgLegend.Width - 
+        return Tasks.GetWindowWidth() - DlgLegend.ActualWidth - 
                (Tasks.GetWindowState() == WindowState.Maximized?Constants.MaximazeScrollBarWith:Constants.NormalScrollBarWith);
     }
     
