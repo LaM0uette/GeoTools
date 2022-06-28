@@ -24,6 +24,7 @@ public partial class DlgView
         
         SetTabItem(VTabItemDlgMonth);
         
+        //ChangeWidth();
         if (Application.Current.MainWindow != null) Application.Current.MainWindow.SizeChanged += OnSizeChanged;
     }
     
@@ -38,19 +39,27 @@ public partial class DlgView
     }
     private void OnSizeChanged(object sender, SizeChangedEventArgs e)
     {
-        double maxWith = GetMaxWidth();
+        ChangeWidth();
+        ChangeHeight();
+    }
+
+    private void ChangeHeight()
+    {
         double maxHeigh = GetMaxHeight();
+        
+        //DlgViewMonth.GridMonth.MaxHeight = maxHeigh;
+    }
+    private void ChangeWidth()
+    {
+        double maxWith = GetMaxWidth();
         
         DlgViewAll.Width = maxWith;
         DlgViewMonth.Width = maxWith;
-        
-        DlgViewMonth.GridMonth.MaxHeight = maxHeigh;
     }
 
     private double GetMaxHeight()
     {
-        // double x = ActualHeight != double.NaN ? 10 : 0;
-        return Tasks.GetWindowHeight() - (ActualHeight != double.NaN ? 10 : 0);
+        return Tasks.GetWindowHeight() - (ActualHeight != double.NaN ? ActualHeight : 0);
     }
     private double GetMaxWidth()
     {
