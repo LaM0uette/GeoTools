@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -10,11 +11,11 @@ namespace GeoTools.Utils;
 public class Widget
 {
     private static User _user = MainWindow.UserSession;
-    public static Button MakeBtnDlg(NpgsqlDataReader cdReader, Style style)
+    public static Button MakeBtnDlg(Dictionary<string, object> dictionary, Style style)
     {
-        Label lbZoMarche = MakeLabel(content: $"RIP{cdReader["refcode1"]}");
-        Label lbDlInitDate = MakeLabel(content: $"{DateTime.Parse(cdReader["date_initial"].ToString()).ToString("MM/dd/yyyy")}");
-        Label lbExEtNom = MakeLabel(content: $"{cdReader["nom_etat"]}");
+        Label lbZoMarche = MakeLabel(content: $"RIP{dictionary["refcode1"]}");
+        Label lbDlInitDate = MakeLabel(content: $"{DateTime.Parse(dictionary["date_initial"].ToString()).ToString("MM/dd/yyyy")}");
+        Label lbExEtNom = MakeLabel(content: $"{dictionary["nom_etat"]}");
 
         Border bdZoMarche = MakeBorder();
         bdZoMarche.Child = lbZoMarche;
@@ -74,7 +75,7 @@ public class Widget
 
         TextBlock dlgInfo = new TextBlock()
         {
-            Text = cdReader["dlg_infos"].ToString().Replace("|", "\n"),
+            Text = dictionary["dlg_infos"].ToString().Replace("|", "\n"),
             FontSize = Constants.TextBlockFontSize,
             TextWrapping = TextWrapping.Wrap,
             VerticalAlignment = VerticalAlignment.Center,
@@ -91,14 +92,14 @@ public class Widget
         return new Button()
         {
             Content = grid,
-            Name = $"dlg_{cdReader["id"]}",
+            Name = $"dlg_{dictionary["id"]}",
             Style = style,
-            ToolTip = $"{cdReader["dlg"]}\n" +
-                      $"Etat : {cdReader["nom_etat"]} ({cdReader["code_etat"]})\n" +
-                      $"ID : {cdReader["id"]}\n" +
+            ToolTip = $"{dictionary["dlg"]}\n" +
+                      $"Etat : {dictionary["nom_etat"]} ({dictionary["code_etat"]})\n" +
+                      $"ID : {dictionary["id"]}\n" +
                       $"admin={_user.Admin}\n" +
                       $"prenom={_user.Prenom}", 
-            Background = Tasks.HexBrush(hexColor: cdReader["couleur_etat"].ToString())
+            Background = Tasks.HexBrush(hexColor: dictionary["couleur_etat"].ToString())
         };
     }
     private static Label MakeLabel(string content)

@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
+using Npgsql;
 
 namespace GeoTools.Utils;
 
@@ -42,6 +43,17 @@ public class Tasks
         return (byte)weekends.Count();
 
     }
+
+    public static Dictionary<string, object> sqlDict(NpgsqlDataReader cdReader)
+    {  
+        Dictionary<string, object> dict = new Dictionary<string, object>();
+        for( int lp = 0 ; lp < cdReader.FieldCount ; lp++ )
+        {
+            dict.Add(cdReader.GetName(lp), cdReader.GetValue(lp));
+        }
+        return dict;
+    }
+
 
     public static DateTime GetDayOfWeek(int week, int year, DayOfWeek dayOfWeek=DayOfWeek.Monday)
     {

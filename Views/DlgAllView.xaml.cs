@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using GeoTools.Utils;
 using Npgsql;
@@ -9,6 +10,7 @@ namespace GeoTools.Views;
 public partial class DlgViewAll
 {
     public static DlgViewAll InstanceDlgViewAll;
+    public static string YoLeBolos = "TrouDuCul";
     
     public DlgViewAll()
     {
@@ -34,7 +36,8 @@ public partial class DlgViewAll
         
         while (cdReader.Read())
         {
-            Button button = Widget.MakeBtnDlg(cdReader:cdReader, style:style);
+            if (style == null) continue;
+            Button button = Widget.MakeBtnDlg(dictionary: Tasks.sqlDict(cdReader: cdReader), style:style);
             button.Click += btnDlgAll_Click;
             DlgAllPanel.Children.Add(button);
         }

@@ -16,10 +16,14 @@ VALUES (2, 1, 1, CURRENT_DATE, 2, 3, 1, 1),
 -- ...
 
 
-
 -- ******** VUES ******** --
+-- v_l_refcode
+create or replace view "data"."v_refcode" as
+    SELECT * FROM "data".l_refcode;
+
+
 -- v_dlg
-create or replace view "GeoTools".v_dlg as
+create or replace view "GeoTools"."v_dlg" as
 WITH dlg AS (SELECT dl.dl_id                                               AS id,
                     usp.us_guid                                            AS guid_projeteur,
                     (usp.us_nom::text || ' '::text) || usp.us_prenom::text AS projeteur,
@@ -31,24 +35,24 @@ WITH dlg AS (SELECT dl.dl_id                                               AS id
                     rc.rc_refcode2                                         AS refcode2,
                     rc.rc_refcode3                                         AS refcode3,
                     dl.dl_date_init                                        AS date_initial,
-                    extract('week' from dl.dl_date_init)                      AS semaine,
-                    extract('year' from dl.dl_date_init)                      AS annee,
+                    extract('week' from dl.dl_date_init)                   AS semaine,
+                    extract('year' from dl.dl_date_init)                   AS annee,
                     ph.ph_nom                                              AS phase,
                     te.te_code                                             AS code_type_export,
                     te.te_nom                                              AS type_export,
                     dl.dl_livraison                                        AS livraison,
                     dl.dl_version                                          AS version,
-                    (SELECT t_exports.ex_id
-                     FROM "GeoTools".t_exports
-                     WHERE t_exports.ex_dl_id = dl.dl_id
-                     ORDER BY t_exports.ex_date DESC
+                    (SELECT ex.ex_id
+                     FROM "GeoTools"."t_exports" ex
+                     WHERE ex.ex_dl_id = dl.dl_id
+                     ORDER BY ex.ex_date DESC
                      LIMIT 1)                                              AS id_export
-             FROM "GeoTools".t_dlg dl
-                      LEFT JOIN "GeoTools".t_users usp ON usp.us_id = dl.dl_proj_us_id
-                      LEFT JOIN "GeoTools".t_users use ON use.us_id = dl.dl_exe_us_id
-                      JOIN data.l_refcode rc ON rc.rc_id = dl.dl_rc_id::double precision
-                      JOIN "GeoTools".l_phases ph ON ph.ph_id = dl.dl_ph_id
-                      JOIN "GeoTools".l_type_export te ON te.te_id = dl.dl_te_id)
+             FROM "GeoTools"."t_dlg" dl
+                      LEFT JOIN "GeoTools"."t_users" usp ON usp.us_id = dl.dl_proj_us_id
+                      LEFT JOIN "GeoTools"."t_users" use ON use.us_id = dl.dl_exe_us_id
+                      JOIN "data"."l_refcode" rc ON rc.rc_id = dl.dl_rc_id::double precision
+                      JOIN "GeoTools"."l_phases" ph ON ph.ph_id = dl.dl_ph_id
+                      JOIN "GeoTools"."l_type_export" te ON te.te_id = dl.dl_te_id)
 SELECT dlg.id,
        dlg.guid_projeteur,
        dlg.projeteur,
@@ -77,19 +81,19 @@ SELECT dlg.id,
        LEFT(dlg.phase, 3) || '|' ||
        dlg.code_type_export || '-' || to_char(dlg.livraison, 'fm00') || '-V' || dlg.version as dlg_infos
 FROM dlg
-         JOIN "GeoTools".t_exports ex ON ex.ex_id = dlg.id_export
-         JOIN "GeoTools".l_etats et ON et.et_id = ex.ex_et_id;
+         JOIN "GeoTools"."t_exports" ex ON ex.ex_id = dlg.id_export
+         JOIN "GeoTools"."l_etats" et ON et.et_id = ex.ex_et_id;
 -- ...
 
 
 -- v_exports
-create or replace view "GeoTools".v_exports as
+create or replace view "GeoTools"."v_exports" as
 SELECT ex.ex_id    as id,
        ex.ex_dl_id as dlg_id,
        et.et_code  as code_etat,
        et.et_nom   as nom_etat,
        et_code     as couleur_etat
-FROM "GeoTools".t_exports ex
+FROM "GeoTools"."t_exports" ex
          INNER JOIN "GeoTools".l_etats et
                     ON et.et_id = ex.ex_et_id
 ORDER BY ex.ex_dl_id, ex.ex_id;
@@ -195,7 +199,8 @@ $BODY$
     LANGUAGE plpgsql STABLE
                      COST 100;
 
-SELECT * FROM get_dlg_by_date('2022-06-23');
+SELECT *
+FROM get_dlg_by_date('2022-06-23');
 -- ...
 
 
@@ -204,13 +209,14 @@ create or replace function get_dlg_by_weeks(week int, year int) returns setof "G
 as
 $BODY$
 begin
-    RETURN QUERY (SELECT * FROM "GeoTools".v_dlg WHERE semaine = week AND annee = year);
+    RETURN QUERY (SELECT * FROM "GeoTools".v_dlg WHERE semaine = week AND annee = year ORDER BY date_initial);
 end
 $BODY$
     LANGUAGE plpgsql STABLE
                      COST 100;
 
-SELECT * FROM get_dlg_by_weeks(25, 2022);
+SELECT *
+FROM get_dlg_by_weeks(25, 2022);
 -- ...
 
 
@@ -225,9 +231,9 @@ $BODY$
     LANGUAGE plpgsql STABLE
                      COST 100;
 
-SELECT * FROM get_dlg_exports(2);
+SELECT *
+FROM get_dlg_exports(2);
 -- ...
-
 
 
 -- ******** TRIGGERS ******** --
