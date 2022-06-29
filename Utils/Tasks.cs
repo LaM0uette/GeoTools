@@ -77,5 +77,10 @@ public class Tasks
         return Environment.UserName;
     }
 
+    public static double Point2Pixel(double point)
+    {
+        return point * 1.33334;
+    }
+    
 }
 

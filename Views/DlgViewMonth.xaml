@@ -9,14 +9,7 @@
                       HorizontalScrollBarVisibility="Disabled" 
                       VerticalScrollBarVisibility="Auto">
             
-            <Grid x:Name="GridMonth" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+            <Grid x:Name="GridMonth" ShowGridLines="True">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>

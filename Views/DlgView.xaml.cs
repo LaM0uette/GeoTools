@@ -22,7 +22,7 @@ public partial class DlgView
         VTabItemDlgAll = TabItemDlgAll;
         VTabItemDlgMonth = TabItemDlgMonth;
         
-        SetTabItem(VTabItemDlgMonth);
+        SetTabItem(TabItemDlgAll);
         
         //ChangeWidth();
         if (Application.Current.MainWindow != null) Application.Current.MainWindow.SizeChanged += OnSizeChanged;

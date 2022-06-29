@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -13,87 +14,54 @@ public class Widget
     private static User _user = MainWindow.UserSession;
     public static Button MakeBtnDlg(Dictionary<string, object> dictionary, Style style)
     {
-        Label lbZoMarche = MakeLabel(content: $"RIP{dictionary["refcode1"]}");
-        Label lbDlInitDate = MakeLabel(content: $"{DateTime.Parse(dictionary["date_initial"].ToString()).ToString("MM/dd/yyyy")}");
-        Label lbExEtNom = MakeLabel(content: $"{dictionary["nom_etat"]}");
+        Thickness margin = new Thickness(2);
 
-        Border bdZoMarche = MakeBorder();
-        bdZoMarche.Child = lbZoMarche;
+        TextBlock txtZoMarche = makeTextBlock(content: $"RIP{dictionary["refcode1"]}", fontSize:9);
+        TextBlock txtDlInitDate = makeTextBlock(content: $"{DateTime.Parse(dictionary["date_initial"].ToString()).ToString("MM/dd/yyyy")}", fontSize:9);
+        TextBlock txtExEtNom = makeTextBlock(content: $"{dictionary["nom_etat"]}", fontSize:9);
 
-        Border bdDlInitDate = MakeBorder();
-        bdDlInitDate.Child = lbDlInitDate;
+        Border bdZoMarche = MakeBorderTxt(margin: margin);
+        bdZoMarche.Child = txtZoMarche;
 
-        Border bdExEtNom = MakeBorder();
-        bdExEtNom.Child = lbExEtNom;
+        Border bdDlInitDate = MakeBorderTxt(margin: margin);
+        bdDlInitDate.Child = txtDlInitDate;
 
-        // Create the Grid
-        Grid grid = new Grid()
+        Border bdExEtNom = MakeBorderTxt(margin: margin);
+        bdExEtNom.Child = txtExEtNom;
+
+        StackPanel stackLabel = new StackPanel()
         {
-            Width = Constants.DlgWith,
-            Height = Constants.DlgHeight,
-            HorizontalAlignment = HorizontalAlignment.Center,
-            VerticalAlignment = VerticalAlignment.Center,
-            ShowGridLines = true
+            Orientation = Orientation.Vertical,
+            HorizontalAlignment = HorizontalAlignment.Right,
+            Children = { bdZoMarche, bdDlInitDate, bdExEtNom },
+            Margin = new Thickness(3, 0, 0, 0),
         };
-
-        Grid GridLabel = new Grid()
-        {
-            VerticalAlignment = VerticalAlignment.Stretch,
-            HorizontalAlignment = HorizontalAlignment.Center 
-        };
-        // Define the Rows
-        for (byte i = 0; i < 3; i++)
-        {
-            GridLabel.RowDefinitions.Add(new RowDefinition());
-        }
-
-        SetElementGrid(element: bdZoMarche, row: 0);
-        SetElementGrid(element: bdDlInitDate, row: 1);
-        SetElementGrid(element: bdExEtNom, row: 2);
-
-        GridLabel.Children.Add(bdZoMarche);
-        GridLabel.Children.Add(bdDlInitDate);
-        GridLabel.Children.Add(bdExEtNom);
-            
-        for (byte i = 0; i < 2; i++)
-        {
-            ColumnDefinition col = new ColumnDefinition();
-            if (i > 0)
-            {
-                col.Width = new GridLength(Constants.DlgLargeColumnWidth);
-            }
-
-            grid.ColumnDefinitions.Add(col);
-        }
-
-        // Define the Rows
-        for (byte i = 0; i < 1; i++) 
-        {
-            //RowDefinition row = new RowDefinition();
-            grid.RowDefinitions.Add(new RowDefinition());
-        }
-
+        
         TextBlock dlgInfo = new TextBlock()
         {
             Text = dictionary["dlg_infos"].ToString().Replace("|", "\n"),
-            FontSize = Constants.TextBlockFontSize,
+            FontSize = 11,
             TextWrapping = TextWrapping.Wrap,
             VerticalAlignment = VerticalAlignment.Center,
             HorizontalAlignment = HorizontalAlignment.Center,
-            TextAlignment = TextAlignment.Center
+            TextAlignment = TextAlignment.Center,
+            Margin = new Thickness(0, 0, 3, 0),
         };
 
-        SetElementGrid(element: dlgInfo);
-        SetElementGrid(element: GridLabel, column: 1);
-
-        grid.Children.Add(GridLabel);
-        grid.Children.Add(dlgInfo);
+        StackPanel stackAll = new StackPanel()
+        {
+            Orientation = Orientation.Horizontal,
+            Children = { dlgInfo, stackLabel }
+        };
 
         return new Button()
         {
-            Content = grid,
+            Content = stackAll,
+            Height = Constants.DlgHeight,
+            Width = Constants.DlgWith,
+            Margin = new Thickness(5),
             Name = $"dlg_{dictionary["id"]}",
-            Style = style,
+            //Style = style,
             ToolTip = $"{dictionary["dlg"]}\n" +
                       $"Etat : {dictionary["nom_etat"]} ({dictionary["code_etat"]})\n" +
                       $"ID : {dictionary["id"]}\n" +
@@ -102,28 +70,57 @@ public class Widget
             Background = Tasks.HexBrush(hexColor: dictionary["couleur_etat"].ToString())
         };
     }
-    private static Label MakeLabel(string content)
+
+    private static TextBlock makeTextBlock(string content, int fontSize)
     {
-        return new Label()
+        return new TextBlock()
         {
-            Content = content,
-            Background = Brushes.Transparent,
-            HorizontalAlignment = HorizontalAlignment.Center,
+            Text = content,
             VerticalAlignment = VerticalAlignment.Center,
-            FontSize = Constants.LabelFontSize,
-            HorizontalContentAlignment = HorizontalAlignment.Center,
-            VerticalContentAlignment = VerticalAlignment.Center,
+            HorizontalAlignment = HorizontalAlignment.Center,
+            Foreground = Brushes.Black,
+            FontSize = fontSize
         };
     }
-    private static Border MakeBorder()
+    // private static Label MakeLabel(string content)
+    // {
+    //     return new Label()
+    //     {
+    //         Content = content,
+    //         Background = Brushes.Transparent,
+    //         HorizontalAlignment = HorizontalAlignment.Center,
+    //         VerticalAlignment = VerticalAlignment.Center,
+    //         FontSize = Constants.LabelFontSize,
+    //         HorizontalContentAlignment = HorizontalAlignment.Center,
+    //         VerticalContentAlignment = VerticalAlignment.Center,
+    //     };
+    // }
+    private static Border MakeBorderBtn()
     {
         return new Border()
         {
             CornerRadius = new CornerRadius(5),
             Background = Brushes.White,
+            BorderBrush = Brushes.White,
             Height = Constants.LabelHeighSize,
             Width = Constants.LabelWidthSize,
             Margin = new Thickness(5, 0, 5, 0),
+            HorizontalAlignment = HorizontalAlignment.Right,
+            VerticalAlignment = VerticalAlignment.Center,
+        };
+    }
+    private static Border MakeBorderTxt(Thickness margin)
+    {
+        return new Border()
+        {
+            CornerRadius = new CornerRadius(3),
+            Background = Brushes.White,
+            BorderBrush = Brushes.White,
+            Height = 13,
+            Width = 65,
+            Margin = margin,
+            HorizontalAlignment = HorizontalAlignment.Right,
+            VerticalAlignment = VerticalAlignment.Center,
         };
     }
     public static void SetElementGrid(UIElement element, int row=0, int column=0)

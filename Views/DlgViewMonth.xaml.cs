@@ -63,15 +63,16 @@ public partial class DlgViewMonth : UserControl
         
         for (byte i = 0; firstWeeks + i <= lastWeeks; i++)
         {
+            GridMonth.RowDefinitions.Add(new RowDefinition());
+            
             Weeks weeks = sql2Struc(week: (byte)(firstWeeks + i), year:year);
 
             foreach (DateTime date in Tasks.EachDay(from:Tasks.GetDayOfWeek(week:firstWeeks + i, year:year), to:Tasks.GetDayOfWeek(week:firstWeeks + i, year:year, DayOfWeek.Friday)))
             {
                 Brush? foreground = dateNow == DateOnly.FromDateTime(date) ? Brushes.White : FindResource("RgbM2") as Brush;
-                int col = (int)date.DayOfWeek;
+                int col = (int)date.DayOfWeek - 1;
                 
                 nameOfDay = Tasks.FistLetterUpper(date.ToString("dddd", lang));
-                List<Dictionary<string, object>> listDay = GetDay(weeks: weeks, day: nameOfDay);
 
                 StackPanel stackPanel = new StackPanel()
                 {
@@ -82,30 +83,41 @@ public partial class DlgViewMonth : UserControl
                 Label lbJourNom = makeLabel(content: nameOfDay, foreground: foreground);
                 Label lbNumJour = makeLabel(content: $"{date.Day}", foreground: foreground);
                 
-                Grid gridDlg = new Grid();
+                StackPanel stackDlg = new StackPanel()
+                {
+                    Orientation = Orientation.Vertical,
+                    MaxHeight = 200,
+                };
 
-                int dlgRow = 0;
-
-                foreach (var dlg in listDay)
+                foreach (var dlg in GetDay(weeks: weeks, day: nameOfDay))
                 {
                     Button button = Widget.MakeBtnDlg(dictionary: dlg, style: style);
-                    Widget.SetElementGrid(button, row: dlgRow);
-                    
-                    gridDlg.RowDefinitions.Add(new RowDefinition());
-                    gridDlg.Children.Add(button);
-                    dlgRow++;
+                    button.Height = 50;
+                    button.Width = 177;
+                    stackDlg.Children.Add(button);
                 }
 
                 ScrollViewer scrollViewer = new ScrollViewer()
                 {
-                    Content = gridDlg,
+                    Content = stackDlg,
+                    //CanContentScroll = true,
                     VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
                     HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled
+                };
+                
+                Border border = new Border()
+                {
+                    BorderThickness = new Thickness(2.5),
+                    CornerRadius = new CornerRadius(3),
+                    BorderBrush = FindResource("RgbM2") as Brush,
+                    Height = 64,
+                    Width = 190,
+                    Child = scrollViewer
                 };
         
                 stackPanel.Children.Add(lbJourNom);
                 stackPanel.Children.Add(lbNumJour);
-                stackPanel.Children.Add(scrollViewer);
+                stackPanel.Children.Add(border);
 
                 Widget.SetElementGrid(stackPanel, row:i, column:col);
                 GridMonth.Children.Add(stackPanel);
