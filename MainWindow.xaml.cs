@@ -9,8 +9,7 @@ namespace GeoTools
 {
     public partial class MainWindow
     {
-        
-        public static User UserSession = new();
+        public static User UserSession { get; } = new();
 
         public MainWindow()
         {

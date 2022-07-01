@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using GeoTools.Model;
-using Npgsql;
 
 namespace GeoTools.Utils;
 
 public class Widget
 {
-    private static User _user = MainWindow.UserSession;
     public static Button MakeBtnDlg(Dictionary<string, object> dictionary, Style style)
     {
         Thickness margin = new Thickness(2);
@@ -65,8 +61,8 @@ public class Widget
             ToolTip = $"{dictionary["dlg"]}\n" +
                       $"Etat : {dictionary["nom_etat"]} ({dictionary["code_etat"]})\n" +
                       $"ID : {dictionary["id"]}\n" +
-                      $"admin={_user.Admin}\n" +
-                      $"prenom={_user.Prenom}", 
+                      $"admin={MainWindow.UserSession.Admin}\n" +
+                      $"prenom={MainWindow.UserSession.Prenom}", 
             Background = Tasks.HexBrush(hexColor: dictionary["couleur_etat"].ToString())
         };
     }

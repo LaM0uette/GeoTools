@@ -19,10 +19,10 @@ public partial class DlgView
         InitializeComponent();
         VTabItemDlgAll = TabItemDlgAll;
         VTabItemDlgMonth = TabItemDlgMonth;
+
+        Tasks.SetTabItem(VTabItemDlgAll);
         
         FillListBtn();
-
-        Tasks.SetTabItem(TabItemDlgAll);
         
         //ChangeWidth();
         if (Application.Current.MainWindow != null) Application.Current.MainWindow.SizeChanged += OnSizeChanged;
@@ -32,6 +32,7 @@ public partial class DlgView
     {
         Tasks.SetTabItem(MainView.VTabItemMenu);
     }
+    
     private void OnSizeChanged(object sender, SizeChangedEventArgs e)
     {
         ChangeWidth();
