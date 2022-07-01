@@ -29,6 +29,8 @@ namespace GeoTools
                 UserSession.Admin = int.Parse($"{cdReader["us_admin"]}") == 1;
             }
             
+            MessageBox.Show(UserSession.Nom);
+
             cdReader.Close();
         }
 
