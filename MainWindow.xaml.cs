@@ -18,7 +18,7 @@ namespace GeoTools
 
         private static void SetUserParameters()
         {
-            NpgsqlDataReader cdReader = Sql.GetUserInformation(guid: Tasks.GetUserSession());
+            var cdReader = Sql.GetUserInformation(guid: Tasks.GetUserSession());
 
             while (cdReader.Read())
             {
