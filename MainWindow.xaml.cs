@@ -15,7 +15,7 @@ namespace GeoTools
         {
             SetUserParameters();
         }
-
+        
         private static void SetUserParameters()
         {
             var cdReader = Sql.GetUserInformation(guid: Tasks.GetUserSession());

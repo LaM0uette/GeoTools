@@ -5,55 +5,63 @@ namespace GeoTools.Utils;
 
 public static class Sql
 {
-    private static NpgsqlConnection Connection = Connect();
-    private static NpgsqlTransaction Transaction = Connection.BeginTransaction();
+    private static NpgsqlConnection _connection = Connect();
+    private static NpgsqlTransaction _transaction = _connection.BeginTransaction();
 
+    private static NpgsqlDataReader GetSqlData(string req)
+    {
+        var command = new NpgsqlCommand(req, _connection);
+        return command.ExecuteReader();
+    }
+    
     public static NpgsqlDataReader GetDlgByDate(string date)
     {
-        return GetSql($"SELECT * FROM \"GeoTools\".v_dlg WHERE date_initial='{date}'");
+        var req = @$"
+                SELECT * 
+                FROM `GeoTools`.`v_dlg` 
+                WHERE date_initial='{date}'
+                ";
+        
+        return GetSqlData(req);
     }
 
     public static NpgsqlDataReader GetDlgByWeek(byte week, int year)
     {
-        // return GetSql($"SELECT * FROM \"GeoTools\".v_dlg WHERE semaine={week} AND annee={year} ORDER BY date_initial");
-        return GetSql($"SELECT * FROM \"GeoTools\".get_dlg_by_weeks({week}, {year});");
+        // return GetSqlData($"SELECT * FROM \"GeoTools\".v_dlg WHERE semaine={week} AND annee={year} ORDER BY date_initial");
+        return GetSqlData($"SELECT * FROM \"GeoTools\".get_dlg_by_weeks({week}, {year});");
         
     }
 
     public static NpgsqlDataReader GetAllDlgATraiter()
     {
-        return GetSql("SELECT * FROM \"GeoTools\".v_dlg WHERE id=1");
+        return GetSqlData("SELECT * FROM \"GeoTools\".v_dlg WHERE id=1");
     }  
     
     public static NpgsqlDataReader GetAllDlg()
     {
-        return GetSql("SELECT * FROM \"GeoTools\".v_dlg");
+        return GetSqlData("SELECT * FROM \"GeoTools\".v_dlg");
     }    
     
     public static NpgsqlDataReader GetSqlFait()
     {
-        return GetSql("SELECT * FROM \"GeoTools\".v_dlg WHERE id=5");
+        return GetSqlData("SELECT * FROM \"GeoTools\".v_dlg WHERE id=5");
     }
     
     public static NpgsqlDataReader GetUserInformation(string guid)
     {
-        return GetSql($"SELECT * FROM \"GeoTools\".t_users WHERE us_guid='{guid}'");
+        return GetSqlData($"SELECT * FROM \"GeoTools\".t_users WHERE us_guid='{guid}'");
     }
 
     public static NpgsqlDataReader GetAllUser()
     {
-        return GetSql($"SELECT * FROM \"GeoTools\".t_users");
+        return GetSqlData($"SELECT * FROM \"GeoTools\".t_users");
     }
     
-    public static NpgsqlDataReader GetSql(string req)
-    {
-        NpgsqlCommand command = new NpgsqlCommand(req, Connection);
-        return command.ExecuteReader();
-    }
+    
     
     public static NpgsqlDataReader GetDlgExports(int dlg)
     {
-        return GetSql(req: $"SELECT * FROM \"GeoTools\".get_dlg_exports({dlg})");
+        return GetSqlData(req: $"SELECT * FROM \"GeoTools\".get_dlg_exports({dlg})");
     }
     
     public static void AddDlg(string proj, string refcode3, string dateInit, string phase, string typeExport, int livraison, int version)
@@ -63,18 +71,18 @@ public static class Sql
     
     public static void Exec(string req)
     {
-        new NpgsqlCommand(req, Connection).ExecuteNonQuery();
+        new NpgsqlCommand(req, _connection).ExecuteNonQuery();
         Commit();
     }
 
     public static void Close()
     {
-        Connection.Close();
+        _connection.Close();
     }
     
     public static void Commit()
     {
-        Transaction.Commit();
+        _transaction.Commit();
     }
     
     private static NpgsqlConnection Connect()
