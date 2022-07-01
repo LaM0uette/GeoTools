@@ -4,10 +4,23 @@
     
     <!-- Radius -->
     <sys:Double x:Key="VRscRound">2</sys:Double>
+    
     <CornerRadius x:Key="RscRound" 
                   BottomLeft="{StaticResource VRscRound}" 
                   BottomRight="{StaticResource VRscRound}" 
                   TopLeft="{StaticResource VRscRound}" 
+                  TopRight="{StaticResource VRscRound}"/>
+    
+    <CornerRadius x:Key="RscRoundLeft" 
+                  BottomLeft="{StaticResource VRscRound}" 
+                  BottomRight="0"
+                  TopLeft="{StaticResource VRscRound}" 
+                  TopRight="0"/>
+    
+    <CornerRadius x:Key="RscRoundRight" 
+                  BottomLeft="0"
+                  BottomRight="{StaticResource VRscRound}" 
+                  TopLeft="0"
                   TopRight="{StaticResource VRscRound}"/>
     
     <!-- Dim -->

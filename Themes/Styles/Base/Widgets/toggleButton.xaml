@@ -196,4 +196,39 @@
     <!-- /INITIAL -->
     
     
+    <!-- Etat DLG -->
+    <Style x:Key="ToggleButtonEtatDlg" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource ToggleButtonPlain}">
+        <Setter Property="Background" Value="{StaticResource RgbM2}"/>
+        <Setter Property="Tag" Value="{StaticResource RgbM3}"/>
+        <Setter Property="Width" Value="80"/>
+    </Style>
+    
+    <Style x:Key="ToggleButtonEtatDlgLeft" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource ToggleButtonEtatDlg}">
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="{DynamicResource RscRoundLeft}"></Setter>
+            </Style>
+        </Style.Resources>
+    </Style>
+    
+    <Style x:Key="ToggleButtonEtatDlgCenter" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource ToggleButtonEtatDlg}">
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="0"></Setter>
+            </Style>
+        </Style.Resources>
+    </Style>
+    
+    <Style x:Key="ToggleButtonEtatDlgRight" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource ToggleButtonEtatDlg}">
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="{DynamicResource RscRoundRight}"></Setter>
+            </Style>
+        </Style.Resources>
+    </Style>
+    
+    
+    <!-- /Etat DLG -->
+    
+    
 </ResourceDictionary>

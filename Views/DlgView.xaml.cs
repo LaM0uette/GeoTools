@@ -69,7 +69,7 @@ public partial class DlgView
     
     private void FillListBtn()
     {
-        toggleButtons.Add(BtnDlgTraiter);
+        toggleButtons.Add(BtnDlgATraiter);
         toggleButtons.Add(BtnDlgAll);
         toggleButtons.Add(BtnDlgFait);
     }
