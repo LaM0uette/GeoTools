@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using Npgsql;
 
@@ -80,6 +81,11 @@ public class Tasks
     public static double Point2Pixel(double point)
     {
         return point * 1.33334;
+    }
+    
+    public static void SetTabItem(TabItem tabItem)
+    {
+        tabItem.IsSelected = true;
     }
     
 }

@@ -12,30 +12,25 @@ public partial class DlgView
     
     public static TabItem VTabItemDlgAll = new ();
     public static TabItem VTabItemDlgMonth = new ();
-    private List<ToggleButton> toggleButtons = new();
+    private List<ToggleButton> _toggleButtons = new();
     
     public DlgView()
     {
         InitializeComponent();
-        FillListBtn();
-        
         VTabItemDlgAll = TabItemDlgAll;
         VTabItemDlgMonth = TabItemDlgMonth;
         
-        SetTabItem(TabItemDlgAll);
+        FillListBtn();
+
+        Tasks.SetTabItem(TabItemDlgAll);
         
         //ChangeWidth();
         if (Application.Current.MainWindow != null) Application.Current.MainWindow.SizeChanged += OnSizeChanged;
     }
-    
-    public static void SetTabItem(TabItem tabItem)
-    {
-        tabItem.IsSelected = true;
-    }
-    
+
     private void BtnDlgBackHome_OnClick(object sender, RoutedEventArgs e)
     {
-        MainView.SetTabItem(MainView.VTabItemMenu);
+        Tasks.SetTabItem(MainView.VTabItemMenu);
     }
     private void OnSizeChanged(object sender, SizeChangedEventArgs e)
     {
@@ -69,9 +64,9 @@ public partial class DlgView
     
     private void FillListBtn()
     {
-        toggleButtons.Add(BtnDlgATraiter);
-        toggleButtons.Add(BtnDlgAll);
-        toggleButtons.Add(BtnDlgFait);
+        _toggleButtons.Add(BtnDlgATraiter);
+        _toggleButtons.Add(BtnDlgAll);
+        _toggleButtons.Add(BtnDlgFait);
     }
     
     void Toggle_OnClick(object sender, RoutedEventArgs e)
@@ -81,7 +76,7 @@ public partial class DlgView
 
         DlgViewAll.InstanceDlgViewAll.CreateBtnDlgAll(mode:mode);
 
-        foreach (ToggleButton btn in toggleButtons)
+        foreach (ToggleButton btn in _toggleButtons)
         {
             btn.IsChecked = btnName == btn.Name;
         }
