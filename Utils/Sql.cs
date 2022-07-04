@@ -97,7 +97,9 @@ public static class Sql
     
     
     
-
+    
+    
+    
     
 
     public static NpgsqlDataReader GetAllDlgATraiter()

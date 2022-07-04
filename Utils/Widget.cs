@@ -10,7 +10,7 @@ public class Widget
 {
     public static Button MakeBtnDlg(Dictionary<string, object> dictionary, Style style)
     {
-        Thickness margin = new Thickness(2);
+        Thickness margin = new (2);
 
         TextBlock txtZoMarche = makeTextBlock(content: $"RIP{dictionary["refcode1"]}", fontSize:9);
         TextBlock txtDlInitDate = makeTextBlock(content: $"{DateTime.Parse(dictionary["date_initial"].ToString()).ToString("MM/dd/yyyy")}", fontSize:9);
