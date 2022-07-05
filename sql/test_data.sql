@@ -19,7 +19,8 @@ VALUES (2, 1, 1, CURRENT_DATE, 2, 3, 1, 1),
 -- ******** VUES ******** --
 -- v_l_refcode
 create or replace view "data"."v_refcode" as
-    SELECT * FROM "data".l_refcode;
+SELECT *
+FROM "data".l_refcode;
 
 
 -- v_dlg
@@ -71,6 +72,13 @@ SELECT dlg.id,
        dlg.livraison,
        dlg.version,
        dlg.id_export,
+       CASE
+           WHEN et.et_id IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12)
+               THEN 1
+           WHEN et.et_id IN (11, 13)
+               THEN 2
+           ELSE 0
+           END                                                                              AS "id_etat",
        et.et_code                                                                           AS code_etat,
        et.et_nom                                                                            AS nom_etat,
        et.et_color                                                                          AS couleur_etat,

@@ -26,9 +26,9 @@ public partial class DlgViewAll
 
         NpgsqlDataReader cdReader = mode switch
         {
-            "A TRAITER" => Sql.GetAllDlgATraiter(),
+            "A TRAITER" => Sql.GetAllDlgFiltered(1),
             "TOUT" => Sql.GetAllDlg(),
-            "FAIT" => Sql.GetSqlFait(),
+            "FAIT" => Sql.GetAllDlgFiltered(2),
             _ => Sql.GetAllDlg()
         };
 

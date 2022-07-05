@@ -67,6 +67,25 @@ public static class Sql
     
     //
     // REQUÊTES
+    public static NpgsqlDataReader GetAllDlg()
+    {
+        const string req = 
+            @$"SELECT * 
+               FROM ""GeoTools"".""v_dlg""";
+        
+        return GetSqlData(req);
+    }
+    
+    public static NpgsqlDataReader GetAllDlgFiltered(int id)
+    {
+        var req = 
+            @$"SELECT * 
+               FROM ""GeoTools"".""v_dlg""
+               WHERE id_etat={id}";
+        
+        return GetSqlData(req);
+    }
+
     public static NpgsqlDataReader GetDlgByDate(string date)
     {
         var req = 
@@ -102,20 +121,13 @@ public static class Sql
     
     
 
-    public static NpgsqlDataReader GetAllDlgATraiter()
-    {
-        return GetSqlData("SELECT * FROM \"GeoTools\".v_dlg WHERE id=1");
-    }  
     
-    public static NpgsqlDataReader GetAllDlg()
-    {
-        return GetSqlData("SELECT * FROM \"GeoTools\".v_dlg");
-    }    
     
-    public static NpgsqlDataReader GetSqlFait()
-    {
-        return GetSqlData("SELECT * FROM \"GeoTools\".v_dlg WHERE id=5");
-    }
+    
+    
+    
+    
+    
     
     
 
