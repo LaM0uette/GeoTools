@@ -19,7 +19,14 @@ public partial class DlgView
         InitializeComponent();
         VTabItemDlgAll = TabItemDlgAll;
         VTabItemDlgMonth = TabItemDlgMonth;
-
+        
+        ComboBoxTypeView.Items.Insert(0, "TOUT");
+        ComboBoxTypeView.Items.Insert(1, new Separator());
+        ComboBoxTypeView.Items.Insert(2, "JOUR");
+        ComboBoxTypeView.Items.Insert(3, "SEMAINE");
+        ComboBoxTypeView.Items.Insert(4, "MOIS");
+        ComboBoxTypeView.SelectedItem = ComboBoxTypeView.Items.IndexOf("TOUT");
+        
         Tasks.SetTabItem(VTabItemDlgAll);
         
         FillListBtn();

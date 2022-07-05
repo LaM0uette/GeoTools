@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Views"
   ],
-  "SelectedNode": "\\.gitignore",
+  "SelectedNode": "\\MainWindow.xaml",
   "PreviewInSolutionExplorer": false
 }

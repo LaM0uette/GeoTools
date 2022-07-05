@@ -44,10 +44,16 @@ public class Widget
             Margin = new Thickness(0, 0, 3, 0),
         };
 
+        Separator separator = new ()
+        {
+            Width = 16,
+            Background = Brushes.Transparent
+        };
+
         StackPanel stackAll = new StackPanel()
         {
             Orientation = Orientation.Horizontal,
-            Children = { dlgInfo, stackLabel }
+            Children = { dlgInfo, separator, stackLabel }
         };
 
         return new Button()

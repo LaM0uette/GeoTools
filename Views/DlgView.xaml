@@ -41,9 +41,12 @@
                 </Button>
 
                 <!-- ComboBox des types d'affichages -->
-                <ComboBox Grid.Column="2"
+                <ComboBox x:Name="ComboBoxTypeView"
+                          Width="120"
+                          HorizontalContentAlignment="Center"
+                          Grid.Column="2"
                           HorizontalAlignment="Right"
-                          Style="{StaticResource ComboBoxPlainM1}" />
+                          Style="{StaticResource ComboBoxPlainM2}" />
 
             </Grid>
         </Border>
@@ -92,18 +95,17 @@
                         
                         <StackPanel Grid.Column="0" Orientation="Horizontal">
                             
-                            
-                            <ToggleButton x:Name="BtnDlgATraiter"
-                                          Style="{StaticResource ToggleButtonEtatDlgLeft}"
-                                          Content="A TRAITER"
-                                          Click="Toggle_OnClick"/>
-                
                             <ToggleButton x:Name="BtnDlgAll"
                                           Style="{StaticResource ToggleButtonEtatDlgCenter}"
                                           IsChecked="True"
                                           Content="TOUT"
                                           Click="Toggle_OnClick"/>
-        
+                            
+                            <ToggleButton x:Name="BtnDlgATraiter"
+                                          Style="{StaticResource ToggleButtonEtatDlgLeft}"
+                                          Content="A FAIRE"
+                                          Click="Toggle_OnClick"/>
+                            
                             <ToggleButton x:Name="BtnDlgFait"
                                           Style="{StaticResource ToggleButtonEtatDlgRight}"
                                           Content="FAIT"
