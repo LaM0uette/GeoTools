@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Windows;
 using GeoTools.Model;
 using GeoTools.Utils;
-using GeoTools.Views;
-using Npgsql;
 
 namespace GeoTools
 {
@@ -26,15 +23,6 @@ namespace GeoTools
             UserSession.Prenom = $"{cdReader["us_prenom"]}";
             UserSession.Role = int.Parse($"{cdReader["us_role"]}");
             UserSession.Admin = int.Parse($"{cdReader["us_admin"]}") == 1;
-            
-            // while (cdReader.Read())
-            // {
-            //     UserSession.Refcode1 = int.Parse($"{cdReader["us_refcode1"]}");
-            //     UserSession.Nom = $"{cdReader["us_nom"]}";
-            //     UserSession.Prenom = $"{cdReader["us_prenom"]}";
-            //     UserSession.Role = int.Parse($"{cdReader["us_role"]}");
-            //     UserSession.Admin = int.Parse($"{cdReader["us_admin"]}") == 1;
-            // }
 
             cdReader.Close();
         }
