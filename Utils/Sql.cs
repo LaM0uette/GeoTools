@@ -54,17 +54,7 @@ public static class Sql
     {
         Exec(req:$"SELECT * FROM \"GeoTools\".add_dlg('{proj}', '{refcode3}', '{dateInit}', '{phase}', '{typeExport}', {livraison}, {version})");
     }
-    
-    
-    /*
-        var req = @$"
-                SELECT * 
-                FROM ""GeoTools"".""t_users""
-                WHERE us_guid='{guid}'";
-        
-        return GetSqlData(req);
-     */
-    
+
     //
     // REQUÊTES
     public static NpgsqlDataReader GetAllDlg()
@@ -113,35 +103,4 @@ public static class Sql
         
         return GetSqlData(req);
     }
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    public static NpgsqlDataReader GetAllUser()
-    {
-        return GetSqlData($"SELECT * FROM \"GeoTools\".t_users");
-    }
-    
-    
-    
-    public static NpgsqlDataReader GetDlgExports(int dlg)
-    {
-        return GetSqlData(req: $"SELECT * FROM \"GeoTools\".get_dlg_exports({dlg})");
-    }
-    
-    
 }
