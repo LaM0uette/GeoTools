@@ -19,30 +19,29 @@ namespace GeoTools
         private static void SetUserParameters()
         {
             var cdReader = Sql.GetUserInformation(guid: Tasks.GetUserSession());
-
-            while (cdReader.Read())
-            {
-                UserSession.Refcode1 = int.Parse($"{cdReader["us_refcode1"]}");
-                UserSession.Nom = $"{cdReader["us_nom"]}";
-                UserSession.Prenom = $"{cdReader["us_prenom"]}";
-                UserSession.Role = int.Parse($"{cdReader["us_role"]}");
-                UserSession.Admin = int.Parse($"{cdReader["us_admin"]}") == 1;
-            }
+            cdReader.Read();
             
-            MessageBox.Show(UserSession.Nom);
+            UserSession.Refcode1 = int.Parse($"{cdReader["us_refcode1"]}");
+            UserSession.Nom = $"{cdReader["us_nom"]}";
+            UserSession.Prenom = $"{cdReader["us_prenom"]}";
+            UserSession.Role = int.Parse($"{cdReader["us_role"]}");
+            UserSession.Admin = int.Parse($"{cdReader["us_admin"]}") == 1;
+            
+            // while (cdReader.Read())
+            // {
+            //     UserSession.Refcode1 = int.Parse($"{cdReader["us_refcode1"]}");
+            //     UserSession.Nom = $"{cdReader["us_nom"]}";
+            //     UserSession.Prenom = $"{cdReader["us_prenom"]}";
+            //     UserSession.Role = int.Parse($"{cdReader["us_role"]}");
+            //     UserSession.Admin = int.Parse($"{cdReader["us_admin"]}") == 1;
+            // }
 
             cdReader.Close();
-        }
-
-        private static void ConnectionOnNotification(object sender, NpgsqlNotificationEventArgs e)
-        {
-            MessageBox.Show("value changed");
         }
 
         private void OnApplicationExit(object sender, EventArgs e)
         {
             Sql.Close();
         }
-        
     }
 }
