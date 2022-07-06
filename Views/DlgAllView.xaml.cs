@@ -37,7 +37,8 @@ public partial class DlgAllView
         while (cdReader.Read())
         {
             if (style == null) continue;
-            var  button = Widget.MakeBtnDlg(dictionary: Tasks.sqlDict(cdReader: cdReader), style:style);
+            
+            var button = Widget.MakeBtnDlg(dictionary: Tasks.sqlDict(cdReader: cdReader), style:style);
             button.Click += BtnDlgAll_Click;
             DlgAllPanel.Children.Add(button);
         }
