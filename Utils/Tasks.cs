@@ -83,10 +83,9 @@ public class Tasks
         return point * 1.33334;
     }
     
-    public static void SetTabItem(TabItem tabItem)
+    public static void SetSelectedTabItem(TabItem tabItem)
     {
         tabItem.IsSelected = true;
     }
-    
 }
 

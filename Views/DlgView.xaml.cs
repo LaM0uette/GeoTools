@@ -10,19 +10,19 @@ namespace GeoTools.Views;
 public partial class DlgView
 {
     
-    private static TabItem VTabItemDlgAll { get; set; } = new ();
-    private static TabItem VTabItemDlgMonth { get; set; } = new ();
+    private static TabItem _vTabItemDlgAll = new ();
+    private static TabItem _vTabItemDlgMonth = new ();
     private static List<ToggleButton> _toggleButtons = new();
     
     public DlgView()
     {
         InitializeComponent();
-        SetTabItems();
         AddComboBoxData();
+        SetTabItems();
+
+        Tasks.SetSelectedTabItem(_vTabItemDlgAll);
         
-        Tasks.SetTabItem(VTabItemDlgAll);
-        
-        FillListBtn();
+        AddToggleButtonsInList();
         
         //ChangeWidth();
         if (Application.Current.MainWindow != null) Application.Current.MainWindow.SizeChanged += OnSizeChanged;
@@ -30,12 +30,6 @@ public partial class DlgView
     
     //
     // Functions
-    private void SetTabItems()
-    {
-        VTabItemDlgAll = TabItemDlgAll;
-        VTabItemDlgMonth = TabItemDlgMonth;
-    }
-
     private void AddComboBoxData()
     {
         ComboBoxTypeView.Items.Insert(0, "TOUT");
@@ -46,6 +40,19 @@ public partial class DlgView
         ComboBoxTypeView.SelectedItem = ComboBoxTypeView.Items.IndexOf("TOUT");
     }
     
+    private void AddToggleButtonsInList()
+    {
+        _toggleButtons.Add(BtnDlgAll);
+        _toggleButtons.Add(BtnDlgATraiter);
+        _toggleButtons.Add(BtnDlgFait);
+    }
+    
+    private void SetTabItems()
+    {
+        _vTabItemDlgAll = TabItemDlgAll;
+        _vTabItemDlgMonth = TabItemDlgMonth;
+    }
+
     //
     // Actions
     
@@ -65,7 +72,7 @@ public partial class DlgView
 
     private void BtnDlgBackHome_OnClick(object sender, RoutedEventArgs e)
     {
-        Tasks.SetTabItem(MainView.VTabItemMenu);
+        Tasks.SetSelectedTabItem(MainView.VTabItemMenu);
     }
     
     private void OnSizeChanged(object sender, SizeChangedEventArgs e)
@@ -98,12 +105,7 @@ public partial class DlgView
                (Tasks.GetWindowState() == WindowState.Maximized?Constants.MaximazeScrollBarWith:Constants.NormalScrollBarWith);
     }
     
-    private void FillListBtn()
-    {
-        _toggleButtons.Add(BtnDlgATraiter);
-        _toggleButtons.Add(BtnDlgAll);
-        _toggleButtons.Add(BtnDlgFait);
-    }
+    
     
     void Toggle_OnClick(object sender, RoutedEventArgs e)
     {
