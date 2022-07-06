@@ -6,8 +6,8 @@ namespace GeoTools.Views;
 
 public partial class MainView
 {
-    public static TabItem VTabItemExportGrace = new ();
-    public static TabItem VTabItemMenu = new ();
+    public static TabItem VTabItemExportGrace { get; set; } = new ();
+    public static TabItem VTabItemMenu { get; set; } = new ();
 
     public MainView()
     {
