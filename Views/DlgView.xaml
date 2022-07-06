@@ -101,7 +101,7 @@
                                           Content="TOUT"
                                           Click="TogBtnDlg_OnClick"/>
                             
-                            <ToggleButton x:Name="TogBtnDlgATraiter"
+                            <ToggleButton x:Name="TogBtnDlgAFaire"
                                           Style="{StaticResource ToggleButtonEtatDlgCenter}"
                                           Content="A FAIRE"
                                           Click="TogBtnDlg_OnClick"/>

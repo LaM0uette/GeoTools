@@ -8,25 +8,27 @@ namespace GeoTools.Views;
 
 public partial class DlgAllView
 {
-    public static DlgAllView InstanceDlgAllView;
+    public static DlgAllView InstanceDlgAllView = new();
     
     public DlgAllView()
     {
         InstanceDlgAllView = this;
+        
         InitializeComponent();
-
         CreateBtnDlgAll();
     }
 
-    public void CreateBtnDlgAll(string mode="TOUT")
+    //
+    // Functions
+    public void CreateBtnDlgAll(string mode="TogBtnDlgAll")
     {
         var style = FindResource("ButtonDLGTemp") as Style;
 
         NpgsqlDataReader cdReader = mode switch
         {
-            "A TRAITER" => Sql.GetAllDlgFiltered(1),
-            "TOUT" => Sql.GetAllDlg(),
-            "FAIT" => Sql.GetAllDlgFiltered(2),
+            "TogBtnDlgAll" => Sql.GetAllDlg(),
+            "TogBtnDlgAFaire" => Sql.GetAllDlgFiltered(1),
+            "TogBtnDlgFait" => Sql.GetAllDlgFiltered(2),
             _ => Sql.GetAllDlg()
         };
 
@@ -36,18 +38,21 @@ public partial class DlgAllView
         {
             if (style == null) continue;
             Button button = Widget.MakeBtnDlg(dictionary: Tasks.sqlDict(cdReader: cdReader), style:style);
-            button.Click += btnDlgAll_Click;
+            button.Click += BtnDlgAll_Click;
             DlgAllPanel.Children.Add(button);
         }
 
         cdReader.Close();
     }
-    static void btnDlgAll_Click(object sender, RoutedEventArgs e)
+    
+    //
+    // Actions
+    private static void BtnDlgAll_Click(object sender, RoutedEventArgs e)
     {
-        string btnName = ((Button) sender).Name;
+        var btnName = ((Button) sender).Name;
         if (btnName is not null)
         {
-            MessageBox.Show($"You clicked on the {btnName}");
+            MessageBox.Show($"Tu as cliqué sur le bouton : {btnName}");
         }
     }
 }

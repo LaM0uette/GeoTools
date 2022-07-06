@@ -41,7 +41,7 @@ public partial class DlgView
     private void AddToggleButtonsInList()
     {
         _toggleButtons.Add(TogBtnDlgAll);
-        _toggleButtons.Add(TogBtnDlgATraiter);
+        _toggleButtons.Add(TogBtnDlgAFaire);
         _toggleButtons.Add(TogBtnDlgFait);
     }
 
@@ -61,9 +61,8 @@ public partial class DlgView
     private void TogBtnDlg_OnClick(object sender, RoutedEventArgs e)
     {
         var btnName = ((ToggleButton) sender).Name;
-        var mode = $"{((ToggleButton) sender).Content}";
 
-        DlgAllView.InstanceDlgAllView.CreateBtnDlgAll(mode);
+        DlgAllView.InstanceDlgAllView.CreateBtnDlgAll(btnName);
 
         foreach (var btn in _toggleButtons)
         {
