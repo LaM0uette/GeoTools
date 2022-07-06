@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -41,9 +40,9 @@ public partial class DlgView
 
     private void AddToggleButtonsInList()
     {
-        _toggleButtons.Add(BtnDlgAll);
-        _toggleButtons.Add(BtnDlgATraiter);
-        _toggleButtons.Add(BtnDlgFait);
+        _toggleButtons.Add(TogBtnDlgAll);
+        _toggleButtons.Add(TogBtnDlgATraiter);
+        _toggleButtons.Add(TogBtnDlgFait);
     }
 
     private void SetTabItems()
@@ -54,8 +53,24 @@ public partial class DlgView
 
     //
     // Actions
+    private void BtnDlgBackHome_OnClick(object sender, RoutedEventArgs e)
+    {
+        Tasks.SetSelectedTabItem(MainView.VTabItemMenu);
+    }
 
+    private void TogBtnDlg_OnClick(object sender, RoutedEventArgs e)
+    {
+        var btnName = ((ToggleButton) sender).Name;
+        var mode = $"{((ToggleButton) sender).Content}";
 
+        DlgAllView.InstanceDlgAllView.CreateBtnDlgAll(mode);
+
+        foreach (var btn in _toggleButtons)
+        {
+            btn.IsChecked = btnName == btn.Name;
+        }
+    }
+    
     //
     // Event
     private void OnWindowSizeChanged(object sender, SizeChangedEventArgs e)
@@ -70,24 +85,5 @@ public partial class DlgView
         //DlgViewMonth.GridMonth.MaxHeight = maxHeigh;
         DlgViewAll.Width = maxWith;
         DlgViewMonth.Width = maxWith;
-    }
-
-
-    private void BtnDlgBackHome_OnClick(object sender, RoutedEventArgs e)
-    {
-        Tasks.SetSelectedTabItem(MainView.VTabItemMenu);
-    }
-
-    void Toggle_OnClick(object sender, RoutedEventArgs e)
-    {
-        string btnName = ((ToggleButton) sender).Name;
-        string mode = $"{((ToggleButton) sender).Content}";
-
-        DlgViewAll.InstanceDlgViewAll.CreateBtnDlgAll(mode: mode);
-
-        foreach (ToggleButton btn in _toggleButtons)
-        {
-            btn.IsChecked = btnName == btn.Name;
-        }
     }
 }

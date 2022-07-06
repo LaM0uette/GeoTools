@@ -95,21 +95,21 @@
                         
                         <StackPanel Grid.Column="0" Orientation="Horizontal">
                             
-                            <ToggleButton x:Name="BtnDlgAll"
+                            <ToggleButton x:Name="TogBtnDlgAll"
                                           Style="{StaticResource ToggleButtonEtatDlgLeft}"
                                           IsChecked="True"
                                           Content="TOUT"
-                                          Click="Toggle_OnClick"/>
+                                          Click="TogBtnDlg_OnClick"/>
                             
-                            <ToggleButton x:Name="BtnDlgATraiter"
+                            <ToggleButton x:Name="TogBtnDlgATraiter"
                                           Style="{StaticResource ToggleButtonEtatDlgCenter}"
                                           Content="A FAIRE"
-                                          Click="Toggle_OnClick"/>
+                                          Click="TogBtnDlg_OnClick"/>
                             
-                            <ToggleButton x:Name="BtnDlgFait"
+                            <ToggleButton x:Name="TogBtnDlgFait"
                                           Style="{StaticResource ToggleButtonEtatDlgRight}"
                                           Content="FAIT"
-                                          Click="Toggle_OnClick"/>
+                                          Click="TogBtnDlg_OnClick"/>
                         </StackPanel>
                         
                         <Button Grid.Column="2"
@@ -129,7 +129,7 @@
                     <TabItem x:Name="TabItemDlgAll"
                              Visibility="Collapsed">
 
-                        <views:DlgViewAll x:Name="DlgViewAll"
+                        <views:DlgAllView x:Name="DlgViewAll"
                                           HorizontalAlignment="Left"
                                           VerticalAlignment="Center" />
 

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using GeoTools.Utils;
 using Npgsql;
@@ -7,14 +6,13 @@ using Npgsql;
 
 namespace GeoTools.Views;
 
-public partial class DlgViewAll
+public partial class DlgAllView
 {
-    public static DlgViewAll InstanceDlgViewAll;
-    public static string YoLeBolos = "TrouDuCul";
+    public static DlgAllView InstanceDlgAllView;
     
-    public DlgViewAll()
+    public DlgAllView()
     {
-        InstanceDlgViewAll = this;
+        InstanceDlgAllView = this;
         InitializeComponent();
 
         CreateBtnDlgAll();
