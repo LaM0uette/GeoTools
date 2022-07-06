@@ -96,13 +96,13 @@
                         <StackPanel Grid.Column="0" Orientation="Horizontal">
                             
                             <ToggleButton x:Name="BtnDlgAll"
-                                          Style="{StaticResource ToggleButtonEtatDlgCenter}"
+                                          Style="{StaticResource ToggleButtonEtatDlgLeft}"
                                           IsChecked="True"
                                           Content="TOUT"
                                           Click="Toggle_OnClick"/>
                             
                             <ToggleButton x:Name="BtnDlgATraiter"
-                                          Style="{StaticResource ToggleButtonEtatDlgLeft}"
+                                          Style="{StaticResource ToggleButtonEtatDlgCenter}"
                                           Content="A FAIRE"
                                           Click="Toggle_OnClick"/>
                             
