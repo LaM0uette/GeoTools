@@ -24,7 +24,7 @@ public partial class DlgAllView
     {
         var style = FindResource("ButtonDLGTemp") as Style;
 
-        NpgsqlDataReader cdReader = mode switch
+        var cdReader = mode switch
         {
             "TogBtnDlgAll" => Sql.GetAllDlg(),
             "TogBtnDlgAFaire" => Sql.GetAllDlgFiltered(1),
@@ -37,7 +37,7 @@ public partial class DlgAllView
         while (cdReader.Read())
         {
             if (style == null) continue;
-            Button button = Widget.MakeBtnDlg(dictionary: Tasks.sqlDict(cdReader: cdReader), style:style);
+            var  button = Widget.MakeBtnDlg(dictionary: Tasks.sqlDict(cdReader: cdReader), style:style);
             button.Click += BtnDlgAll_Click;
             DlgAllPanel.Children.Add(button);
         }
