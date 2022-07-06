@@ -10,22 +10,15 @@ namespace GeoTools.Views;
 public partial class DlgView
 {
     
-    public static TabItem VTabItemDlgAll = new ();
-    public static TabItem VTabItemDlgMonth = new ();
-    private List<ToggleButton> _toggleButtons = new();
+    private static TabItem VTabItemDlgAll { get; set; } = new ();
+    private static TabItem VTabItemDlgMonth { get; set; } = new ();
+    private static List<ToggleButton> _toggleButtons = new();
     
     public DlgView()
     {
         InitializeComponent();
-        VTabItemDlgAll = TabItemDlgAll;
-        VTabItemDlgMonth = TabItemDlgMonth;
-        
-        ComboBoxTypeView.Items.Insert(0, "TOUT");
-        ComboBoxTypeView.Items.Insert(1, new Separator());
-        ComboBoxTypeView.Items.Insert(2, "JOUR");
-        ComboBoxTypeView.Items.Insert(3, "SEMAINE");
-        ComboBoxTypeView.Items.Insert(4, "MOIS");
-        ComboBoxTypeView.SelectedItem = ComboBoxTypeView.Items.IndexOf("TOUT");
+        SetTabItems();
+        AddComboBoxData();
         
         Tasks.SetTabItem(VTabItemDlgAll);
         
@@ -34,6 +27,41 @@ public partial class DlgView
         //ChangeWidth();
         if (Application.Current.MainWindow != null) Application.Current.MainWindow.SizeChanged += OnSizeChanged;
     }
+    
+    //
+    // Functions
+    private void SetTabItems()
+    {
+        VTabItemDlgAll = TabItemDlgAll;
+        VTabItemDlgMonth = TabItemDlgMonth;
+    }
+
+    private void AddComboBoxData()
+    {
+        ComboBoxTypeView.Items.Insert(0, "TOUT");
+        ComboBoxTypeView.Items.Insert(1, new Separator());
+        ComboBoxTypeView.Items.Insert(2, "JOUR");
+        ComboBoxTypeView.Items.Insert(3, "SEMAINE");
+        ComboBoxTypeView.Items.Insert(4, "MOIS");
+        ComboBoxTypeView.SelectedItem = ComboBoxTypeView.Items.IndexOf("TOUT");
+    }
+    
+    //
+    // Actions
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     private void BtnDlgBackHome_OnClick(object sender, RoutedEventArgs e)
     {
