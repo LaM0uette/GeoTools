@@ -42,6 +42,7 @@ public class Widget
             HorizontalAlignment = HorizontalAlignment.Center,
             TextAlignment = TextAlignment.Center,
             Margin = new Thickness(0, 0, 3, 0),
+            Foreground = Brushes.White,
         };
 
         Separator separator = new ()

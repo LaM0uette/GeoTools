@@ -24,6 +24,9 @@ public partial class DlgView
 
         // Detecte le changement de taille de la mainWindow
         if (Application.Current.MainWindow != null) Application.Current.MainWindow.SizeChanged += OnWindowSizeChanged;
+
+        // Detecte le changement d'item du combobox
+        ComboBoxTypeView.SelectionChanged += OnViewChanged;
     }
 
     //
@@ -72,16 +75,36 @@ public partial class DlgView
     
     //
     // Event
+    private void OnViewChanged(object sender, SelectionChangedEventArgs e)
+    {
+        switch (ComboBoxTypeView.SelectedIndex)
+        {
+            case 0:
+                Tasks.SetSelectedTabItem(_vTabItemDlgAll);
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                Tasks.SetSelectedTabItem(_vTabItemDlgMonth);
+                break;
+        }
+    }
     private void OnWindowSizeChanged(object sender, SizeChangedEventArgs e)
     {
-        //var maxHeigh = Tasks.GetWindowHeight() - (ActualHeight != double.NaN ? ActualHeight : 0);
-        var maxWith = Tasks.GetWindowWidth() - DlgLegend.ActualWidth - (
-            Tasks.GetWindowState() == WindowState.Maximized
-            ? Constants.MaximazeScrollBarWith
-            : Constants.NormalScrollBarWith
-            );
+        var maxHeight = Tasks.GetWindowHeight();// - Height;
+        var maxWith = Tasks.GetWindowWidth() - 
+                      (DlgLegend.ActualWidth == 0 ?
+                          300:DlgLegend.ActualWidth)-
+                      (Tasks.GetWindowState() == WindowState.Maximized
+                        ? Constants.MaximazeScrollBarWith
+                        : Constants.NormalScrollBarWith
+                        );
 
-        //DlgViewMonth.GridMonth.MaxHeight = maxHeigh;
+        //MessageBox.Show($"{DlgLegend.ActualWidth}");
+        
+        DlgViewAll.DlgAllPanel.Height = maxHeight;
         DlgViewAll.Width = maxWith;
         DlgViewMonth.Width = maxWith;
     }

@@ -9,12 +9,14 @@
              <!-- Height="200"> -->
     
     <Grid>
-        <!-- <ScrollViewer x:Name="DlgAllScrollViewer"  -->
-        <!--               HorizontalScrollBarVisibility="Disabled"  -->
-        <!--               VerticalScrollBarVisibility="Auto"> -->
-            
-            <!-- <WrapPanel x:Name="DlgAllPanel"/> -->
-            <WrapPanel x:Name="DlgAllPanel" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True"/>
-        <!-- </ScrollViewer> -->
+        <Border BorderThickness="1" BorderBrush="Aqua">
+            <!-- <ScrollViewer x:Name="DlgAllScrollViewer" -->
+            <!--               HorizontalScrollBarVisibility="Disabled" -->
+            <!--               VerticalScrollBarVisibility="Auto"> -->
+                
+                <!-- <WrapPanel x:Name="DlgAllPanel"/> -->
+                <WrapPanel x:Name="DlgAllPanel" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True"/>
+            <!-- </ScrollViewer> -->
+        </Border>
     </Grid>
 </UserControl>
