@@ -85,19 +85,6 @@ public class Widget
             FontSize = fontSize
         };
     }
-    // private static Label MakeLabel(string content)
-    // {
-    //     return new Label()
-    //     {
-    //         Content = content,
-    //         Background = Brushes.Transparent,
-    //         HorizontalAlignment = HorizontalAlignment.Center,
-    //         VerticalAlignment = VerticalAlignment.Center,
-    //         FontSize = Constants.LabelFontSize,
-    //         HorizontalContentAlignment = HorizontalAlignment.Center,
-    //         VerticalContentAlignment = VerticalAlignment.Center,
-    //     };
-    // }
     private static Border MakeBorderBtn()
     {
         return new Border()

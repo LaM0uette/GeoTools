@@ -1,40 +1,64 @@
-﻿using Npgsql;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
+using Npgsql;
 using GeoTools.Configs;
 
 namespace GeoTools.Utils;
 
 public static class Sql
 {
-    private static NpgsqlConnection _connection = Connect();
-    private static NpgsqlTransaction _transaction = _connection.BeginTransaction();
-    
+    public static NpgsqlConnection? Connection { get; } = PgConnect();
+    //private static NpgsqlConnection Connection = Connect();
+    private static NpgsqlTransaction _transaction = Connection.BeginTransaction();
+
     //
     // INITIALISATIONS
-    private static NpgsqlConnection Connect()
+
+    private static NpgsqlConnection PgConnect()
+    {
+        NpgsqlConnection connect = new(ConnectString());
+        connect.Open();
+        return connect;
+    }
+
+    public static async Task PgConfig()
+    {
+        await using var conn = new NpgsqlConnection(ConnectString());
+        await conn.OpenAsync();
+        conn.Notification += ConnOnNotification;
+        await using var cmd = new NpgsqlCommand("LISTEN datachange;", conn);
+        cmd.ExecuteNonQuery();
+        while (true)
+            await conn.WaitAsync();
+    }
+
+    private static void ConnOnNotification(object sender, NpgsqlNotificationEventArgs e)
+    {
+        MessageBox.Show($"{e.Payload}");
+    }
+
+    private static string ConnectString()
     {
         var connexionString = 
             @$"HOST={Login.PgHost};
                Username={Login.PgUser};
                Password={Login.PgPassword};
                Database={Login.PgDatabase}";
-
-        NpgsqlConnection connect = new(@$"HOST={Login.PgHost};
-               Username={Login.PgUser};
-               Password={Login.PgPassword};
-               Database={Login.PgDatabase}");
-        connect.Open();
-        return connect;
+        return connexionString;
     }
     
+
     private static void Exec(string req)
     {
-        new NpgsqlCommand(req, _connection).ExecuteNonQuery();
+        new NpgsqlCommand(req, Connection).ExecuteNonQuery();
         Commit();
     }
     
     private static NpgsqlDataReader GetSqlData(string req)
     {
-        var command = new NpgsqlCommand(req, _connection);
+        var command = new NpgsqlCommand(req, Connection);
         return command.ExecuteReader();
     }
     
@@ -45,7 +69,7 @@ public static class Sql
     
     public static void Close()
     {
-        _connection.Close();
+        Connection.Close();
     }
     
     //

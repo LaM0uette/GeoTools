@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Data;
+using System.Threading.Tasks;
+using System.Windows;
 using GeoTools.Model;
 using GeoTools.Utils;
+using Npgsql;
 
 namespace GeoTools
 {
@@ -10,6 +14,7 @@ namespace GeoTools
 
         public MainWindow()
         {
+            Sql.PgConfig();
             SetUserParameters();
         }
         
