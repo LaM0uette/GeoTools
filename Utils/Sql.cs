@@ -82,9 +82,18 @@ public static class Sql
 
     private static void PgConnectionIsOpen()
     {
+        // try
+        // {
+        //     GetAllDlg();
+        // }
+        // catch (Exception e)
+        // {
+        //     Console.WriteLine(e);
+        //     throw;
+        // }
         try
         {
-            GetAllDlg();
+            Console.WriteLine("kl;j,hgbfvdcs");
         }
         catch (Exception e)
         {
