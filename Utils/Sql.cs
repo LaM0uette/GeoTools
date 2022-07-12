@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -9,7 +10,7 @@ namespace GeoTools.Utils;
 
 public static class Sql
 {
-    public static NpgsqlConnection? Connection { get; } = PgConnect();
+    public static NpgsqlConnection? Connection { get; set; }// = PgConnect();
     private static NpgsqlTransaction _transaction = Connection.BeginTransaction();
 
     //
@@ -82,22 +83,18 @@ public static class Sql
 
     private static void PgConnectionIsOpen()
     {
-        // try
-        // {
-        //     GetAllDlg();
-        // }
-        // catch (Exception e)
-        // {
-        //     Console.WriteLine(e);
-        //     throw;
-        // }
         try
         {
-            Console.WriteLine("kl;j,hgbfvdcs");
+            var command = new NpgsqlCommand("SELECT * FROM \"GeoTools\".t_logs", Connection);
+            var re = command.ExecuteReader();
+            Console.WriteLine($"{re}");
+            re.Close();
         }
-        catch (Exception e)
+        catch (NpgsqlException e)
         {
             Console.WriteLine(e);
+            Console.WriteLine(",jngdqfgfdfbfcxgbhxgdtrfgdc,dtr(excdcgvn");
+            Connection = PgConnect();
             throw;
         }
     }
@@ -149,5 +146,4 @@ public static class Sql
                WHERE us_guid='{guid}'";
         
         return GetSqlData(req);
-    }
-}
+    }

@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using GeoTools.Model;
 using GeoTools.Utils;
-using Npgsql;
 
 namespace GeoTools
 {
