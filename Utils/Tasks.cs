@@ -11,20 +11,17 @@ namespace GeoTools.Utils;
 
 public static class Tasks
 {
-
     private static BrushConverter _converter = new();
 
+    public static Brush HexBrush(string hexColor) => (Brush)_converter.ConvertFromString(hexColor)!;
+    
     public static WindowState GetWindowState() => Application.Current.MainWindow!.WindowState;
-
-    public static Brush HexBrush(string hexColor)
-    {
-        return (Brush)_converter.ConvertFromString(hexColor)!;
-    }
 
     public static byte DaysInMonth(int year, int month)
     {
-        return (byte)DateTime.DaysInMonth(year: year, month: month);
+        return (byte)DateTime.DaysInMonth(year,month);
     }
+    
     public static byte WeekInMonth(int year, int month)
     {
         DateTime date = new DateTime(year, month, 1);
