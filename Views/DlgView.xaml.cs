@@ -66,14 +66,14 @@ public partial class DlgView
         var btnName = ((ToggleButton) sender).Name;
 
         DlgAllView.InstanceDlgAllView.CreateBtnDlgAll(btnName);
-        DlgMonthView.InstanceDlgMonthView?.CreateBtnDlgMonth(year:2022, month:6, mode:btnName);
+        DlgMonthView.InstanceDlgMonthView?.CreateBtnDlgMonth(year: 2022, month: 6, mode: btnName);
 
         foreach (var btn in _toggleButtons)
         {
             btn.IsChecked = btnName == btn.Name;
         }
     }
-    
+
     //
     // Event
     private void OnViewChanged(object sender, SelectionChangedEventArgs e)
@@ -92,21 +92,20 @@ public partial class DlgView
                 break;
         }
     }
+
     private void OnWindowSizeChanged(object sender, SizeChangedEventArgs e)
     {
-        var maxHeight = Tasks.GetWindowHeight();// - Height;
-        var maxWith = Tasks.GetWindowWidth() - 
-                      (DlgLegend.ActualWidth == 0 ?
-                          300:DlgLegend.ActualWidth)-
-                      (Tasks.GetWindowState() == WindowState.Maximized
-                        ? Constants.MaximazeScrollBarWith
-                        : Constants.NormalScrollBarWith
-                        );
+        static double GetWindowHeight() => Application.Current.MainWindow!.ActualHeight;
+        static double GetWindowWidth() => Application.Current.MainWindow!.ActualWidth;
 
-        //MessageBox.Show($"{DlgLegend.ActualWidth}");
-        
-        DlgViewAll.DlgAllPanel.Height = maxHeight;
-        DlgViewAll.Width = maxWith;
-        DlgViewMonth.Width = maxWith;
+        var maxWindowHeight = GetWindowHeight();
+        var scrollSize = Tasks.GetWindowState() == WindowState.Maximized
+            ? Constants.MaxScrollBarWith
+            : Constants.ScrollBarWith;
+        var maxWindowWith = GetWindowWidth() - 300 - scrollSize;
+
+        DlgViewAll.DlgAllPanel.Height = maxWindowHeight;
+        DlgViewAll.Width = maxWindowWith;
+        DlgViewMonth.Width = maxWindowWith;
     }
 }

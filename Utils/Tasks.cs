@@ -12,25 +12,13 @@ namespace GeoTools.Utils;
 public static class Tasks
 {
 
-    private static BrushConverter converter = new();
-    
-    public static double GetWindowHeight()
-    {
-        return Application.Current.MainWindow!.ActualHeight;
-    }
-    public static double GetWindowWidth()
-    {
-        return Application.Current.MainWindow!.ActualWidth;
-    }
+    private static BrushConverter _converter = new();
 
-    public static WindowState GetWindowState()
-    {
-        return Application.Current.MainWindow!.WindowState;
-    }
+    public static WindowState GetWindowState() => Application.Current.MainWindow!.WindowState;
 
     public static Brush HexBrush(string hexColor)
     {
-        return (Brush)converter.ConvertFromString(hexColor)!;
+        return (Brush)_converter.ConvertFromString(hexColor)!;
     }
 
     public static byte DaysInMonth(int year, int month)

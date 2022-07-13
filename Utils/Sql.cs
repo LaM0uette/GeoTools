@@ -53,8 +53,7 @@ public static class Sql
             //TODO: A FAIRE le close puis re co du thread de notif - MainWindow.PgSql = PgNotifierConnect();
         }
     }
-
-    // TODO: à renommer
+    
     private static void EventOnNotification(object sender, NpgsqlNotificationEventArgs evt)
     {
         MessageBox.Show($"{evt.Payload}");

@@ -17,6 +17,6 @@ public static class Constants
     //...
     // Window
     public const byte MaximizeMarge = 15;
-    public const byte NormalScrollBarWith = 10;
-    public const byte MaximazeScrollBarWith = NormalScrollBarWith + MaximizeMarge;
+    public const byte ScrollBarWith = 10;
+    public const byte MaxScrollBarWith = ScrollBarWith + MaximizeMarge;
 }
