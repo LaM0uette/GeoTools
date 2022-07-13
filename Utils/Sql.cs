@@ -43,13 +43,6 @@ public static class Sql
         Commit();
     }
 
-    private static NpgsqlDataReader GetSqlDataOld(string req)
-    {
-        PgConnectionIsOpen();
-        var command = new NpgsqlCommand(req, PgConnection);
-        return command.ExecuteReader();
-    }
-
     private static void PgConnectionIsOpen()
     {
         try
@@ -96,36 +89,4 @@ public static class Sql
         var command = new NpgsqlCommand(req, PgConnection);
         return command.ExecuteReader();
     }
-}
-
-//
-// REQUÊTES SQL
-public static class Req
-{
-    public static string AllDlg() =>
-        @"SELECT * 
-          FROM ""GeoTools"".""v_dlg""";
-
-    public static string AllDlgFiltered(int id) =>
-        @$"SELECT * 
-           FROM ""GeoTools"".""v_dlg"" 
-           WHERE id_etat={id}";
-
-    public static string DlgByDate(string date) => 
-        @$"SELECT * 
-           FROM ""GeoTools"".get_dlg_by_date('{date}')";
-
-    public static string DlgByWeek(byte week, int year) =>
-        @$"SELECT * 
-           FROM ""GeoTools"".get_dlg_by_weeks({week}, {year})";
-    
-    public static string DlgFilteredByWeek(byte week, int year, int id) =>
-        @$"SELECT * 
-           FROM ""GeoTools"".get_dlg_by_weeks({week}, {year})
-           WHERE id_etat = {id}";
-    
-    public static string UserInformation(string guid) =>
-        @$"SELECT * 
-           FROM ""GeoTools"".""t_users""
-           WHERE us_guid='{guid}'";
 }
