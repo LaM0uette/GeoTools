@@ -10,7 +10,7 @@ namespace GeoTools
     public partial class MainWindow
     {
         public static User UserSession { get; } = new();
-        public static Task PgSql = Sql.PgConfig();
+        public static Task PgSql { get; set; } = Sql.PgConfig();
 
         public MainWindow()
         {
@@ -19,7 +19,7 @@ namespace GeoTools
         
         private static void SetUserParameters()
         {
-            var cdReader = Sql.GetUserInformation(guid: Tasks.GetUserSession());
+            var cdReader = Sql.GetUserInformation(Tasks.GetGUID());
             cdReader.Read();
             
             UserSession.Refcode1 = int.Parse($"{cdReader["us_refcode1"]}");

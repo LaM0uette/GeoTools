@@ -5,7 +5,7 @@ namespace GeoTools.Model;
 public class User
 {
 
-    public string Guid { get; set; } = Tasks.GetUserSession();
+    public string Guid { get; set; } = Tasks.GetGUID();
     
     public int Refcode1 { get; set; }
     

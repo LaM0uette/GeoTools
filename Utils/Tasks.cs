@@ -76,7 +76,7 @@ public static class Tasks
         return char.ToUpper(s[0]) + s[1..];
     }
     
-    public static string GetUserSession()
+    public static string GetGUID()
     {
         return Environment.UserName;
     }
