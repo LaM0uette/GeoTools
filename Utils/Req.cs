@@ -2,6 +2,19 @@
 
 public static class Req
 {
+    public static string AddDlg(
+        string proj, 
+        string refcode3, 
+        string dateInit, 
+        string phase, 
+        string typeExport, 
+        int livraison, 
+        int version) =>
+        
+        @$"SELECT * 
+           FROM ""GeoTools"".""add_dlg""(
+               '{proj}', '{refcode3}', '{dateInit}', '{phase}', '{typeExport}', {livraison}, {version})";
+    
     public static string AllDlg() =>
         @"SELECT * 
           FROM ""GeoTools"".""v_dlg""";

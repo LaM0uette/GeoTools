@@ -36,13 +36,6 @@ public static class Sql
 
     //
     // FONCTIONS
-    private static void Exec(string req)
-    {
-        PgConnectionIsOpen();
-        new NpgsqlCommand(req, PgConnection).ExecuteNonQuery();
-        Commit();
-    }
-
     private static void PgConnectionIsOpen()
     {
         try
@@ -66,23 +59,24 @@ public static class Sql
     }
 
     //
-    // REQUÊTES EXEC
-    public static void AddDlg(string proj, string refcode3, string dateInit, string phase, string typeExport,
-        int livraison, int version)
-    {
-        var req =
-            @$"SELECT * 
-               FROM ""GeoTools"".""add_dlg""('{proj}', '{refcode3}', '{dateInit}', '{phase}', '{typeExport}', {livraison}, {version})";
+    // DELEGATE
+    public delegate void SqlDelegate(string req);
 
-        Exec(req);
-    }
-
-    //
-    // REQUÊTES GET
     public delegate NpgsqlDataReader SqlDataDelegate(string req);
+
+    public static readonly SqlDelegate Call = ExecSql;
 
     public static readonly SqlDataDelegate Get = GetSqlData;
 
+    //
+    // REQUÊTES
+    private static void ExecSql(string req)
+    {
+        PgConnectionIsOpen();
+        new NpgsqlCommand(req, PgConnection).ExecuteNonQuery();
+        Commit();
+    }
+    
     private static NpgsqlDataReader GetSqlData(string req)
     {
         PgConnectionIsOpen();
