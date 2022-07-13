@@ -29,18 +29,13 @@ public static class Login
         }
     }
 
-    private const string PgHost = "BORDEAUX04";
-    private const string PgUser = "postgres";
-    private const string PgPassword = "INEO_Infracom_33";
-    private const string PgDatabase = "sig";
-
     public static SqlStruct GeoTools = new(
-        host: PgHost,
-        user: PgUser,
-        password: PgPassword,
-        database: PgDatabase,
+        host: "BORDEAUX04",
+        user: "postgres",
+        password: "INEO_Infracom_33",
+        database: "sig",
         appName: "GeoTools"
     );
 
-    public static SqlStruct GeoToolsNotif = GeoTools with { AppName = "GeoToolsNotif"};
+    public static SqlStruct GeoToolsNotif = GeoTools with { AppName = "GeoToolsNotif" };
 }
