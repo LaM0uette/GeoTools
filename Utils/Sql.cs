@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Data;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using Npgsql;
@@ -33,9 +31,15 @@ public static class Sql
             await conn.WaitAsync();
     }
 
+    private static void Commit() => PgTransaction.Commit();
+    public static void Close() => PgConnection?.Close();
+    
+    //
+    // FONCTIONS
     private static void Exec(string req)
     {
         PgConnectionIsOpen();
+        
         new NpgsqlCommand(req, PgConnection).ExecuteNonQuery();
         Commit();
     }
@@ -43,33 +47,11 @@ public static class Sql
     private static NpgsqlDataReader GetSqlData(string req)
     {
         PgConnectionIsOpen();
+        
         var command = new NpgsqlCommand(req, PgConnection);
         return command.ExecuteReader();
     }
     
-    private static void Commit()
-    {
-        PgTransaction.Commit();
-    }
-    
-    public static void Close()
-    {
-        PgConnection?.Close();
-    }
-    
-    //
-    // FONCTIONS
-    //TODO: à renommer
-    private static void ConnOnNotification(object sender, NpgsqlNotificationEventArgs e)
-    {
-        MessageBox.Show($"{e.Payload}");
-    }
-    
-    public static void AddDlg(string proj, string refcode3, string dateInit, string phase, string typeExport, int livraison, int version)
-    {
-        Exec(req:$"SELECT * FROM \"GeoTools\".add_dlg('{proj}', '{refcode3}', '{dateInit}', '{phase}', '{typeExport}', {livraison}, {version})");
-    }
-
     private static void PgConnectionIsOpen()
     {
         try
@@ -85,6 +67,23 @@ public static class Sql
             //MainWindow.PgSql = PgConfig();
         }
     }
+    
+    // TODO: à renommer
+    private static void ConnOnNotification(object sender, NpgsqlNotificationEventArgs evt)
+    {
+        MessageBox.Show($"{evt.Payload}");
+    }
+    
+    public static void AddDlg(string proj, string refcode3, string dateInit, string phase, string typeExport, int livraison, int version)
+    {
+        var req = 
+            @$"SELECT * 
+               FROM ""GeoTools"".""add_dlg""('{proj}', '{refcode3}', '{dateInit}', '{phase}', '{typeExport}', {livraison}, {version})";
+        
+        Exec(req);
+    }
+
+    
 
     //
     // REQUÊTES
