@@ -19,7 +19,7 @@ namespace GeoTools
         
         private static void SetUserParameters()
         {
-            var cdReader = Sql.GetUserInformation(Tasks.GetGUID());
+            var cdReader = Sql.Get(Req.UserInformation(Tasks.GetGUID()));
             cdReader.Read();
             
             UserSession.Refcode1 = int.Parse($"{cdReader["us_refcode1"]}");

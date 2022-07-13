@@ -74,7 +74,8 @@ public static class Sql
 
     //
     // REQUÊTES EXEC
-    public static void AddDlg(string proj, string refcode3, string dateInit, string phase, string typeExport, int livraison, int version)
+    public static void AddDlg(string proj, string refcode3, string dateInit, string phase, string typeExport,
+        int livraison, int version)
     {
         var req =
             @$"SELECT * 
@@ -95,75 +96,34 @@ public static class Sql
         var command = new NpgsqlCommand(req, PgConnection);
         return command.ExecuteReader();
     }
-
-    
-    
-    
-    
-    public static NpgsqlDataReader GetAllDlg()
-    {
-        const string req =
-            @"SELECT * 
-               FROM ""GeoTools"".""v_dlg""";
-
-        return GetSqlDataOld(req);
-    }
-
-    public static NpgsqlDataReader GetAllDlgFiltered(int id)
-    {
-        var req =
-            @$"SELECT * 
-               FROM ""GeoTools"".""v_dlg""
-               WHERE id_etat={id}";
-
-        return GetSqlDataOld(req);
-    }
-
-    public static NpgsqlDataReader GetDlgByDate(string date)
-    {
-        var req =
-            @$"SELECT * 
-               FROM ""GeoTools"".get_dlg_by_date('{date}')";
-
-        return GetSqlDataOld(req);
-    }
-
-    public static NpgsqlDataReader GetDlgByWeek(byte week, int year)
-    {
-        var req =
-            @$"SELECT * 
-               FROM ""GeoTools"".get_dlg_by_weeks({week}, {year})";
-
-        return GetSqlDataOld(req);
-    }
-
-    public static NpgsqlDataReader GetDlgFilteredByWeek(byte week, int year, int id)
-    {
-        var req =
-            @$"SELECT * 
-               FROM ""GeoTools"".get_dlg_by_weeks({week}, {year})
-               WHERE id_etat = {id}";
-
-        return GetSqlDataOld(req);
-    }
-
-    public static NpgsqlDataReader GetUserInformation(string guid)
-    {
-        var req =
-            @$"SELECT * 
-               FROM ""GeoTools"".""t_users""
-               WHERE us_guid='{guid}'";
-
-        return GetSqlDataOld(req);
-    }
 }
 
 public static class Req
 {
-    public static string AllDlg() => @"SELECT * FROM ""GeoTools"".""v_dlg""";
-    
+    public static string AllDlg() =>
+        @"SELECT * 
+          FROM ""GeoTools"".""v_dlg""";
+
     public static string AllDlgFiltered(int id) =>
         @$"SELECT * 
            FROM ""GeoTools"".""v_dlg"" 
            WHERE id_etat={id}";
+
+    public static string DlgByDate(string date) => 
+        @$"SELECT * 
+           FROM ""GeoTools"".get_dlg_by_date('{date}')";
+
+    public static string DlgByWeek(byte week, int year) =>
+        @$"SELECT * 
+           FROM ""GeoTools"".get_dlg_by_weeks({week}, {year})";
+    
+    public static string DlgFilteredByWeek(byte week, int year, int id) =>
+        @$"SELECT * 
+           FROM ""GeoTools"".get_dlg_by_weeks({week}, {year})
+           WHERE id_etat = {id}";
+    
+    public static string UserInformation(string guid) =>
+        @$"SELECT * 
+           FROM ""GeoTools"".""t_users""
+           WHERE us_guid='{guid}'";
 }

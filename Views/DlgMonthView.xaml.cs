@@ -162,10 +162,10 @@ public partial class DlgMonthView : UserControl
     {
         var cdReader = mode switch
         {
-            "TogBtnDlgAll" => Sql.GetDlgByWeek(week: week, year:year),
-            "TogBtnDlgAFaire" => Sql.GetDlgFilteredByWeek(week, year, 1),
-            "TogBtnDlgFait" => Sql.GetDlgFilteredByWeek(week, year, 2),
-            _ => Sql.GetDlgByWeek(week: week, year:year)
+            "TogBtnDlgAll" => Sql.Get(Req.DlgByWeek(week, year)),
+            "TogBtnDlgAFaire" => Sql.Get(Req.DlgFilteredByWeek(week, year, 1)),
+            "TogBtnDlgFait" => Sql.Get(Req.DlgFilteredByWeek(week, year, 2)),
+            _ => Sql.Get(Req.DlgByWeek(week, year))
         };
         
         Weeks weeks = new();
