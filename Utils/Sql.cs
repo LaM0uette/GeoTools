@@ -33,25 +33,23 @@ public static class Sql
 
     private static void Commit() => PgTransaction.Commit();
     public static void Close() => PgConnection?.Close();
-    
+
     //
     // FONCTIONS
     private static void Exec(string req)
     {
         PgConnectionIsOpen();
-        
         new NpgsqlCommand(req, PgConnection).ExecuteNonQuery();
         Commit();
     }
-    
-    private static NpgsqlDataReader GetSqlData(string req)
+
+    private static NpgsqlDataReader GetSqlDataOld(string req)
     {
         PgConnectionIsOpen();
-        
         var command = new NpgsqlCommand(req, PgConnection);
         return command.ExecuteReader();
     }
-    
+
     private static void PgConnectionIsOpen()
     {
         try
@@ -67,79 +65,105 @@ public static class Sql
             //MainWindow.PgSql = PgConfig();
         }
     }
-    
+
     // TODO: à renommer
     private static void ConnOnNotification(object sender, NpgsqlNotificationEventArgs evt)
     {
         MessageBox.Show($"{evt.Payload}");
     }
-    
+
+    //
+    // REQUÊTES EXEC
     public static void AddDlg(string proj, string refcode3, string dateInit, string phase, string typeExport, int livraison, int version)
     {
-        var req = 
+        var req =
             @$"SELECT * 
                FROM ""GeoTools"".""add_dlg""('{proj}', '{refcode3}', '{dateInit}', '{phase}', '{typeExport}', {livraison}, {version})";
-        
+
         Exec(req);
     }
 
-    
-
     //
-    // REQUÊTES
+    // REQUÊTES GET
+    public delegate NpgsqlDataReader SqlDataDelegate(string req);
+
+    public static readonly SqlDataDelegate Get = GetSqlData;
+
+    private static NpgsqlDataReader GetSqlData(string req)
+    {
+        PgConnectionIsOpen();
+        var command = new NpgsqlCommand(req, PgConnection);
+        return command.ExecuteReader();
+    }
+
+    
+    
+    
+    
     public static NpgsqlDataReader GetAllDlg()
     {
-        const string req = 
+        const string req =
             @"SELECT * 
                FROM ""GeoTools"".""v_dlg""";
-        
-        return GetSqlData(req);
+
+        return GetSqlDataOld(req);
     }
-    
+
     public static NpgsqlDataReader GetAllDlgFiltered(int id)
     {
-        var req = 
+        var req =
             @$"SELECT * 
                FROM ""GeoTools"".""v_dlg""
                WHERE id_etat={id}";
-        
-        return GetSqlData(req);
+
+        return GetSqlDataOld(req);
     }
 
     public static NpgsqlDataReader GetDlgByDate(string date)
     {
-        var req = 
+        var req =
             @$"SELECT * 
                FROM ""GeoTools"".get_dlg_by_date('{date}')";
-        
-        return GetSqlData(req);
+
+        return GetSqlDataOld(req);
     }
-    
+
     public static NpgsqlDataReader GetDlgByWeek(byte week, int year)
     {
-        var req = 
+        var req =
             @$"SELECT * 
                FROM ""GeoTools"".get_dlg_by_weeks({week}, {year})";
-        
-        return GetSqlData(req);
+
+        return GetSqlDataOld(req);
     }
+
     public static NpgsqlDataReader GetDlgFilteredByWeek(byte week, int year, int id)
     {
-        var req = 
+        var req =
             @$"SELECT * 
                FROM ""GeoTools"".get_dlg_by_weeks({week}, {year})
                WHERE id_etat = {id}";
-        
-        return GetSqlData(req);
+
+        return GetSqlDataOld(req);
     }
-    
+
     public static NpgsqlDataReader GetUserInformation(string guid)
     {
-        var req = 
+        var req =
             @$"SELECT * 
                FROM ""GeoTools"".""t_users""
                WHERE us_guid='{guid}'";
-        
-        return GetSqlData(req);
+
+        return GetSqlDataOld(req);
     }
+}
+
+public static class Req
+{
+    public static string AllDlg() => @"SELECT * FROM ""GeoTools"".""v_dlg""";
+    
+    public static string AllDlgFiltered(int id) =>
+        @$"SELECT * 
+           FROM ""GeoTools"".""v_dlg"" 
+           WHERE id_etat={id}";
 }

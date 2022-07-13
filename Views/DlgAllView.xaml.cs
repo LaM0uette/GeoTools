@@ -26,10 +26,10 @@ public partial class DlgAllView
 
         var cdReader = mode switch
         {
-            "TogBtnDlgAll" => Sql.GetAllDlg(),
-            "TogBtnDlgAFaire" => Sql.GetAllDlgFiltered(1),
-            "TogBtnDlgFait" => Sql.GetAllDlgFiltered(2),
-            _ => Sql.GetAllDlg()
+            "TogBtnDlgAll" => Sql.Get(Req.AllDlg()),
+            "TogBtnDlgAFaire" => Sql.Get(Req.AllDlgFiltered(1)), 
+            "TogBtnDlgFait" => Sql.Get(Req.AllDlgFiltered(2)),
+            _ => Sql.Get(Req.AllDlg())
         };
 
         DlgAllPanel.Children.Clear();
