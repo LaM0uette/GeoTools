@@ -10,32 +10,21 @@ namespace GeoTools.Utils;
 
 public static class Sql
 {
-    public static NpgsqlConnection? Connection { get; set; } = PgConnect();
-    private static NpgsqlTransaction _transaction = Connection.BeginTransaction();
+    private static NpgsqlConnection? PgConnection { get; set; } = PgConnect();
+    private static NpgsqlTransaction PgTransaction { get; } = PgConnection.BeginTransaction();
 
     //
     // INITIALISATIONS
-    private static string ConnectString(string name)
-    {
-        var connexionString = 
-            @$"HOST={Login.PgHost};
-               Username={Login.PgUser};
-               Password={Login.PgPassword};
-               Database={Login.PgDatabase};
-               ApplicationName={name}";
-        return connexionString;
-    }
-    
     private static NpgsqlConnection PgConnect()
     {
-        NpgsqlConnection connect = new(ConnectString("GeoTools"));
+        var connect = new NpgsqlConnection(Login.GeoTools.ToString());
         connect.Open();
         return connect;
     }
 
     public static async Task PgConfig()
     {
-        await using var conn = new NpgsqlConnection(ConnectString("Geotools_Notif"));
+        await using var conn = new NpgsqlConnection(Login.GeoToolsNotif.ToString());
         await conn.OpenAsync();
         conn.Notification += ConnOnNotification;
         await using var cmd = new NpgsqlCommand("LISTEN datachange;", conn);
@@ -47,25 +36,25 @@ public static class Sql
     private static void Exec(string req)
     {
         PgConnectionIsOpen();
-        new NpgsqlCommand(req, Connection).ExecuteNonQuery();
+        new NpgsqlCommand(req, PgConnection).ExecuteNonQuery();
         Commit();
     }
     
     private static NpgsqlDataReader GetSqlData(string req)
     {
         PgConnectionIsOpen();
-        var command = new NpgsqlCommand(req, Connection);
+        var command = new NpgsqlCommand(req, PgConnection);
         return command.ExecuteReader();
     }
     
     private static void Commit()
     {
-        _transaction.Commit();
+        PgTransaction.Commit();
     }
     
     public static void Close()
     {
-        Connection?.Close();
+        PgConnection?.Close();
     }
     
     //
@@ -85,14 +74,14 @@ public static class Sql
     {
         try
         {
-            var command = new NpgsqlCommand("SELECT * FROM \"GeoTools\".t_logs", Connection);
+            var command = new NpgsqlCommand("SELECT * FROM \"GeoTools\".t_logs", PgConnection);
             var re = command.ExecuteReader();
             re.Close();
         }
         catch (NpgsqlException)
         {
-            Console.WriteLine("Connection close connard"); // :) todo: à Renommer + Relancer la fonction notif
-            Connection = PgConnect();
+            Console.WriteLine("PgConnection close connard"); // :) todo: à Renommer + Relancer la fonction notif
+            PgConnection = PgConnect();
             //MainWindow.PgSql = PgConfig();
         }
     }

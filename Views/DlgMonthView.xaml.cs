@@ -127,7 +127,7 @@ public partial class DlgMonthView : UserControl
         {
             Content = content,
             Width = Constants.LabelWidthSize,
-            Height = Constants.LabelHeighSize,
+            Height = Constants.LabelHeightSize,
             FontSize = Constants.LabelFontSize,
             Foreground = foreground,
             HorizontalAlignment = HorizontalAlignment.Center,

@@ -92,7 +92,7 @@ public class Widget
             CornerRadius = new CornerRadius(5),
             Background = Brushes.White,
             BorderBrush = Brushes.White,
-            Height = Constants.LabelHeighSize,
+            Height = Constants.LabelHeightSize,
             Width = Constants.LabelWidthSize,
             Margin = new Thickness(5, 0, 5, 0),
             HorizontalAlignment = HorizontalAlignment.Right,
