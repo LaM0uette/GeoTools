@@ -20,15 +20,17 @@ public static class Sql
         return connect;
     }
 
-    public static async Task PgConfig()
+    public static async Task PgNotifierConnect()
     {
         await using var conn = new NpgsqlConnection(Login.GeoToolsNotif.ToString());
         await conn.OpenAsync();
-        conn.Notification += ConnOnNotification;
+        conn.Notification += EventOnNotification;
+        
         await using var cmd = new NpgsqlCommand("LISTEN datachange;", conn);
         cmd.ExecuteNonQuery();
-        while (true)
-            await conn.WaitAsync();
+        
+        while (true) await conn.WaitAsync();
+        // ReSharper disable once FunctionNeverReturns
     }
 
     private static void Commit() => PgTransaction.Commit();
@@ -36,7 +38,7 @@ public static class Sql
 
     //
     // FONCTIONS
-    private static void PgConnectionIsOpen()
+    private static void CheckPgConnection()
     {
         try
         {
@@ -46,14 +48,14 @@ public static class Sql
         }
         catch (NpgsqlException)
         {
-            Console.WriteLine("PgConnection close connard"); // :) todo: à Renommer + Relancer la fonction notif
+            Console.WriteLine("Re connection à la base OK");
             PgConnection = PgConnect();
-            //MainWindow.PgSql = PgConfig();
+            //TODO: A FAIRE le close puis re co du thread de notif - MainWindow.PgSql = PgNotifierConnect();
         }
     }
 
     // TODO: à renommer
-    private static void ConnOnNotification(object sender, NpgsqlNotificationEventArgs evt)
+    private static void EventOnNotification(object sender, NpgsqlNotificationEventArgs evt)
     {
         MessageBox.Show($"{evt.Payload}");
     }
@@ -72,14 +74,14 @@ public static class Sql
     // REQUÊTES
     private static void ExecSql(string req)
     {
-        PgConnectionIsOpen();
+        CheckPgConnection();
         new NpgsqlCommand(req, PgConnection).ExecuteNonQuery();
         Commit();
     }
     
     private static NpgsqlDataReader GetSqlData(string req)
     {
-        PgConnectionIsOpen();
+        CheckPgConnection();
         var command = new NpgsqlCommand(req, PgConnection);
         return command.ExecuteReader();
     }
