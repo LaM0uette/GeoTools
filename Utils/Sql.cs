@@ -98,6 +98,8 @@ public static class Sql
     }
 }
 
+//
+// REQUÊTES SQL
 public static class Req
 {
     public static string AllDlg() =>
