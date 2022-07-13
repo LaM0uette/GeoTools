@@ -12,9 +12,9 @@ public class Widget
     {
         Thickness margin = new (2);
 
-        TextBlock txtZoMarche = makeTextBlock(content: $"RIP{dictionary["refcode1"]}", fontSize:9);
-        TextBlock txtDlInitDate = makeTextBlock(content: $"{DateTime.Parse(dictionary["date_initial"].ToString()).ToString("MM/dd/yyyy")}", fontSize:9);
-        TextBlock txtExEtNom = makeTextBlock(content: $"{dictionary["nom_etat"]}", fontSize:9);
+        var txtZoMarche = makeTextBlock(content: $"RIP{dictionary["refcode1"]}", fontSize:9);
+        var txtDlInitDate = makeTextBlock(content: $"{DateTime.Parse(dictionary["date_initial"].ToString()!):MM/dd/yyyy}", fontSize:9);
+        var txtExEtNom = makeTextBlock(content: $"{dictionary["nom_etat"]}", fontSize:9);
 
         Border bdZoMarche = MakeBorderTxt(margin: margin);
         bdZoMarche.Child = txtZoMarche;
@@ -35,7 +35,7 @@ public class Widget
         
         TextBlock dlgInfo = new TextBlock()
         {
-            Text = dictionary["dlg_infos"].ToString().Replace("|", "\n"),
+            Text = dictionary["dlg_infos"].ToString()!.Replace("|", "\n"),
             FontSize = 11,
             TextWrapping = TextWrapping.Wrap,
             VerticalAlignment = VerticalAlignment.Center,
@@ -70,7 +70,7 @@ public class Widget
                       $"ID : {dictionary["id"]}\n" +
                       $"admin={MainWindow.UserSession.Admin}\n" +
                       $"prenom={MainWindow.UserSession.Prenom}", 
-            Background = Tasks.HexBrush(hexColor: dictionary["couleur_etat"].ToString())
+            Background = Tasks.HexBrush(hexColor: dictionary["couleur_etat"].ToString()!)
         };
     }
 

@@ -140,7 +140,7 @@
                     <TabItem x:Name="TabItemDlgMonth"
                              Visibility="Collapsed">
 
-                        <views:DlgViewMonth x:Name="DlgViewMonth"
+                        <views:DlgMonthView x:Name="DlgViewMonth"
                                             HorizontalAlignment="Left"
                                             VerticalAlignment="Center" />
 

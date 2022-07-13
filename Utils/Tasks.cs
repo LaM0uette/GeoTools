@@ -9,28 +9,28 @@ using Npgsql;
 
 namespace GeoTools.Utils;
 
-public class Tasks
+public static class Tasks
 {
 
     private static BrushConverter converter = new();
     
     public static double GetWindowHeight()
     {
-        return Application.Current.MainWindow.ActualHeight;
+        return Application.Current.MainWindow!.ActualHeight;
     }
     public static double GetWindowWidth()
     {
-        return Application.Current.MainWindow.ActualWidth;
+        return Application.Current.MainWindow!.ActualWidth;
     }
 
     public static WindowState GetWindowState()
     {
-        return Application.Current.MainWindow.WindowState;
+        return Application.Current.MainWindow!.WindowState;
     }
 
     public static Brush HexBrush(string hexColor)
     {
-        return (Brush)converter.ConvertFromString(hexColor);
+        return (Brush)converter.ConvertFromString(hexColor)!;
     }
 
     public static byte DaysInMonth(int year, int month)
@@ -49,10 +49,10 @@ public class Tasks
 
     }
 
-    public static Dictionary<string, object> sqlDict(NpgsqlDataReader cdReader)
+    public static Dictionary<string, object> SqlDict(NpgsqlDataReader cdReader)
     {  
-        Dictionary<string, object> dict = new Dictionary<string, object>();
-        for( int lp = 0 ; lp < cdReader.FieldCount ; lp++ )
+        var dict = new Dictionary<string, object>();
+        for( var lp = 0 ; lp < cdReader.FieldCount ; lp++ )
         {
             dict.Add(cdReader.GetName(lp), cdReader.GetValue(lp));
         }
@@ -64,23 +64,21 @@ public class Tasks
     {
         return ISOWeek.ToDateTime(year: year, week: week, dayOfWeek);
     }
+    
     public static IEnumerable<DateTime> EachDay(DateTime from, DateTime to)
     {
         for(var day = from.Date; day.Date <= to.Date; day = day.AddDays(1))
             yield return day;
     }
+    
     public static string FistLetterUpper(string s)
     {
         return char.ToUpper(s[0]) + s[1..];
     }
+    
     public static string GetUserSession()
     {
         return Environment.UserName;
-    }
-
-    public static double Point2Pixel(double point)
-    {
-        return point * 1.33334;
     }
     
     public static void SetSelectedTabItem(TabItem tabItem)

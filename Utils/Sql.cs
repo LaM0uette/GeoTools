@@ -10,7 +10,7 @@ namespace GeoTools.Utils;
 
 public static class Sql
 {
-    public static NpgsqlConnection? Connection { get; set; }// = PgConnect();
+    public static NpgsqlConnection? Connection { get; set; } = PgConnect();
     private static NpgsqlTransaction _transaction = Connection.BeginTransaction();
 
     //
@@ -65,7 +65,7 @@ public static class Sql
     
     public static void Close()
     {
-        Connection.Close();
+        Connection?.Close();
     }
     
     //
@@ -87,15 +87,13 @@ public static class Sql
         {
             var command = new NpgsqlCommand("SELECT * FROM \"GeoTools\".t_logs", Connection);
             var re = command.ExecuteReader();
-            Console.WriteLine($"{re}");
             re.Close();
         }
-        catch (NpgsqlException e)
+        catch (NpgsqlException)
         {
-            Console.WriteLine(e);
-            Console.WriteLine(",jngdqfgfdfbfcxgbhxgdtrfgdc,dtr(excdcgvn");
+            Console.WriteLine("Connection close connard"); // :) todo: à Renommer + Relancer la fonction notif
             Connection = PgConnect();
-            throw;
+            //MainWindow.PgSql = PgConfig();
         }
     }
 
@@ -104,7 +102,7 @@ public static class Sql
     public static NpgsqlDataReader GetAllDlg()
     {
         const string req = 
-            @$"SELECT * 
+            @"SELECT * 
                FROM ""GeoTools"".""v_dlg""";
         
         return GetSqlData(req);
@@ -137,6 +135,15 @@ public static class Sql
         
         return GetSqlData(req);
     }
+    public static NpgsqlDataReader GetDlgFilteredByWeek(byte week, int year, int id)
+    {
+        var req = 
+            @$"SELECT * 
+               FROM ""GeoTools"".get_dlg_by_weeks({week}, {year})
+               WHERE id_etat = {id}";
+        
+        return GetSqlData(req);
+    }
     
     public static NpgsqlDataReader GetUserInformation(string guid)
     {
@@ -146,4 +153,5 @@ public static class Sql
                WHERE us_guid='{guid}'";
         
         return GetSqlData(req);
-    }
+    }
+}

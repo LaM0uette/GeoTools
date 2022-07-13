@@ -1,25 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Media;
 using GeoTools.Utils;
-using Npgsql;
-using Calendar = System.Globalization.Calendar;
 
 namespace GeoTools.Views;
 
-public partial class DlgViewMonth : UserControl
+public partial class DlgMonthView : UserControl
 {
-    public static DlgViewMonth InstanceDlgViewMonth;
+    public static DlgMonthView? InstanceDlgMonthView;
     
-    private static readonly CultureInfo lang = CultureInfo.CreateSpecificCulture("fr-FR");
-    private static readonly DateOnly dateNow = DateOnly.FromDateTime(DateTime.Now);
+    private static readonly CultureInfo Lang = CultureInfo.CreateSpecificCulture("fr-FR");
+    private static readonly DateOnly DateNow = DateOnly.FromDateTime(DateTime.Now);
     
     private struct Weeks
     {
@@ -31,29 +25,31 @@ public partial class DlgViewMonth : UserControl
 
         public Weeks()
         {
-            this.Lundi = Lundi;
-            this.Mardi = Mardi;
-            this.Mercredi = Mercredi;
-            this.Jeudi = Jeudi;
-            this.Vendredi = Vendredi;
+            // this.Lundi = Lundi;
+            // this.Mardi = Mardi;
+            // this.Mercredi = Mercredi;
+            // this.Jeudi = Jeudi;
+            // this.Vendredi = Vendredi;
         }
     }
 
-    public DlgViewMonth()
+    public DlgMonthView()
     {
-        InstanceDlgViewMonth = this;
+        InstanceDlgMonthView = this;
         InitializeComponent();
         
-        CreateBtnDlgMonth(year:2022, month:6);
+        CreateBtnDlgMonth(year:2022, month:6, mode:"TogBtnDlgAll");
     }
 
-    public void CreateBtnDlgMonth(int year, byte month)
+    public void CreateBtnDlgMonth(int year, byte month, string mode)
     {
-        int yearEnd = year;
-        byte monthEnd = (byte)(month + 1);
-        if (monthEnd == 13){ yearEnd++; monthEnd = 1;}
+        var yearEnd = year;
+        var monthEnd = (byte)(month + 1);
         var style = FindResource("ButtonDLGTemp") as Style;
 
+        GridMonth.Children.Clear();
+        
+        if (monthEnd == 13){ yearEnd++; monthEnd = 1;}
         DateTime startDate = new DateTime(day: 1, month: month, year: year);
         DateTime endDate = new DateTime(day: 1, month: monthEnd, year: yearEnd).AddDays(-1);
         
@@ -65,14 +61,14 @@ public partial class DlgViewMonth : UserControl
         {
             GridMonth.RowDefinitions.Add(new RowDefinition());
             
-            Weeks weeks = sql2Struc(week: (byte)(firstWeeks + i), year:year);
+            Weeks weeks = sql2Struc(week: (byte)(firstWeeks + i), year:year, mode:mode); // todo a renommer
 
             foreach (DateTime date in Tasks.EachDay(from:Tasks.GetDayOfWeek(week:firstWeeks + i, year:year), to:Tasks.GetDayOfWeek(week:firstWeeks + i, year:year, DayOfWeek.Friday)))
             {
-                Brush? foreground = dateNow == DateOnly.FromDateTime(date) ? Brushes.White : FindResource("RgbM2") as Brush;
+                Brush? foreground = DateNow == DateOnly.FromDateTime(date) ? Brushes.White : FindResource("RgbM2") as Brush;
                 int col = (int)date.DayOfWeek - 1;
                 
-                nameOfDay = Tasks.FistLetterUpper(date.ToString("dddd", lang));
+                nameOfDay = Tasks.FistLetterUpper(date.ToString("dddd", Lang));
 
                 StackPanel stackPanel = new StackPanel()
                 {
@@ -91,7 +87,7 @@ public partial class DlgViewMonth : UserControl
 
                 foreach (var dlg in GetDay(weeks: weeks, day: nameOfDay))
                 {
-                    Button button = Widget.MakeBtnDlg(dictionary: dlg, style: style);
+                    Button button = Widget.MakeBtnDlg(dictionary: dlg, style: style!);
                     button.Height = 50;
                     button.Width = 177;
                     stackDlg.Children.Add(button);
@@ -162,17 +158,24 @@ public partial class DlgViewMonth : UserControl
 
         return listDay;
     }
-    private Weeks sql2Struc(byte week, int year)
+    private Weeks sql2Struc(byte week, int year, string mode)
     {
-        NpgsqlDataReader cdReader = Sql.GetDlgByWeek(week: (byte)(week), year:year);
+        var cdReader = mode switch
+        {
+            "TogBtnDlgAll" => Sql.GetDlgByWeek(week: week, year:year),
+            "TogBtnDlgAFaire" => Sql.GetDlgFilteredByWeek(week, year, 1),
+            "TogBtnDlgFait" => Sql.GetDlgFilteredByWeek(week, year, 2),
+            _ => Sql.GetDlgByWeek(week: week, year:year)
+        };
+        
         Weeks weeks = new();
         while (cdReader.Read())
         {
-            Dictionary<string, object> dictionary = Tasks.sqlDict(cdReader);
+            var dictionary = Tasks.SqlDict(cdReader);
                 
-            DateTime date = (DateTime)dictionary["date_initial"];
+            var date = (DateTime)dictionary["date_initial"];
             
-            switch (Tasks.FistLetterUpper(date.ToString("dddd", lang)))
+            switch (Tasks.FistLetterUpper(date.ToString("dddd", Lang)))
             {
                 case "Lundi":
                     weeks.Lundi.Add(dictionary);

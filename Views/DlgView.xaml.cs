@@ -66,6 +66,7 @@ public partial class DlgView
         var btnName = ((ToggleButton) sender).Name;
 
         DlgAllView.InstanceDlgAllView.CreateBtnDlgAll(btnName);
+        DlgMonthView.InstanceDlgMonthView?.CreateBtnDlgMonth(year:2022, month:6, mode:btnName);
 
         foreach (var btn in _toggleButtons)
         {

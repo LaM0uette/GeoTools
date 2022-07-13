@@ -10,10 +10,10 @@ namespace GeoTools
     public partial class MainWindow
     {
         public static User UserSession { get; } = new();
+        public static Task PgSql = Sql.PgConfig();
 
         public MainWindow()
         {
-            Sql.PgConfig();
             SetUserParameters();
         }
         
