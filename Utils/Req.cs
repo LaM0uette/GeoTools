@@ -37,6 +37,8 @@ public static class Req
            FROM ""GeoTools"".get_dlg_by_weeks({week}, {year})
            WHERE id_etat = {id}";
     
+    public static string Logs() => "SELECT * FROM \"GeoTools\".t_logs";
+    
     public static string UserInformation(string guid) =>
         @$"SELECT * 
            FROM ""GeoTools"".""t_users""

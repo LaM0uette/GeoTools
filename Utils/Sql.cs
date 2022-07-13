@@ -40,7 +40,7 @@ public static class Sql
     {
         try
         {
-            var command = new NpgsqlCommand("SELECT * FROM \"GeoTools\".t_logs", PgConnection);
+            var command = new NpgsqlCommand(Req.Logs(), PgConnection);
             var re = command.ExecuteReader();
             re.Close();
         }
