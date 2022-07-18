@@ -53,22 +53,22 @@ public partial class DlgMonthView : UserControl
         DateTime startDate = new DateTime(day: 1, month: month, year: year);
         DateTime endDate = new DateTime(day: 1, month: monthEnd, year: yearEnd).AddDays(-1);
         
-        byte firstWeeks = (byte)ISOWeek.GetWeekOfYear(startDate);
-        byte lastWeeks = (byte)ISOWeek.GetWeekOfYear(endDate);
+        byte firstWeekOfMonth = (byte)ISOWeek.GetWeekOfYear(startDate);
+        byte lastWeekOfMonth = (byte)ISOWeek.GetWeekOfYear(endDate);
         string nameOfDay;
         
-        for (byte i = 0; firstWeeks + i <= lastWeeks; i++)
+        for (byte i = 0; firstWeekOfMonth + i <= lastWeekOfMonth; i++)
         {
             GridMonth.RowDefinitions.Add(new RowDefinition());
             
-            Weeks weeks = sql2Struc(week: (byte)(firstWeeks + i), year:year, mode:mode); // todo a renommer
+            Weeks weeks = sql2Struc(week: (byte)(firstWeekOfMonth + i), year:year, mode:mode); // todo a renommer
 
-            foreach (DateTime date in Tasks.EachDay(from:Tasks.GetDayOfWeek(week:firstWeeks + i, year:year), to:Tasks.GetDayOfWeek(week:firstWeeks + i, year:year, DayOfWeek.Friday)))
+            foreach (DateTime date in Tasks.EachDay(from:Tasks.GetDayOfWeek(week:firstWeekOfMonth + i, year:year), to:Tasks.GetDayOfWeek(week:firstWeekOfMonth + i, year:year, DayOfWeek.Friday)))
             {
                 Brush? foreground = DateNow == DateOnly.FromDateTime(date) ? Brushes.White : FindResource("RgbM2") as Brush;
                 int col = (int)date.DayOfWeek - 1;
                 
-                nameOfDay = Tasks.FistLetterUpper(date.ToString("dddd", Lang));
+                nameOfDay = date.ToString("dddd", Lang).Capitalize();
 
                 StackPanel stackPanel = new StackPanel()
                 {
@@ -162,7 +162,6 @@ public partial class DlgMonthView : UserControl
     {
         var cdReader = mode switch
         {
-            "TogBtnDlgAll" => Sql.Get(Req.DlgByWeek(week, year)),
             "TogBtnDlgAFaire" => Sql.Get(Req.DlgFilteredByWeek(week, year, 1)),
             "TogBtnDlgFait" => Sql.Get(Req.DlgFilteredByWeek(week, year, 2)),
             _ => Sql.Get(Req.DlgByWeek(week, year))
@@ -175,7 +174,7 @@ public partial class DlgMonthView : UserControl
                 
             var date = (DateTime)dictionary["date_initial"];
             
-            switch (Tasks.FistLetterUpper(date.ToString("dddd", Lang)))
+            switch (date.ToString("dddd", Lang).Capitalize())
             {
                 case "Lundi":
                     weeks.Lundi.Add(dictionary);

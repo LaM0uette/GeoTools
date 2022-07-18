@@ -35,7 +35,7 @@ public static class Req
     public static string DlgFilteredByWeek(byte week, int year, int id) =>
         @$"SELECT * 
            FROM ""GeoTools"".get_dlg_by_weeks({week}, {year})
-           WHERE id_etat = {id}";
+           WHERE ""id_etat"" = {id}";
     
     public static string Logs() => "SELECT * FROM \"GeoTools\".t_logs";
     

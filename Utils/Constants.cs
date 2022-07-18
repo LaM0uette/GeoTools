@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace GeoTools.Utils;
+﻿namespace GeoTools.Utils;
 
 public static class Constants
 {
