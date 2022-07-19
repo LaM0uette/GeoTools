@@ -10,7 +10,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="CommonTasks" Version="1.0.0" />
+      <PackageReference Include="CommonTasks" Version="1.0.1" />
       <PackageReference Include="Logger" Version="1.0.8" />
       <PackageReference Include="MahApps.Metro" Version="2.4.9" />
       <PackageReference Include="Npgsql" Version="6.0.5" />
