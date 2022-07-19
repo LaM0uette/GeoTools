@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Data;
 using System.Threading.Tasks;
-using System.Windows;
+using CommonTasks;
 using GeoTools.Model;
 using GeoTools.Utils;
 
@@ -19,7 +18,7 @@ namespace GeoTools
         
         private static void SetUserParameters()
         {
-            var cdReader = Sql.Get(Req.UserInformation(Tasks.GetGUID()));
+            var cdReader = Sql.Get(Req.UserInformation(Windows.GetGuid()));
             cdReader.Read();
             
             UserSession.Refcode1 = int.Parse($"{cdReader["us_refcode1"]}");

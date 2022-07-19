@@ -18,7 +18,7 @@ public partial class DlgView
         AddComboBoxData();
         SetTabItems();
 
-        Tasks.SetSelectedTabItem(_vTabItemDlgAll);
+        Tasks.SetCurrentTabItem(_vTabItemDlgAll);
 
         AddToggleButtonsInList();
 
@@ -58,7 +58,7 @@ public partial class DlgView
     // Actions
     private void BtnDlgBackHome_OnClick(object sender, RoutedEventArgs e)
     {
-        Tasks.SetSelectedTabItem(MainView.VTabItemMenu);
+        Tasks.SetCurrentTabItem(MainView.VTabItemMenu);
     }
 
     private void TogBtnDlg_OnClick(object sender, RoutedEventArgs e)
@@ -81,14 +81,14 @@ public partial class DlgView
         switch (ComboBoxTypeView.SelectedIndex)
         {
             case 0:
-                Tasks.SetSelectedTabItem(_vTabItemDlgAll);
+                Tasks.SetCurrentTabItem(_vTabItemDlgAll);
                 break;
             case 2:
                 break;
             case 3:
                 break;
             case 4:
-                Tasks.SetSelectedTabItem(_vTabItemDlgMonth);
+                Tasks.SetCurrentTabItem(_vTabItemDlgMonth);
                 break;
         }
     }

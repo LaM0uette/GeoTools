@@ -30,6 +30,8 @@ public static class Tasks
     //
     
     #region Functions
+    
+    public static string Capitalize(this string s) => char.ToUpper(s[0]) + s[1..];
 
     public static byte GetDaysInMonth(int year, int month) => (byte) DateTime.DaysInMonth(year, month);
 
@@ -49,25 +51,13 @@ public static class Tasks
 
     public static DateTime GetDayOfWeek(int week, int year, DayOfWeek dayOfWeek = DayOfWeek.Monday) =>
         ISOWeek.ToDateTime(year, week, dayOfWeek);
-
-    public static string Capitalize(this string s) => char.ToUpper(s[0]) + s[1..];
+    
+    public static void SetCurrentTabItem(TabItem tabItem) => tabItem.IsSelected = true;
 
     #endregion
 
     //
-
-    public static string GetGUID()
-    {
-        return Environment.UserName;
-    }
-
-    public static void SetSelectedTabItem(TabItem tabItem)
-    {
-        tabItem.IsSelected = true;
-    }
-
-
-    //
+    
     // TODO: A MODIFIER !
     public static Dictionary<string, object> SqlDict(NpgsqlDataReader cdReader)
     {

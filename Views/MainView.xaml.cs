@@ -27,6 +27,6 @@ public partial class MainView
     // Actions
     private void BtnTiMenu_OnClick(object sender, RoutedEventArgs e)
     {
-        Tasks.SetSelectedTabItem(VTabItemExportGrace);
+        Tasks.SetCurrentTabItem(VTabItemExportGrace);
     }
 }
