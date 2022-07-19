@@ -8,12 +8,21 @@
     ".NETCoreApp,Version=v6.0": {
       "GeoTools/1.0.0": {
         "dependencies": {
-          "Logger": "1.0.1",
+          "CommonTasks": "1.0.1",
+          "Logger": "1.0.8",
           "MahApps.Metro": "2.4.9",
           "Npgsql": "6.0.5"
         },
         "runtime": {
           "GeoTools.dll": {}
+        }
+      },
+      "CommonTasks/1.0.1": {
+        "runtime": {
+          "lib/net6.0/CommonTasks.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "ControlzEx/4.4.0": {
@@ -28,7 +37,7 @@
           }
         }
       },
-      "Logger/1.0.1": {
+      "Logger/1.0.8": {
         "dependencies": {
           "Pastel": "3.0.1"
         },
@@ -92,6 +101,13 @@
       "serviceable": false,
       "sha512": ""
     },
+    "CommonTasks/1.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tqYJ7E5c42cFiXI+e5hRageku81bgKV20LtW5vV5ELbkr/jUY44campUuZ6UhknoU1DdpqYRe8TP3e9GIIKayA==",
+      "path": "commontasks/1.0.1",
+      "hashPath": "commontasks.1.0.1.nupkg.sha512"
+    },
     "ControlzEx/4.4.0": {
       "type": "package",
       "serviceable": true,
@@ -99,12 +115,12 @@
       "path": "controlzex/4.4.0",
       "hashPath": "controlzex.4.4.0.nupkg.sha512"
     },
-    "Logger/1.0.1": {
+    "Logger/1.0.8": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-afKWbc1C+hO+SyKkUJhwgTs7cNFnQnWgqz/dlRLBTS84L1GHflZ8JJaDPbQUjvriybq6tD305Ob7qL8/Zn64Gw==",
-      "path": "logger/1.0.1",
-      "hashPath": "logger.1.0.1.nupkg.sha512"
+      "sha512": "sha512-wTkgFhIVEsy7zPyELeukbWv8HWAvtPkW71uKnB4zzhrWCMoLwiN15l6400IjpRXX7GaXJGGnylVMJmM3IaXTrg==",
+      "path": "logger/1.0.8",
+      "hashPath": "logger.1.0.8.nupkg.sha512"
     },
     "MahApps.Metro/2.4.9": {
       "type": "package",
