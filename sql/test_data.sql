@@ -37,6 +37,7 @@ WITH dlg AS (SELECT dl.dl_id                                               AS id
                     rc.rc_refcode3                                         AS refcode3,
                     dl.dl_date_init                                        AS date_initial,
                     extract('week' from dl.dl_date_init)                   AS semaine,
+                    extract('month' from dl.dl_date_init)                   AS mois,
                     extract('year' from dl.dl_date_init)                   AS annee,
                     ph.ph_nom                                              AS phase,
                     te.te_code                                             AS code_type_export,
@@ -66,6 +67,7 @@ SELECT dlg.id,
        dlg.refcode3,
        dlg.date_initial,
        dlg.semaine,
+       dlg.mois,
        dlg.annee,
        dlg.phase,
        dlg.type_export,
@@ -196,6 +198,21 @@ SELECT add_export_to_dlg(5, 3);
 -- ...
 
 
+-- Obtenir un seul DLG
+create or replace function get_dlg(i int) returns setof "GeoTools".v_dlg
+as
+$BODY$
+begin
+    RETURN QUERY (SELECT * FROM "GeoTools"."v_dlg" WHERE id = i);
+end
+$BODY$
+    LANGUAGE plpgsql STABLE
+                     COST 100;
+
+SELECT * FROM get_dlg(2);
+-- ...
+
+
 -- Obtenir la liste des DLG à une date précise
 create or replace function get_dlg_by_date(dt date) returns setof "GeoTools".v_dlg
 as
@@ -212,8 +229,8 @@ FROM get_dlg_by_date('2022-06-23');
 -- ...
 
 
--- Obtenir la liste des DLG à une date précise
-create or replace function get_dlg_by_weeks(week int, year int) returns setof "GeoTools".v_dlg
+-- Obtenir la liste des DLG à une semaine donnée
+create or replace function get_dlg_by_week(week int, year int) returns setof "GeoTools".v_dlg
 as
 $BODY$
 begin
@@ -224,7 +241,23 @@ $BODY$
                      COST 100;
 
 SELECT *
-FROM get_dlg_by_weeks(25, 2022);
+FROM get_dlg_by_week(25, 2022);
+-- ...
+
+
+-- Obtenir la liste des DLG à un mois donné
+create or replace function get_dlg_by_month(month int, year int) returns setof "GeoTools".v_dlg
+as
+$BODY$
+begin
+    RETURN QUERY (SELECT * FROM "GeoTools".v_dlg WHERE mois = month AND annee = year ORDER BY date_initial);
+end
+$BODY$
+    LANGUAGE plpgsql STABLE
+                     COST 100;
+
+SELECT *
+FROM get_dlg_by_month(6, 2022);
 -- ...
 
 

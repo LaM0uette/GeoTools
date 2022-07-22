@@ -1,7 +1,30 @@
-﻿namespace GeoTools.Utils;
+﻿using System.Globalization;
+
+namespace GeoTools.Utils;
 
 public static class Constants
 {
+    #region Config
+
+    public static readonly CultureInfo LangFr = CultureInfo.CreateSpecificCulture("fr-FR");
+
+    #endregion
+    
+    //
+
+    #region Enum
+
+    public enum WeekDays
+    {
+        Lundi,
+        Mardi,
+        Mercredi,
+        Jeudi,
+        Vendredi,
+    }
+
+    #endregion
+    
     //...
     // Dlg created
     public const byte DlgWith = 177;  //300;

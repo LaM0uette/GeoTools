@@ -5,12 +5,29 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using GeoTools.Views;
+using MahApps.Metro.Controls;
+using Newtonsoft.Json.Linq;
 using Npgsql;
+using Parser;
 
 namespace GeoTools.Utils;
 
 public static class Tasks
 {
+    #region Struct
+
+    public struct AllDlgStruct
+    {
+        public int Id;
+        public string Dlg;
+        public Constants.WeekDays Day;
+    }
+
+    #endregion
+    
+    //
+    
     #region Brush
 
     private static BrushConverter _converter = new();
@@ -57,6 +74,106 @@ public static class Tasks
     #endregion
 
     //
+
+    #region Functions viewDlg
+
+    private static readonly Style Style = (Application.Current.FindResource("ButtonDLGTemp") as Style)!;
+    
+    public static void Update(JObject evt)
+    {
+        Console.WriteLine($"{evt}");
+
+        var dlgId = $"{evt["data"]!["ex_dl_id"]}".ParseToInt();
+        var dlgName = $"dlg_{dlgId}";
+
+        DlgAllView.InstanceDlgAllView.DlgAllPanel.BeginInvoke((Action)(() =>
+        {
+            var panel = DlgAllView.InstanceDlgAllView.DlgAllPanel;
+            var cdReader = Sql.Get(Req.GetDlg(2));
+            // cdReader.Read();
+            //
+            // Console.WriteLine($"{cdReader["refcode2"]}");
+            //
+            // var dict = SqlDict(cdReader);
+            //
+            //  foreach (Button i in panel.Children)
+            //  {
+            //      if (!i.Name.Equals(dlgName)) continue;
+            //      var idx = panel.Children.IndexOf(i);
+            //
+            //      var button = Widget.MakeBtnDlg(dictionary: dict, style:Style);
+            //      button.Click += DlgAllView.BtnDlgAll_Click;
+            //      panel.Children.RemoveAt(idx);
+            //      panel.Children.Insert(idx, button);
+            //      break;
+            // }
+            
+        }));
+    
+    }
+
+    public static void Delete(JObject evt)
+    {
+        var dlId = $"dlg_{evt["data"]!["ex_dl_id"]}";
+        DlgAllView.InstanceDlgAllView.DlgAllPanel.BeginInvoke((Action)(() =>
+        {
+            var panel = DlgAllView.InstanceDlgAllView.DlgAllPanel;
+
+            foreach (Button i in panel.Children)
+            {
+                if (!i.Name.Equals(dlId)) continue;
+                panel.Children.Remove(i);
+                break;
+            }
+            
+        }));
+    }
+
+    #endregion
+    
+    //
+
+    #region TestStruct
+
+    public static List<AllDlgStruct> GetAllDlgStructs(NpgsqlDataReader cdReader)
+    {
+        var allDlgStructs = new List<AllDlgStruct>();
+        
+        while (cdReader.Read())
+        {
+            var allDlgStruct = new AllDlgStruct();
+            var dateTime = (DateTime)cdReader["date_initial"];
+
+            allDlgStruct.Id = $"{cdReader["id"]}".ParseToInt();
+            allDlgStruct.Dlg = $"{cdReader["dlg"]}";
+
+            switch (dateTime.ToString("dddd", Constants.LangFr).Capitalize())
+            {
+                case "Lundi":
+                    allDlgStruct.Day = Constants.WeekDays.Lundi;
+                    break;
+                case "Mardi":
+                    allDlgStruct.Day = Constants.WeekDays.Mardi;
+                    break;
+                case "Mercredi":
+                    allDlgStruct.Day = Constants.WeekDays.Mercredi;
+                    break;
+                case "Jeudi":
+                    allDlgStruct.Day = Constants.WeekDays.Jeudi;
+                    break;
+                case "Vendredi":
+                    allDlgStruct.Day = Constants.WeekDays.Vendredi;
+                    break;
+            }
+
+            allDlgStructs.Add(allDlgStruct);
+        }
+        cdReader.Close();
+
+        return allDlgStructs;
+    }
+
+    #endregion
     
     // TODO: A MODIFIER !
     public static Dictionary<string, object> SqlDict(NpgsqlDataReader cdReader)

@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using GeoTools.Utils;
+using System.Runtime.InteropServices;
 using Npgsql;
 
 
@@ -48,7 +50,7 @@ public partial class DlgAllView
     
     //
     // Actions
-    private static void BtnDlgAll_Click(object sender, RoutedEventArgs e)
+    public static void BtnDlgAll_Click(object sender, RoutedEventArgs e)
     {
         var btnName = ((Button) sender).Name;
         if (btnName is not null)

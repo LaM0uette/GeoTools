@@ -25,11 +25,6 @@ public partial class DlgMonthView : UserControl
 
         public Weeks()
         {
-            // this.Lundi = Lundi;
-            // this.Mardi = Mardi;
-            // this.Mercredi = Mercredi;
-            // this.Jeudi = Jeudi;
-            // this.Vendredi = Vendredi;
         }
     }
 
@@ -164,9 +159,23 @@ public partial class DlgMonthView : UserControl
         {
             "TogBtnDlgAFaire" => Sql.Get(Req.DlgFilteredByWeek(week, year, 1)),
             "TogBtnDlgFait" => Sql.Get(Req.DlgFilteredByWeek(week, year, 2)),
-            _ => Sql.Get(Req.DlgByWeek(week, year))
+            _ => Sql.Get(Req.DlgByWeek(week, year)) // TogBtnDlgTout
         };
+
+        var AllDlg = Tasks.GetAllDlgStructs(cdReader);
         
+        foreach (var dlg in AllDlg)
+        {
+            Console.Write(dlg.Dlg);
+            Console.Write($" {dlg.Day}\n");
+        }
+        
+        Console.WriteLine("lkdsjkfjds");
+        Console.WriteLine("lkdsjkfjds");
+        Console.WriteLine("lkdsjkfjds");
+        Console.WriteLine("lkdsjkfjds");
+        Console.WriteLine("lkdsjkfjds");
+
         Weeks weeks = new();
         while (cdReader.Read())
         {

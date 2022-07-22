@@ -15,9 +15,10 @@ public static class Req
            FROM ""GeoTools"".""add_dlg""(
                '{proj}', '{refcode3}', '{dateInit}', '{phase}', '{typeExport}', {livraison}, {version})";
     
-    public static string AllDlg() =>
-        @"SELECT * 
-          FROM ""GeoTools"".""v_dlg""";
+    public static string AllDlg() => """
+    SELECT *
+    FROM "GeoTools"."v_dlg"
+    """;
 
     public static string AllDlgFiltered(int id) =>
         @$"SELECT * 
@@ -30,12 +31,15 @@ public static class Req
 
     public static string DlgByWeek(byte week, int year) =>
         @$"SELECT * 
-           FROM ""GeoTools"".get_dlg_by_weeks({week}, {year})";
+           FROM ""GeoTools"".get_dlg_by_week({week}, {year})";
     
     public static string DlgFilteredByWeek(byte week, int year, int id) =>
         @$"SELECT * 
-           FROM ""GeoTools"".get_dlg_by_weeks({week}, {year})
+           FROM ""GeoTools"".get_dlg_by_week({week}, {year})
            WHERE ""id_etat"" = {id}";
+
+    public static string GetDlg(int id) =>
+        @$"SELECT * FROM ""GeoTools"".get_dlg({id})";
     
     public static string Logs() => "SELECT * FROM \"GeoTools\".t_logs";
     

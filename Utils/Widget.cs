@@ -16,16 +16,16 @@ public class Widget
         var txtDlInitDate = makeTextBlock(content: $"{DateTime.Parse(dictionary["date_initial"].ToString()!):MM/dd/yyyy}", fontSize:9);
         var txtExEtNom = makeTextBlock(content: $"{dictionary["nom_etat"]}", fontSize:9);
 
-        Border bdZoMarche = MakeBorderTxt(margin: margin);
+        var bdZoMarche = MakeBorderTxt(margin: margin);
         bdZoMarche.Child = txtZoMarche;
 
-        Border bdDlInitDate = MakeBorderTxt(margin: margin);
+        var bdDlInitDate = MakeBorderTxt(margin: margin);
         bdDlInitDate.Child = txtDlInitDate;
 
-        Border bdExEtNom = MakeBorderTxt(margin: margin);
+        var bdExEtNom = MakeBorderTxt(margin: margin);
         bdExEtNom.Child = txtExEtNom;
 
-        StackPanel stackLabel = new StackPanel()
+        var stackLabel = new StackPanel()
         {
             Orientation = Orientation.Vertical,
             HorizontalAlignment = HorizontalAlignment.Right,
@@ -33,7 +33,7 @@ public class Widget
             Margin = new Thickness(3, 0, 0, 0),
         };
         
-        TextBlock dlgInfo = new TextBlock()
+        var dlgInfo = new TextBlock()
         {
             Text = dictionary["dlg_infos"].ToString()!.Replace("|", "\n"),
             FontSize = 11,
@@ -51,7 +51,7 @@ public class Widget
             Background = Brushes.Transparent
         };
 
-        StackPanel stackAll = new StackPanel()
+        var stackAll = new StackPanel()
         {
             Orientation = Orientation.Horizontal,
             Children = { dlgInfo, separator, stackLabel }

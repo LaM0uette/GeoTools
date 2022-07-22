@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using CommonTasks;
 using GeoTools.Model;
 using GeoTools.Utils;
+using GeoTools.Views;
+using Parser;
 
 namespace GeoTools
 {
@@ -21,11 +23,11 @@ namespace GeoTools
             var cdReader = Sql.Get(Req.UserInformation(TskWindows.GetGuid()));
             cdReader.Read();
             
-            UserSession.Refcode1 = int.Parse($"{cdReader["us_refcode1"]}");
+            UserSession.Refcode1 = $"{cdReader["us_refcode1"]}".ParseToInt();
             UserSession.Nom = $"{cdReader["us_nom"]}";
             UserSession.Prenom = $"{cdReader["us_prenom"]}";
-            UserSession.Role = int.Parse($"{cdReader["us_role"]}");
-            UserSession.Admin = int.Parse($"{cdReader["us_admin"]}") == 1;
+            UserSession.Role = $"{cdReader["us_role"]}".ParseToInt();
+            UserSession.Admin = $"{cdReader["us_admin"]}".ParseToInt() == 1;
 
             cdReader.Close();
         }

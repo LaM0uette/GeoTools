@@ -1,8 +1,16 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using Accessibility;
 using Npgsql;
 using GeoTools.Configs;
+using GeoTools.Views;
+using MahApps.Metro.Controls;
+using Newtonsoft.Json.Linq;
+using Parser;
 
 namespace GeoTools.Utils;
 
@@ -56,10 +64,50 @@ public static class Sql
     
     private static void EventOnNotification(object sender, NpgsqlNotificationEventArgs evt)
     {
-        MessageBox.Show($"{evt.Payload}");
+        var notify = JObject.Parse(evt.Payload);
+
+        // Console.WriteLine(i["action"]);
+
+        switch ($"{notify["action"]}")
+        {
+            case "DELETE":
+                Tasks.Delete(notify);
+                break;
+            case "INSERT":
+                break;
+            case "UPDATE":
+                Tasks.Update(notify);
+                break;
+        }
     }
 
-    //
+    private static async Task TestAsyncTask()
+    {
+        await Task.Run(() =>
+        {
+            for (var i = 0; i < 1000; i++)
+            {
+                Console.WriteLine($"ASync: {i}");
+                Task.Delay(40);
+            }
+        });
+    }
+    
+    private static void TestsyncTask()
+    {
+        var instance = DlgAllView.InstanceDlgAllView.DlgAllPanel;
+        Console.WriteLine("ereerer");
+        foreach (var dlg in instance.Children)
+        {
+            Console.WriteLine("ereerer");
+            Console.WriteLine(dlg);
+        }
+        Console.WriteLine("ereerer");
+    }
+    
+    
+
+        //
     // DELEGATE
     public delegate void SqlDelegate(string req);
 
