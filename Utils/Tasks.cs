@@ -20,7 +20,31 @@ public static class Tasks
     public struct DlgStruct
     {
         public int Id;
+        public string GuidProj;
+        public string Proj;
+        public string GuidExec;
+        public string Exec;
+        public int Nro;
+        public int Sro;
+        public int Refcode1;
+        public string Refcode2;
+        public string Refcode3;
+        public DateOnly DateInit;
+        public int Semaine;
+        public int Mois;
+        public int Annee;
+        public string Phase;
+        public string TypeExport;
+        public int Livraison;
+        public int Version;
+        public int IdExport;
+        public int IdEtat;
+        public string CodeEtat;
+        public string NomEtat;
+        public string CouleurEtat;
+        public DateTime DateEtat;
         public string Dlg;
+        public string DlgInfos;
         public Constants.WeekDays Day;
     }
 
@@ -145,8 +169,31 @@ public static class Tasks
             var dateTime = (DateTime)cdReader["date_initial"];
 
             dlgStruct.Id = $"{cdReader["id"]}".ParseToInt();
+            dlgStruct.GuidProj = $"{cdReader["guid_projeteur"]}";
+            dlgStruct.Proj = $"{cdReader["projeteur"]}";
+            dlgStruct.GuidExec = $"{cdReader["guid_executant"]}";
+            dlgStruct.Exec = $"{cdReader["executant"]}";
+            dlgStruct.Nro = $"{cdReader["nro"]}".ParseToInt();
+            dlgStruct.Sro = $"{cdReader["sro"]}".ParseToInt();
+            dlgStruct.Refcode1 = $"{cdReader["refcode1"]}".ParseToInt();
+            dlgStruct.Refcode2 = $"{cdReader["refcode2"]}";
+            dlgStruct.Refcode3 = $"{cdReader["refcode3"]}";
+            dlgStruct.DateInit = DateOnly.Parse($"{cdReader["date_initial"]}");
+            dlgStruct.Semaine = $"{cdReader["semaine"]}".ParseToInt();
+            dlgStruct.Mois = $"{cdReader["mois"]}".ParseToInt();
+            dlgStruct.Annee = $"{cdReader["annee"]}".ParseToInt();
+            dlgStruct.Phase = $"{cdReader["phase"]}";
+            dlgStruct.TypeExport = $"{cdReader["type_export"]}";
+            dlgStruct.Livraison = $"{cdReader["livraison"]}".ParseToInt();
+            dlgStruct.Version = $"{cdReader["version"]}".ParseToInt();
+            dlgStruct.IdExport = $"{cdReader["id_export"]}".ParseToInt();
+            dlgStruct.IdEtat = $"{cdReader["id_etat"]}".ParseToInt();
+            dlgStruct.CodeEtat = $"{cdReader["code_etat"]}";
+            dlgStruct.NomEtat = $"{cdReader["nom_etat"]}";
+            dlgStruct.CouleurEtat = $"{cdReader["couleur_etat"]}";
+            dlgStruct.DateEtat = DateTime.Parse($"{cdReader["date_etat"]}");
             dlgStruct.Dlg = $"{cdReader["dlg"]}";
-
+            dlgStruct.DlgInfos = $"{cdReader["dlg_infos"]}";
             dlgStruct.Day = dateTime.ToString("dddd", Constants.LangFr).Capitalize() switch
             {
                 "Lundi" => Constants.WeekDays.Lundi,

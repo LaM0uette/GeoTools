@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Windows;
 
 namespace GeoTools.Utils;
 
@@ -34,6 +35,8 @@ public static class Constants
     public const byte LabelHeightSize = 17;  //26;
     public const byte LabelWidthSize = 65;  //125;
     public const byte TextBlockFontSize = 11;  //LabelFontSize + 8;
+    
+    public static Thickness DlgMargin = new (2);
 
     //...
     // Window

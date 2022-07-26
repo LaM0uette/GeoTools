@@ -8,8 +8,12 @@ namespace GeoTools.Utils;
 
 public static class Widget
 {
-    public static Button GetButtonFromDlg()
+    #region Fonctions
+
+    public static Button GetButtonFromDlg(Tasks.DlgStruct dlg)
     {
+        var txtZoMarche = GetTextBlock(content: dlg.Dlg, fontSize:9);
+        
         return new Button
         {
             Height = Constants.DlgHeight,
@@ -17,6 +21,26 @@ public static class Widget
             Background = Brushes.Coral
         };
     }
+
+    #endregion
+
+    //
+
+    #region SubFonctions
+
+    private static TextBlock GetTextBlock(string content, int fontSize)
+    {
+        return new TextBlock
+        {
+            Text = content,
+            VerticalAlignment = VerticalAlignment.Center,
+            HorizontalAlignment = HorizontalAlignment.Center,
+            Foreground = Brushes.Black,
+            FontSize = fontSize
+        };
+    }
+
+    #endregion
     
     public static Button MakeBtnDlg(Dictionary<string, object> dictionary, Style style)
     {
