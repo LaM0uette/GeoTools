@@ -85,6 +85,7 @@ public static class Widget
             FontSize = fontSize
         };
     }
+    
     private static Border MakeBorderBtn()
     {
         return new Border()
@@ -99,6 +100,7 @@ public static class Widget
             VerticalAlignment = VerticalAlignment.Center,
         };
     }
+    
     private static Border MakeBorderTxt(Thickness margin)
     {
         return new Border()
@@ -113,6 +115,7 @@ public static class Widget
             VerticalAlignment = VerticalAlignment.Center,
         };
     }
+    
     public static void SetElementGrid(UIElement element, int row=0, int column=0)
     {
         Grid.SetRow(element, row);

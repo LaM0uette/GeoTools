@@ -24,7 +24,7 @@ public partial class DlgView
         SetTabItems();
 
         Tasks.SetCurrentTabItem(_vTabItemDlgAll);
-        Dlg.AllDlgView.Instance.CreateBtnDlgAll(GetReaderAllDlgMode());
+        Dlg.AllDlgView.Instance.CreateAllDlgButtons(GetReaderAllDlgByMode());
         
         ComboBoxTypeView.SelectionChanged += OnViewChanged;  // Detecte le changement d'item du combobox
         if (Application.Current.MainWindow != null) Application.Current.MainWindow.SizeChanged += OnWindowSizeChanged;  // Detecte le changement de taille de la mainWindow
@@ -45,7 +45,7 @@ public partial class DlgView
     {
         var btnName = ((ToggleButton) sender).Name;
 
-        Dlg.AllDlgView.Instance.CreateBtnDlgAll(GetReaderAllDlgMode(btnName));
+        Dlg.AllDlgView.Instance.CreateAllDlgButtons(GetReaderAllDlgByMode(btnName));
         DlgMonthView.InstanceDlgMonthView?.CreateBtnDlgMonth(year: 2022, month: 6, mode: btnName);
 
         foreach (var btn in _toggleButtons)
@@ -97,7 +97,7 @@ public partial class DlgView
         };
     }
     
-    private static NpgsqlDataReader GetReaderAllDlgMode(string btnName = "")
+    private static NpgsqlDataReader GetReaderAllDlgByMode(string btnName = "")
     {
         return btnName switch
         {

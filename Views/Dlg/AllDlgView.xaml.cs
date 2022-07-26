@@ -25,7 +25,7 @@ public partial class AllDlgView
     #region Actions
 
     // TODO: A MODIFIER !
-    private static void BtnDlgAll_Click(object sender, RoutedEventArgs e)
+    private static void SetActionsOnBtnDlg_Click(object sender, RoutedEventArgs e)
     {
         var btnName = ((Button) sender).Name;
         
@@ -41,21 +41,21 @@ public partial class AllDlgView
 
     #region Fonctions
 
-    public void CreateBtnDlgAll(NpgsqlDataReader cdReader)
+    public void CreateAllDlgButtons(NpgsqlDataReader dlgCdReader)
     {
         var style = GetDlgTempStyle();
         if (style is null) return;
         
         DlgAllPanel.Children.Clear();
 
-        while (cdReader.Read())
+        while (dlgCdReader.Read())
         {
-            var button = Widget.MakeBtnDlg(dictionary: Tasks.SqlDict(cdReader), style: style);
-            button.Click += BtnDlgAll_Click;
+            var button = Widget.MakeBtnDlg(dictionary: Tasks.SqlDict(dlgCdReader), style: style);
+            button.Click += SetActionsOnBtnDlg_Click;
             DlgAllPanel.Children.Add(button);
         }
 
-        cdReader.Close();
+        dlgCdReader.Close();
     }
 
     private Style? GetDlgTempStyle() => FindResource("ButtonDLGTemp") as Style;
