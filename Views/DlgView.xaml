@@ -129,7 +129,7 @@
                     <TabItem x:Name="TabItemDlgAll"
                              Visibility="Collapsed">
 
-                        <views:DlgAllView x:Name="DlgViewAll"
+                        <views:AllDlgView x:Name="AllDlgView"
                                           HorizontalAlignment="Left"
                                           VerticalAlignment="Center" />
 

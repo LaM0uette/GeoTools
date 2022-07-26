@@ -114,8 +114,8 @@ public partial class DlgView
             : Constants.ScrollBarWith;
         var maxWindowWith = GetWindowWidth() - 300 - scrollSize;
 
-        DlgViewAll.DlgAllPanel.Height = maxWindowHeight;
-        DlgViewAll.Width = maxWindowWith;
+        AllDlgView.DlgAllPanel.Height = maxWindowHeight;
+        AllDlgView.Width = maxWindowWith;
         DlgViewMonth.Width = maxWindowWith;
     }
 
