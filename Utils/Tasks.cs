@@ -29,7 +29,7 @@ public static class Tasks
         public int Refcode1;
         public string Refcode2;
         public string Refcode3;
-        public DateOnly DateInit;
+        public DateTime DateInit;
         public int Semaine;
         public int Mois;
         public int Annee;
@@ -178,7 +178,7 @@ public static class Tasks
             dlgStruct.Refcode1 = $"{cdReader["refcode1"]}".ParseToInt();
             dlgStruct.Refcode2 = $"{cdReader["refcode2"]}";
             dlgStruct.Refcode3 = $"{cdReader["refcode3"]}";
-            dlgStruct.DateInit = DateOnly.Parse($"{cdReader["date_initial"]}");
+            dlgStruct.DateInit = DateTime.Parse($"{cdReader["date_initial"]}");
             dlgStruct.Semaine = $"{cdReader["semaine"]}".ParseToInt();
             dlgStruct.Mois = $"{cdReader["mois"]}".ParseToInt();
             dlgStruct.Annee = $"{cdReader["annee"]}".ParseToInt();
