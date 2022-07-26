@@ -13,20 +13,15 @@ public static class Widget
 
     public static Button GetButtonFromDlg(Tasks.DlgStruct dlg)
     {
-        // Création des textBlocks
-        var textBlockRefcode1 = NewTextBlock(content: dlg.Refcode1.ParseToString(), fontSize:9);
-        var textBlockDateInit = NewTextBlock(content: $"{dlg.DateInit:MM/dd/yyyy}", fontSize:9);
-        var textBlockNomEtat = NewTextBlock(content: dlg.NomEtat, fontSize:9);
-        
         // Création des borders
         var borderRefcode1 = NewTextBlockBorder();
         var borderDateInit = NewTextBlockBorder();
         var borderNomEtat = NewTextBlockBorder();
         
         // Attribution des textBlock dans les borders
-        borderRefcode1.Child = textBlockRefcode1;
-        borderDateInit.Child = textBlockDateInit;
-        borderNomEtat.Child = textBlockNomEtat;
+        borderRefcode1.Child = NewTextBlock(content: dlg.Refcode1.ParseToString(), fontSize:9);
+        borderDateInit.Child = NewTextBlock(content: $"{dlg.DateInit:MM/dd/yyyy}", fontSize:9);
+        borderNomEtat.Child = NewTextBlock(content: dlg.NomEtat, fontSize:9);
         
         //
         // Création du stackPanel
