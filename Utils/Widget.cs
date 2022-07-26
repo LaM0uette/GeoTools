@@ -49,7 +49,7 @@ public static class Widget
             Height = Constants.DlgHeight,
             Width = Constants.DlgWith,
             Margin = new Thickness(5),
-            Name = dlg.Id.ParseToString(),
+            Name = $"dlg_{dlg.Id}",
             ToolTip = $"{dlg.Dlg}\n" +
                       $"Etat : {dlg.NomEtat} ({dlg.CodeEtat})\n" +
                       $"ID : {dlg.Id}\n" +
