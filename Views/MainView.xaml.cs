@@ -6,8 +6,16 @@ namespace GeoTools.Views;
 
 public partial class MainView
 {
+    #region Statements
+
     public static TabItem VTabItemExportGrace { get; set; } = new ();
     public static TabItem VTabItemMenu { get; set; } = new ();
+
+    #endregion
+
+    //
+
+    #region Fonctions
 
     public MainView()
     {
@@ -15,18 +23,22 @@ public partial class MainView
         SetTabItems();
     }
 
-    //
-    // Functions
     private void SetTabItems()
     {
         VTabItemExportGrace = TabItemExportGrace;
         VTabItemMenu = TabItemMenu;
     }
 
+    #endregion
+
     //
-    // Actions
+
+    #region Actions
+
     private void BtnTiMenu_OnClick(object sender, RoutedEventArgs e)
     {
         Tasks.SetCurrentTabItem(VTabItemExportGrace);
     }
+
+    #endregion
 }
