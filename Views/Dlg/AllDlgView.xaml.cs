@@ -56,15 +56,6 @@ public partial class AllDlgView
             button.Click += SetActionsOnBtnDlg_Click;
             AllDlgPanel.Children.Add(button);
         }
-
-        // while (dlgCdReader.Read())
-        // {
-        //     var button = Widget.MakeBtnDlg(dictionary: Tasks.SqlDict(dlgCdReader), style: style);
-        //     button.Click += SetActionsOnBtnDlg_Click;
-        //     AllDlgPanel.Children.Add(button);
-        // }
-        //
-        // dlgCdReader.Close();
     }
 
     private Style? GetDlgTempStyle() => FindResource("ButtonDLGTemp") as Style;
