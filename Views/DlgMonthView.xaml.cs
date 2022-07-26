@@ -162,19 +162,19 @@ public partial class DlgMonthView : UserControl
             _ => Sql.Get(Req.DlgByWeek(week, year)) // TogBtnDlgTout
         };
 
-        var AllDlg = Tasks.GetAllDlgStructs(cdReader);
-        
-        foreach (var dlg in AllDlg)
-        {
-            Console.Write(dlg.Dlg);
-            Console.Write($" {dlg.Day}\n");
-        }
-        
-        Console.WriteLine("lkdsjkfjds");
-        Console.WriteLine("lkdsjkfjds");
-        Console.WriteLine("lkdsjkfjds");
-        Console.WriteLine("lkdsjkfjds");
-        Console.WriteLine("lkdsjkfjds");
+        // var AllDlg = Tasks.GetAllDlgStructs(cdReader);
+        //
+        // foreach (var dlg in AllDlg)
+        // {
+        //     Console.Write(dlg.Dlg);
+        //     Console.Write($" {dlg.Day}\n");
+        // }
+        //
+        // Console.WriteLine("lkdsjkfjds");
+        // Console.WriteLine("lkdsjkfjds");
+        // Console.WriteLine("lkdsjkfjds");
+        // Console.WriteLine("lkdsjkfjds");
+        // Console.WriteLine("lkdsjkfjds");
 
         Weeks weeks = new();
         while (cdReader.Read())
