@@ -8,29 +8,35 @@ namespace GeoTools.Views;
 
 public partial class DlgView
 {
+    #region Statements
+
     private static TabItem _vTabItemDlgAll = new();
     private static TabItem _vTabItemDlgMonth = new();
     private static List<ToggleButton> _toggleButtons = new();
 
+    #endregion
+    
+    //
+
+    #region Fonctions
+
     public DlgView()
     {
         InitializeComponent();
+        
         AddComboBoxData();
+        AddToggleButtonsInList();
         SetTabItems();
 
         Tasks.SetCurrentTabItem(_vTabItemDlgAll);
-
-        AddToggleButtonsInList();
+        
+        // Detecte le changement d'item du combobox
+        ComboBoxTypeView.SelectionChanged += OnViewChanged;
 
         // Detecte le changement de taille de la mainWindow
         if (Application.Current.MainWindow != null) Application.Current.MainWindow.SizeChanged += OnWindowSizeChanged;
-
-        // Detecte le changement d'item du combobox
-        ComboBoxTypeView.SelectionChanged += OnViewChanged;
     }
 
-    //
-    // Functions
     private void AddComboBoxData()
     {
         ComboBoxTypeView.Items.Insert(0, "TOUT");
@@ -54,12 +60,14 @@ public partial class DlgView
         _vTabItemDlgMonth = TabItemDlgMonth;
     }
 
+    #endregion
+
     //
-    // Actions
-    private void BtnDlgBackHome_OnClick(object sender, RoutedEventArgs e)
-    {
+
+    #region Actions
+
+    private void BtnDlgBackHome_OnClick(object sender, RoutedEventArgs e) =>
         Tasks.SetCurrentTabItem(MainView.VTabItemMenu);
-    }
 
     private void TogBtnDlg_OnClick(object sender, RoutedEventArgs e)
     {
@@ -69,13 +77,15 @@ public partial class DlgView
         DlgMonthView.InstanceDlgMonthView?.CreateBtnDlgMonth(year: 2022, month: 6, mode: btnName);
 
         foreach (var btn in _toggleButtons)
-        {
             btn.IsChecked = btnName == btn.Name;
-        }
     }
 
+    #endregion
+
     //
-    // Event
+
+    #region Events
+
     private void OnViewChanged(object sender, SelectionChangedEventArgs e)
     {
         switch (ComboBoxTypeView.SelectedIndex)
@@ -108,4 +118,6 @@ public partial class DlgView
         DlgViewAll.Width = maxWindowWith;
         DlgViewMonth.Width = maxWindowWith;
     }
+
+    #endregion
 }
