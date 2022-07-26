@@ -10,14 +10,22 @@ namespace GeoTools
 {
     public partial class MainWindow
     {
+        #region Statements
+
         public static User UserSession { get; } = new();
         public static Task PgSql { get; set; } = Sql.PgNotifierConnect();
 
+        #endregion
+
+        //
+
+        #region Fonctions
+        
         public MainWindow()
         {
             SetUserParameters();
         }
-        
+
         private static void SetUserParameters()
         {
             var cdReader = Sql.Get(Req.UserInformation(TskWindows.GetGuid()));
@@ -32,9 +40,17 @@ namespace GeoTools
             cdReader.Close();
         }
 
+        #endregion
+
+        //
+
+        #region Events
+
         private void OnApplicationExit(object sender, EventArgs e)
         {
             Sql.Close();
         }
+
+        #endregion
     }
 }
