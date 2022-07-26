@@ -28,6 +28,15 @@ public static class Widget
         borderDateInit.Child = textBlockDateInit;
         borderNomEtat.Child = textBlockNomEtat;
         
+        //
+        // Création du stackPanel
+        var stackPanel = NewStackPanel();
+        stackPanel.Children.Add(borderRefcode1);
+        stackPanel.Children.Add(borderDateInit);
+        stackPanel.Children.Add(borderNomEtat);
+
+        var dlgInfo = NewTextBlockTemporaire(dlg.DlgInfos);
+
         return new Button
         {
             Height = Constants.DlgHeight,
@@ -66,6 +75,35 @@ public static class Widget
             Margin = i.Equals(-1) ? Constants.DlgMargin : new Thickness(i),
             HorizontalAlignment = HorizontalAlignment.Right,
             VerticalAlignment = VerticalAlignment.Center,
+        };
+    }
+    
+    private static StackPanel NewStackPanel()
+    {
+        var sp = new StackPanel
+        {
+            Orientation = Orientation.Vertical,
+            HorizontalAlignment = HorizontalAlignment.Right,
+            Margin = new Thickness(3, 0, 0, 0),
+        };
+        
+        
+
+        return sp;
+    }
+    
+    private static TextBlock NewTextBlockTemporaire(string dlgInfos)
+    {
+        return new TextBlock
+        {
+            Text = dlgInfos.ToString()!.Replace("|", "\n"),
+            FontSize = 11,
+            TextWrapping = TextWrapping.Wrap,
+            VerticalAlignment = VerticalAlignment.Center,
+            HorizontalAlignment = HorizontalAlignment.Center,
+            TextAlignment = TextAlignment.Center,
+            Margin = new Thickness(0, 0, 3, 0),
+            Foreground = Brushes.White,
         };
     }
 
