@@ -8,6 +8,16 @@ namespace GeoTools.Utils;
 
 public static class Widget
 {
+    public static Button GetButtonFromDlg()
+    {
+        return new Button
+        {
+            Height = Constants.DlgHeight,
+            Width = Constants.DlgWith,
+            Background = Brushes.Coral
+        };
+    }
+    
     public static Button MakeBtnDlg(Dictionary<string, object> dictionary, Style style)
     {
         Thickness margin = new (2);

@@ -48,14 +48,23 @@ public partial class AllDlgView
         
         AllDlgPanel.Children.Clear();
 
-        while (dlgCdReader.Read())
+        var dlgStructs = Tasks.GetListOfDlgStructs(dlgCdReader);
+
+        foreach (var dlgStruct in dlgStructs)
         {
-            var button = Widget.MakeBtnDlg(dictionary: Tasks.SqlDict(dlgCdReader), style: style);
+            var button = Widget.GetButtonFromDlg();
             button.Click += SetActionsOnBtnDlg_Click;
             AllDlgPanel.Children.Add(button);
         }
 
-        dlgCdReader.Close();
+        // while (dlgCdReader.Read())
+        // {
+        //     var button = Widget.MakeBtnDlg(dictionary: Tasks.SqlDict(dlgCdReader), style: style);
+        //     button.Click += SetActionsOnBtnDlg_Click;
+        //     AllDlgPanel.Children.Add(button);
+        // }
+        //
+        // dlgCdReader.Close();
     }
 
     private Style? GetDlgTempStyle() => FindResource("ButtonDLGTemp") as Style;

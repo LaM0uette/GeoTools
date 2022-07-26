@@ -17,7 +17,7 @@ public static class Tasks
 {
     #region Struct
 
-    public struct AllDlgStruct
+    public struct DlgStruct
     {
         public int Id;
         public string Dlg;
@@ -135,42 +135,33 @@ public static class Tasks
 
     #region TestStruct
 
-    public static List<AllDlgStruct> GetAllDlgStructs(NpgsqlDataReader cdReader)
+    public static List<DlgStruct> GetListOfDlgStructs(NpgsqlDataReader cdReader)
     {
-        var allDlgStructs = new List<AllDlgStruct>();
+        var dlgStructs = new List<DlgStruct>();
         
         while (cdReader.Read())
         {
-            var allDlgStruct = new AllDlgStruct();
+            var dlgStruct = new DlgStruct();
             var dateTime = (DateTime)cdReader["date_initial"];
 
-            allDlgStruct.Id = $"{cdReader["id"]}".ParseToInt();
-            allDlgStruct.Dlg = $"{cdReader["dlg"]}";
+            dlgStruct.Id = $"{cdReader["id"]}".ParseToInt();
+            dlgStruct.Dlg = $"{cdReader["dlg"]}";
 
-            switch (dateTime.ToString("dddd", Constants.LangFr).Capitalize())
+            dlgStruct.Day = dateTime.ToString("dddd", Constants.LangFr).Capitalize() switch
             {
-                case "Lundi":
-                    allDlgStruct.Day = Constants.WeekDays.Lundi;
-                    break;
-                case "Mardi":
-                    allDlgStruct.Day = Constants.WeekDays.Mardi;
-                    break;
-                case "Mercredi":
-                    allDlgStruct.Day = Constants.WeekDays.Mercredi;
-                    break;
-                case "Jeudi":
-                    allDlgStruct.Day = Constants.WeekDays.Jeudi;
-                    break;
-                case "Vendredi":
-                    allDlgStruct.Day = Constants.WeekDays.Vendredi;
-                    break;
-            }
+                "Lundi" => Constants.WeekDays.Lundi,
+                "Mardi" => Constants.WeekDays.Mardi,
+                "Mercredi" => Constants.WeekDays.Mercredi,
+                "Jeudi" => Constants.WeekDays.Jeudi,
+                "Vendredi" => Constants.WeekDays.Vendredi,
+                _ => dlgStruct.Day
+            };
 
-            allDlgStructs.Add(allDlgStruct);
+            dlgStructs.Add(dlgStruct);
         }
+        
         cdReader.Close();
-
-        return allDlgStructs;
+        return dlgStructs;
     }
 
     #endregion
