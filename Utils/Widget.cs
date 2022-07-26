@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace GeoTools.Utils;
 
-public class Widget
+public static class Widget
 {
     public static Button MakeBtnDlg(Dictionary<string, object> dictionary, Style style)
     {
