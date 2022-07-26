@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:views="clr-namespace:GeoTools.Views"
+             xmlns:dlgViews="clr-namespace:GeoTools.Views.Dlg"
              mc:Ignorable="d">
 
 
@@ -129,9 +130,9 @@
                     <TabItem x:Name="TabItemDlgAll"
                              Visibility="Collapsed">
 
-                        <views:AllDlgView x:Name="AllDlgView"
-                                          HorizontalAlignment="Left"
-                                          VerticalAlignment="Center" />
+                        <dlgViews:AllDlgView x:Name="AllDlgView"
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Center" />
 
                     </TabItem>
 

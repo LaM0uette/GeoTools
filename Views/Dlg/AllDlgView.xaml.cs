@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using Npgsql;
 
 
-namespace GeoTools.Views;
+namespace GeoTools.Views.Dlg;
 
 public partial class AllDlgView
 {
