@@ -46,13 +46,13 @@ public partial class AllDlgView
         var style = GetDlgTempStyle();
         if (style is null) return;
         
-        DlgAllPanel.Children.Clear();
+        AllDlgPanel.Children.Clear();
 
         while (dlgCdReader.Read())
         {
             var button = Widget.MakeBtnDlg(dictionary: Tasks.SqlDict(dlgCdReader), style: style);
             button.Click += SetActionsOnBtnDlg_Click;
-            DlgAllPanel.Children.Add(button);
+            AllDlgPanel.Children.Add(button);
         }
 
         dlgCdReader.Close();

@@ -9,7 +9,7 @@
         <Border BorderThickness="2" 
                 BorderBrush="Aqua">
             
-            <WrapPanel x:Name="DlgAllPanel" 
+            <WrapPanel x:Name="AllDlgPanel" 
                        ScrollViewer.VerticalScrollBarVisibility="Auto" 
                        ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                        ScrollViewer.CanContentScroll="True"/>
