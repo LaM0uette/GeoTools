@@ -8,27 +8,48 @@ namespace GeoTools.Views.Dlg;
 
 public partial class AllDlgView
 {
+    #region Statements
+
     public static AllDlgView Instance = new();
 
     public AllDlgView()
     {
         Instance = this;
-
         InitializeComponent();
     }
 
+    #endregion
+
     //
-    // Functions
+
+    #region Actions
+
+    // TODO: A MODIFIER !
+    private static void BtnDlgAll_Click(object sender, RoutedEventArgs e)
+    {
+        var btnName = ((Button) sender).Name;
+        
+        if (btnName is not null)
+        {
+            MessageBox.Show($"Tu as cliqué sur le bouton : {btnName}");
+        }
+    }
+
+    #endregion
+
+    //
+
+    #region Fonctions
+
     public void CreateBtnDlgAll(NpgsqlDataReader cdReader)
     {
-        var style = FindResource("ButtonDLGTemp") as Style;
+        var style = GetDlgTempStyle();
+        if (style is null) return;
         
         DlgAllPanel.Children.Clear();
 
         while (cdReader.Read())
         {
-            if (style == null) continue;
-
             var button = Widget.MakeBtnDlg(dictionary: Tasks.SqlDict(cdReader), style: style);
             button.Click += BtnDlgAll_Click;
             DlgAllPanel.Children.Add(button);
@@ -37,14 +58,7 @@ public partial class AllDlgView
         cdReader.Close();
     }
 
-    //
-    // Actions
-    public static void BtnDlgAll_Click(object sender, RoutedEventArgs e)
-    {
-        var btnName = ((Button) sender).Name;
-        if (btnName is not null)
-        {
-            MessageBox.Show($"Tu as cliqué sur le bouton : {btnName}");
-        }
-    }
+    private Style? GetDlgTempStyle() => FindResource("ButtonDLGTemp") as Style;
+
+    #endregion
 }
