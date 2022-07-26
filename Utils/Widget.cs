@@ -34,14 +34,28 @@ public static class Widget
         stackPanel.Children.Add(borderRefcode1);
         stackPanel.Children.Add(borderDateInit);
         stackPanel.Children.Add(borderNomEtat);
-
+        
         var dlgInfo = NewTextBlockTemporaire(dlg.DlgInfos);
+        var separator = NewSeparator();
+        
+        var stackPanelAll = NewStackPanelTemporaire();
+        stackPanelAll.Children.Add(dlgInfo);
+        stackPanelAll.Children.Add(separator);
+        stackPanelAll.Children.Add(stackPanel);
 
         return new Button
         {
+            Content = stackPanelAll,
             Height = Constants.DlgHeight,
             Width = Constants.DlgWith,
-            Background = Brushes.Coral
+            Margin = new Thickness(5),
+            Name = dlg.Id.ParseToString(),
+            ToolTip = $"{dlg.Dlg}\n" +
+                      $"Etat : {dlg.NomEtat} ({dlg.CodeEtat})\n" +
+                      $"ID : {dlg.Id}\n" +
+                      $"admin={MainWindow.UserSession.Admin}\n" +
+                      $"prenom={MainWindow.UserSession.Prenom}", 
+            Background = Tasks.HexBrush(hexColor: dlg.CouleurEtat)
         };
     }
 
@@ -92,6 +106,19 @@ public static class Widget
         return sp;
     }
     
+    private static Separator NewSeparator()
+    {
+        var sp = new Separator
+        {
+            Width = 16,
+            Background = Brushes.Transparent
+        };
+        
+        
+
+        return sp;
+    }
+    
     private static TextBlock NewTextBlockTemporaire(string dlgInfos)
     {
         return new TextBlock
@@ -105,6 +132,18 @@ public static class Widget
             Margin = new Thickness(0, 0, 3, 0),
             Foreground = Brushes.White,
         };
+    }
+    
+    private static StackPanel NewStackPanelTemporaire()
+    {
+        var sp = new StackPanel
+        {
+            Orientation = Orientation.Horizontal
+        };
+        
+        
+
+        return sp;
     }
 
     #endregion
