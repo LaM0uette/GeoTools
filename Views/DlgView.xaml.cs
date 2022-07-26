@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using GeoTools.Utils;
+using Npgsql;
 
 namespace GeoTools.Views;
 
@@ -13,13 +14,7 @@ public partial class DlgView
     private static TabItem _vTabItemDlgAll = new();
     private static TabItem _vTabItemDlgMonth = new();
     private static List<ToggleButton> _toggleButtons = new();
-
-    #endregion
     
-    //
-
-    #region Fonctions
-
     public DlgView()
     {
         InitializeComponent();
@@ -29,13 +24,39 @@ public partial class DlgView
         SetTabItems();
 
         Tasks.SetCurrentTabItem(_vTabItemDlgAll);
+        Dlg.AllDlgView.Instance.CreateBtnDlgAll(GetReaderAllDlgMode());
         
-        // Detecte le changement d'item du combobox
-        ComboBoxTypeView.SelectionChanged += OnViewChanged;
-
-        // Detecte le changement de taille de la mainWindow
-        if (Application.Current.MainWindow != null) Application.Current.MainWindow.SizeChanged += OnWindowSizeChanged;
+        ComboBoxTypeView.SelectionChanged += OnViewChanged;  // Detecte le changement d'item du combobox
+        if (Application.Current.MainWindow != null) Application.Current.MainWindow.SizeChanged += OnWindowSizeChanged;  // Detecte le changement de taille de la mainWindow
     }
+
+    #endregion
+
+    //
+
+    #region Actions
+
+    private void BtnDlgBackHome_OnClick(object sender, RoutedEventArgs e)
+    {
+        Tasks.SetCurrentTabItem(MainView.VTabItemMenu);
+    }
+
+    private void TogBtnDlg_OnClick(object sender, RoutedEventArgs e)
+    {
+        var btnName = ((ToggleButton) sender).Name;
+
+        Dlg.AllDlgView.Instance.CreateBtnDlgAll(GetReaderAllDlgMode(btnName));
+        DlgMonthView.InstanceDlgMonthView?.CreateBtnDlgMonth(year: 2022, month: 6, mode: btnName);
+
+        foreach (var btn in _toggleButtons)
+            btn.IsChecked = btnName == btn.Name;
+    }
+
+    #endregion
+    
+    //
+
+    #region Fonctions
 
     private void AddComboBoxData()
     {
@@ -54,30 +75,42 @@ public partial class DlgView
         _toggleButtons.Add(TogBtnDlgFait);
     }
 
+    private static NpgsqlDataReader GetReaderWeekDlgMode(string btnName = "")
+    {
+        // TODO: A MODIFIER !
+        return btnName switch
+        {
+            "TogBtnDlgAFaire" => Sql.Get(Req.AllDlgFiltered(1)),
+            "TogBtnDlgFait" => Sql.Get(Req.AllDlgFiltered(2)),
+            _ => Sql.Get(Req.AllDlg())
+        };
+    }
+    
+    private static NpgsqlDataReader GetReaderMonthDlgMode(string btnName = "")
+    {
+        // TODO: A MODIFIER !
+        return btnName switch
+        {
+            "TogBtnDlgAFaire" => Sql.Get(Req.AllDlgFiltered(1)),
+            "TogBtnDlgFait" => Sql.Get(Req.AllDlgFiltered(2)),
+            _ => Sql.Get(Req.AllDlg())
+        };
+    }
+    
+    private static NpgsqlDataReader GetReaderAllDlgMode(string btnName = "")
+    {
+        return btnName switch
+        {
+            "TogBtnDlgAFaire" => Sql.Get(Req.AllDlgFiltered(1)),
+            "TogBtnDlgFait" => Sql.Get(Req.AllDlgFiltered(2)),
+            _ => Sql.Get(Req.AllDlg())
+        };
+    }
+
     private void SetTabItems()
     {
         _vTabItemDlgAll = TabItemDlgAll;
         _vTabItemDlgMonth = TabItemDlgMonth;
-    }
-
-    #endregion
-
-    //
-
-    #region Actions
-
-    private void BtnDlgBackHome_OnClick(object sender, RoutedEventArgs e) =>
-        Tasks.SetCurrentTabItem(MainView.VTabItemMenu);
-
-    private void TogBtnDlg_OnClick(object sender, RoutedEventArgs e)
-    {
-        var btnName = ((ToggleButton) sender).Name;
-
-        Dlg.AllDlgView.Instance.CreateBtnDlgAll(btnName);
-        DlgMonthView.InstanceDlgMonthView?.CreateBtnDlgMonth(year: 2022, month: 6, mode: btnName);
-
-        foreach (var btn in _toggleButtons)
-            btn.IsChecked = btnName == btn.Name;
     }
 
     #endregion

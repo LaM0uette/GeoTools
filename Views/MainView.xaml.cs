@@ -10,18 +10,18 @@ public partial class MainView
 
     public static TabItem VTabItemExportGrace { get; set; } = new ();
     public static TabItem VTabItemMenu { get; set; } = new ();
+    
+    public MainView()
+    {
+        InitializeComponent();
+        SetTabItems();
+    }
 
     #endregion
 
     //
 
     #region Fonctions
-
-    public MainView()
-    {
-        InitializeComponent();
-        SetTabItems();
-    }
 
     private void SetTabItems()
     {
