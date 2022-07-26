@@ -63,7 +63,7 @@ public static class Widget
 
     //
 
-    #region SubFonctions
+    #region NewLayouts
 
     private static TextBlock NewTextBlock(string content, int fontSize)
     {
@@ -150,6 +150,7 @@ public static class Widget
     
     //
     
+    // TODO: A SUPPRIMER!
     public static Button MakeBtnDlg(Dictionary<string, object> dictionary, Style style)
     {
         Thickness margin = new (2);
