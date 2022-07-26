@@ -86,9 +86,9 @@ public static class Tasks
         var dlgId = $"{evt["data"]!["ex_dl_id"]}".ParseToInt();
         var dlgName = $"dlg_{dlgId}";
 
-        DlgAllView.InstanceDlgAllView.DlgAllPanel.BeginInvoke((Action)(() =>
+        Views.Dlg.AllDlgView.Instance.DlgAllPanel.BeginInvoke((Action)(() =>
         {
-            var panel = DlgAllView.InstanceDlgAllView.DlgAllPanel;
+            var panel = Views.Dlg.AllDlgView.Instance.DlgAllPanel;
             var cdReader = Sql.Get(Req.GetDlg(2));
             // cdReader.Read();
             //
@@ -115,9 +115,9 @@ public static class Tasks
     public static void Delete(JObject evt)
     {
         var dlId = $"dlg_{evt["data"]!["ex_dl_id"]}";
-        DlgAllView.InstanceDlgAllView.DlgAllPanel.BeginInvoke((Action)(() =>
+        Views.Dlg.AllDlgView.Instance.DlgAllPanel.BeginInvoke((Action)(() =>
         {
-            var panel = DlgAllView.InstanceDlgAllView.DlgAllPanel;
+            var panel = Views.Dlg.AllDlgView.Instance.DlgAllPanel;
 
             foreach (Button i in panel.Children)
             {

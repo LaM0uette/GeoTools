@@ -95,7 +95,7 @@ public static class Sql
     
     private static void TestsyncTask()
     {
-        var instance = DlgAllView.InstanceDlgAllView.DlgAllPanel;
+        var instance = Views.Dlg.AllDlgView.Instance.DlgAllPanel;
         Console.WriteLine("ereerer");
         foreach (var dlg in instance.Children)
         {

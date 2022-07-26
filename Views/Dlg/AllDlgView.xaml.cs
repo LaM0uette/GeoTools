@@ -10,11 +10,11 @@ namespace GeoTools.Views.Dlg;
 
 public partial class AllDlgView
 {
-    public static AllDlgView InstanceDlgAllView = new();
+    public static AllDlgView Instance = new();
     
     public AllDlgView()
     {
-        InstanceDlgAllView = this;
+        Instance = this;
         
         InitializeComponent();
         CreateBtnDlgAll();
