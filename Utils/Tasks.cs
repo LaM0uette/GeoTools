@@ -213,6 +213,8 @@ public static class Tasks
 
     #endregion
     
+    //
+    
     // TODO: A MODIFIER !
     public static Dictionary<string, object> SqlDict(NpgsqlDataReader cdReader)
     {
