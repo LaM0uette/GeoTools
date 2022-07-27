@@ -13,30 +13,31 @@ public static class Widget
 
     public static Button GetButtonFromDlg(Tasks.DlgStruct dlg)
     {
-        // Création des borders
-        var borderRefcode1 = NewTextBlockBorder();
-        var borderDateInit = NewTextBlockBorder();
-        var borderNomEtat = NewTextBlockBorder();
+        StackPanel NewStackPanelDlgInfos()
+        {
+            // Création des borders
+            var borderRefcode1 = Widgets.NewBorder();
+            var borderDateInit = Widgets.NewBorder();
+            var borderNomEtat = Widgets.NewBorder();
         
-        // Attribution des textBlock dans les borders
-        borderRefcode1.Child = NewTextBlock(content: dlg.Refcode1.ParseToString(), fontSize:9);
-        borderDateInit.Child = NewTextBlock(content: $"{dlg.DateInit:MM/dd/yyyy}", fontSize:9);
-        borderNomEtat.Child = NewTextBlock(content: dlg.NomEtat, fontSize:9);
-        
-        //
-        // Création du stackPanel
-        var stackPanel = NewStackPanel();
-        stackPanel.Children.Add(borderRefcode1);
-        stackPanel.Children.Add(borderDateInit);
-        stackPanel.Children.Add(borderNomEtat);
-        
-        var dlgInfo = NewTextBlockTemporaire(dlg.DlgInfos);
-        var separator = NewSeparator();
-        
+            // Attribution des textBlock dans les borders
+            borderRefcode1.Child = NewTextBlock(dlg.Refcode1.ParseToString());
+            borderDateInit.Child = NewTextBlock($"{dlg.DateInit:MM/dd/yyyy}");
+            borderNomEtat.Child = NewTextBlock(dlg.NomEtat);
+            
+            // Création du stackPanel
+            var stackPanel = NewStackPanel();
+            stackPanel.Children.Add(borderRefcode1);
+            stackPanel.Children.Add(borderDateInit);
+            stackPanel.Children.Add(borderNomEtat);
+
+            return stackPanel;
+        }
+
         var stackPanelAll = NewStackPanelTemporaire();
-        stackPanelAll.Children.Add(dlgInfo);
-        stackPanelAll.Children.Add(separator);
-        stackPanelAll.Children.Add(stackPanel);
+        stackPanelAll.Children.Add(NewTextBlockTemporaire(dlg.DlgInfos));
+        stackPanelAll.Children.Add(NewSeparator());
+        stackPanelAll.Children.Add(NewStackPanelDlgInfos());
 
         return new Button
         {
@@ -60,7 +61,7 @@ public static class Widget
 
     #region NewLayouts
 
-    private static TextBlock NewTextBlock(string content, int fontSize)
+    private static TextBlock NewTextBlock(string content, int fontSize = 9)
     {
         return new TextBlock
         {
@@ -71,22 +72,7 @@ public static class Widget
             FontSize = fontSize
         };
     }
-    
-    private static Border NewTextBlockBorder(double i = -1)
-    {
-        return new Border
-        {
-            CornerRadius = new CornerRadius(3),
-            Background = Brushes.White,
-            BorderBrush = Brushes.White,
-            Height = 13,
-            Width = 65,
-            Margin = i.Equals(-1) ? Constants.DlgMargin : new Thickness(i),
-            HorizontalAlignment = HorizontalAlignment.Right,
-            VerticalAlignment = VerticalAlignment.Center,
-        };
-    }
-    
+
     private static StackPanel NewStackPanel()
     {
         var sp = new StackPanel
@@ -118,7 +104,7 @@ public static class Widget
     {
         return new TextBlock
         {
-            Text = dlgInfos.ToString()!.Replace("|", "\n"),
+            Text = dlgInfos.Replace("|", "\n"),
             FontSize = 11,
             TextWrapping = TextWrapping.Wrap,
             VerticalAlignment = VerticalAlignment.Center,
@@ -142,7 +128,7 @@ public static class Widget
     }
 
     #endregion
-    
+
     //
     
     // TODO: A SUPPRIMER!
