@@ -29,7 +29,7 @@ public static class Constants
     //...
     // Dlg created
     public const byte DlgWith = 177;  //300;
-    public const byte DlgHeight = 50;  //120;
+    public const byte DlgHeight = 60;  //120;
     public const byte DlgLargeColumnWidth = 140;
     public const byte LabelFontSize = 9;
     public const byte LabelHeightSize = 17;  //26;

@@ -35,7 +35,8 @@ public static class Widget
         }
 
         var stackPanelAll = NewStackPanelTemporaire();
-        stackPanelAll.Children.Add(NewTextBlockTemporaire(dlg.DlgInfos));
+        
+        stackPanelAll.Children.Add(Widgets.NewTextBlock(content: dlg.DlgInfos.Replace("|", "\n")));
         stackPanelAll.Children.Add(NewSeparator());
         stackPanelAll.Children.Add(NewStackPanelDlgInfos());
 
