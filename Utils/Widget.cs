@@ -88,22 +88,7 @@ public static class Widget
 
         return sp;
     }
-    
-    private static TextBlock NewTextBlockTemporaire(string dlgInfos)
-    {
-        return new TextBlock
-        {
-            Text = dlgInfos.Replace("|", "\n"),
-            FontSize = 11,
-            TextWrapping = TextWrapping.Wrap,
-            VerticalAlignment = VerticalAlignment.Center,
-            HorizontalAlignment = HorizontalAlignment.Center,
-            TextAlignment = TextAlignment.Center,
-            Margin = new Thickness(0, 0, 3, 0),
-            Foreground = Brushes.White,
-        };
-    }
-    
+
     private static StackPanel NewStackPanelTemporaire()
     {
         var sp = new StackPanel
