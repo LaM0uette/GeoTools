@@ -34,15 +34,25 @@ public static class Widget
             return stackPanel;
         }
 
-        var stackPanelAll = NewStackPanelTemporaire();
+        // var stackPanelAll = NewStackPanelTemporaire();
+        //
+        // stackPanelAll.Children.Add(Widgets.NewTextBlock(content: dlg.DlgInfos.Replace("|", "\n")));
+        // stackPanelAll.Children.Add(NewSeparator());
+        // stackPanelAll.Children.Add(NewStackPanelDlgInfos());
+
+        var gridDlg = Widgets.NewGrid();
+        var textBlockDlgInfos = Widgets.NewTextBlock(content: dlg.DlgInfos.Replace("|", "\n"));
+        var stackPanelDlgInfos = NewStackPanelDlgInfos();
         
-        stackPanelAll.Children.Add(Widgets.NewTextBlock(content: dlg.DlgInfos.Replace("|", "\n")));
-        stackPanelAll.Children.Add(NewSeparator());
-        stackPanelAll.Children.Add(NewStackPanelDlgInfos());
+        Grid.SetColumn(textBlockDlgInfos, 0);
+        Grid.SetColumn(stackPanelDlgInfos, 2);
+
+        gridDlg.Children.Add(textBlockDlgInfos);
+        gridDlg.Children.Add(stackPanelDlgInfos);
 
         return new Button
         {
-            Content = stackPanelAll,
+            Content = gridDlg,
             Height = Constants.DlgHeight,
             Width = Constants.DlgWith,
             Margin = new Thickness(5),

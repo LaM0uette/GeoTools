@@ -90,6 +90,33 @@ public static class Widgets
     }
 
     #endregion
+    
+    //
+    
+    #region Border
+
+    public struct GridStruct
+    {
+    }
+        
+    public static Grid NewGrid(GridStruct strct = new())
+    {
+        var grd = new Grid();
+
+        var colDef1 = new ColumnDefinition();
+        var colDef2 = new ColumnDefinition();
+        var colDef3 = new ColumnDefinition();
+        
+        colDef2.Width = new GridLength(1,GridUnitType.Star);
+        
+        grd.ColumnDefinitions.Add(colDef1);
+        grd.ColumnDefinitions.Add(colDef2);
+        grd.ColumnDefinitions.Add(colDef3);
+
+        return grd;
+    }
+
+    #endregion
 
 
 }
