@@ -21,9 +21,9 @@ public static class Widget
             var borderNomEtat = Widgets.NewBorder();
         
             // Attribution des textBlock dans les borders
-            borderRefcode1.Child = NewTextBlock(dlg.Refcode1.ParseToString());
-            borderDateInit.Child = NewTextBlock($"{dlg.DateInit:MM/dd/yyyy}");
-            borderNomEtat.Child = NewTextBlock(dlg.NomEtat);
+            borderRefcode1.Child = Widgets.NewTextBlock(dlg.Refcode1.ParseToString());
+            borderDateInit.Child = Widgets.NewTextBlock($"{dlg.DateInit:MM/dd/yyyy}");
+            borderNomEtat.Child = Widgets.NewTextBlock(dlg.NomEtat);
             
             // Création du stackPanel
             var stackPanel = NewStackPanel();
@@ -60,18 +60,6 @@ public static class Widget
     //
 
     #region NewLayouts
-
-    private static TextBlock NewTextBlock(string content, int fontSize = 9)
-    {
-        return new TextBlock
-        {
-            Text = content,
-            VerticalAlignment = VerticalAlignment.Center,
-            HorizontalAlignment = HorizontalAlignment.Center,
-            Foreground = Brushes.Black,
-            FontSize = fontSize
-        };
-    }
 
     private static StackPanel NewStackPanel()
     {
