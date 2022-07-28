@@ -26,7 +26,21 @@ public static class Constants
 
     #endregion
     
-    //...
+    //
+
+    #region Structs
+
+    public static class Dlg
+    {
+        public const byte Width = 200;
+        public const byte Height = 80;
+        
+        public const byte LeftWidth = 60;
+        public const byte RightWidth = 100;
+    }
+
+    #endregion
+    
     // Dlg created
     public const byte DlgWith = 200;  //300;
     public const byte DlgHeight = 60;  //120;

@@ -97,11 +97,11 @@ public static class Widgets
 
     public static Grid NewDlgGrid()
     {
-        var grd = new Grid{Width = Constants.DlgWith};
+        var grd = new Grid{Width = Constants.Dlg.Width};
 
-        grd.ColumnDefinitions.Add(new ColumnDefinition{Width = new GridLength(50)});
+        grd.ColumnDefinitions.Add(new ColumnDefinition{Width = new GridLength(Constants.Dlg.LeftWidth)});
         grd.ColumnDefinitions.Add(new ColumnDefinition{Width = new GridLength(1, GridUnitType.Star)});
-        grd.ColumnDefinitions.Add(new ColumnDefinition{Width = new GridLength(100)});
+        grd.ColumnDefinitions.Add(new ColumnDefinition{Width = new GridLength(Constants.Dlg.RightWidth)});
 
         return grd;
     }
