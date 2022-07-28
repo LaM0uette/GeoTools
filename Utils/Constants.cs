@@ -33,10 +33,16 @@ public static class Constants
     public static class Dlg
     {
         public const byte Width = 200;
-        public const byte Height = 100;
+        public const byte Height = 70;
         
         public const byte LeftWidth = 80;
         public const byte RightWidth = 100;
+    }
+    
+    public static class Border
+    {
+        public const byte Width = 80;
+        public const byte Height = 15;
     }
 
     #endregion
