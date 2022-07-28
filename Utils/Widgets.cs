@@ -18,7 +18,7 @@ public static class Widgets
             BorderBrush = new SolidColorBrush(Color.FromRgb(255, 255, 255)),
             Width = Constants.Border.Width,
             Height = Constants.Border.Height,
-            Margin = new Thickness(0, 0, 5, 0),
+            Margin = new Thickness(0, 0, 3, 0),
             HorizontalAlignment = HorizontalAlignment.Right,
             VerticalAlignment = VerticalAlignment.Center
         };
@@ -68,6 +68,7 @@ public static class Widgets
         grd.RowDefinitions.Add(new RowDefinition{Height = new GridLength(1, GridUnitType.Star)});
         grd.RowDefinitions.Add(new RowDefinition{Height = new GridLength(1, GridUnitType.Star)});
         grd.RowDefinitions.Add(new RowDefinition{Height = new GridLength(1, GridUnitType.Star)});
+        grd.RowDefinitions.Add(new RowDefinition{Height = new GridLength(5)});
 
         return grd;
     }

@@ -13,6 +13,10 @@ public static class Widget
 
     public static Button GetButtonFromDlg(Tasks.DlgStruct dlg)
     {
+        var bd = new Border();
+        bd.BorderBrush = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+        bd.BorderThickness = new Thickness(0, 0, 0, 3);
+        
         var gridDlg = Widgets.NewDlgGrid();
         var grdDlgInfos = NewDlgInfos(dlg);
 
@@ -26,9 +30,11 @@ public static class Widget
         gridDlg.Children.Add(textBlockDlgInfos);
         gridDlg.Children.Add(grdDlgInfos);
 
+        bd.Child = gridDlg;
+
         return new Button
         {
-            Content = gridDlg,
+            Content = bd,
             Height = Constants.Dlg.Height,
             Width = Constants.Dlg.Width,
             Margin = new Thickness(5),
