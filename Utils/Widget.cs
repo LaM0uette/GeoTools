@@ -13,48 +13,22 @@ public static class Widget
 
     public static Button GetButtonFromDlg(Tasks.DlgStruct dlg)
     {
-        StackPanel NewStackPanelDlgInfos()
-        {
-            // Création des borders
-            var borderRefcode1 = Widgets.NewBorder();
-            var borderDateInit = Widgets.NewBorder();
-            var borderNomEtat = Widgets.NewBorder();
-        
-            // Attribution des textBlock dans les borders
-            borderRefcode1.Child = Widgets.NewTextBlock(dlg.Refcode1.ParseToString());
-            borderDateInit.Child = Widgets.NewTextBlock($"{dlg.DateInit:MM/dd/yyyy}");
-            borderNomEtat.Child = Widgets.NewTextBlock(dlg.NomEtat);
-            
-            // Création du stackPanel
-            var stackPanel = NewStackPanel();
-            stackPanel.Children.Add(borderRefcode1);
-            stackPanel.Children.Add(borderDateInit);
-            stackPanel.Children.Add(borderNomEtat);
-
-            return stackPanel;
-        }
-
-        // var stackPanelAll = NewStackPanelTemporaire();
-        //
-        // stackPanelAll.Children.Add(Widgets.NewTextBlock(content: dlg.DlgInfos.Replace("|", "\n")));
-        // stackPanelAll.Children.Add(NewSeparator());
-        // stackPanelAll.Children.Add(NewStackPanelDlgInfos());
-
         var gridDlg = Widgets.NewDlgGrid();
+        var grdDlgInfos = NewDlgInfos(dlg);
+
         var textBlockDlgInfos = Widgets.NewTextBlock(content: dlg.DlgInfos.Replace("|", "\n"));
-        var stackPanelDlgInfos = NewStackPanelDlgInfos();
 
         Grid.SetColumn(textBlockDlgInfos, 0);
-        Grid.SetColumn(stackPanelDlgInfos, 2);
+        Grid.SetColumn(grdDlgInfos, 2);
 
         gridDlg.Children.Add(textBlockDlgInfos);
-        gridDlg.Children.Add(stackPanelDlgInfos);
+        gridDlg.Children.Add(grdDlgInfos);
 
         return new Button
         {
             Content = gridDlg,
-            Height = Constants.DlgHeight,
-            Width = Constants.DlgWith,
+            Height = Constants.Dlg.Height,
+            Width = Constants.Dlg.Width,
             Margin = new Thickness(5),
             Name = $"dlg_{dlg.Id}",
             ToolTip = $"{dlg.Dlg}\n" +
@@ -72,6 +46,31 @@ public static class Widget
 
     #region NewLayouts
 
+    private static Grid NewDlgInfos(Tasks.DlgStruct dlg)
+    {
+        var grd = Widgets.NewDlgInfosGrid();
+
+        var g1 = Widgets.NewBorder();
+        var g2 = Widgets.NewBorder();
+        var g3 = Widgets.NewBorder();
+        
+        g1.Child = Widgets.NewTextBlock(dlg.Refcode1.ParseToString());
+        g2.Child = Widgets.NewTextBlock($"{dlg.DateInit:MM/dd/yyyy}");
+        g3.Child = Widgets.NewTextBlock(dlg.NomEtat);
+        
+        Grid.SetRow(g1, 0);
+        Grid.SetRow(g2, 1);
+        Grid.SetRow(g3, 2);
+        
+        grd.Children.Add(g1);
+        grd.Children.Add(g2);
+        grd.Children.Add(g3);
+
+        return grd;
+    }
+    
+    //
+    //
     private static StackPanel NewStackPanel()
     {
         var sp = new StackPanel
@@ -168,8 +167,8 @@ public static class Widget
         return new Button()
         {
             Content = stackAll,
-            Height = Constants.DlgHeight,
-            Width = Constants.DlgWith,
+            Height = Constants.Dlg.Height,
+            Width = Constants.Dlg.Width,
             Margin = new Thickness(5),
             Name = $"dlg_{dictionary["id"]}",
             //Style = style,

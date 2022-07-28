@@ -23,9 +23,9 @@ public static class Widgets
         public int CornerRadius { get => _cornerRadius ?? 2; set => _cornerRadius = value; }
         public (byte, byte, byte) Background { get => _background ?? (255, 255, 255); set => _background = value; }
         public (byte, byte, byte) BorderBrush { get => _borderBrush ?? (255, 255, 255); set => _borderBrush = value; }
-        public int Width { get => _width ?? 65; set => _width = value; }
-        public int Height { get => _height ?? 10; set => _height = value; }
-        public Thickness Margin { get => _margin ?? new Thickness(0, 2, 0, 2); set => _margin = value; }
+        public int Width { get => _width ?? 80; set => _width = value; }
+        public int Height { get => _height ?? 20; set => _height = value; }
+        public Thickness Margin { get => _margin ?? new Thickness(0); set => _margin = value; }
         public HorizontalAlignment HorizontalAlignment { get => _horizontalAlignment ?? HorizontalAlignment.Right; set => _horizontalAlignment = value; }
         public VerticalAlignment VerticalAlignment { get => _verticalAlignment ?? VerticalAlignment.Center; set => _verticalAlignment = value; }
     }
@@ -65,10 +65,10 @@ public static class Widgets
         public TextAlignment TextAlignment { get => _textAlignment ?? TextAlignment.Center; set => _textAlignment = value; }
         public TextWrapping TextWrapping { get => _textWrapping ?? TextWrapping.Wrap; set => _textWrapping = value; }
         public (byte, byte, byte) Foreground { get => _foreground ?? (25, 25, 25); set => _foreground = value; }
-        public int Width { get => _width ?? 65; set => _width = value; }
-        public int Height { get => _height ?? 10; set => _height = value; }
+        public int Width { get => _width ?? 80; set => _width = value; }
+        public int Height { get => _height ?? 20; set => _height = value; }
         public Thickness Margin { get => _margin ?? new Thickness(0); set => _margin = value; }
-        public HorizontalAlignment HorizontalAlignment { get => _horizontalAlignment ?? HorizontalAlignment.Left; set => _horizontalAlignment = value; }
+        public HorizontalAlignment HorizontalAlignment { get => _horizontalAlignment ?? HorizontalAlignment.Center; set => _horizontalAlignment = value; }
         public VerticalAlignment VerticalAlignment { get => _verticalAlignment ?? VerticalAlignment.Center; set => _verticalAlignment = value; }
     }
         
@@ -102,6 +102,17 @@ public static class Widgets
         grd.ColumnDefinitions.Add(new ColumnDefinition{Width = new GridLength(Constants.Dlg.LeftWidth)});
         grd.ColumnDefinitions.Add(new ColumnDefinition{Width = new GridLength(1, GridUnitType.Star)});
         grd.ColumnDefinitions.Add(new ColumnDefinition{Width = new GridLength(Constants.Dlg.RightWidth)});
+
+        return grd;
+    }
+    
+    public static Grid NewDlgInfosGrid()
+    {
+        var grd = new Grid{ShowGridLines = true, Height = Constants.Dlg.Height};
+
+        grd.RowDefinitions.Add(new RowDefinition{Height = new GridLength(1, GridUnitType.Star)});
+        grd.RowDefinitions.Add(new RowDefinition{Height = new GridLength(1, GridUnitType.Star)});
+        grd.RowDefinitions.Add(new RowDefinition{Height = new GridLength(1, GridUnitType.Star)});
 
         return grd;
     }
