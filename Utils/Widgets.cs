@@ -25,7 +25,7 @@ public static class Widgets
         public (byte, byte, byte) BorderBrush { get => _borderBrush ?? (255, 255, 255); set => _borderBrush = value; }
         public int Width { get => _width ?? 65; set => _width = value; }
         public int Height { get => _height ?? 10; set => _height = value; }
-        public Thickness Margin { get => _margin ?? new Thickness(3); set => _margin = value; }
+        public Thickness Margin { get => _margin ?? new Thickness(0, 2, 0, 2); set => _margin = value; }
         public HorizontalAlignment HorizontalAlignment { get => _horizontalAlignment ?? HorizontalAlignment.Right; set => _horizontalAlignment = value; }
         public VerticalAlignment VerticalAlignment { get => _verticalAlignment ?? VerticalAlignment.Center; set => _verticalAlignment = value; }
     }
@@ -68,7 +68,7 @@ public static class Widgets
         public int Width { get => _width ?? 65; set => _width = value; }
         public int Height { get => _height ?? 10; set => _height = value; }
         public Thickness Margin { get => _margin ?? new Thickness(0); set => _margin = value; }
-        public HorizontalAlignment HorizontalAlignment { get => _horizontalAlignment ?? HorizontalAlignment.Center; set => _horizontalAlignment = value; }
+        public HorizontalAlignment HorizontalAlignment { get => _horizontalAlignment ?? HorizontalAlignment.Left; set => _horizontalAlignment = value; }
         public VerticalAlignment VerticalAlignment { get => _verticalAlignment ?? VerticalAlignment.Center; set => _verticalAlignment = value; }
     }
         
@@ -102,13 +102,17 @@ public static class Widgets
     public static Grid NewGrid(GridStruct strct = new())
     {
         var grd = new Grid();
+        grd.ShowGridLines = true;
+        grd.Width = Constants.DlgWith;
 
         var colDef1 = new ColumnDefinition();
         var colDef2 = new ColumnDefinition();
         var colDef3 = new ColumnDefinition();
-        
-        colDef2.Width = new GridLength(1,GridUnitType.Star);
-        
+
+        colDef1.Width = new GridLength(50);
+        colDef2.Width = new GridLength(1, GridUnitType.Star);
+        colDef3.Width = new GridLength(100);
+
         grd.ColumnDefinitions.Add(colDef1);
         grd.ColumnDefinitions.Add(colDef2);
         grd.ColumnDefinitions.Add(colDef3);

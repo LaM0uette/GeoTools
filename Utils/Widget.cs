@@ -43,11 +43,15 @@ public static class Widget
         var gridDlg = Widgets.NewGrid();
         var textBlockDlgInfos = Widgets.NewTextBlock(content: dlg.DlgInfos.Replace("|", "\n"));
         var stackPanelDlgInfos = NewStackPanelDlgInfos();
+
+        var n = new Border() {Width = 20, Height = 20, Background = Brushes.Aqua};
         
         Grid.SetColumn(textBlockDlgInfos, 0);
+        Grid.SetColumn(n, 1);
         Grid.SetColumn(stackPanelDlgInfos, 2);
 
         gridDlg.Children.Add(textBlockDlgInfos);
+        gridDlg.Children.Add(n);
         gridDlg.Children.Add(stackPanelDlgInfos);
 
         return new Button
@@ -63,7 +67,7 @@ public static class Widget
                       $"admin={MainWindow.UserSession.Admin}\n" +
                       $"prenom={MainWindow.UserSession.Prenom}", 
             Background = Tasks.HexBrush(hexColor: dlg.CouleurEtat)
-        };
+        };;
     }
 
     #endregion
