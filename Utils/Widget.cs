@@ -16,7 +16,9 @@ public static class Widget
         var gridDlg = Widgets.NewDlgGrid();
         var grdDlgInfos = NewDlgInfos(dlg);
 
-        var textBlockDlgInfos = Widgets.NewTextBlock(content: dlg.DlgInfos.Replace("|", "\n"));
+        var textBlockDlgInfos = Widgets.NewTextBlock(content: dlg.DlgInfos.Replace("|", "\n"), fontSize: 14);
+        textBlockDlgInfos.Margin = new Thickness(10, 0, 0, 0);
+        textBlockDlgInfos.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
 
         Grid.SetColumn(textBlockDlgInfos, 0);
         Grid.SetColumn(grdDlgInfos, 2);
@@ -53,7 +55,7 @@ public static class Widget
         var g1 = Widgets.NewBorder();
         var g2 = Widgets.NewBorder();
         var g3 = Widgets.NewBorder();
-        
+
         g1.Child = Widgets.NewTextBlock(dlg.Refcode1.ParseToString());
         g2.Child = Widgets.NewTextBlock($"{dlg.DateInit:MM/dd/yyyy}");
         g3.Child = Widgets.NewTextBlock(dlg.NomEtat);

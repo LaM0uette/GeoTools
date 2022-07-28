@@ -13,7 +13,7 @@ public static class Widgets
     {
         return new Border
         {
-            CornerRadius = new CornerRadius(2),
+            CornerRadius = new CornerRadius(4),
             Background = new SolidColorBrush(Color.FromRgb(255, 255, 255)),
             BorderBrush = new SolidColorBrush(Color.FromRgb(255, 255, 255)),
             Width = Constants.Border.Width,
@@ -39,9 +39,7 @@ public static class Widgets
             TextAlignment = TextAlignment.Center,
             TextWrapping = TextWrapping.Wrap,
             Foreground = new SolidColorBrush(Color.FromRgb(25, 25, 25)),
-            Width = Constants.Border.Width,
-            Height = Constants.Border.Height,
-            HorizontalAlignment = HorizontalAlignment.Center,
+            HorizontalAlignment = HorizontalAlignment.Stretch,
             VerticalAlignment = VerticalAlignment.Center
         };
     }
@@ -56,9 +54,9 @@ public static class Widgets
     {
         var grd = new Grid{Width = Constants.Dlg.Width};
 
-        grd.ColumnDefinitions.Add(new ColumnDefinition{Width = new GridLength(Constants.Dlg.LeftWidth)});
+        grd.ColumnDefinitions.Add(new ColumnDefinition{Width = new GridLength(0, GridUnitType.Auto), MaxWidth = Constants.Dlg.DlgNameWidth});
         grd.ColumnDefinitions.Add(new ColumnDefinition{Width = new GridLength(1, GridUnitType.Star)});
-        grd.ColumnDefinitions.Add(new ColumnDefinition{Width = new GridLength(Constants.Dlg.RightWidth)});
+        grd.ColumnDefinitions.Add(new ColumnDefinition{Width = new GridLength(Constants.Dlg.DlgInfosWidth)});
 
         return grd;
     }
