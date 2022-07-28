@@ -13,17 +13,21 @@
         </Style.Resources>
 
         <Style.Triggers>
-            <EventTrigger RoutedEvent="Button.MouseEnter">
-                <BeginStoryboard>
-                    <Storyboard>
-                        <DoubleAnimation Storyboard.TargetProperty="(Button.Opacity)" From="0.5" To="1"
-                                         Duration="0:0:0.2" FillBehavior="Stop" />
-                    </Storyboard>
-                </BeginStoryboard>
-            </EventTrigger>
+            <!-- <EventTrigger RoutedEvent="Button.MouseEnter"> -->
+            <!--     <BeginStoryboard> -->
+            <!--         <Storyboard> -->
+            <!--             <DoubleAnimation Storyboard.TargetProperty="(Button.Opacity)" From="0.5" To="1" -->
+            <!--                              Duration="0:0:0.2" FillBehavior="Stop" /> -->
+            <!--         </Storyboard> -->
+            <!--     </BeginStoryboard> -->
+            <!-- </EventTrigger> -->
+            
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.8" />
+            </Trigger>
 
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Opacity" Value="0.4" />
+                <Setter Property="Opacity" Value="0.6" />
             </Trigger>
 
         </Style.Triggers>
