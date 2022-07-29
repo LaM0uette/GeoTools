@@ -116,6 +116,7 @@ public partial class DlgMonthView : UserControl
             }
         }
     }
+    
     private Label makeLabel(string content, Brush? foreground)
     {
         return new Label()

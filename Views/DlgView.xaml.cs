@@ -24,7 +24,7 @@ public partial class DlgView
         SetTabItems();
 
         Tasks.SetCurrentTabItem(_vTabItemDlgAll);
-        Dlg.AllDlgView.Instance.CreateAllDlgButtons(GetReaderAllDlgByMode());
+        Dlg.AllDlgView.Instance.CreateDlgButtons(GetReaderAllDlgByMode());
         
         ComboBoxTypeView.SelectionChanged += OnViewChanged;  // Detecte le changement d'item du combobox
     }
@@ -44,7 +44,7 @@ public partial class DlgView
     {
         var btnName = ((ToggleButton) sender).Name;
 
-        Dlg.AllDlgView.Instance.CreateAllDlgButtons(GetReaderAllDlgByMode(btnName));
+        Dlg.AllDlgView.Instance.CreateDlgButtons(GetReaderAllDlgByMode(btnName));
         DlgMonthView.InstanceDlgMonthView?.CreateBtnDlgMonth(year: 2022, month: 6, mode: btnName);
 
         foreach (var btn in _toggleButtons)

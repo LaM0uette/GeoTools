@@ -41,7 +41,7 @@ public partial class AllDlgView
 
     #region Fonctions
 
-    public void CreateAllDlgButtons(NpgsqlDataReader dlgCdReader)
+    public void CreateDlgButtons(NpgsqlDataReader dlgCdReader)
     {
         AllDlgPanel.Children.Clear();
 
