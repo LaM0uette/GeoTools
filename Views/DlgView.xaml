@@ -129,10 +129,14 @@
                     <!-- TabItem DlgAll -->
                     <TabItem x:Name="TabItemDlgAll"
                              Visibility="Collapsed">
+                        
+                        <Grid Margin="2, 10, 2, 0">
+                            <dlgViews:AllDlgView x:Name="AllDlgView"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Top" />
+                        </Grid>
 
-                        <dlgViews:AllDlgView x:Name="AllDlgView"
-                                             HorizontalAlignment="Left"
-                                             VerticalAlignment="Center" />
+                        
 
                     </TabItem>
 

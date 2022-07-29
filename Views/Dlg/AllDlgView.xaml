@@ -6,16 +6,12 @@
              mc:Ignorable="d">
     
     <Grid>
-        <Border BorderThickness="2" 
-                BorderBrush="Aqua">
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled"
+                      CanContentScroll="True">
             
-            <ScrollViewer VerticalScrollBarVisibility="Auto"
-                          HorizontalScrollBarVisibility="Disabled"
-                          CanContentScroll="True">
-                
-                <WrapPanel x:Name="AllDlgPanel"/>
-            
-            </ScrollViewer>
-        </Border>
+            <WrapPanel x:Name="AllDlgPanel"/>
+        
+        </ScrollViewer>
     </Grid>
 </UserControl>

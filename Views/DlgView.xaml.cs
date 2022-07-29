@@ -27,7 +27,6 @@ public partial class DlgView
         Dlg.AllDlgView.Instance.CreateAllDlgButtons(GetReaderAllDlgByMode());
         
         ComboBoxTypeView.SelectionChanged += OnViewChanged;  // Detecte le changement d'item du combobox
-        if (Application.Current.MainWindow != null) Application.Current.MainWindow.SizeChanged += OnWindowSizeChanged;  // Detecte le changement de taille de la mainWindow
     }
 
     #endregion
@@ -134,22 +133,6 @@ public partial class DlgView
                 Tasks.SetCurrentTabItem(_vTabItemDlgMonth);
                 break;
         }
-    }
-
-    private void OnWindowSizeChanged(object sender, SizeChangedEventArgs e)
-    {
-        static double GetWindowHeight() => Application.Current.MainWindow!.ActualHeight;
-        static double GetWindowWidth() => Application.Current.MainWindow!.ActualWidth;
-
-        var maxWindowHeight = GetWindowHeight();
-        var scrollSize = Tasks.GetWindowState() == WindowState.Maximized
-            ? Constants.MaxScrollBarWith
-            : Constants.ScrollBarWith;
-        var maxWindowWith = GetWindowWidth() - 300 - scrollSize;
-
-        AllDlgView.AllDlgPanel.Height = maxWindowHeight;
-        AllDlgView.Width = maxWindowWith;
-        DlgViewMonth.Width = maxWindowWith;
     }
 
     #endregion
