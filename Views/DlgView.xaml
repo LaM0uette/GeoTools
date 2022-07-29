@@ -145,10 +145,11 @@
                     <TabItem x:Name="TabItemDlgMonth"
                              Visibility="Collapsed">
 
-                        <views:DlgMonthView x:Name="DlgViewMonth"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Center" />
-
+                        <Grid Margin="2, 10, 2, 0">
+                            <views:DlgMonthView x:Name="DlgViewMonth"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center" />
+                        </Grid>
                     </TabItem>
                 </TabControl>
             </Grid>
