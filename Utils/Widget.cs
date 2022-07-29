@@ -13,28 +13,25 @@ public static class Widget
 
     public static Button GetButtonFromDlg(Tasks.DlgStruct dlg)
     {
-        var bd = new Border();
-        bd.BorderBrush = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-        bd.BorderThickness = new Thickness(0, 0, 0, 3);
-        
-        var gridDlg = Widgets.NewDlgGrid();
-        var grdDlgInfos = NewDlgInfos(dlg);
+        var dlgBorder = Widgets.NewDlgBorder();
+        var dlgGrid = Widgets.NewDlgGrid();
+        var dlgInfos = NewDlgInfos(dlg);
 
-        var textBlockDlgInfos = Widgets.NewTextBlock(content: dlg.DlgInfos.Replace("|", "\n"), fontSize: 14);
+        var textBlockDlgInfos = Widgets.NewDlgInfoTextBlock(content: dlg.DlgInfos.Replace("|", "\n"), fontSize: 16);
         textBlockDlgInfos.Margin = new Thickness(10, 0, 0, 0);
         textBlockDlgInfos.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
 
         Grid.SetColumn(textBlockDlgInfos, 0);
-        Grid.SetColumn(grdDlgInfos, 2);
+        Grid.SetColumn(dlgInfos, 2);
 
-        gridDlg.Children.Add(textBlockDlgInfos);
-        gridDlg.Children.Add(grdDlgInfos);
+        dlgGrid.Children.Add(textBlockDlgInfos);
+        dlgGrid.Children.Add(dlgInfos);
 
-        bd.Child = gridDlg;
+        dlgBorder.Child = dlgGrid;
 
         return new Button
         {
-            Content = bd,
+            Content = dlgBorder,
             Height = Constants.Dlg.Height,
             Width = Constants.Dlg.Width,
             Margin = new Thickness(5),
@@ -58,14 +55,10 @@ public static class Widget
     {
         var grd = Widgets.NewDlgInfosGrid();
 
-        var g1 = Widgets.NewBorder();
-        var g2 = Widgets.NewBorder();
-        var g3 = Widgets.NewBorder();
+        var dlgInfoRefcode1 = Widgets.NewDlgInfoTextBlock(dlg.Refcode1.ParseToString());
+        var dlgInfoDateInit = Widgets.NewDlgInfoTextBlock($"{dlg.DateInit:MM/dd/yyyy}");
+        var dlgInfoNomEtat = Widgets.NewDlgInfoTextBlock(dlg.NomEtat);
 
-        g1.Child = Widgets.NewTextBlock(dlg.Refcode1.ParseToString());
-        g2.Child = Widgets.NewTextBlock($"{dlg.DateInit:MM/dd/yyyy}");
-        g3.Child = Widgets.NewTextBlock(dlg.NomEtat);
-        
         var sep = new Border
         {
             Width = 2,
@@ -75,19 +68,19 @@ public static class Widget
         };
         
         Grid.SetRowSpan(sep, 3);
-        Grid.SetRow(g1, 0);
-        Grid.SetRow(g2, 1);
-        Grid.SetRow(g3, 2);
+        Grid.SetRow(dlgInfoRefcode1, 0);
+        Grid.SetRow(dlgInfoDateInit, 1);
+        Grid.SetRow(dlgInfoNomEtat, 2);
         
         Grid.SetColumn(sep, 0);
-        Grid.SetColumn(g1, 1);
-        Grid.SetColumn(g2, 1);
-        Grid.SetColumn(g3, 1);
+        Grid.SetColumn(dlgInfoRefcode1, 1);
+        Grid.SetColumn(dlgInfoDateInit, 1);
+        Grid.SetColumn(dlgInfoNomEtat, 1);
         
         grd.Children.Add(sep);
-        grd.Children.Add(g1);
-        grd.Children.Add(g2);
-        grd.Children.Add(g3);
+        grd.Children.Add(dlgInfoRefcode1);
+        grd.Children.Add(dlgInfoDateInit);
+        grd.Children.Add(dlgInfoNomEtat);
 
         
         

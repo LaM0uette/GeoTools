@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Windows;
+using System.Windows.Media;
 
 namespace GeoTools.Utils;
 
@@ -35,14 +36,13 @@ public static class Constants
         public const byte Width = 240;
         public const byte Height = 80;
         
-        public const byte DlgNameMaxWidth = 120;
-        public const byte DlgInfosMaxWidth = 120;
+        public const byte DlgNameMaxWidth = Width-Height;
+        public const byte DlgInfosMaxWidth = Height;
     }
     
-    public static class Border
+    public static class Colors
     {
-        public const byte Width = 80;
-        public const byte Height = 20;
+        public static SolidColorBrush White = new (Color.FromRgb(255, 255, 255));
     }
 
     #endregion
