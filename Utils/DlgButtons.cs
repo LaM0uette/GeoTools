@@ -86,6 +86,8 @@ public static class DlgButtons
     #endregion
 
     //
+    //
+    //
     
     // TODO: A SUPPRIMER!
     public static Button MakeBtnDlg(Dictionary<string, object> dictionary, Style style)
