@@ -28,6 +28,7 @@ public static class Widgets
         TextAlignment = TextAlignment.Center,
         TextWrapping = TextWrapping.Wrap,
         Foreground = Constants.Colors.White,
+        Margin = new Thickness(5, 0, 5, 0),
         HorizontalAlignment = HorizontalAlignment.Stretch,
         VerticalAlignment = VerticalAlignment.Center
     };

@@ -82,47 +82,6 @@ public static class Widget
 
         return dlgName;
     }
-    
-    //
-    //
-    private static StackPanel NewStackPanel()
-    {
-        var sp = new StackPanel
-        {
-            Orientation = Orientation.Vertical,
-            HorizontalAlignment = HorizontalAlignment.Right,
-            Margin = new Thickness(3, 0, 0, 0),
-        };
-        
-        
-
-        return sp;
-    }
-    
-    private static Separator NewSeparator()
-    {
-        var sp = new Separator
-        {
-            Width = 16,
-            Background = Brushes.Transparent
-        };
-        
-        
-
-        return sp;
-    }
-
-    private static StackPanel NewStackPanelTemporaire()
-    {
-        var sp = new StackPanel
-        {
-            Orientation = Orientation.Horizontal
-        };
-        
-        
-
-        return sp;
-    }
 
     #endregion
 
