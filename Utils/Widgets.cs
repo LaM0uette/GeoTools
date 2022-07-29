@@ -31,6 +31,14 @@ public static class Widgets
         HorizontalAlignment = HorizontalAlignment.Stretch,
         VerticalAlignment = VerticalAlignment.Center
     };
+    
+    public static Border NewDlgSeparator() => new ()
+    {
+        Width = 2,
+        CornerRadius = new CornerRadius(1),
+        Height = Constants.Dlg.Height-15,
+        Background = Constants.Colors.White
+    };
 
     #endregion
 

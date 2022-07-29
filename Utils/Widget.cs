@@ -58,31 +58,22 @@ public static class Widget
         var dlgInfoRefcode1 = Widgets.NewDlgInfoTextBlock(dlg.Refcode1.ParseToString());
         var dlgInfoDateInit = Widgets.NewDlgInfoTextBlock($"{dlg.DateInit:MM/dd/yyyy}");
         var dlgInfoNomEtat = Widgets.NewDlgInfoTextBlock(dlg.NomEtat);
+        var dlgSeparator = Widgets.NewDlgSeparator();
 
-        var sep = new Border
-        {
-            Width = 2,
-            CornerRadius = new CornerRadius(1),
-            Height = Constants.Dlg.Height-15,
-            Background = new SolidColorBrush(Color.FromRgb(255, 255, 255))
-        };
-        
-        Grid.SetRowSpan(sep, 3);
-        Grid.SetRow(dlgInfoRefcode1, 0);
-        Grid.SetRow(dlgInfoDateInit, 1);
-        Grid.SetRow(dlgInfoNomEtat, 2);
-        
-        Grid.SetColumn(sep, 0);
+        Grid.SetColumn(dlgSeparator, 0);
         Grid.SetColumn(dlgInfoRefcode1, 1);
         Grid.SetColumn(dlgInfoDateInit, 1);
         Grid.SetColumn(dlgInfoNomEtat, 1);
         
-        grd.Children.Add(sep);
+        Grid.SetRow(dlgInfoRefcode1, 0);
+        Grid.SetRow(dlgInfoDateInit, 1);
+        Grid.SetRow(dlgInfoNomEtat, 2);
+        Grid.SetRowSpan(dlgSeparator, 3);
+        
+        grd.Children.Add(dlgSeparator);
         grd.Children.Add(dlgInfoRefcode1);
         grd.Children.Add(dlgInfoDateInit);
         grd.Children.Add(dlgInfoNomEtat);
-
-        
         
         return grd;
     }
