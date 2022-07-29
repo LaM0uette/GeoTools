@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace GeoTools.Utils;
 
@@ -19,12 +20,20 @@ public static class Widgets
         BorderBrush = Constants.Colors.Gray,
         BorderThickness = new Thickness(0.6)
     };
+    
+    public static Border NewDlgSeparator() => new ()
+    {
+        Width = 2,
+        CornerRadius = new CornerRadius(1),
+        Height = Constants.Dlg.Height-20,
+        Background = Constants.Colors.White
+    };
 
     #endregion
 
     //
 
-    #region Border
+    #region TextBlock
 
     public static TextBlock NewDlgInfoTextBlock(string content, int fontSize = 12) => new ()
     {
@@ -36,14 +45,6 @@ public static class Widgets
         Margin = new Thickness(5, 0, 5, 0),
         HorizontalAlignment = HorizontalAlignment.Stretch,
         VerticalAlignment = VerticalAlignment.Center
-    };
-    
-    public static Border NewDlgSeparator() => new ()
-    {
-        Width = 2,
-        CornerRadius = new CornerRadius(1),
-        Height = Constants.Dlg.Height-20,
-        Background = Constants.Colors.White
     };
 
     #endregion
@@ -90,6 +91,15 @@ public static class Widgets
 
         return grd;
     }
+
+    public static StackPanel NewMonthDlgStackPanel() => new ()
+    {
+        Width = 100,
+        Height = 100,
+        Background = Brushes.Coral,
+        Orientation = Orientation.Vertical,
+        HorizontalAlignment = HorizontalAlignment.Center
+    };
 
     #endregion
 }

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using GeoTools.Utils;
 using Npgsql;
@@ -45,6 +46,54 @@ public partial class MonthDlgView
         MonthGrid.Children.Clear();
 
         var dlgStructs = Tasks.GetListOfDlgStructs(dlgCdReader);
+        
+        // TODO: A MODIFIER !
+        const int month = 6;
+        const int year = 2022;
+        var week = 0;
+        var weekI = -1;
+        
+        for (var i = 1; i <= DateTime.DaysInMonth(year, month); i++)  // Boucle sur tous les jours du mois
+        {
+            var dt = new DateTime(year, month, i);
+
+            if (Tasks.GetWeekNumber(dt) > week)
+            {
+                week = Tasks.GetWeekNumber(dt);
+                weekI++;
+                MonthGrid.RowDefinitions.Add(new RowDefinition());
+            }
+            
+            
+            var sp = Widgets.NewMonthDlgStackPanel();
+
+            switch (dt.ToString("dddd", Constants.LangFr).Capitalize())
+            {
+                case "Lundi":
+                    Grid.SetColumn(sp, 0);
+                    Grid.SetRow(sp, weekI);
+                    continue;
+                case "Mardi":
+                    Grid.SetColumn(sp, 1);
+                    Grid.SetRow(sp, weekI);
+                    continue;
+                case "Mercredi":
+                    Grid.SetColumn(sp, 2);
+                    Grid.SetRow(sp, weekI);
+                    break;
+                case "Jeudi":
+                    Grid.SetColumn(sp, 3);
+                    Grid.SetRow(sp, weekI);
+                    break;
+                case "Vendredi":
+                    Grid.SetColumn(sp, 4);
+                    Grid.SetRow(sp, weekI);
+                    break;
+            }
+            
+            MonthGrid.Children.Add(sp);
+        }
+        
 
         foreach (var dlgStruct in dlgStructs)
         {

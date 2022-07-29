@@ -73,6 +73,9 @@ public static class Tasks
     #region Functions
     
     public static string Capitalize(this string s) => char.ToUpper(s[0]) + s[1..];
+    
+    public static DateTime GetDayOfWeek(int week, int year, DayOfWeek dayOfWeek = DayOfWeek.Monday) =>
+        ISOWeek.ToDateTime(year, week, dayOfWeek);
 
     public static byte GetDaysInMonth(int year, int month) => (byte) DateTime.DaysInMonth(year, month);
 
@@ -89,9 +92,13 @@ public static class Tasks
 
         return (byte) weekends.Count();
     }
-
-    public static DateTime GetDayOfWeek(int week, int year, DayOfWeek dayOfWeek = DayOfWeek.Monday) =>
-        ISOWeek.ToDateTime(year, week, dayOfWeek);
+    
+    public static int GetWeekNumber(DateTime now) 
+    { 
+        CultureInfo ci = CultureInfo.CurrentCulture; 
+        int weekNumber = ci.Calendar.GetWeekOfYear(now, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday); 
+        return weekNumber; 
+    } 
     
     public static void SetCurrentTabItem(TabItem tabItem) => tabItem.IsSelected = true;
 
@@ -100,8 +107,6 @@ public static class Tasks
     //
 
     #region Functions viewDlg
-
-    private static readonly Style Style = (Application.Current.FindResource("ButtonDLGTemp") as Style)!;
     
     public static void Update(JObject evt)
     {
@@ -157,7 +162,7 @@ public static class Tasks
     
     //
 
-    #region TestStruct
+    #region DlgStruct
 
     public static List<DlgStruct> GetListOfDlgStructs(NpgsqlDataReader cdReader)
     {
