@@ -55,7 +55,7 @@ public static class DlgButtons
         var grd = Widgets.NewDlgInfosGrid();
 
         var dlgInfoRefcode1 = Widgets.NewDlgInfoTextBlock(dlg.Refcode1.ParseToString());
-        var dlgInfoDateInit = Widgets.NewDlgInfoTextBlock($"{dlg.DateInit:MM/dd/yyyy}");
+        var dlgInfoDateInit = Widgets.NewDlgInfoTextBlock($"{dlg.DateInit:dd/MM/yyyy}");
         var dlgInfoNomEtat = Widgets.NewDlgInfoTextBlock(dlg.NomEtat);
         var dlgSeparator = Widgets.NewDlgSeparator();
 

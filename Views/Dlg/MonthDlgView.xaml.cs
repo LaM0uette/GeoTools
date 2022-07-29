@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using Accessibility;
 using GeoTools.Utils;
 using Npgsql;
 
@@ -64,19 +66,21 @@ public partial class MonthDlgView
                 MonthGrid.RowDefinitions.Add(new RowDefinition());
             }
             
+            var sp = Widgets.NewMonthDlgStackPanel($"{i:D2}{month:D2}{year}");
+            var name = Widgets.NewDlgInfoTextBlock($"{i:D2}{month:D2}{year}");
             
-            var sp = Widgets.NewMonthDlgStackPanel();
+            //Console.WriteLine(sp.Name);
 
             switch (dt.ToString("dddd", Constants.LangFr).Capitalize())
             {
                 case "Lundi":
                     Grid.SetColumn(sp, 0);
                     Grid.SetRow(sp, weekI);
-                    continue;
+                    break;
                 case "Mardi":
                     Grid.SetColumn(sp, 1);
                     Grid.SetRow(sp, weekI);
-                    continue;
+                    break;
                 case "Mercredi":
                     Grid.SetColumn(sp, 2);
                     Grid.SetRow(sp, weekI);
@@ -89,16 +93,39 @@ public partial class MonthDlgView
                     Grid.SetColumn(sp, 4);
                     Grid.SetRow(sp, weekI);
                     break;
+                default:
+                    continue;
+                    
             }
-            
+
             MonthGrid.Children.Add(sp);
         }
-        
 
         foreach (var dlgStruct in dlgStructs)
         {
             var button = DlgButtons.GetButtonFromDlg(dlgStruct);
             button.Click += SetActionsOnBtnDlg_Click;
+
+            var lb = new Label{Content = "Salut", Background = Brushes.Blue, Width = 50, Height = 50};
+
+            try
+            {
+                var myControl1 = FindName($"MonthDlgStackPanel{dlgStruct.DateInit:ddMMyyyy}") as StackPanel;
+
+                Console.WriteLine("");
+                Console.WriteLine("*******************");
+                Console.WriteLine(myControl1.Name);
+                Console.WriteLine($"MonthDlgStackPanel{dlgStruct.DateInit:ddMMyyyy}");
+                Console.WriteLine("*******************");
+                
+                myControl1.Children.Add(lb);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Console.WriteLine($"ERREUR -- MonthDlgStackPanel{dlgStruct.DateInit:ddMMyyyy}");
+            }
+
             //AllDlgPanel.Children.Add(button);
         }
     }

@@ -92,11 +92,12 @@ public static class Widgets
         return grd;
     }
 
-    public static StackPanel NewMonthDlgStackPanel() => new ()
+    public static StackPanel NewMonthDlgStackPanel(string date) => new ()
     {
-        Width = 100,
-        Height = 100,
-        Background = Brushes.Coral,
+        Name = $"MonthDlgStackPanel{date}",
+        Width = 160,
+        Height = 160,
+        Margin = new Thickness(5),
         Orientation = Orientation.Vertical,
         HorizontalAlignment = HorizontalAlignment.Center
     };
