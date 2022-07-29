@@ -43,7 +43,7 @@ public static class Widgets
     {
         Width = 2,
         CornerRadius = new CornerRadius(1),
-        Height = Constants.Dlg.Height-15,
+        Height = Constants.Dlg.Height-20,
         Background = Constants.Colors.White
     };
 
