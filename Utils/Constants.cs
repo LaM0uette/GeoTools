@@ -35,6 +35,7 @@ public static class Constants
     {
         public const byte Width = 240;
         public const byte Height = 80;
+        public static Thickness Margin => new (5);
         
         public const byte DlgNameMaxWidth = Width-Height;
         public const byte DlgInfosMaxWidth = Height;

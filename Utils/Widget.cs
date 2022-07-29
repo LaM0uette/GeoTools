@@ -15,8 +15,8 @@ public static class Widget
     {
         var dlgBorder = Widgets.NewDlgBorder();
         var dlgGrid = Widgets.NewDlgGrid();
-        var dlgInfos = NewDlgInfos(dlg);
         var dlgName = NewDlgNameTextBlock(dlg);
+        var dlgInfos = NewDlgInfos(dlg);
 
         Grid.SetColumn(dlgName, 0);
         Grid.SetColumn(dlgInfos, 2);
@@ -29,17 +29,17 @@ public static class Widget
         return new Button
         {
             Content = dlgBorder,
+            Name = $"dlg_{dlg.Id}",
             Height = Constants.Dlg.Height,
             Width = Constants.Dlg.Width,
-            Margin = new Thickness(5),
-            Name = $"dlg_{dlg.Id}",
+            Margin = Constants.Dlg.Margin,
             ToolTip = $"{dlg.Dlg}\n" +
                       $"Etat : {dlg.NomEtat} ({dlg.CodeEtat})\n" +
                       $"ID : {dlg.Id}\n" +
                       $"admin={MainWindow.UserSession.Admin}\n" +
                       $"prenom={MainWindow.UserSession.Prenom}", 
             Background = Tasks.HexBrush(hexColor: dlg.CouleurEtat)
-        };;
+        };
     }
 
     #endregion
