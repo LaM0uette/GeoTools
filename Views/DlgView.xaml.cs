@@ -45,7 +45,7 @@ public partial class DlgView
         var btnName = ((ToggleButton) sender).Name;
 
         Dlg.AllDlgView.Instance.CreateDlgButtons(GetReaderAllDlgByMode(btnName));
-        DlgMonthView.InstanceDlgMonthView?.CreateBtnDlgMonth(year: 2022, month: 6, mode: btnName);
+        Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(btnName));
 
         foreach (var btn in _toggleButtons)
             btn.IsChecked = btnName == btn.Name;

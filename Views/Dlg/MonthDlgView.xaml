@@ -11,7 +11,7 @@
                       HorizontalScrollBarVisibility="Disabled" 
                       VerticalScrollBarVisibility="Auto">
             
-            <Grid x:Name="GridMonth" ShowGridLines="True">
+            <Grid x:Name="MonthGrid" ShowGridLines="True">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
