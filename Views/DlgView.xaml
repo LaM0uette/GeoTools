@@ -127,7 +127,7 @@
                 <TabControl Grid.Row="1" Background="Transparent">
                     
                     <!-- TabItem DlgAll -->
-                    <TabItem x:Name="TabItemDlgAll"
+                    <TabItem x:Name="TabItemAllDlg"
                              Visibility="Collapsed">
                         
                         <Grid Margin="2, 10, 2, 0">
@@ -142,7 +142,7 @@
 
                     
                     <!-- TabItem DlgMonth -->
-                    <TabItem x:Name="TabItemDlgMonth"
+                    <TabItem x:Name="TabItemMonthDlg"
                              Visibility="Collapsed">
 
                         <Grid Margin="2, 10, 2, 0">

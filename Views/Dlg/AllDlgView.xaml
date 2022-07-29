@@ -10,7 +10,7 @@
                       HorizontalScrollBarVisibility="Disabled"
                       CanContentScroll="True">
             
-            <WrapPanel x:Name="AllDlgPanel"/>
+            <WrapPanel x:Name="AllDlgWrapPanel"/>
         
         </ScrollViewer>
     </Grid>

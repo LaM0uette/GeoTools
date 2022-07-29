@@ -108,8 +108,8 @@ public partial class DlgView
 
     private void SetTabItems()
     {
-        _vTabItemDlgAll = TabItemDlgAll;
-        _vTabItemDlgMonth = TabItemDlgMonth;
+        _vTabItemDlgAll = TabItemAllDlg;
+        _vTabItemDlgMonth = TabItemMonthDlg;
     }
 
     #endregion

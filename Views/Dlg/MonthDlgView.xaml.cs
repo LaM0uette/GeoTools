@@ -50,7 +50,7 @@ public partial class MonthDlgView
         {
             var button = DlgButtons.GetButtonFromDlg(dlgStruct);
             button.Click += SetActionsOnBtnDlg_Click;
-            AllDlgPanel.Children.Add(button);
+            //AllDlgPanel.Children.Add(button);
         }
     }
 

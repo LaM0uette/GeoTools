@@ -43,7 +43,7 @@ public partial class AllDlgView
 
     public void CreateDlgButtons(NpgsqlDataReader dlgCdReader)
     {
-        AllDlgPanel.Children.Clear();
+        AllDlgWrapPanel.Children.Clear();
 
         var dlgStructs = Tasks.GetListOfDlgStructs(dlgCdReader);
 
@@ -51,7 +51,7 @@ public partial class AllDlgView
         {
             var button = DlgButtons.GetButtonFromDlg(dlgStruct);
             button.Click += SetActionsOnBtnDlg_Click;
-            AllDlgPanel.Children.Add(button);
+            AllDlgWrapPanel.Children.Add(button);
         }
     }
 
