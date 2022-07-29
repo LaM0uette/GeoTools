@@ -16,15 +16,12 @@ public static class Widget
         var dlgBorder = Widgets.NewDlgBorder();
         var dlgGrid = Widgets.NewDlgGrid();
         var dlgInfos = NewDlgInfos(dlg);
+        var dlgName = NewDlgNameTextBlock(dlg);
 
-        var textBlockDlgInfos = Widgets.NewDlgInfoTextBlock(content: dlg.DlgInfos.Replace("|", "\n"), fontSize: 16);
-        textBlockDlgInfos.Margin = new Thickness(10, 0, 0, 0);
-        textBlockDlgInfos.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-
-        Grid.SetColumn(textBlockDlgInfos, 0);
+        Grid.SetColumn(dlgName, 0);
         Grid.SetColumn(dlgInfos, 2);
 
-        dlgGrid.Children.Add(textBlockDlgInfos);
+        dlgGrid.Children.Add(dlgName);
         dlgGrid.Children.Add(dlgInfos);
 
         dlgBorder.Child = dlgGrid;
@@ -76,6 +73,14 @@ public static class Widget
         grd.Children.Add(dlgInfoNomEtat);
         
         return grd;
+    }
+
+    private static TextBlock NewDlgNameTextBlock(Tasks.DlgStruct dlg)
+    {
+        var dlgName = Widgets.NewDlgInfoTextBlock(dlg.DlgInfos.Replace("|", "\n"), 16);
+        dlgName.Margin = new Thickness(10, 0, 0, 0);
+
+        return dlgName;
     }
     
     //
