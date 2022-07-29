@@ -82,7 +82,7 @@ public partial class DlgMonthView : UserControl
 
                 foreach (var dlg in GetDay(weeks: weeks, day: nameOfDay))
                 {
-                    Button button = Widget.MakeBtnDlg(dictionary: dlg, style: style!);
+                    Button button = DlgButtons.MakeBtnDlg(dictionary: dlg, style: style!);
                     button.Height = 50;
                     button.Width = 177;
                     stackDlg.Children.Add(button);
@@ -110,7 +110,7 @@ public partial class DlgMonthView : UserControl
                 stackPanel.Children.Add(lbNumJour);
                 stackPanel.Children.Add(border);
 
-                Widget.SetElementGrid(stackPanel, row:i, column:col);
+                DlgButtons.SetElementGrid(stackPanel, row:i, column:col);
                 GridMonth.Children.Add(stackPanel);
 
             }

@@ -7,7 +7,7 @@ using Parser;
 
 namespace GeoTools.Utils;
 
-public static class Widget
+public static class DlgButtons
 {
     #region Fonctions
 

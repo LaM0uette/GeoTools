@@ -52,7 +52,7 @@ public partial class AllDlgView
 
         foreach (var dlgStruct in dlgStructs)
         {
-            var button = Widget.GetButtonFromDlg(dlgStruct);
+            var button = DlgButtons.GetButtonFromDlg(dlgStruct);
             button.Click += SetActionsOnBtnDlg_Click;
             AllDlgPanel.Children.Add(button);
         }

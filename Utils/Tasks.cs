@@ -125,7 +125,7 @@ public static class Tasks
             //      if (!i.Name.Equals(dlgName)) continue;
             //      var idx = panel.Children.IndexOf(i);
             //
-            //      var button = Widget.MakeBtnDlg(dictionary: dict, style:Style);
+            //      var button = DlgButtons.MakeBtnDlg(dictionary: dict, style:Style);
             //      button.Click += DlgAllView.BtnDlgAll_Click;
             //      panel.Children.RemoveAt(idx);
             //      panel.Children.Insert(idx, button);
