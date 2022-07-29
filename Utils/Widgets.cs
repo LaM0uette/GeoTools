@@ -14,11 +14,11 @@ public static class Widgets
         return new Border
         {
             CornerRadius = new CornerRadius(4),
-            Background = new SolidColorBrush(Color.FromRgb(255, 255, 255)),
-            BorderBrush = new SolidColorBrush(Color.FromRgb(255, 255, 255)),
+            Background = Brushes.Transparent,
+            BorderBrush = Brushes.Transparent,
             Width = Constants.Border.Width,
             Height = Constants.Border.Height,
-            Margin = new Thickness(0, 0, 3, 0),
+            Margin = new Thickness(3, 0, 3, 0),
             HorizontalAlignment = HorizontalAlignment.Right,
             VerticalAlignment = VerticalAlignment.Center
         };
@@ -38,7 +38,7 @@ public static class Widgets
             FontSize = fontSize,
             TextAlignment = TextAlignment.Center,
             TextWrapping = TextWrapping.Wrap,
-            Foreground = new SolidColorBrush(Color.FromRgb(25, 25, 25)),
+            Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255)),
             HorizontalAlignment = HorizontalAlignment.Stretch,
             VerticalAlignment = VerticalAlignment.Center
         };
@@ -54,9 +54,9 @@ public static class Widgets
     {
         var grd = new Grid{Width = Constants.Dlg.Width};
 
-        grd.ColumnDefinitions.Add(new ColumnDefinition{Width = new GridLength(0, GridUnitType.Auto), MaxWidth = Constants.Dlg.DlgNameWidth});
+        grd.ColumnDefinitions.Add(new ColumnDefinition{Width = new GridLength(0, GridUnitType.Auto), MaxWidth = Constants.Dlg.DlgNameMaxWidth});
         grd.ColumnDefinitions.Add(new ColumnDefinition{Width = new GridLength(1, GridUnitType.Star)});
-        grd.ColumnDefinitions.Add(new ColumnDefinition{Width = new GridLength(Constants.Dlg.DlgInfosWidth)});
+        grd.ColumnDefinitions.Add(new ColumnDefinition{Width = new GridLength(0, GridUnitType.Auto), MaxWidth = Constants.Dlg.DlgInfosMaxWidth});
 
         return grd;
     }
@@ -69,6 +69,9 @@ public static class Widgets
         grd.RowDefinitions.Add(new RowDefinition{Height = new GridLength(1, GridUnitType.Star)});
         grd.RowDefinitions.Add(new RowDefinition{Height = new GridLength(1, GridUnitType.Star)});
         grd.RowDefinitions.Add(new RowDefinition{Height = new GridLength(5)});
+        
+        grd.ColumnDefinitions.Add(new ColumnDefinition{Width = new GridLength(0, GridUnitType.Auto), MaxWidth = 2});
+        grd.ColumnDefinitions.Add(new ColumnDefinition{Width = new GridLength(1, GridUnitType.Star)});
 
         return grd;
     }

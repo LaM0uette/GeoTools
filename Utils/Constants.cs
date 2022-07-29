@@ -35,13 +35,13 @@ public static class Constants
         public const byte Width = 240;
         public const byte Height = 80;
         
-        public const byte DlgNameWidth = 120;
-        public const byte DlgInfosWidth = 120;
+        public const byte DlgNameMaxWidth = 120;
+        public const byte DlgInfosMaxWidth = 120;
     }
     
     public static class Border
     {
-        public const byte Width = 100;
+        public const byte Width = 80;
         public const byte Height = 20;
     }
 

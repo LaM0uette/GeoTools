@@ -66,14 +66,31 @@ public static class Widget
         g2.Child = Widgets.NewTextBlock($"{dlg.DateInit:MM/dd/yyyy}");
         g3.Child = Widgets.NewTextBlock(dlg.NomEtat);
         
+        var sep = new Border
+        {
+            Width = 2,
+            CornerRadius = new CornerRadius(1),
+            Height = Constants.Dlg.Height-15,
+            Background = new SolidColorBrush(Color.FromRgb(255, 255, 255))
+        };
+        
+        Grid.SetRowSpan(sep, 3);
         Grid.SetRow(g1, 0);
         Grid.SetRow(g2, 1);
         Grid.SetRow(g3, 2);
         
+        Grid.SetColumn(sep, 0);
+        Grid.SetColumn(g1, 1);
+        Grid.SetColumn(g2, 1);
+        Grid.SetColumn(g3, 1);
+        
+        grd.Children.Add(sep);
         grd.Children.Add(g1);
         grd.Children.Add(g2);
         grd.Children.Add(g3);
 
+        
+        
         return grd;
     }
     
