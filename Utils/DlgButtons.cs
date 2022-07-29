@@ -13,6 +13,7 @@ public static class DlgButtons
 
     public static Button GetButtonFromDlg(Tasks.DlgStruct dlg)
     {
+        var dlgBorderB = Widgets.NewDlgCounterBorder();
         var dlgBorder = Widgets.NewDlgBorder();
         var dlgGrid = Widgets.NewDlgGrid();
         var dlgName = NewDlgNameTextBlock(dlg);
@@ -25,10 +26,11 @@ public static class DlgButtons
         dlgGrid.Children.Add(dlgInfos);
 
         dlgBorder.Child = dlgGrid;
+        dlgBorderB.Child = dlgBorder;
 
         return new Button
         {
-            Content = dlgBorder,
+            Content = dlgBorderB,
             Name = $"dlg_{dlg.Id}",
             Height = Constants.Dlg.Height,
             Width = Constants.Dlg.Width,

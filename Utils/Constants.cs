@@ -44,6 +44,7 @@ public static class Constants
     public static class Colors
     {
         public static SolidColorBrush White => new (Color.FromRgb(255, 255, 255));
+        public static SolidColorBrush Gray => new (Color.FromRgb(143, 143, 163));
     }
 
     #endregion

@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace GeoTools.Utils;
 
@@ -10,7 +11,14 @@ public static class Widgets
     public static Border NewDlgBorder() => new()
     {
         BorderBrush = Constants.Colors.White,
-        BorderThickness = new Thickness(0, 0, 0, 3)
+        CornerRadius = new CornerRadius(2.2),
+        BorderThickness = new Thickness(0, 0, 0, 3.2)
+    };
+    
+    public static Border NewDlgCounterBorder() => new()
+    {
+        BorderBrush = Constants.Colors.Gray,
+        BorderThickness = new Thickness(0.6)
     };
 
     #endregion

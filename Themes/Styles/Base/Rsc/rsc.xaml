@@ -3,7 +3,7 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     
     <!-- Radius -->
-    <sys:Double x:Key="VRscRound">3</sys:Double>
+    <sys:Double x:Key="VRscRound">4</sys:Double>
     
     <CornerRadius x:Key="RscRound" 
                   BottomLeft="{StaticResource VRscRound}" 
