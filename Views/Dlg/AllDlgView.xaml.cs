@@ -43,9 +43,6 @@ public partial class AllDlgView
 
     public void CreateAllDlgButtons(NpgsqlDataReader dlgCdReader)
     {
-        var style = GetDlgTempStyle();
-        if (style is null) return;
-        
         AllDlgPanel.Children.Clear();
 
         var dlgStructs = Tasks.GetListOfDlgStructs(dlgCdReader);
@@ -57,8 +54,6 @@ public partial class AllDlgView
             AllDlgPanel.Children.Add(button);
         }
     }
-
-    private Style? GetDlgTempStyle() => FindResource("ButtonDLGTemp") as Style;
 
     #endregion
 }
