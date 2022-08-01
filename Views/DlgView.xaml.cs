@@ -27,6 +27,7 @@ public partial class DlgView
         Tasks.SetCurrentTabItem(_vTabItemDlgAll);
         Dlg.AllDlgView.Instance.CreateDlgButtons(GetReaderAllDlgByMode());
         Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(6, 2022));
+        Dlg.WeekDlgView.Instance.CreateDlgButtons(GetReaderWeekDlgMode(26, 2022));
         
         ComboBoxTypeView.SelectionChanged += OnViewChanged;  // Detecte le changement d'item du combobox
     }
@@ -48,6 +49,7 @@ public partial class DlgView
 
         Dlg.AllDlgView.Instance.CreateDlgButtons(GetReaderAllDlgByMode(btnName));
         Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(6, 2022, btnName));
+        Dlg.WeekDlgView.Instance.CreateDlgButtons(GetReaderWeekDlgMode(26, 2022, btnName));
 
         foreach (var btn in _toggleButtons)
             btn.IsChecked = btnName == btn.Name;
@@ -76,14 +78,13 @@ public partial class DlgView
         _toggleButtons.Add(TogBtnDlgFait);
     }
 
-    private static NpgsqlDataReader GetReaderWeekDlgMode(string btnName = "")
+    private static NpgsqlDataReader GetReaderWeekDlgMode(byte week, int year, string btnName = "")
     {
-        // TODO: A MODIFIER !
         return btnName switch
         {
-            "TogBtnDlgAFaire" => Sql.Get(Req.AllDlgFiltered(1)),
-            "TogBtnDlgFait" => Sql.Get(Req.AllDlgFiltered(2)),
-            _ => Sql.Get(Req.AllDlg())
+            "TogBtnDlgAFaire" => Sql.Get(Req.DlgFilteredByWeek(week, year, 1)),
+            "TogBtnDlgFait" => Sql.Get(Req.DlgFilteredByWeek(week, year, 2)),
+            _ => Sql.Get(Req.DlgByWeek(week, year)) // TogBtnDlgTout
         };
     }
     
@@ -128,9 +129,9 @@ public partial class DlgView
                 Tasks.SetCurrentTabItem(_vTabItemDlgAll);
                 break;
             case 2:
-                Tasks.SetCurrentTabItem(_vTabItemDlgWeek);
                 break;
             case 3:
+                Tasks.SetCurrentTabItem(_vTabItemDlgWeek);
                 break;
             case 4:
                 Tasks.SetCurrentTabItem(_vTabItemDlgMonth);
