@@ -15,6 +15,14 @@ public static class Widgets
         BorderThickness = new Thickness(0, 0, 0, 3.2)
     };
     
+    public static Border NewMonthDlgBorder() => new()
+    {
+        BorderThickness = new Thickness(2), 
+        BorderBrush = Constants.Colors.Gray,
+        Margin = new Thickness(4),
+        CornerRadius = new CornerRadius(3)
+    };
+    
     public static Border NewDlgCounterBorder() => new()
     {
         BorderBrush = Constants.Colors.Gray,
@@ -96,6 +104,7 @@ public static class Widgets
     {
         Name = $"MonthDlgStackPanel{date}",
         Margin = new Thickness(5),
+        MinWidth = Constants.Dlg.MonthWidth,
         Orientation = Orientation.Vertical,
         HorizontalAlignment = HorizontalAlignment.Center
     };

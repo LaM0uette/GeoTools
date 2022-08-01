@@ -48,6 +48,7 @@ public partial class MonthDlgView
         var dlgs = Tasks.GetListOfDlgStructs(dlgCdReader);
         
         ClearMonthGrid();
+        AddDaysInMonthGrid();
         AddStackPanelOfDays();
 
         foreach (var dlg in dlgs)
@@ -69,6 +70,29 @@ public partial class MonthDlgView
         MonthGrid.UpdateLayout();
     }
 
+    private void AddDaysInMonthGrid()
+    {
+        MonthGrid.RowDefinitions.Add(new RowDefinition());
+        
+        var lbLun = Widgets.NewDlgInfoTextBlock("Lundi", 18);
+        var lbMar = Widgets.NewDlgInfoTextBlock("Mardi", 18);
+        var lbMer = Widgets.NewDlgInfoTextBlock("Mercredi", 18);
+        var lbJeu = Widgets.NewDlgInfoTextBlock("Jeudi", 18);
+        var lbVen = Widgets.NewDlgInfoTextBlock("Vendredi", 18);
+        
+        SetItemsInGrid(lbLun, 0, 0);
+        SetItemsInGrid(lbMar, 1, 0);
+        SetItemsInGrid(lbMer, 2, 0);
+        SetItemsInGrid(lbJeu, 3, 0);
+        SetItemsInGrid(lbVen, 4, 0);
+
+        MonthGrid.Children.Add(lbLun);
+        MonthGrid.Children.Add(lbMar);
+        MonthGrid.Children.Add(lbMer);
+        MonthGrid.Children.Add(lbJeu);
+        MonthGrid.Children.Add(lbVen);
+    }
+
     private void AddStackPanelOfDays()
     {
         // TODO: A MODIFIER !
@@ -78,39 +102,14 @@ public partial class MonthDlgView
         var lastWeek = 0;
         var weekInc = 0;
         
-        var lbLun = Widgets.NewDlgInfoTextBlock("Lundi", 18);
-        var lbMar = Widgets.NewDlgInfoTextBlock("Mardi", 18);
-        var lbMer = Widgets.NewDlgInfoTextBlock("Mercredi", 18);
-        var lbJeu = Widgets.NewDlgInfoTextBlock("Jeudi", 18);
-        var lbVen = Widgets.NewDlgInfoTextBlock("Vendredi", 18);
-        SetGridItemsV(lbLun, 0, 0);
-        SetGridItemsV(lbMar, 1, 0);
-        SetGridItemsV(lbMer, 2, 0);
-        SetGridItemsV(lbJeu, 3, 0);
-        SetGridItemsV(lbVen, 4, 0);
-        
-        MonthGrid.RowDefinitions.Add(new RowDefinition());
-        MonthGrid.Children.Add(lbLun);
-        MonthGrid.Children.Add(lbMar);
-        MonthGrid.Children.Add(lbMer);
-        MonthGrid.Children.Add(lbJeu);
-        MonthGrid.Children.Add(lbVen);
-        
-        
         for (var i = 1; i <= DateTime.DaysInMonth(year, month); i++)  // Boucle sur tous les jours du mois
         {
             var day = new DateTime(year, month, i);
             var weekOfTheDay = Tasks.GetWeekNumber(day);
-            var bd = new Border { BorderThickness = new Thickness(2), 
-                BorderBrush = Brushes.Gray,
-                Margin = new Thickness(4),
-                CornerRadius = new CornerRadius(3)
-                
-            };
             
-            var sp = Widgets.NewMonthDlgStackPanel($"{i:D2}{month:D2}{year}");
+            var border = Widgets.NewMonthDlgBorder();
+            var stackPanel = Widgets.NewMonthDlgStackPanel($"{i:D2}{month:D2}{year}");
             var dayName = Widgets.NewDlgInfoTextBlock(i.ParseToString(), 20);
-            sp.MinWidth = Constants.Dlg.MonthWidth;
             dayName.HorizontalAlignment = HorizontalAlignment.Left;
             
             // Check if is new week
@@ -122,50 +121,42 @@ public partial class MonthDlgView
             }
 
             // Check and add RegisterName for StackPanel
-            if(FindName(sp.Name)!=null)
-                UnregisterName(sp.Name);
-            RegisterName(sp.Name, sp);
+            if(FindName(stackPanel.Name)!=null)
+                UnregisterName(stackPanel.Name);
+            RegisterName(stackPanel.Name, stackPanel);
 
             switch (day.ToString("dddd", Constants.LangFr).Capitalize())
             {
                 case "Lundi":
-                    SetGridItems(bd, 0, weekInc);
+                    SetItemsInGrid(border, 0, weekInc);
                     break;
                 case "Mardi":
-                    SetGridItems(bd, 1, weekInc);
+                    SetItemsInGrid(border, 1, weekInc);
                     break;
                 case "Mercredi":
-                    SetGridItems(bd, 2, weekInc);
+                    SetItemsInGrid(border, 2, weekInc);
                     break;
                 case "Jeudi":
-                    SetGridItems(bd, 3, weekInc);
+                    SetItemsInGrid(border, 3, weekInc);
                     break;
                 case "Vendredi":
-                    SetGridItems(bd, 4, weekInc);
+                    SetItemsInGrid(border, 4, weekInc);
                     break;
                 default:
                     continue;
                     
             }
 
-            sp.Children.Add(dayName);
-            
-            bd.Child = sp;
-
-            MonthGrid.Children.Add(bd);
+            stackPanel.Children.Add(dayName);
+            border.Child = stackPanel;
+            MonthGrid.Children.Add(border);
         }
     }
     
-    private static void SetGridItems(Border sp, int col, int row)
+    private static void SetItemsInGrid(UIElement uiElement, int col, int row)
     {
-        Grid.SetColumn(sp, col);
-        Grid.SetRow(sp, row);
-    }
-    
-    private static void SetGridItemsV(TextBlock sp, int col, int row)
-    {
-        Grid.SetColumn(sp, col);
-        Grid.SetRow(sp, row);
+        Grid.SetColumn(uiElement, col);
+        Grid.SetRow(uiElement, row);
     }
 
     #endregion
