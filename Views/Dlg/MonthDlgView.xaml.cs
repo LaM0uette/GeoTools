@@ -99,9 +99,10 @@ public partial class MonthDlgView
         const int month = 6;
         const int year = 2022;
         
+        var currentDay = DateTime.Now;
         var lastWeek = 0;
         var weekInc = 0;
-        
+
         for (var i = 1; i <= DateTime.DaysInMonth(year, month); i++)  // Boucle sur tous les jours du mois
         {
             var day = new DateTime(year, month, i);
@@ -112,6 +113,9 @@ public partial class MonthDlgView
             var dayName = Widgets.NewDlgInfoTextBlock(i.ParseToString(), 20);
             dayName.HorizontalAlignment = HorizontalAlignment.Left;
             dayName.Margin = new Thickness(0, 0, 0, 20);
+            
+            if (currentDay.Year.Equals(year) && currentDay.Month.Equals(month) && currentDay.Day.Equals(day.Day))
+                dayName.Foreground = Constants.Colors.Red;
             
             // Check if is new week
             if (weekOfTheDay > lastWeek)
