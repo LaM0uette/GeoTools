@@ -70,15 +70,10 @@ public partial class MonthDlgView
             }
             
             var sp = Widgets.NewMonthDlgStackPanel($"{i:D2}{month:D2}{year}");
-
-            try
-            {
-                RegisterName(sp.Name, sp);
-            }
-            catch (Exception e)
-            {
-                
-            }
+            
+            if(FindName(sp.Name)!=null)
+                UnregisterName(sp.Name);
+            RegisterName(sp.Name, sp);
 
             switch (dt.ToString("dddd", Constants.LangFr).Capitalize())
             {
@@ -119,12 +114,6 @@ public partial class MonthDlgView
 
             if (stackPanelName is not null)
                 stackPanelName.Children.Add(button);
-        }
-        
-        foreach (StackPanel stk in MonthGrid.Children)
-        {
-            UnregisterName(stk.Name);
-            stk.Name = null;
         }
     }
 
