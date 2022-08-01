@@ -234,7 +234,7 @@ create or replace function get_dlg_by_week(week int, year int) returns setof "Ge
 as
 $BODY$
 begin
-    RETURN QUERY (SELECT * FROM "GeoTools".v_dlg WHERE semaine = week AND annee = year ORDER BY date_initial);
+    RETURN QUERY (SELECT * FROM "GeoTools".v_dlg WHERE semaine = week AND annee = year ORDER BY date_initial, id);
 end
 $BODY$
     LANGUAGE plpgsql STABLE
@@ -250,7 +250,7 @@ create or replace function get_dlg_by_month(month int, year int) returns setof "
 as
 $BODY$
 begin
-    RETURN QUERY (SELECT * FROM "GeoTools".v_dlg WHERE mois = month AND annee = year ORDER BY date_initial);
+    RETURN QUERY (SELECT * FROM "GeoTools".v_dlg WHERE mois = month AND annee = year ORDER BY date_initial, id);
 end
 $BODY$
     LANGUAGE plpgsql STABLE
