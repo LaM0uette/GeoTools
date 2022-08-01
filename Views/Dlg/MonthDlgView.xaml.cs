@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using Accessibility;
 using GeoTools.Utils;
 using Npgsql;
 
@@ -46,56 +43,73 @@ public partial class MonthDlgView
 
     public void CreateDlgButtons(NpgsqlDataReader dlgCdReader)
     {
+        var dlgs = Tasks.GetListOfDlgStructs(dlgCdReader);
+        
+        ClearMonthGrid();
+        AddStackPanelOfDays();
+
+        foreach (var dlg in dlgs)
+        {
+            var button = DlgButtons.GetButtonFromDlg(dlg);
+            button.Click += SetActionsOnBtnDlg_Click;
+            
+            var stackPanelName = FindName($"MonthDlgStackPanel{dlg.DateInit:ddMMyyyy}") as StackPanel;
+
+            if (stackPanelName is not null)
+                stackPanelName.Children.Add(button);
+        }
+    }
+
+    private void ClearMonthGrid()
+    {
         MonthGrid.Children.Clear();
         MonthGrid.RowDefinitions.Clear();
         MonthGrid.UpdateLayout();
+    }
 
-        var dlgStructs = Tasks.GetListOfDlgStructs(dlgCdReader);
-        
+    private void AddStackPanelOfDays()
+    {
         // TODO: A MODIFIER !
         const int month = 6;
         const int year = 2022;
-        var week = 0;
-        var weekI = -1;
+        var lastWeek = 0;
+        var weekInc = -1;
         
         for (var i = 1; i <= DateTime.DaysInMonth(year, month); i++)  // Boucle sur tous les jours du mois
         {
-            var dt = new DateTime(year, month, i);
+            var day = new DateTime(year, month, i);
+            var weekOfTheDay = Tasks.GetWeekNumber(day);
+            var sp = Widgets.NewMonthDlgStackPanel($"{i:D2}{month:D2}{year}");
 
-            if (Tasks.GetWeekNumber(dt) > week)
+            // Check if is new week
+            if (weekOfTheDay > lastWeek)
             {
-                week = Tasks.GetWeekNumber(dt);
-                weekI++;
+                lastWeek = weekOfTheDay;
+                weekInc++;
                 MonthGrid.RowDefinitions.Add(new RowDefinition());
             }
-            
-            var sp = Widgets.NewMonthDlgStackPanel($"{i:D2}{month:D2}{year}");
-            
+
+            // Check and add RegisterName for StackPanel
             if(FindName(sp.Name)!=null)
                 UnregisterName(sp.Name);
             RegisterName(sp.Name, sp);
 
-            switch (dt.ToString("dddd", Constants.LangFr).Capitalize())
+            switch (day.ToString("dddd", Constants.LangFr).Capitalize())
             {
                 case "Lundi":
-                    Grid.SetColumn(sp, 0);
-                    Grid.SetRow(sp, weekI);
+                    SetGridItems(sp, 0, weekInc);
                     break;
                 case "Mardi":
-                    Grid.SetColumn(sp, 1);
-                    Grid.SetRow(sp, weekI);
+                    SetGridItems(sp, 1, weekInc);
                     break;
                 case "Mercredi":
-                    Grid.SetColumn(sp, 2);
-                    Grid.SetRow(sp, weekI);
+                    SetGridItems(sp, 2, weekInc);
                     break;
                 case "Jeudi":
-                    Grid.SetColumn(sp, 3);
-                    Grid.SetRow(sp, weekI);
+                    SetGridItems(sp, 3, weekInc);
                     break;
                 case "Vendredi":
-                    Grid.SetColumn(sp, 4);
-                    Grid.SetRow(sp, weekI);
+                    SetGridItems(sp, 4, weekInc);
                     break;
                 default:
                     continue;
@@ -104,17 +118,12 @@ public partial class MonthDlgView
 
             MonthGrid.Children.Add(sp);
         }
-
-        foreach (var dlgStruct in dlgStructs)
-        {
-            var button = DlgButtons.GetButtonFromDlg(dlgStruct);
-            button.Click += SetActionsOnBtnDlg_Click;
-            
-            var stackPanelName = FindName($"MonthDlgStackPanel{dlgStruct.DateInit:ddMMyyyy}") as StackPanel;
-
-            if (stackPanelName is not null)
-                stackPanelName.Children.Add(button);
-        }
+    }
+    
+    private static void SetGridItems(StackPanel sp, int row, int col)
+    {
+        Grid.SetColumn(sp, col);
+        Grid.SetRow(sp, row);
     }
 
     #endregion
