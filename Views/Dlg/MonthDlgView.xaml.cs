@@ -110,6 +110,7 @@ public partial class MonthDlgView
             
             var border = Widgets.NewMonthDlgBorder();
             var stackPanel = Widgets.NewMonthDlgStackPanel($"{i:D2}{month:D2}{year}");
+            
             var dayName = Widgets.NewDlgInfoTextBlock(i.ParseToString(), 20);
             dayName.HorizontalAlignment = HorizontalAlignment.Left;
             dayName.Margin = new Thickness(0, 0, 0, 20);
