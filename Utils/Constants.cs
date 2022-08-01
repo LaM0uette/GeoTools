@@ -51,14 +51,4 @@ public static class Constants
     }
 
     #endregion
-
-    public const byte LabelFontSize = 9;
-    public const byte LabelHeightSize = 17;  //26;
-    public const byte LabelWidthSize = 65;  //125;
-
-    //...
-    // Window
-    public const byte MaximizeMarge = 15;
-    public const byte ScrollBarWith = 10;
-    public const byte MaxScrollBarWith = ScrollBarWith + MaximizeMarge;
 }
