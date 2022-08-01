@@ -25,6 +25,7 @@ public partial class DlgView
 
         Tasks.SetCurrentTabItem(_vTabItemDlgAll);
         Dlg.AllDlgView.Instance.CreateDlgButtons(GetReaderAllDlgByMode());
+        Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(6, 2022));
         
         ComboBoxTypeView.SelectionChanged += OnViewChanged;  // Detecte le changement d'item du combobox
     }
@@ -45,7 +46,7 @@ public partial class DlgView
         var btnName = ((ToggleButton) sender).Name;
 
         Dlg.AllDlgView.Instance.CreateDlgButtons(GetReaderAllDlgByMode(btnName));
-        Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(btnName));
+        Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(6, 2022, btnName));
 
         foreach (var btn in _toggleButtons)
             btn.IsChecked = btnName == btn.Name;
@@ -85,14 +86,13 @@ public partial class DlgView
         };
     }
     
-    private static NpgsqlDataReader GetReaderMonthDlgMode(string btnName = "")
+    private static NpgsqlDataReader GetReaderMonthDlgMode(byte month, int year, string btnName = "")
     {
-        // TODO: A MODIFIER !
         return btnName switch
         {
-            "TogBtnDlgAFaire" => Sql.Get(Req.AllDlgFiltered(1)),
-            "TogBtnDlgFait" => Sql.Get(Req.AllDlgFiltered(2)),
-            _ => Sql.Get(Req.AllDlg())
+            "TogBtnDlgAFaire" => Sql.Get(Req.DlgFilteredByMonth(month, year, 1)),
+            "TogBtnDlgFait" => Sql.Get(Req.DlgFilteredByMonth(month, year, 2)),
+            _ => Sql.Get(Req.DlgByMonth(month, year)) // TogBtnDlgTout
         };
     }
     
