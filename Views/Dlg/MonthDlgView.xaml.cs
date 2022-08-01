@@ -74,11 +74,11 @@ public partial class MonthDlgView
     {
         MonthGrid.RowDefinitions.Add(new RowDefinition());
         
-        var lbLun = Widgets.NewDlgInfoTextBlock("Lundi", 18);
-        var lbMar = Widgets.NewDlgInfoTextBlock("Mardi", 18);
-        var lbMer = Widgets.NewDlgInfoTextBlock("Mercredi", 18);
-        var lbJeu = Widgets.NewDlgInfoTextBlock("Jeudi", 18);
-        var lbVen = Widgets.NewDlgInfoTextBlock("Vendredi", 18);
+        var lbLun = Widgets.NewDlgInfoTextBlock("Lundi", 20);
+        var lbMar = Widgets.NewDlgInfoTextBlock("Mardi", 20);
+        var lbMer = Widgets.NewDlgInfoTextBlock("Mercredi", 20);
+        var lbJeu = Widgets.NewDlgInfoTextBlock("Jeudi", 20);
+        var lbVen = Widgets.NewDlgInfoTextBlock("Vendredi", 20);
         
         SetItemsInGrid(lbLun, 0, 0);
         SetItemsInGrid(lbMar, 1, 0);

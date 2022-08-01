@@ -104,7 +104,7 @@ public static class Widgets
     {
         Name = $"MonthDlgStackPanel{date}",
         Margin = new Thickness(5),
-        MinWidth = Constants.Dlg.MonthWidth,
+        Width = Constants.Dlg.MonthWidth,
         Orientation = Orientation.Vertical,
         HorizontalAlignment = HorizontalAlignment.Center
     };
