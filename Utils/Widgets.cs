@@ -95,8 +95,6 @@ public static class Widgets
     public static StackPanel NewMonthDlgStackPanel(string date) => new ()
     {
         Name = $"MonthDlgStackPanel{date}",
-        Width = 160,
-        Height = 160,
         Margin = new Thickness(5),
         Orientation = Orientation.Vertical,
         HorizontalAlignment = HorizontalAlignment.Center

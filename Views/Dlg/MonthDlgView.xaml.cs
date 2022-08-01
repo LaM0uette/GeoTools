@@ -50,7 +50,7 @@ public partial class MonthDlgView
 
         foreach (var dlg in dlgs)
         {
-            var button = DlgButtons.GetButtonFromDlg(dlg);
+            var button = DlgButtons.GetButtonFromMonthDlg(dlg);
             button.Click += SetActionsOnBtnDlg_Click;
             
             var stackPanelName = FindName($"MonthDlgStackPanel{dlg.DateInit:ddMMyyyy}") as StackPanel;

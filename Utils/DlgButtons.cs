@@ -44,6 +44,25 @@ public static class DlgButtons
             Background = Tasks.HexBrush(hexColor: dlg.CouleurEtat)
         };
     }
+    
+    public static Button GetButtonFromMonthDlg(Tasks.DlgStruct dlg)
+    {
+        var dlgName = Widgets.NewDlgInfoTextBlock(dlg.Dlg);
+
+        return new Button
+        {
+            Content = dlgName,
+            Name = $"dlg_{dlg.Id}",
+            Margin = Constants.Dlg.Margin,
+            ToolTip = $"{dlg.Dlg}\n" +
+                      $"Etat : {dlg.NomEtat} ({dlg.CodeEtat})\n" +
+                      $"ID : {dlg.Id}\n" +
+                      $"admin={MainWindow.UserSession.Admin}\n" +
+                      $"prenom={MainWindow.UserSession.Prenom}" +
+                      $"date={dlg.DateInit}", 
+            Background = Tasks.HexBrush(hexColor: dlg.CouleurEtat)
+        };
+    }
 
     #endregion
 
