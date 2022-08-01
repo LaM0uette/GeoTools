@@ -135,9 +135,19 @@
                                                  HorizontalAlignment="Center"
                                                  VerticalAlignment="Top" />
                         </Grid>
-
                         
+                    </TabItem>
+                    
+                    
+                    <!-- TabItem DlgWeek -->
+                    <TabItem x:Name="TabItemWeekDlg"
+                             Visibility="Collapsed">
 
+                        <Grid Margin="2, 10, 2, 0">
+                            <dlgViews:WeekDlgView x:Name="WeekDlgView"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Top" />
+                        </Grid>
                     </TabItem>
 
                     

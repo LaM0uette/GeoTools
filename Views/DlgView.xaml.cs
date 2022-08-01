@@ -12,6 +12,7 @@ public partial class DlgView
     #region Statements
 
     private static TabItem _vTabItemDlgAll = new();
+    private static TabItem _vTabItemDlgWeek = new();
     private static TabItem _vTabItemDlgMonth = new();
     private static List<ToggleButton> _toggleButtons = new();
     
@@ -109,6 +110,7 @@ public partial class DlgView
     private void SetTabItems()
     {
         _vTabItemDlgAll = TabItemAllDlg;
+        _vTabItemDlgWeek = TabItemWeekDlg;
         _vTabItemDlgMonth = TabItemMonthDlg;
     }
 
@@ -126,6 +128,7 @@ public partial class DlgView
                 Tasks.SetCurrentTabItem(_vTabItemDlgAll);
                 break;
             case 2:
+                Tasks.SetCurrentTabItem(_vTabItemDlgWeek);
                 break;
             case 3:
                 break;
