@@ -148,7 +148,7 @@
                         <Grid Margin="2, 10, 2, 0">
                             <dlgViews:MonthDlgView x:Name="MonthDlgView"
                                                    HorizontalAlignment="Center"
-                                                   VerticalAlignment="Center" />
+                                                   VerticalAlignment="Top" />
                         </Grid>
                     </TabItem>
                 </TabControl>
