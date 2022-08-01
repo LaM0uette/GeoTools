@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -46,6 +47,8 @@ public partial class MonthDlgView
     public void CreateDlgButtons(NpgsqlDataReader dlgCdReader)
     {
         MonthGrid.Children.Clear();
+        MonthGrid.RowDefinitions.Clear();
+        MonthGrid.UpdateLayout();
 
         var dlgStructs = Tasks.GetListOfDlgStructs(dlgCdReader);
         
@@ -67,9 +70,15 @@ public partial class MonthDlgView
             }
             
             var sp = Widgets.NewMonthDlgStackPanel($"{i:D2}{month:D2}{year}");
-            var name = Widgets.NewDlgInfoTextBlock($"{i:D2}{month:D2}{year}");
-            
-            //Console.WriteLine(sp.Name);
+
+            try
+            {
+                RegisterName(sp.Name, sp);
+            }
+            catch (Exception e)
+            {
+                
+            }
 
             switch (dt.ToString("dddd", Constants.LangFr).Capitalize())
             {
@@ -105,28 +114,17 @@ public partial class MonthDlgView
         {
             var button = DlgButtons.GetButtonFromDlg(dlgStruct);
             button.Click += SetActionsOnBtnDlg_Click;
+            
+            var stackPanelName = FindName($"MonthDlgStackPanel{dlgStruct.DateInit:ddMMyyyy}") as StackPanel;
 
-            var lb = new Label{Content = "Salut", Background = Brushes.Blue, Width = 50, Height = 50};
-
-            try
-            {
-                var myControl1 = FindName($"MonthDlgStackPanel{dlgStruct.DateInit:ddMMyyyy}") as StackPanel;
-
-                Console.WriteLine("");
-                Console.WriteLine("*******************");
-                Console.WriteLine(myControl1.Name);
-                Console.WriteLine($"MonthDlgStackPanel{dlgStruct.DateInit:ddMMyyyy}");
-                Console.WriteLine("*******************");
-                
-                myControl1.Children.Add(lb);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Console.WriteLine($"ERREUR -- MonthDlgStackPanel{dlgStruct.DateInit:ddMMyyyy}");
-            }
-
-            //AllDlgPanel.Children.Add(button);
+            if (stackPanelName is not null)
+                stackPanelName.Children.Add(button);
+        }
+        
+        foreach (StackPanel stk in MonthGrid.Children)
+        {
+            UnregisterName(stk.Name);
+            stk.Name = null;
         }
     }
 
