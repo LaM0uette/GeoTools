@@ -120,7 +120,7 @@ public partial class MonthDlgView
         }
     }
     
-    private static void SetGridItems(StackPanel sp, int row, int col)
+    private static void SetGridItems(StackPanel sp, int col, int row)
     {
         Grid.SetColumn(sp, col);
         Grid.SetRow(sp, row);
