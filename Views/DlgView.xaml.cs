@@ -26,9 +26,9 @@ public partial class DlgView
 
         Tasks.SetCurrentTabItem(_vTabItemDlgAll);
         Dlg.AllDlgView.Instance.CreateDlgButtons(GetReaderAllDlgByMode());
-        Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(6, 2022));
         Dlg.WeekDlgView.Instance.CreateDlgButtons(GetReaderWeekDlgMode(24, 2022));
-        
+        Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(6, 2022));
+
         ComboBoxTypeView.SelectionChanged += OnViewChanged;  // Detecte le changement d'item du combobox
     }
 
@@ -48,8 +48,8 @@ public partial class DlgView
         var btnName = ((ToggleButton) sender).Name;
 
         Dlg.AllDlgView.Instance.CreateDlgButtons(GetReaderAllDlgByMode(btnName));
-        Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(6, 2022, btnName));
         Dlg.WeekDlgView.Instance.CreateDlgButtons(GetReaderWeekDlgMode(24, 2022, btnName));
+        Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(6, 2022, btnName));
 
         foreach (var btn in _toggleButtons)
             btn.IsChecked = btnName == btn.Name;

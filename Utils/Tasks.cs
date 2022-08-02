@@ -74,25 +74,18 @@ public static class Tasks
     
     public static string Capitalize(this string s) => char.ToUpper(s[0]) + s[1..];
     
-    public static DateTime GetDayOfWeek(int week, int year, DayOfWeek dayOfWeek = DayOfWeek.Monday) =>
-        ISOWeek.ToDateTime(year, week, dayOfWeek);
-
-    public static byte GetDaysInMonth(int year, int month) => (byte) DateTime.DaysInMonth(year, month);
-
-    public static byte GetWeeksInMonth(int year, int month)
+    public static int GetMonthOfWeek(int week, int year)
     {
-        var date = new DateTime(year, month, 1);
+        var currentDateTime = new DateTime(year, 1, 1);
+        var dayOfWeek = currentDateTime.DayOfWeek;
+        var dayOfYear = week * 7 - 6;
 
-        var dateTimes = Enumerable.Range(1, DateTime.DaysInMonth(date.Year, date.Month)).Select(n =>
-            new DateTime(date.Year, date.Month, n));
-
-        var weekends = from dateTime in dateTimes
-            where dateTime.DayOfWeek == DayOfWeek.Monday
-            select dateTime;
-
-        return (byte) weekends.Count();
+        if (dayOfWeek != DayOfWeek.Sunday)
+            currentDateTime = currentDateTime.AddDays(7 - (int)currentDateTime.DayOfWeek);
+        
+        return currentDateTime.AddDays(dayOfYear).Month;
     }
-    
+
     public static int GetWeekNumber(DateTime now) 
     { 
         CultureInfo ci = CultureInfo.CurrentCulture; 

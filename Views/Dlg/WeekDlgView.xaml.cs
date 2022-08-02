@@ -96,17 +96,17 @@ public partial class WeekDlgView
     private void AddStackPanelOfDays()
     {
         // TODO: A MODIFIER !
-        const int month = 6;
         const int year = 2022;
-        
+        var month = Tasks.GetMonthOfWeek(24, 2022);
+
         var currentDay = DateTime.Now;
-        var lastWeek = 0;
-        var weekInc = 0;
 
         for (var i = 1; i <= DateTime.DaysInMonth(year, month); i++)  // Boucle sur tous les jours du mois
         {
             var day = new DateTime(year, month, i);
             var weekOfTheDay = Tasks.GetWeekNumber(day);
+
+            if (!weekOfTheDay.Equals(24)) continue;
             
             var border = Widgets.NewMonthDlgBorder();
             var stackPanel = Widgets.NewMonthDlgStackPanel($"{i:D2}{month:D2}{year}");
@@ -117,14 +117,8 @@ public partial class WeekDlgView
             
             if (currentDay.Year.Equals(year) && currentDay.Month.Equals(month) && currentDay.Day.Equals(day.Day))
                 dayName.Foreground = Constants.Colors.Red;
-            
-            // Check if is new week
-            if (weekOfTheDay > lastWeek)
-            {
-                lastWeek = weekOfTheDay;
-                weekInc++;
-                WeekGrid.RowDefinitions.Add(new RowDefinition());
-            }
+
+            WeekGrid.RowDefinitions.Add(new RowDefinition());
 
             // Check and add RegisterName for StackPanel
             if(FindName(stackPanel.Name)!=null)
@@ -134,19 +128,19 @@ public partial class WeekDlgView
             switch (day.ToString("dddd", Constants.LangFr).Capitalize())
             {
                 case "Lundi":
-                    SetItemsInGrid(border, 0, weekInc);
+                    SetItemsInGrid(border, 0, 1);
                     break;
                 case "Mardi":
-                    SetItemsInGrid(border, 1, weekInc);
+                    SetItemsInGrid(border, 1, 1);
                     break;
                 case "Mercredi":
-                    SetItemsInGrid(border, 2, weekInc);
+                    SetItemsInGrid(border, 2, 1);
                     break;
                 case "Jeudi":
-                    SetItemsInGrid(border, 3, weekInc);
+                    SetItemsInGrid(border, 3, 1);
                     break;
                 case "Vendredi":
-                    SetItemsInGrid(border, 4, weekInc);
+                    SetItemsInGrid(border, 4, 1);
                     break;
                 default:
                     continue;
