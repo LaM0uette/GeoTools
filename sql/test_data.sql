@@ -145,19 +145,19 @@ as
 $BODY$
 declare
     proj_us_id int = (SELECT us_id
-                      FROM "GeoTools".t_users
+                      FROM "GeoTools"."t_users"
                       WHERE us_guid = proj);
     rc_id      int = (SELECT rc_id
-                      FROM "data".l_refcode
+                      FROM "data"."l_refcode"
                       WHERE rc_refcode3 = refcode3);
     ph_id      int = (SELECT ph_id
-                      FROM "GeoTools".l_phases
+                      FROM "GeoTools"."l_phases"
                       WHERE ph_nom = ph);
     te_id      int = (SELECT te_id
-                      FROM "GeoTools".l_type_export
+                      FROM "GeoTools"."l_type_export"
                       WHERE te_nom = te);
 begin
-    INSERT INTO "GeoTools".t_dlg (dl_proj_us_id, dl_rc_id, dl_date_init,
+    INSERT INTO "GeoTools"."t_dlg" (dl_proj_us_id, dl_rc_id, dl_date_init,
                                   dl_ph_id, dl_te_id, dl_livraison, dl_version)
     SELECT proj_us_id,
            rc_id,
@@ -167,7 +167,7 @@ begin
            livraison,
            version
     WHERE NOT EXISTS(SELECT dl_id
-                     FROM "GeoTools".t_dlg
+                     FROM "GeoTools"."t_dlg"
                      WHERE dl_rc_id = rc_id
                        AND dl_ph_id = ph_id
                        AND dl_te_id = te_id
@@ -175,10 +175,21 @@ begin
                        AND dl_version = version);
 end;
 $BODY$
-    LANGUAGE plpgsql STABLE
+    LANGUAGE plpgsql VOLATILE
                      COST 100;
 
-SELECT add_dlg('XD5965', 'NISY', CURRENT_DATE, 'EXE', 'TRANSPORT ET DISTRIBUTION', 1, 1);
+SELECT add_dlg('XD5965', 'VISE', CURRENT_DATE, 'DOE', 'TRANSPORT ET DISTRIBUTION', 1, 1);
+SELECT add_dlg('XD5965', 'VISE', CURRENT_DATE, 'DOE', 'TRANSPORT ET DISTRIBUTION', 1, 2);
+SELECT add_dlg('XD5965', 'VISE', CURRENT_DATE, 'DOE', 'TRANSPORT ET DISTRIBUTION', 1, 3);
+SELECT add_dlg('XD5965', 'VISE', CURRENT_DATE, 'DOE', 'TRANSPORT ET DISTRIBUTION', 1, 4);
+SELECT add_dlg('XD5965', 'VISE', CURRENT_DATE, 'DOE', 'TRANSPORT ET DISTRIBUTION', 1, 5);
+SELECT add_dlg('XD5965', 'VISE', CURRENT_DATE, 'DOE', 'TRANSPORT ET DISTRIBUTION', 1, 6);
+SELECT add_dlg('XD5965', 'VISE', CURRENT_DATE, 'DOE', 'TRANSPORT ET DISTRIBUTION', 1, 7);
+SELECT add_dlg('XD5965', 'VISE', CURRENT_DATE, 'DOE', 'TRANSPORT ET DISTRIBUTION', 1, 8);
+SELECT add_dlg('XD5965', 'VISE', CURRENT_DATE, 'DOE', 'TRANSPORT ET DISTRIBUTION', 1, 9);
+SELECT add_dlg('XD5965', 'VISE', CURRENT_DATE, 'DOE', 'TRANSPORT ET DISTRIBUTION', 1, 10);
+SELECT add_dlg('XD5965', 'VISE', CURRENT_DATE, 'DOE', 'TRANSPORT ET DISTRIBUTION', 1, 11);
+SELECT add_dlg('XD5965', 'VISE', CURRENT_DATE, 'DOE', 'TRANSPORT ET DISTRIBUTION', 1, 12);
 -- ...
 
 
@@ -287,7 +298,7 @@ begin
     RETURN NEW;
 end;
 $BODY$
-    LANGUAGE plpgsql STABLE
+    LANGUAGE plpgsql VOLATILE
                      COST 100;
 
 create trigger tr_add_export_to_dlg

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -47,14 +48,14 @@ public partial class DlgView
         Tasks.SetCurrentTabItem(MainView.VTabItemMenu);
     }
 
-    private void TogBtnDlg_OnClick(object sender, RoutedEventArgs e)
+    private async void TogBtnDlg_OnClick(object sender, RoutedEventArgs e)
     {
         var btnName = ((ToggleButton) sender).Name;
 
-        Dlg.AllDlgView.Instance.CreateDlgButtons(GetReaderAllDlgByMode(btnName));
-        Dlg.DayDlgView.Instance.CreateDlgButtons(GetReaderDayDlgMode(new DateTime(2022, 6, 13), btnName));
-        Dlg.WeekDlgView.Instance.CreateDlgButtons(GetReaderWeekDlgMode(24, 2022, btnName));
-        Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(6, 2022, btnName));
+        await Dlg.AllDlgView.Instance.CreateDlgButtons(GetReaderAllDlgByMode(btnName));
+        //Dlg.DayDlgView.Instance.CreateDlgButtons(GetReaderDayDlgMode(new DateTime(2022, 6, 13), btnName));
+        //Dlg.WeekDlgView.Instance.CreateDlgButtons(GetReaderWeekDlgMode(24, 2022, btnName));
+        //Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(6, 2022, btnName));
 
         foreach (var btn in _toggleButtons)
             btn.IsChecked = btnName == btn.Name;
