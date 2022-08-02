@@ -24,6 +24,8 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
                 <!-- Bouton de retour au Menu -->
@@ -40,12 +42,58 @@
                            Height="18" />
 
                 </Button>
+                
+                <Grid Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <Button Grid.Column="0" x:Name="BtnToday"
+                            Style="{StaticResource ButtonPlainM2}"
+                            Width="100"
+                            Content="Ajourd'hui"/>
+                    
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        
+                        <Button  x:Name="BtnWeekLeft"
+                                 Style="{StaticResource ButtonPlainM2}"
+                                 Width="25"
+                                 Height="25"
+                                 Click="BtnDlgBackHome_OnClick">
+
+                            <Image Style="{StaticResource ImgHomeM1}"
+                                   Width="18"
+                                   Height="18" />
+
+                        </Button>
+                    
+                        <TextBox Width="60"
+                                 Style="{StaticResource TextBoxPlainM2}"/>
+                    
+                        <Button x:Name="BtnWeekRight"
+                                Style="{StaticResource ButtonPlainM2}"
+                                Width="25"
+                                Height="25"
+                                Click="BtnDlgBackHome_OnClick">
+
+                            <Image Style="{StaticResource ImgHomeM1}"
+                                   Width="18"
+                                   Height="18" />
+
+                        </Button>
+                        
+                    </StackPanel>
+                    
+                    
+                    
+                </Grid>
 
                 <!-- ComboBox des types d'affichages -->
                 <ComboBox x:Name="ComboBoxTypeView"
                           Width="120"
                           HorizontalContentAlignment="Center"
-                          Grid.Column="2"
+                          Grid.Column="4"
                           HorizontalAlignment="Right"
                           Style="{StaticResource ComboBoxPlainM2}" />
 

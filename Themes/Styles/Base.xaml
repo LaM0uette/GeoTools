@@ -17,6 +17,7 @@
         <ResourceDictionary Source="/Themes/Styles/Base/Widgets/button.xaml"/>
         <ResourceDictionary Source="/Themes/Styles/Base/Widgets/checkBox.xaml"/>
         <ResourceDictionary Source="/Themes/Styles/Base/Widgets/radioButton.xaml"/>
+        <ResourceDictionary Source="/Themes/Styles/Base/Widgets/textBox.xaml"/>
         <ResourceDictionary Source="/Themes/Styles/Base/Widgets/toggleButton.xaml"/>
         
         <ResourceDictionary Source="/Themes/Styles/Base/Widgets/comboBox.xaml"/>
