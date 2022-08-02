@@ -21,18 +21,18 @@ public partial class DlgView
     private static TabItem _vTabItemDlgWeek = new();
     private static TabItem _vTabItemDlgMonth = new();
     private static List<ToggleButton> _toggleButtons = new();
-    
+
     public DlgView()
     {
         InitializeComponent();
-        
+
         AddComboBoxData();
         AddToggleButtonsInList();
         SetTabItems();
         SetCurrentWeek();
         LoadDefaultDlg();
 
-        ComboBoxTypeView.SelectionChanged += OnViewChanged;  // Detecte le changement d'item du combobox
+        ComboBoxTypeView.SelectionChanged += OnViewChanged; // Detecte le changement d'item du combobox
     }
 
     #endregion
@@ -51,7 +51,7 @@ public partial class DlgView
         var ctrlName = ((Button) sender).Name;
         var inc = ctrlName.Equals("BtnWeekLeft") ? -1 : 1;
 
-        TextBoxWeek.Text = $"{TextBoxWeek.Text.ParseToInt()+inc}";
+        TextBoxWeek.Text = $"{TextBoxWeek.Text.ParseToInt() + inc}";
     }
 
     private void TogBtnDlg_OnClick(object sender, RoutedEventArgs e)
@@ -76,7 +76,7 @@ public partial class DlgView
     }
 
     #endregion
-    
+
     //
 
     #region Fonctions
@@ -105,7 +105,7 @@ public partial class DlgView
         Dlg.WeekDlgView.Instance.CreateDlgButtons(GetReaderWeekDlgMode(24, 2022));
         Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(6, 2022));
     }
-    
+
     private static NpgsqlDataReader GetReaderAllDlgByMode(string btnName = "")
     {
         return btnName switch
@@ -115,11 +115,11 @@ public partial class DlgView
             _ => Sql.Get(Req.AllDlg())
         };
     }
-    
+
     private static NpgsqlDataReader GetReaderDayDlgMode(DateTime day, string btnName = "")
     {
         var dt = day.ToString(CultureInfo.GetCultureInfo("fr-FR"));
-        
+
         return btnName switch
         {
             "TogBtnDlgAFaire" => Sql.Get(Req.DlgFilteredByDay(dt, 1)),
@@ -127,7 +127,7 @@ public partial class DlgView
             _ => Sql.Get(Req.DlgByDate(dt)) // TogBtnDlgTout
         };
     }
-    
+
     private static NpgsqlDataReader GetReaderWeekDlgMode(byte week, int year, string btnName = "")
     {
         return btnName switch
@@ -137,7 +137,7 @@ public partial class DlgView
             _ => Sql.Get(Req.DlgByWeek(week, year)) // TogBtnDlgTout
         };
     }
-    
+
     private static NpgsqlDataReader GetReaderMonthDlgMode(byte month, int year, string btnName = "")
     {
         return btnName switch
@@ -153,14 +153,14 @@ public partial class DlgView
         var currentWeek = Tasks.GetWeekNumber(DateTime.Now);
         TextBoxWeek.Text = currentWeek.ParseToString();
     }
-    
+
     private void SetTabItems()
     {
         _vTabItemDlgAll = TabItemAllDlg;
         _vTabItemDlgDay = TabItemDayDlg;
         _vTabItemDlgWeek = TabItemWeekDlg;
         _vTabItemDlgMonth = TabItemMonthDlg;
-        
+
         Tasks.SetCurrentTabItem(_vTabItemDlgAll);
     }
 
