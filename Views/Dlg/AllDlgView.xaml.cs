@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using GeoTools.Utils;
@@ -25,15 +27,14 @@ public partial class AllDlgView
 
     #region Fonctions
 
-    public async Task CreateDlgButtons(NpgsqlDataReader dlgCdReader)
+    public void CreateDlgButtons(NpgsqlDataReader dlgCdReader)
     {
         AllDlgWrapPanel.Children.Clear();
 
-        var dlgStructs = Tasks.GetListOfDlgStructsB(dlgCdReader);
+        var dlgs = Tasks.GetListOfDlgStructs(dlgCdReader);
 
-        await foreach (var dlgStruct in dlgStructs)
+        foreach (var button in dlgs.Select(DlgButtons.GetButtonFromDlg))
         {
-            var button = DlgButtons.GetButtonFromDlg(dlgStruct);
             button.Click += DlgButtons.SetActionsOnBtnDlg_Click;
             AllDlgWrapPanel.Children.Add(button);
         }

@@ -208,55 +208,6 @@ public static class Tasks
         cdReader.Close();
         return dlgStructs;
     }
-    
-    public static async IAsyncEnumerable<DlgStruct> GetListOfDlgStructsB(NpgsqlDataReader cdReader)
-    {
-        while (await cdReader.ReadAsync())
-        {
-            var dlgStruct = new DlgStruct();
-            var dateTime = (DateTime)cdReader["date_initial"];
-
-            dlgStruct.Id = $"{cdReader["id"]}".ParseToInt();
-            dlgStruct.GuidProj = $"{cdReader["guid_projeteur"]}";
-            dlgStruct.Proj = $"{cdReader["projeteur"]}";
-            dlgStruct.GuidExec = $"{cdReader["guid_executant"]}";
-            dlgStruct.Exec = $"{cdReader["executant"]}";
-            dlgStruct.Nro = $"{cdReader["nro"]}".ParseToInt();
-            dlgStruct.Sro = $"{cdReader["sro"]}".ParseToInt();
-            dlgStruct.Refcode1 = $"{cdReader["refcode1"]}".ParseToInt();
-            dlgStruct.Refcode2 = $"{cdReader["refcode2"]}";
-            dlgStruct.Refcode3 = $"{cdReader["refcode3"]}";
-            dlgStruct.DateInit = DateTime.Parse($"{cdReader["date_initial"]}");
-            dlgStruct.Semaine = $"{cdReader["semaine"]}".ParseToInt();
-            dlgStruct.Mois = $"{cdReader["mois"]}".ParseToInt();
-            dlgStruct.Annee = $"{cdReader["annee"]}".ParseToInt();
-            dlgStruct.Phase = $"{cdReader["phase"]}";
-            dlgStruct.TypeExport = $"{cdReader["type_export"]}";
-            dlgStruct.Livraison = $"{cdReader["livraison"]}".ParseToInt();
-            dlgStruct.Version = $"{cdReader["version"]}".ParseToInt();
-            dlgStruct.IdExport = $"{cdReader["id_export"]}".ParseToInt();
-            dlgStruct.IdEtat = $"{cdReader["id_etat"]}".ParseToInt();
-            dlgStruct.CodeEtat = $"{cdReader["code_etat"]}";
-            dlgStruct.NomEtat = $"{cdReader["nom_etat"]}";
-            dlgStruct.CouleurEtat = $"{cdReader["couleur_etat"]}";
-            dlgStruct.DateEtat = DateTime.Parse($"{cdReader["date_etat"]}");
-            dlgStruct.Dlg = $"{cdReader["dlg"]}";
-            dlgStruct.DlgInfos = $"{cdReader["dlg_infos"]}";
-            dlgStruct.Day = dateTime.ToString("dddd", Constants.LangFr).Capitalize() switch
-            {
-                "Lundi" => Constants.WeekDays.Lundi,
-                "Mardi" => Constants.WeekDays.Mardi,
-                "Mercredi" => Constants.WeekDays.Mercredi,
-                "Jeudi" => Constants.WeekDays.Jeudi,
-                "Vendredi" => Constants.WeekDays.Vendredi,
-                _ => dlgStruct.Day
-            };
-
-            yield return dlgStruct;
-        }
-        
-        cdReader.Close();
-    }
 
     #endregion
     

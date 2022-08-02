@@ -24,7 +24,7 @@ public static class Sql
     private static NpgsqlConnection PgConnect()
     {
         var connect = new NpgsqlConnection(Login.GeoTools.ToString());
-        connect.Open();
+        connect.OpenAsync();
         return connect;
     }
 
@@ -81,33 +81,9 @@ public static class Sql
         }
     }
 
-    private static async Task TestAsyncTask()
-    {
-        await Task.Run(() =>
-        {
-            for (var i = 0; i < 1000; i++)
-            {
-                Console.WriteLine($"ASync: {i}");
-                Task.Delay(40);
-            }
-        });
-    }
-    
-    private static void TestsyncTask()
-    {
-        var instance = Views.Dlg.AllDlgView.Instance.AllDlgWrapPanel;
-        Console.WriteLine("ereerer");
-        foreach (var dlg in instance.Children)
-        {
-            Console.WriteLine("ereerer");
-            Console.WriteLine(dlg);
-        }
-        Console.WriteLine("ereerer");
-    }
-    
-    
 
-        //
+
+    //
     // DELEGATE
     public delegate void SqlDelegate(string req);
 
