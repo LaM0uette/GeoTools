@@ -9,6 +9,23 @@ namespace GeoTools.Utils;
 
 public static class DlgButtons
 {
+    #region Actions
+
+    // TODO: A MODIFIER
+    public static void SetActionsOnBtnDlg_Click(object sender, RoutedEventArgs e)
+    {
+        var btnName = ((Button) sender).Name;
+        
+        if (btnName is not null)
+        {
+            MessageBox.Show($"Tu as cliqué sur le bouton : {btnName}");
+        }
+    }
+
+    #endregion
+    
+    //
+    
     #region Fonctions
 
     public static Button GetButtonFromDlg(Tasks.DlgStruct dlg)

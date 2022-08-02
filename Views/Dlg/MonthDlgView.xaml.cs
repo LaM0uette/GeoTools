@@ -23,23 +23,6 @@ public partial class MonthDlgView
     #endregion
 
     //
-    
-    #region Actions
-
-    // TODO: A MODIFIER !
-    private static void SetActionsOnBtnDlg_Click(object sender, RoutedEventArgs e)
-    {
-        var btnName = ((Button) sender).Name;
-        
-        if (btnName is not null)
-        {
-            MessageBox.Show($"Tu as cliqué sur le bouton : {btnName}");
-        }
-    }
-
-    #endregion
-    
-    //
 
     #region Fonctions
 
@@ -54,7 +37,7 @@ public partial class MonthDlgView
         foreach (var dlg in dlgs)
         {
             var button = DlgButtons.GetButtonFromMonthDlg(dlg);
-            button.Click += SetActionsOnBtnDlg_Click;
+            button.Click += DlgButtons.SetActionsOnBtnDlg_Click;
             
             var stackPanelName = FindName($"MonthDlgStackPanel{dlg.DateInit:ddMMyyyy}") as StackPanel;
 

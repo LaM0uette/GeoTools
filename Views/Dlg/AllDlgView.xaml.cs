@@ -22,23 +22,6 @@ public partial class AllDlgView
 
     //
 
-    #region Actions
-
-    // TODO: A MODIFIER !
-    private static void SetActionsOnBtnDlg_Click(object sender, RoutedEventArgs e)
-    {
-        var btnName = ((Button) sender).Name;
-        
-        if (btnName is not null)
-        {
-            MessageBox.Show($"Tu as cliqué sur le bouton : {btnName}");
-        }
-    }
-
-    #endregion
-
-    //
-
     #region Fonctions
 
     public void CreateDlgButtons(NpgsqlDataReader dlgCdReader)
@@ -50,7 +33,7 @@ public partial class AllDlgView
         foreach (var dlgStruct in dlgStructs)
         {
             var button = DlgButtons.GetButtonFromDlg(dlgStruct);
-            button.Click += SetActionsOnBtnDlg_Click;
+            button.Click += DlgButtons.SetActionsOnBtnDlg_Click;
             AllDlgWrapPanel.Children.Add(button);
         }
     }
