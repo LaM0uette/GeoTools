@@ -60,7 +60,7 @@
                                  Style="{StaticResource ButtonPlainM2}"
                                  Width="25"
                                  Height="25"
-                                 Click="BtnDlgBackHome_OnClick">
+                                 Click="SetTextBoxValue">
 
                             <Image Style="{StaticResource ImgHomeM1}"
                                    Width="18"
@@ -68,7 +68,7 @@
 
                         </Button>
                     
-                        <TextBox x:Name="TxtBlcWeek"
+                        <TextBox x:Name="TextBoxWeek"
                                  Width="40"
                                  Style="{StaticResource TextBoxPlainM2}"/>
                     
@@ -76,7 +76,7 @@
                                 Style="{StaticResource ButtonPlainM2}"
                                 Width="25"
                                 Height="25"
-                                Click="BtnDlgBackHome_OnClick">
+                                Click="SetTextBoxValue">
 
                             <Image Style="{StaticResource ImgHomeM1}"
                                    Width="18"

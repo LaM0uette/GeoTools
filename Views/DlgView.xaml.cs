@@ -46,6 +46,15 @@ public partial class DlgView
         Tasks.SetCurrentTabItem(MainView.VTabItemMenu);
     }
 
+    private void SetTextBoxValue(object sender, RoutedEventArgs e)
+    {
+        var ctrlName = ((Button) sender).Name;
+        var inc = ctrlName.Equals("BtnWeekLeft") ? -1 : 1;
+
+        TextBoxWeek.Text = $"{TextBoxWeek.Text.ParseToInt()+inc}";
+        
+    }
+
     private void TogBtnDlg_OnClick(object sender, RoutedEventArgs e)
     {
         Mouse.OverrideCursor = Cursors.Wait;
@@ -143,7 +152,7 @@ public partial class DlgView
     private void SetCurrentWeek()
     {
         var currentWeek = Tasks.GetWeekNumber(DateTime.Now);
-        TxtBlcWeek.Text = currentWeek.ParseToString();
+        TextBoxWeek.Text = currentWeek.ParseToString();
     }
     
     private void SetTabItems()
