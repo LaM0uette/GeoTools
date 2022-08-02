@@ -88,8 +88,8 @@ public static class Tasks
 
     public static int GetWeekNumber(DateTime now) 
     { 
-        CultureInfo ci = CultureInfo.CurrentCulture; 
-        int weekNumber = ci.Calendar.GetWeekOfYear(now, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday); 
+        var ci = CultureInfo.CurrentCulture; 
+        var weekNumber = ci.Calendar.GetWeekOfYear(now, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday); 
         return weekNumber; 
     } 
     
@@ -210,23 +210,4 @@ public static class Tasks
     }
 
     #endregion
-    
-    //
-    
-    // TODO: A MODIFIER !
-    public static Dictionary<string, object> SqlDict(NpgsqlDataReader cdReader)
-    {
-        var dict = new Dictionary<string, object>();
-
-        for (var idxColumn = 0; idxColumn < cdReader.FieldCount; idxColumn++)
-            dict.Add(cdReader.GetName(idxColumn), cdReader.GetValue(idxColumn));
-
-        return dict;
-    }
-
-    public static IEnumerable<DateTime> EachDay(DateTime from, DateTime to)
-    {
-        for (var day = from.Date; day.Date <= to.Date; day = day.AddDays(1))
-            yield return day;
-    }
 }

@@ -8,6 +8,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using GeoTools.Utils;
 using Npgsql;
+using Parser;
 
 namespace GeoTools.Views;
 
@@ -28,12 +29,8 @@ public partial class DlgView
         AddComboBoxData();
         AddToggleButtonsInList();
         SetTabItems();
-
-        Tasks.SetCurrentTabItem(_vTabItemDlgAll);
-        Dlg.AllDlgView.Instance.CreateDlgButtons(GetReaderAllDlgByMode());
-        Dlg.DayDlgView.Instance.CreateDlgButtons(GetReaderDayDlgMode(new DateTime(2022, 6, 13)));
-        Dlg.WeekDlgView.Instance.CreateDlgButtons(GetReaderWeekDlgMode(24, 2022));
-        Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(6, 2022));
+        SetCurrentWeek();
+        LoadDefaultDlg();
 
         ComboBoxTypeView.SelectionChanged += OnViewChanged;  // Detecte le changement d'item du combobox
     }
@@ -92,6 +89,14 @@ public partial class DlgView
         _toggleButtons.Add(TogBtnDlgAFaire);
         _toggleButtons.Add(TogBtnDlgFait);
     }
+
+    private static void LoadDefaultDlg()
+    {
+        Dlg.AllDlgView.Instance.CreateDlgButtons(GetReaderAllDlgByMode());
+        Dlg.DayDlgView.Instance.CreateDlgButtons(GetReaderDayDlgMode(new DateTime(2022, 6, 13)));
+        Dlg.WeekDlgView.Instance.CreateDlgButtons(GetReaderWeekDlgMode(24, 2022));
+        Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(6, 2022));
+    }
     
     private static NpgsqlDataReader GetReaderAllDlgByMode(string btnName = "")
     {
@@ -134,6 +139,12 @@ public partial class DlgView
             _ => Sql.Get(Req.DlgByMonth(month, year)) // TogBtnDlgTout
         };
     }
+
+    private void SetCurrentWeek()
+    {
+        var currentWeek = Tasks.GetWeekNumber(DateTime.Now);
+        TxtBlcWeek.Text = currentWeek.ParseToString();
+    }
     
     private void SetTabItems()
     {
@@ -141,6 +152,8 @@ public partial class DlgView
         _vTabItemDlgDay = TabItemDayDlg;
         _vTabItemDlgWeek = TabItemWeekDlg;
         _vTabItemDlgMonth = TabItemMonthDlg;
+        
+        Tasks.SetCurrentTabItem(_vTabItemDlgAll);
     }
 
     #endregion
