@@ -68,7 +68,7 @@
 
                         </Button>
                     
-                        <TextBox Width="60"
+                        <TextBox Width="40"
                                  Style="{StaticResource TextBoxPlainM2}"/>
                     
                         <Button x:Name="BtnWeekRight"

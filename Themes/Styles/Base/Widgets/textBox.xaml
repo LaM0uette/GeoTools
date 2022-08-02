@@ -5,6 +5,7 @@
         <Setter Property="TextAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="MaxLength" Value="2" />
+        <Setter Property="BorderThickness" Value="0"/>
         
         <Style.Resources>
             <Style TargetType="Border">
