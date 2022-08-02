@@ -2,9 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <!-- Base -->
     <Style x:Key="TextBoxBase" TargetType="{x:Type TextBox}">
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="MaxLength" Value="2" />
+        
         <Style.Resources>
             <Style TargetType="Border">
-                <Setter Property="CornerRadius" Value="{DynamicResource RscRound}"></Setter>
+                <Setter Property="CornerRadius" Value="{DynamicResource RscRound}"/>
             </Style>
         </Style.Resources>
     </Style>
