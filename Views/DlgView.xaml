@@ -139,6 +139,18 @@
                     </TabItem>
                     
                     
+                    <!-- TabItem DlgDay -->
+                    <TabItem x:Name="TabItemDayDlg"
+                             Visibility="Collapsed">
+
+                        <Grid Margin="2, 10, 2, 0">
+                            <dlgViews:DayDlgView x:Name="DayDlgView"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Top" />
+                        </Grid>
+                    </TabItem>
+                    
+                    
                     <!-- TabItem DlgWeek -->
                     <TabItem x:Name="TabItemWeekDlg"
                              Visibility="Collapsed">

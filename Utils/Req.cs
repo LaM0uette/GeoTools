@@ -37,6 +37,11 @@ public static class Req
         @$"SELECT * 
            FROM ""GeoTools"".get_dlg_by_month({month}, {year})";
     
+    public static string DlgFilteredByDay(string date, int id) =>
+        @$"SELECT * 
+           FROM ""GeoTools"".get_dlg_by_date({date})
+           WHERE ""id_etat"" = {id}";
+    
     public static string DlgFilteredByWeek(byte week, int year, int id) =>
         @$"SELECT * 
            FROM ""GeoTools"".get_dlg_by_week({week}, {year})
