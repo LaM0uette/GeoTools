@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -94,7 +95,7 @@ public partial class DlgView
     
     private static NpgsqlDataReader GetReaderDayDlgMode(DateTime day, string btnName = "")
     {
-        var dt = day.ToString();
+        var dt = day.ToString(CultureInfo.GetCultureInfo("fr-FR"));
         
         return btnName switch
         {

@@ -39,7 +39,7 @@ public static class Req
     
     public static string DlgFilteredByDay(string date, int id) =>
         @$"SELECT * 
-           FROM ""GeoTools"".get_dlg_by_date({date})
+           FROM ""GeoTools"".get_dlg_by_date('{date}')
            WHERE ""id_etat"" = {id}";
     
     public static string DlgFilteredByWeek(byte week, int year, int id) =>
