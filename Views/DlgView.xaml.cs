@@ -52,7 +52,6 @@ public partial class DlgView
         var inc = ctrlName.Equals("BtnWeekLeft") ? -1 : 1;
 
         TextBoxWeek.Text = $"{TextBoxWeek.Text.ParseToInt()+inc}";
-        
     }
 
     private void TogBtnDlg_OnClick(object sender, RoutedEventArgs e)
