@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using GeoTools.Utils;
 using Npgsql;
 
@@ -50,15 +51,23 @@ public partial class DlgView
 
     private void TogBtnDlg_OnClick(object sender, RoutedEventArgs e)
     {
-        var btnName = ((ToggleButton) sender).Name;
+        Mouse.OverrideCursor = Cursors.Wait;
+        try
+        {
+            var btnName = ((ToggleButton) sender).Name;
 
-        Dlg.AllDlgView.Instance.CreateDlgButtons(GetReaderAllDlgByMode(btnName));
-        Dlg.DayDlgView.Instance.CreateDlgButtons(GetReaderDayDlgMode(new DateTime(2022, 6, 13), btnName));
-        Dlg.WeekDlgView.Instance.CreateDlgButtons(GetReaderWeekDlgMode(24, 2022, btnName));
-        Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(6, 2022, btnName));
+            Dlg.AllDlgView.Instance.CreateDlgButtons(GetReaderAllDlgByMode(btnName));
+            Dlg.DayDlgView.Instance.CreateDlgButtons(GetReaderDayDlgMode(new DateTime(2022, 6, 13), btnName));
+            Dlg.WeekDlgView.Instance.CreateDlgButtons(GetReaderWeekDlgMode(24, 2022, btnName));
+            Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(6, 2022, btnName));
 
-        foreach (var btn in _toggleButtons)
-            btn.IsChecked = btnName == btn.Name;
+            foreach (var btn in _toggleButtons)
+                btn.IsChecked = btnName == btn.Name;
+        }
+        finally
+        {
+            Mouse.OverrideCursor = null;
+        }
     }
 
     #endregion
