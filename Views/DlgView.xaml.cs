@@ -79,10 +79,12 @@ public partial class DlgView
     {
         var value = TextBoxWeek.Text.ParseToInt();
 
-        if (value <= 0)
-            TextBoxWeek.Text = 1.ParseToString();
-        else if (value > 60)
-            TextBoxWeek.Text = 60.ParseToString();
+        TextBoxWeek.Text = value switch
+        {
+            <= 0 => 1.ParseToString(),
+            > 60 => 60.ParseToString(),
+            _ => TextBoxWeek.Text
+        };
     }
 
     #endregion
