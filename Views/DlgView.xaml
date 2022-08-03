@@ -49,6 +49,7 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     
                     <Button Grid.Column="0" x:Name="BtnToday"
@@ -140,7 +141,8 @@
                     
                     <!-- Year -->
                     <StackPanel Grid.Column="3" 
-                                Orientation="Horizontal">
+                                Orientation="Horizontal"
+                                Margin="15, 0, 50, 0">
                         
                         <Button  x:Name="BtnYearLeft"
                                  Style="{StaticResource ButtonPlainM2}"
@@ -175,6 +177,14 @@
                         </Button>
                         
                     </StackPanel>
+                    
+                    
+                    <!-- refresh -->
+                    <Button Grid.Column="4" x:Name="BtnRefresh"
+                            Style="{StaticResource ButtonPlainM2}"
+                            Width="100"
+                            Content="Actualiser"
+                            Click="BtnRefresh_OnClick"/>
                 </Grid>
 
                 <!-- ComboBox des types d'affichages -->

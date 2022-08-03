@@ -94,14 +94,22 @@ public partial class DlgView
     {
         var value = TextBoxWeek.Text.ParseToByte();
 
-        TextBoxWeek.Text = value switch
+        switch (value)
         {
-            <= 0 => $"{1}",
-            > 60 => $"{60}",
-            _ => $"{TextBoxWeek.Text}"
-        };
+            case < 1:
+                TextBoxWeek.Text = $"{54}";
+                //TextBoxMonth.Text = $"{TextBoxMonth.Text.ParseToByte()-1}";
+                break;
+            case > 54:
+                TextBoxWeek.Text = $"{1}";
+                //TextBoxMonth.Text = $"{TextBoxMonth.Text.ParseToByte()+1}";
+                break;
+            default:
+                TextBoxWeek.Text = $"{TextBoxWeek.Text}";
+                break;
+        }
 
-        UpdateAllDlgMode();
+        //UpdateAllDlgMode();
         
         var currentMonth = Tasks.GetMonthOfWeek(Constants.Week, Constants.Year);
         TextBoxMonth.Text = currentMonth.ParseToString();
@@ -118,7 +126,7 @@ public partial class DlgView
             _ => $"{TextBoxMonth.Text}"
         };
         
-        UpdateAllDlgMode();
+        //UpdateAllDlgMode();
     }
     
     private void TextBoxYear_OnTextChanged(object sender, TextChangedEventArgs e)
@@ -132,6 +140,11 @@ public partial class DlgView
             _ => $"{TextBoxYear.Text}"
         };
         
+        //UpdateAllDlgMode();
+    }
+    
+    private void BtnRefresh_OnClick(object sender, RoutedEventArgs e)
+    {
         UpdateAllDlgMode();
     }
 
