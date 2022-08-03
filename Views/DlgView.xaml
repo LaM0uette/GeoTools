@@ -71,7 +71,6 @@
                         </Button>
                         
                         <Label Style="{StaticResource LabelPlainM2}">Semaine</Label>
-                        
                         <TextBox x:Name="TextBoxWeek"
                                  Width="30"
                                  MaxLength="2"
@@ -85,7 +84,7 @@
                                 Height="25"
                                 Click="SetTextBoxValue">
 
-                            <Image Style="{StaticResource ImgHomeM1}"
+                            <Image Style="{StaticResource ImgRightArrowM1}"
                                    Width="18"
                                    Height="18" />
 
