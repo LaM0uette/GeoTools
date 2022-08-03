@@ -87,6 +87,12 @@ public partial class DlgView
         }
     }
     
+    private void BtnToday_OnClick(object sender, RoutedEventArgs e)
+    {
+        SetCurrentWeek();
+        SetCurrentMonth();
+    }
+    
     private void TextBoxWeek_OnTextChanged(object sender, TextChangedEventArgs e)
     {
         var value = TextBoxWeek.Text.ParseToInt();

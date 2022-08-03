@@ -53,11 +53,12 @@
                     <Button Grid.Column="0" x:Name="BtnToday"
                             Style="{StaticResource ButtonPlainM2}"
                             Width="100"
-                            Content="Ajourd'hui"/>
+                            Content="Ajourd'hui"
+                            Click="BtnToday_OnClick"/>
                     
                     <StackPanel Grid.Column="1" 
                                 Orientation="Horizontal"
-                                Margin="15, 0, 80, 0">
+                                Margin="15, 0, 50, 0">
                         
                         <Button  x:Name="BtnWeekLeft"
                                  Style="{StaticResource ButtonPlainM2}"
