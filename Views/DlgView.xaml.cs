@@ -30,7 +30,7 @@ public partial class DlgView
         SetTabItems();
         SetCurrentWeek();
         SetCurrentMonth();
-        LoadDefaultDlg();
+        UpdateAllDlgMode();
 
         ComboBoxTypeView.SelectionChanged += OnViewChanged; // Detecte le changement d'item du combobox
     }
@@ -139,14 +139,6 @@ public partial class DlgView
         _toggleButtons.Add(TogBtnDlgFait);
     }
 
-    private static void LoadDefaultDlg()
-    {
-        Dlg.AllDlgView.Instance.CreateDlgButtons(GetReaderAllDlgByMode());
-        Dlg.DayDlgView.Instance.CreateDlgButtons(GetReaderDayDlgMode(new DateTime(2022, 6, 13)));
-        Dlg.WeekDlgView.Instance.CreateDlgButtons(GetReaderWeekDlgMode(24, 2022));
-        Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(6, 2022));
-    }
-
     private static NpgsqlDataReader GetReaderAllDlgByMode()
     {
         return Constants.CurrentState switch
@@ -211,9 +203,18 @@ public partial class DlgView
         Tasks.SetCurrentTabItem(_vTabItemDlgAll);
     }
 
-    private static void UpdateAllDlgMode()
+    private void UpdateAllDate()
+    {
+        Constants.Year = 2022;
+        Constants.Month = TextBoxMonth.Text.ParseToInt();
+        Constants.Week = TextBoxWeek.Text.ParseToInt();
+    }
+
+    private void UpdateAllDlgMode()
     {
         Mouse.OverrideCursor = Cursors.Wait;
+
+        UpdateAllDate();
         
         try
         {
