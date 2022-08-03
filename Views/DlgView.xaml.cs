@@ -209,8 +209,8 @@ public partial class DlgView
     private void UpdateAllDate()
     {
         Constants.Year = 2022;
-        Constants.Month = TextBoxMonth.Text.ParseToInt();
-        Constants.Week = TextBoxWeek.Text.ParseToInt();
+        Constants.Month = TextBoxMonth.Text.ParseToByte();
+        Constants.Week = TextBoxWeek.Text.ParseToByte();
     }
 
     private void UpdateAllDlgMode()
@@ -221,10 +221,12 @@ public partial class DlgView
         
         try
         {
+            var dt = DateTime.Now;
+            
             Dlg.AllDlgView.Instance.CreateDlgButtons(GetReaderAllDlgByMode());
-            Dlg.DayDlgView.Instance.CreateDlgButtons(GetReaderDayDlgMode(new DateTime(2022, 6, 13)));
-            Dlg.WeekDlgView.Instance.CreateDlgButtons(GetReaderWeekDlgMode(24, 2022));
-            Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(6, 2022));
+            Dlg.DayDlgView.Instance.CreateDlgButtons(GetReaderDayDlgMode(new DateTime(Constants.Year, Constants.Month, Constants.Day)));
+            Dlg.WeekDlgView.Instance.CreateDlgButtons(GetReaderWeekDlgMode(Constants.Week, Constants.Year));
+            Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(Constants.Month, Constants.Year));
         }
         finally
         {

@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Media;
 
@@ -65,9 +66,10 @@ public static class Constants
     #region Var
 
     public static TogBtn CurrentState = TogBtn.Tout;
-    public static int Year = 2022;
-    public static int Month = 6;
-    public static int Week = 24;
+    public static int Year = DateTime.Now.Year;
+    public static byte Month = (byte)DateTime.Now.Month;
+    public static byte Week = (byte)Tasks.GetWeekNumber(DateTime.Now);
+    public static byte Day = (byte)DateTime.Now.Day;
 
     #endregion
 }
