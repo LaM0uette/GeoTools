@@ -98,8 +98,11 @@ public partial class DlgView
             > 60 => $"{60}",
             _ => $"{TextBoxWeek.Text}"
         };
-        
+
         UpdateAllDlgMode();
+        
+        var currentMonth = Tasks.GetMonthOfWeek(Constants.Week, Constants.Year);
+        TextBoxMonth.Text = currentMonth.ParseToString();
     }
     
     private void TextBoxMonth_OnTextChanged(object sender, TextChangedEventArgs e)
