@@ -44,8 +44,7 @@ public static class Constants
     {
         public const byte Width = 240;
         public const byte Height = 90;
-        public const byte MonthWidth = 200;
-        public const byte MonthHeight = 25;
+        public const byte MonthWidth = 220;
         public static Thickness Margin => new (5);
         
         public const byte DlgNameMaxWidth = Width-Height;

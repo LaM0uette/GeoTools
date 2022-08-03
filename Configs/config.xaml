@@ -8,8 +8,8 @@
     <sys:String x:Key="AppVersion">0.1</sys:String>
     
     <!-- Window -->
-    <sys:Double x:Key="AppWidth">1500</sys:Double>
-    <sys:Double x:Key="AppHeight">850</sys:Double>
+    <sys:Double x:Key="AppWidth">1600</sys:Double>
+    <sys:Double x:Key="AppHeight">900</sys:Double>
     <sys:Double x:Key="WgHeight">25</sys:Double>
     
 </ResourceDictionary>

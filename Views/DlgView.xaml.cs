@@ -62,7 +62,7 @@ public partial class DlgView
         
         var inc = ctrlName.Contains("Left") ? -1 : 1;
 
-        ctrl.Text = $"{ctrl.Text.ParseToInt() + inc}";
+        ctrl.Text = $"{ctrl.Text.ParseToByte() + inc}";
     }
 
     private void TogBtnDlg_OnClick(object sender, RoutedEventArgs e)
@@ -90,7 +90,7 @@ public partial class DlgView
     
     private void TextBoxWeek_OnTextChanged(object sender, TextChangedEventArgs e)
     {
-        var value = TextBoxWeek.Text.ParseToInt();
+        var value = TextBoxWeek.Text.ParseToByte();
 
         TextBoxWeek.Text = value switch
         {
@@ -217,16 +217,19 @@ public partial class DlgView
     {
         Mouse.OverrideCursor = Cursors.Wait;
         
-        SetCurrentWeek();
-        SetCurrentMonth();
         UpdateAllDate();
 
         try
         {
             Dlg.AllDlgView.Instance.CreateDlgButtons(GetReaderAllDlgByMode());
-            Dlg.DayDlgView.Instance.CreateDlgButtons(GetReaderDayDlgMode(new DateTime(Constants.Year, Constants.Month, Constants.Day)));
+            Dlg.DayDlgView.Instance.CreateDlgButtons(
+                GetReaderDayDlgMode(new DateTime(Constants.Year, Constants.Month, Constants.Day)));
             Dlg.WeekDlgView.Instance.CreateDlgButtons(GetReaderWeekDlgMode(Constants.Week, Constants.Year));
             Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(Constants.Month, Constants.Year));
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
         }
         finally
         {
