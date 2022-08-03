@@ -64,7 +64,7 @@
                                  Height="25"
                                  Click="SetTextBoxValue">
 
-                            <Image Style="{StaticResource ImgHomeM1}"
+                            <Image Style="{StaticResource ImgLeftArrowM1}"
                                    Width="18"
                                    Height="18" />
 
