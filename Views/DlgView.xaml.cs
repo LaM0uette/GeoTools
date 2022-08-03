@@ -58,6 +58,10 @@ public partial class DlgView
         {
             ctrl = TextBoxMonth;
         }
+        else if (ctrlName.Contains("Year"))
+        {
+            ctrl = TextBoxYear;
+        }
         
         var inc = ctrlName.Contains("Left") ? -1 : 1;
 
@@ -112,6 +116,20 @@ public partial class DlgView
             <= 0 => $"{1}",
             > 12 => $"{12}",
             _ => $"{TextBoxMonth.Text}"
+        };
+        
+        UpdateAllDlgMode();
+    }
+    
+    private void TextBoxYear_OnTextChanged(object sender, TextChangedEventArgs e)
+    {
+        var value = TextBoxYear.Text.ParseToInt();
+
+        TextBoxYear.Text = value switch
+        {
+            <= 2020 => $"{2020}",
+            > 2060 => $"{2060}",
+            _ => $"{TextBoxYear.Text}"
         };
         
         UpdateAllDlgMode();
@@ -243,8 +261,7 @@ public partial class DlgView
         try
         {
             Dlg.AllDlgView.Instance.CreateDlgButtons(GetReaderAllDlgByMode());
-            Dlg.DayDlgView.Instance.CreateDlgButtons(
-                GetReaderDayDlgMode(new DateTime(Constants.Year, Constants.Month, Constants.Day)));
+            Dlg.DayDlgView.Instance.CreateDlgButtons(GetReaderDayDlgMode(new DateTime(Constants.Year, Constants.Month, Constants.Day)));
             Dlg.WeekDlgView.Instance.CreateDlgButtons(GetReaderWeekDlgMode(Constants.Week, Constants.Year));
             Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(Constants.Month, Constants.Year));
         }

@@ -48,6 +48,7 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     
                     <Button Grid.Column="0" x:Name="BtnToday"
@@ -132,8 +133,42 @@
                         
                     </StackPanel>
                     
+                    <StackPanel Grid.Column="3" 
+                                Orientation="Horizontal">
+                        
+                        <Button  x:Name="BtnYearLeft"
+                                 Style="{StaticResource ButtonPlainM2}"
+                                 Width="25"
+                                 Height="25"
+                                 Click="SetTextBoxValue">
+
+                            <Image Style="{StaticResource ImgLeftArrowM1}"
+                                   Width="18"
+                                   Height="18" />
+
+                        </Button>
+                        
+                        <Label Style="{StaticResource LabelPlainM2}">Année</Label>
+                        <TextBox x:Name="TextBoxYear"
+                                 Width="30"
+                                 MaxLength="4"
+                                 Margin="-5, 0, 0, 0"
+                                 Style="{StaticResource TextBoxPlainM2}"
+                                 TextChanged="TextBoxYear_OnTextChanged" />
                     
-                    
+                        <Button x:Name="BtnYearRight"
+                                Style="{StaticResource ButtonPlainM2}"
+                                Width="25"
+                                Height="25"
+                                Click="SetTextBoxValue">
+
+                            <Image Style="{StaticResource ImgRightArrowM1}"
+                                   Width="18"
+                                   Height="18" />
+
+                        </Button>
+                        
+                    </StackPanel>
                 </Grid>
 
                 <!-- ComboBox des types d'affichages -->
