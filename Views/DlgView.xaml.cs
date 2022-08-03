@@ -49,9 +49,20 @@ public partial class DlgView
     private void SetTextBoxValue(object sender, RoutedEventArgs e)
     {
         var ctrlName = ((Button) sender).Name;
-        var inc = ctrlName.Equals("BtnWeekLeft") ? -1 : 1;
+        var ctrl = new TextBox();
 
-        TextBoxWeek.Text = $"{TextBoxWeek.Text.ParseToInt() + inc}";
+        if (ctrlName.Contains("Week"))
+        {
+            ctrl = TextBoxWeek;
+        }
+        else if (ctrlName.Contains("Month"))
+        {
+            ctrl = TextBoxMonth;
+        }
+        
+        var inc = ctrlName.Contains("Left") ? -1 : 1;
+
+        ctrl.Text = $"{ctrl.Text.ParseToInt() + inc}";
     }
 
     private void TogBtnDlg_OnClick(object sender, RoutedEventArgs e)
@@ -84,6 +95,18 @@ public partial class DlgView
             <= 0 => $"{1}",
             > 60 => $"{60}",
             _ => $"{TextBoxWeek.Text}"
+        };
+    }
+    
+    private void TextBoxMonth_OnTextChanged(object sender, TextChangedEventArgs e)
+    {
+        var value = TextBoxMonth.Text.ParseToInt();
+
+        TextBoxMonth.Text = value switch
+        {
+            <= 0 => $"{1}",
+            > 12 => $"{12}",
+            _ => $"{TextBoxMonth.Text}"
         };
     }
 

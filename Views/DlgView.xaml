@@ -47,6 +47,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     
                     <Button Grid.Column="0" x:Name="BtnToday"
@@ -56,7 +57,7 @@
                     
                     <StackPanel Grid.Column="1" 
                                 Orientation="Horizontal"
-                                Margin="15, 0, 15, 0">
+                                Margin="15, 0, 80, 0">
                         
                         <Button  x:Name="BtnWeekLeft"
                                  Style="{StaticResource ButtonPlainM2}"
@@ -79,6 +80,43 @@
                                  TextChanged="TextBoxWeek_OnTextChanged" />
                     
                         <Button x:Name="BtnWeekRight"
+                                Style="{StaticResource ButtonPlainM2}"
+                                Width="25"
+                                Height="25"
+                                Click="SetTextBoxValue">
+
+                            <Image Style="{StaticResource ImgRightArrowM1}"
+                                   Width="18"
+                                   Height="18" />
+
+                        </Button>
+                        
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Column="2" 
+                                Orientation="Horizontal">
+                        
+                        <Button  x:Name="BtnMonthLeft"
+                                 Style="{StaticResource ButtonPlainM2}"
+                                 Width="25"
+                                 Height="25"
+                                 Click="SetTextBoxValue">
+
+                            <Image Style="{StaticResource ImgLeftArrowM1}"
+                                   Width="18"
+                                   Height="18" />
+
+                        </Button>
+                        
+                        <Label Style="{StaticResource LabelPlainM2}">Mois</Label>
+                        <TextBox x:Name="TextBoxMonth"
+                                 Width="30"
+                                 MaxLength="2"
+                                 Margin="-5, 0, 0, 0"
+                                 Style="{StaticResource TextBoxPlainM2}"
+                                 TextChanged="TextBoxMonth_OnTextChanged" />
+                    
+                        <Button x:Name="BtnMonthRight"
                                 Style="{StaticResource ButtonPlainM2}"
                                 Width="25"
                                 Height="25"
