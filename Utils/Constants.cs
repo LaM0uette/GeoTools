@@ -15,6 +15,13 @@ public static class Constants
     //
 
     #region Enum
+    
+    public enum TogBtn
+    {
+        Tout,
+        AFaire,
+        Fait
+    }
 
     public enum WeekDays
     {
@@ -24,6 +31,7 @@ public static class Constants
         Jeudi,
         Vendredi,
     }
+    
 
     #endregion
     
@@ -49,6 +57,14 @@ public static class Constants
         public static SolidColorBrush Gray => new (Color.FromRgb(143, 143, 163));
         public static SolidColorBrush Red => new (Color.FromRgb(229, 56, 67));
     }
+
+    #endregion
+    
+    //
+
+    #region Var
+
+    public static TogBtn CurrentState = TogBtn.Tout;
 
     #endregion
 }

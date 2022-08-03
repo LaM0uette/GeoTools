@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -69,14 +68,22 @@ public partial class DlgView
     private void TogBtnDlg_OnClick(object sender, RoutedEventArgs e)
     {
         Mouse.OverrideCursor = Cursors.Wait;
+        
         try
         {
             var btnName = ((ToggleButton) sender).Name;
 
-            Dlg.AllDlgView.Instance.CreateDlgButtons(GetReaderAllDlgByMode(btnName));
-            Dlg.DayDlgView.Instance.CreateDlgButtons(GetReaderDayDlgMode(new DateTime(2022, 6, 13), btnName));
-            Dlg.WeekDlgView.Instance.CreateDlgButtons(GetReaderWeekDlgMode(24, 2022, btnName));
-            Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(6, 2022, btnName));
+            Constants.CurrentState = btnName switch
+            {
+                "TogBtnDlgAFaire" => Constants.TogBtn.AFaire,
+                "TogBtnDlgFait" => Constants.TogBtn.Fait,
+                _ => Constants.TogBtn.Tout
+            };
+
+            Dlg.AllDlgView.Instance.CreateDlgButtons(GetReaderAllDlgByMode());
+            Dlg.DayDlgView.Instance.CreateDlgButtons(GetReaderDayDlgMode(new DateTime(2022, 6, 13)));
+            Dlg.WeekDlgView.Instance.CreateDlgButtons(GetReaderWeekDlgMode(24, 2022));
+            Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(6, 2022));
 
             foreach (var btn in _toggleButtons)
                 btn.IsChecked = btnName == btn.Name;
@@ -148,44 +155,44 @@ public partial class DlgView
         Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(6, 2022));
     }
 
-    private static NpgsqlDataReader GetReaderAllDlgByMode(string btnName = "")
+    private static NpgsqlDataReader GetReaderAllDlgByMode()
     {
-        return btnName switch
+        return Constants.CurrentState switch
         {
-            "TogBtnDlgAFaire" => Sql.Get(Req.AllDlgFiltered(1)),
-            "TogBtnDlgFait" => Sql.Get(Req.AllDlgFiltered(2)),
+            Constants.TogBtn.AFaire => Sql.Get(Req.AllDlgFiltered(1)),
+            Constants.TogBtn.Fait => Sql.Get(Req.AllDlgFiltered(2)),
             _ => Sql.Get(Req.AllDlg())
         };
     }
 
-    private static NpgsqlDataReader GetReaderDayDlgMode(DateTime day, string btnName = "")
+    private static NpgsqlDataReader GetReaderDayDlgMode(DateTime day)
     {
         var dt = day.ToString(CultureInfo.GetCultureInfo("fr-FR"));
-
-        return btnName switch
+        
+        return Constants.CurrentState switch
         {
-            "TogBtnDlgAFaire" => Sql.Get(Req.DlgFilteredByDay(dt, 1)),
-            "TogBtnDlgFait" => Sql.Get(Req.DlgFilteredByDay(dt, 2)),
+            Constants.TogBtn.AFaire => Sql.Get(Req.DlgFilteredByDay(dt, 1)),
+            Constants.TogBtn.Fait => Sql.Get(Req.DlgFilteredByDay(dt, 2)),
             _ => Sql.Get(Req.DlgByDate(dt)) // TogBtnDlgTout
         };
     }
 
-    private static NpgsqlDataReader GetReaderWeekDlgMode(byte week, int year, string btnName = "")
+    private static NpgsqlDataReader GetReaderWeekDlgMode(byte week, int year)
     {
-        return btnName switch
+        return Constants.CurrentState switch
         {
-            "TogBtnDlgAFaire" => Sql.Get(Req.DlgFilteredByWeek(week, year, 1)),
-            "TogBtnDlgFait" => Sql.Get(Req.DlgFilteredByWeek(week, year, 2)),
+            Constants.TogBtn.AFaire => Sql.Get(Req.DlgFilteredByWeek(week, year, 1)),
+            Constants.TogBtn.Fait => Sql.Get(Req.DlgFilteredByWeek(week, year, 2)),
             _ => Sql.Get(Req.DlgByWeek(week, year)) // TogBtnDlgTout
         };
     }
 
-    private static NpgsqlDataReader GetReaderMonthDlgMode(byte month, int year, string btnName = "")
+    private static NpgsqlDataReader GetReaderMonthDlgMode(byte month, int year)
     {
-        return btnName switch
+        return Constants.CurrentState switch
         {
-            "TogBtnDlgAFaire" => Sql.Get(Req.DlgFilteredByMonth(month, year, 1)),
-            "TogBtnDlgFait" => Sql.Get(Req.DlgFilteredByMonth(month, year, 2)),
+            Constants.TogBtn.AFaire => Sql.Get(Req.DlgFilteredByMonth(month, year, 1)),
+            Constants.TogBtn.Fait => Sql.Get(Req.DlgFilteredByMonth(month, year, 2)),
             _ => Sql.Get(Req.DlgByMonth(month, year)) // TogBtnDlgTout
         };
     }
