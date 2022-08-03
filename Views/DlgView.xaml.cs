@@ -28,8 +28,7 @@ public partial class DlgView
         AddComboBoxData();
         AddToggleButtonsInList();
         SetTabItems();
-        SetCurrentWeek();
-        SetCurrentMonth();
+        SetCurrentMwy();
         UpdateAllDlgMode();
 
         ComboBoxTypeView.SelectionChanged += OnViewChanged; // Detecte le changement d'item du combobox
@@ -84,8 +83,7 @@ public partial class DlgView
     
     private void BtnToday_OnClick(object sender, RoutedEventArgs e)
     {
-        SetCurrentWeek();
-        SetCurrentMonth();
+        SetCurrentMwy();
     }
     
     private void TextBoxWeek_OnTextChanged(object sender, TextChangedEventArgs e)
@@ -184,16 +182,39 @@ public partial class DlgView
         };
     }
 
+    private void SetCurrentDay()
+    {
+        var currentDay = (byte)DateTime.Now.Day;
+        Constants.Day = currentDay;
+    }
+    
     private void SetCurrentWeek()
     {
-        var currentWeek = Tasks.GetWeekNumber(DateTime.Now);
+        var currentWeek = (byte)Tasks.GetWeekNumber(DateTime.Now);
         TextBoxWeek.Text = currentWeek.ParseToString();
+        Constants.Week = currentWeek;
     }
     
     private void SetCurrentMonth()
     {
-        var currentMonth = DateTime.Now.Month;
+        var currentMonth = (byte)DateTime.Now.Month;
         TextBoxMonth.Text = currentMonth.ParseToString();
+        Constants.Month = currentMonth;
+    }
+    
+    private void SetCurrentYears()
+    {
+        var currentYears = DateTime.Now.Year;
+        TextBoxMonth.Text = currentYears.ParseToString();
+        Constants.Year = currentYears;
+    }
+    
+    private void SetCurrentMwy()
+    {
+        SetCurrentDay();
+        SetCurrentWeek();
+        SetCurrentMonth();
+        SetCurrentYears();
     }
 
     private void SetTabItems()
