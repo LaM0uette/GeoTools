@@ -30,6 +30,7 @@ public partial class DlgView
         AddToggleButtonsInList();
         SetTabItems();
         SetCurrentWeek();
+        SetCurrentMonth();
         LoadDefaultDlg();
 
         ComboBoxTypeView.SelectionChanged += OnViewChanged; // Detecte le changement d'item du combobox
@@ -187,6 +188,12 @@ public partial class DlgView
     {
         var currentWeek = Tasks.GetWeekNumber(DateTime.Now);
         TextBoxWeek.Text = currentWeek.ParseToString();
+    }
+    
+    private void SetCurrentMonth()
+    {
+        var currentMonth = DateTime.Now.Month;
+        TextBoxMonth.Text = currentMonth.ParseToString();
     }
 
     private void SetTabItems()
