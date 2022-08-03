@@ -81,9 +81,9 @@ public partial class DlgView
 
         TextBoxWeek.Text = value switch
         {
-            <= 0 => 1.ParseToString(),
-            > 60 => 60.ParseToString(),
-            _ => TextBoxWeek.Text
+            <= 0 => $"{1}",
+            > 60 => $"{60}",
+            _ => $"{TextBoxWeek.Text}"
         };
     }
 
