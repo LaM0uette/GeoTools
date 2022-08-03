@@ -74,6 +74,16 @@ public partial class DlgView
             Mouse.OverrideCursor = null;
         }
     }
+    
+    private void TextBoxWeek_OnTextChanged(object sender, TextChangedEventArgs e)
+    {
+        var value = TextBoxWeek.Text.ParseToInt();
+
+        if (value <= 0)
+            TextBoxWeek.Text = 1.ParseToString();
+        else if (value > 60)
+            TextBoxWeek.Text = 60.ParseToString();
+    }
 
     #endregion
 

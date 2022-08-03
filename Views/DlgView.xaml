@@ -54,7 +54,9 @@
                             Width="100"
                             Content="Ajourd'hui"/>
                     
-                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <StackPanel Grid.Column="1" 
+                                Orientation="Horizontal"
+                                Margin="15, 0, 15, 0">
                         
                         <Button  x:Name="BtnWeekLeft"
                                  Style="{StaticResource ButtonPlainM2}"
@@ -67,10 +69,11 @@
                                    Height="18" />
 
                         </Button>
-                    
+                        
                         <TextBox x:Name="TextBoxWeek"
-                                 Width="40"
-                                 Style="{StaticResource TextBoxPlainM2}"/>
+                                 Width="30"
+                                 Style="{StaticResource TextBoxPlainM2}"
+                                 TextChanged="TextBoxWeek_OnTextChanged" />
                     
                         <Button x:Name="BtnWeekRight"
                                 Style="{StaticResource ButtonPlainM2}"
