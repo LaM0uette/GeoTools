@@ -216,13 +216,13 @@ public partial class DlgView
     private void UpdateAllDlgMode()
     {
         Mouse.OverrideCursor = Cursors.Wait;
-
-        UpdateAllDate();
         
+        SetCurrentWeek();
+        SetCurrentMonth();
+        UpdateAllDate();
+
         try
         {
-            var dt = DateTime.Now;
-            
             Dlg.AllDlgView.Instance.CreateDlgButtons(GetReaderAllDlgByMode());
             Dlg.DayDlgView.Instance.CreateDlgButtons(GetReaderDayDlgMode(new DateTime(Constants.Year, Constants.Month, Constants.Day)));
             Dlg.WeekDlgView.Instance.CreateDlgButtons(GetReaderWeekDlgMode(Constants.Week, Constants.Year));

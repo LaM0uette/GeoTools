@@ -1,4 +1,5 @@
-﻿using GeoTools.Utils;
+﻿using System.Linq;
+using GeoTools.Utils;
 using Npgsql;
 
 
@@ -28,9 +29,8 @@ public partial class DayDlgView
 
         var dlgStructs = Tasks.GetListOfDlgStructs(dlgCdReader);
 
-        foreach (var dlgStruct in dlgStructs)
+        foreach (var button in dlgStructs.Select(DlgButtons.GetButtonFromDlg))
         {
-            var button = DlgButtons.GetButtonFromDlg(dlgStruct);
             button.Click += DlgButtons.SetActionsOnBtnDlg_Click;
             DayDlgWrapPanel.Children.Add(button);
         }
