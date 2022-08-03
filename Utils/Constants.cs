@@ -65,9 +65,9 @@ public static class Constants
     #region Var
 
     public static TogBtn CurrentState = TogBtn.Tout;
-    public static int Year;
-    public static int Month;
-    public static int Week;
+    public static int Year = 2022;
+    public static int Month = 6;
+    public static int Week = 24;
 
     #endregion
 }

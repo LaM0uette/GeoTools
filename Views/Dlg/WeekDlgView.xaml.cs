@@ -95,27 +95,25 @@ public partial class WeekDlgView
 
     private void AddStackPanelOfDays()
     {
-        // TODO: A MODIFIER !
-        const int year = 2022;
-        var month = Tasks.GetMonthOfWeek(24, 2022);
+        var month = Tasks.GetMonthOfWeek(Constants.Week, Constants.Year);
 
         var currentDay = DateTime.Now;
 
-        for (var i = 1; i <= DateTime.DaysInMonth(year, month); i++)  // Boucle sur tous les jours du mois
+        for (var i = 1; i <= DateTime.DaysInMonth(Constants.Year, month); i++)  // Boucle sur tous les jours du mois
         {
-            var day = new DateTime(year, month, i);
+            var day = new DateTime(Constants.Year, month, i);
             var weekOfTheDay = Tasks.GetWeekNumber(day);
 
-            if (!weekOfTheDay.Equals(24)) continue;
+            if (!weekOfTheDay.Equals(Constants.Week)) continue;
             
             var border = Widgets.NewMonthDlgBorder();
-            var stackPanel = Widgets.NewMonthDlgStackPanel($"{i:D2}{month:D2}{year}");
+            var stackPanel = Widgets.NewMonthDlgStackPanel($"{i:D2}{month:D2}{Constants.Year}");
             
             var dayName = Widgets.NewDlgInfoTextBlock(i.ParseToString(), 20);
             dayName.HorizontalAlignment = HorizontalAlignment.Left;
             dayName.Margin = new Thickness(0, 0, 0, 20);
             
-            if (currentDay.Year.Equals(year) && currentDay.Month.Equals(month) && currentDay.Day.Equals(day.Day))
+            if (currentDay.Year.Equals(Constants.Year) && currentDay.Month.Equals(month) && currentDay.Day.Equals(day.Day))
                 dayName.Foreground = Constants.Colors.Red;
 
             WeekGrid.RowDefinitions.Add(new RowDefinition());
