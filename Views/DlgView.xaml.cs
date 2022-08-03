@@ -260,8 +260,25 @@ public partial class DlgView
 
         try
         {
+            if (Constants.Year.Equals(0))
+            {
+                SetCurrentYears();
+            }
+            
+            if (Constants.Month.Equals(0))
+            {
+                SetCurrentMonth();
+            }
+            
+            if (Constants.Day.Equals(0))
+            {
+                SetCurrentDay();
+            }
+            
+            var dt = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            
             Dlg.AllDlgView.Instance.CreateDlgButtons(GetReaderAllDlgByMode());
-            Dlg.DayDlgView.Instance.CreateDlgButtons(GetReaderDayDlgMode(new DateTime(Constants.Year, Constants.Month, Constants.Day)));
+            Dlg.DayDlgView.Instance.CreateDlgButtons(GetReaderDayDlgMode(dt));
             Dlg.WeekDlgView.Instance.CreateDlgButtons(GetReaderWeekDlgMode(Constants.Week, Constants.Year));
             Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(Constants.Month, Constants.Year));
         }
