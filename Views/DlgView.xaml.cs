@@ -67,31 +67,19 @@ public partial class DlgView
 
     private void TogBtnDlg_OnClick(object sender, RoutedEventArgs e)
     {
-        Mouse.OverrideCursor = Cursors.Wait;
-        
-        try
+        var btnName = ((ToggleButton) sender).Name;
+
+        Constants.CurrentState = btnName switch
         {
-            var btnName = ((ToggleButton) sender).Name;
+            "TogBtnDlgAFaire" => Constants.TogBtn.AFaire,
+            "TogBtnDlgFait" => Constants.TogBtn.Fait,
+            _ => Constants.TogBtn.Tout
+        };
 
-            Constants.CurrentState = btnName switch
-            {
-                "TogBtnDlgAFaire" => Constants.TogBtn.AFaire,
-                "TogBtnDlgFait" => Constants.TogBtn.Fait,
-                _ => Constants.TogBtn.Tout
-            };
+        UpdateAllDlgMode();
 
-            Dlg.AllDlgView.Instance.CreateDlgButtons(GetReaderAllDlgByMode());
-            Dlg.DayDlgView.Instance.CreateDlgButtons(GetReaderDayDlgMode(new DateTime(2022, 6, 13)));
-            Dlg.WeekDlgView.Instance.CreateDlgButtons(GetReaderWeekDlgMode(24, 2022));
-            Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(6, 2022));
-
-            foreach (var btn in _toggleButtons)
-                btn.IsChecked = btnName == btn.Name;
-        }
-        finally
-        {
-            Mouse.OverrideCursor = null;
-        }
+        foreach (var btn in _toggleButtons)
+            btn.IsChecked = btnName == btn.Name;
     }
     
     private void BtnToday_OnClick(object sender, RoutedEventArgs e)
@@ -110,6 +98,8 @@ public partial class DlgView
             > 60 => $"{60}",
             _ => $"{TextBoxWeek.Text}"
         };
+        
+        UpdateAllDlgMode();
     }
     
     private void TextBoxMonth_OnTextChanged(object sender, TextChangedEventArgs e)
@@ -122,6 +112,8 @@ public partial class DlgView
             > 12 => $"{12}",
             _ => $"{TextBoxMonth.Text}"
         };
+        
+        UpdateAllDlgMode();
     }
 
     #endregion
@@ -217,6 +209,23 @@ public partial class DlgView
         _vTabItemDlgMonth = TabItemMonthDlg;
 
         Tasks.SetCurrentTabItem(_vTabItemDlgAll);
+    }
+
+    private static void UpdateAllDlgMode()
+    {
+        Mouse.OverrideCursor = Cursors.Wait;
+        
+        try
+        {
+            Dlg.AllDlgView.Instance.CreateDlgButtons(GetReaderAllDlgByMode());
+            Dlg.DayDlgView.Instance.CreateDlgButtons(GetReaderDayDlgMode(new DateTime(2022, 6, 13)));
+            Dlg.WeekDlgView.Instance.CreateDlgButtons(GetReaderWeekDlgMode(24, 2022));
+            Dlg.MonthDlgView.Instance.CreateDlgButtons(GetReaderMonthDlgMode(6, 2022));
+        }
+        finally
+        {
+            Mouse.OverrideCursor = null;
+        }
     }
 
     #endregion
