@@ -223,7 +223,7 @@ public partial class DlgView
     private void SetCurrentYears()
     {
         var currentYears = DateTime.Now.Year;
-        TextBoxMonth.Text = currentYears.ParseToString();
+        TextBoxYear.Text = currentYears.ParseToString();
         Constants.Year = currentYears;
     }
     
@@ -247,7 +247,7 @@ public partial class DlgView
 
     private void UpdateAllDate()
     {
-        Constants.Year = 2022;
+        Constants.Year = TextBoxYear.Text.ParseToInt();
         Constants.Month = TextBoxMonth.Text.ParseToByte();
         Constants.Week = TextBoxWeek.Text.ParseToByte();
     }
