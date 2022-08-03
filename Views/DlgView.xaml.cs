@@ -98,18 +98,19 @@ public partial class DlgView
         {
             case < 1:
                 TextBoxWeek.Text = $"{54}";
-                TextBoxMonth.Text = $"{TextBoxMonth.Text.ParseToByte()-1}";
-                break;
+                TextBoxMonth.Text = $"{TextBoxMonth.Text.ParseToInt()-1}";
+                return;
             case > 54:
                 TextBoxWeek.Text = $"{1}";
-                TextBoxMonth.Text = $"{TextBoxMonth.Text.ParseToByte()+1}";
-                break;
+                TextBoxMonth.Text = $"{TextBoxMonth.Text.ParseToInt()+1}";
+                return;
             default:
                 TextBoxWeek.Text = $"{TextBoxWeek.Text}";
                 break;
         }
 
         //UpdateAllDlgMode();
+        //UpdateAllDate();
         
         var currentMonth = Tasks.GetMonthOfWeek(Constants.Week, Constants.Year);
         TextBoxMonth.Text = currentMonth.ParseToString();
@@ -117,17 +118,17 @@ public partial class DlgView
     
     private void TextBoxMonth_OnTextChanged(object sender, TextChangedEventArgs e)
     {
-        var value = TextBoxMonth.Text.ParseToInt();
+        var value = TextBoxMonth.Text.ParseToByte();
         
         switch (value)
         {
             case < 1:
                 TextBoxMonth.Text = $"{12}";
-                TextBoxYear.Text = $"{TextBoxYear.Text.ParseToByte()-1}";
+                TextBoxYear.Text = $"{TextBoxYear.Text.ParseToInt()-1}";
                 break;
             case > 12:
                 TextBoxMonth.Text = $"{1}";
-                TextBoxYear.Text = $"{TextBoxYear.Text.ParseToByte()+1}";
+                TextBoxYear.Text = $"{TextBoxYear.Text.ParseToInt()+1}";
                 break;
             default:
                 TextBoxMonth.Text = $"{TextBoxMonth.Text}";
@@ -135,6 +136,7 @@ public partial class DlgView
         }
 
         //UpdateAllDlgMode();
+        //UpdateAllDate();
     }
     
     private void TextBoxYear_OnTextChanged(object sender, TextChangedEventArgs e)
@@ -149,6 +151,7 @@ public partial class DlgView
         };
         
         //UpdateAllDlgMode();
+        //UpdateAllDate();
     }
     
     private void BtnRefresh_OnClick(object sender, RoutedEventArgs e)
