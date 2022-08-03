@@ -65,7 +65,7 @@ public partial class DlgView
         
         var inc = ctrlName.Contains("Left") ? -1 : 1;
 
-        ctrl.Text = $"{ctrl.Text.ParseToByte() + inc}";
+        ctrl.Text = $"{ctrl.Text.ParseToInt() + inc}";
     }
 
     private void TogBtnDlg_OnClick(object sender, RoutedEventArgs e)
@@ -261,19 +261,13 @@ public partial class DlgView
         try
         {
             if (Constants.Year.Equals(0))
-            {
                 SetCurrentYears();
-            }
             
             if (Constants.Month.Equals(0))
-            {
                 SetCurrentMonth();
-            }
             
             if (Constants.Day.Equals(0))
-            {
                 SetCurrentDay();
-            }
             
             var dt = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
             
